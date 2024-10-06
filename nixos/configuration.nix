@@ -4,7 +4,9 @@
 
 { config, lib, pkgs, ... }:
 
-{
+  let 
+    unstable = import <nixos-unstable> {config = {allowUnfree = true;};}; 
+  in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -70,9 +72,9 @@
      vim
      home-manager
      git
+     unstable.clipse
   ];
-
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

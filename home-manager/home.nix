@@ -11,6 +11,7 @@
 		packages = with pkgs; [
 			neofetch
 			btop
+			telegram-desktop
 		];
 	};
 
@@ -24,6 +25,7 @@
 			ll = "ls -l";
 			la = "ls -la";
 			upgrade = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
+			nixconf = "nvim ~/nix/nixos/configuration.nix";
 			conf = "home-manager switch --flake /home/levizor/nix&&exec zsh";
 		};
 
@@ -37,4 +39,5 @@
 		enable = true;
 		defaultEditor = true;
 	};
+
 }
