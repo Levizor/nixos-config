@@ -1,6 +1,5 @@
 { config, pkgs, ...}: 
 	let 
-		homePath = "/home/levizor";
     unstable = import <nixos-unstable> {config = {allowUnfree = true;};}; 
 	in 
 {
@@ -10,7 +9,7 @@
   ];
 	home = {
 		username = "levizor";
-		homeDirectory = "${homePath}";
+		homeDirectory = "/home/levizor/";
 		stateVersion = "24.05";
 
 		packages = with pkgs; [

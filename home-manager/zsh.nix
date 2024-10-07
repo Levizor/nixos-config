@@ -19,7 +19,7 @@
 
 		history = {
 			size = 10000;
-			path = "${homePath}/zsh/history";
+			path = "/home/levizor/zsh/history";
 		};
 	};
 
