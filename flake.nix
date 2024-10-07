@@ -18,12 +18,14 @@
 	in {
 		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 			inherit system;
-			modules = [ nixos/configuration.nix ];
+			modules = [ ./nixos/configuration.nix ];
 		};
 
 		homeConfigurations.levizor = home-manager.lib.homeManagerConfiguration {
 			pkgs = nixpkgs.legacyPackages."${system}";
-			modules = [ home-manager/home.nix ];
+			modules = [ 
+            ./home-manager/home.nix 
+        ];
 		};
 
 	};

@@ -1,8 +1,13 @@
 { config, pkgs, ...}: 
-
 	let 
 		homePath = "/home/levizor";
-	in {
+    unstable = import <nixos-unstable> {config = {allowUnfree = true;};}; 
+	in 
+{
+  imports = [
+    ./zsh.nix
+    ./librewolf.nix
+  ];
 	home = {
 		username = "levizor";
 		homeDirectory = "${homePath}";
@@ -12,32 +17,42 @@
 			neofetch
 			btop
 			telegram-desktop
+			webcord
+			fuzzel
+      hyprpicker
+      tree
+      kitty
+      librewolf
+      ungoogled-chromium
+      brave
+      unstable.clipse
+      zathura
+      cinnamon.nemo
+      nomacs
+      mpv
+      wlogout
+      grimblast
+      easyeffects
+      bluetuith
+      vivid
+      lsd
+      oh-my-posh
+      ripgrep
 		];
 	};
 
-	programs.zsh = {
-		enable = true;
-		enableCompletion = true;
-		autosuggestion.enable = true;
-		syntaxHighlighting.enable = true;
-
-		shellAliases = {
-			ll = "ls -l";
-			la = "ls -la";
-			upgrade = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
-			nixconf = "nvim ~/nix/nixos/configuration.nix";
-			conf = "home-manager switch --flake /home/levizor/nix&&exec zsh";
-		};
-
-		history = {
-			size = 10000;
-			path = "${homePath}/zsh/history";
-		};
-	};
 
 	programs.neovim = {
 		enable = true;
 		defaultEditor = true;
 	};
 
+	programs.obs-studio = {
+    		enable = true;
+    		# plugins = with pkgs.obs-studio-plugins; [
+    		# 			wlrobs
+    		#   	obs-backgroundremoval
+    		#   	obs-pipewire-audio-capture
+    		# ];
+	};
 }
