@@ -26,10 +26,17 @@
       enable = true;
       plugins = [
         "git" "sudo" "colored-man-pages" "copybuffer" "copyfile" "copypath"
-        "extract" "aliases" "cp" "adb" "zsh-vi-mode" "globalias" "magic-enter" "zoxide"
-        "fzf-tab" "zsh-utils"
+        "extract" "aliases" "cp" "adb" "globalias" "magic-enter" 
       ];
     };
 	};
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
+  };
 
 }
