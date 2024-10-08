@@ -6,7 +6,9 @@
   imports = [
     ./zsh.nix
     ./librewolf.nix
+    ./git.nix
   ];
+
 	home = {
 		username = "levizor";
 		homeDirectory = "/home/levizor/";
@@ -37,6 +39,7 @@
       lsd
       oh-my-posh
       ripgrep
+      fzf
 		];
 	};
 
@@ -47,11 +50,6 @@
 	};
 
 	programs.obs-studio = {
-    		enable = true;
-    		# plugins = with pkgs.obs-studio-plugins; [
-    		# 			wlrobs
-    		#   	obs-backgroundremoval
-    		#   	obs-pipewire-audio-capture
-    		# ];
+    enable = true;
 	};
 }

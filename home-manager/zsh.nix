@@ -21,6 +21,15 @@
 			size = 10000;
 			path = "/home/levizor/zsh/history";
 		};
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git" "sudo" "colored-man-pages" "copybuffer" "copyfile" "copypath"
+        "extract" "aliases" "cp" "adb" "zsh-vi-mode" "globalias" "magic-enter" "zoxide"
+        "fzf-tab" "zsh-utils"
+      ];
+    };
 	};
 
 }
