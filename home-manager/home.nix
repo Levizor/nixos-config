@@ -11,6 +11,7 @@
   ];
 
 	home = {
+    enableNixpkgsReleaseCheck = false;
 		username = "levizor";
 		homeDirectory = "/home/levizor/";
 		stateVersion = "24.05";

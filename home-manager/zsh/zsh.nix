@@ -1,4 +1,4 @@
-{config, ...}:
+{config, pkgs, ...}:
 
 {
 	programs.zsh = {
@@ -14,11 +14,6 @@
             # Must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
             name = "fzf-tab";
             src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-          }
-          {
-            name = "powerlevel10k";
-            src = pkgs.zsh-powerlevel10k;
-            file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
           }
     ];
 
@@ -101,28 +96,7 @@
     '';
 
     initExtraFirst = ''
-      # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-      # Initialization code that may require console input (password prompts, [y/n]
-      # confirmations, etc.) must go above this block; everything else may go below.
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
 
-      DISABLE_AUTO_UPDATE=true
-      DISABLE_MAGIC_FUNCTIONS=true
-      export "MICRO_TRUECOLOR=1"
-
-      setopt sharehistory
-      setopt hist_ignore_space
-      setopt hist_ignore_all_dups
-      setopt hist_save_no_dups
-      setopt hist_ignore_dups
-      setopt hist_find_no_dups
-      setopt hist_expire_dups_first
-      setopt hist_verify
-
-      source ~/.p10k.zsh
-      
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
       # - The first argument to the function ($1) is the base path to start traversal
       # - See the source code (completion.{bash,zsh}) for the details.
@@ -175,6 +149,17 @@
         "extract" "aliases" "cp" "globalias" "magic-enter" 
       ];
     };
+
+    antidote = {
+      enable = true;
+      plugins = [
+        "belak/zsh-utils path:completion"
+        "wehlando/efibootmgr-zsh-completion"
+        "romkatv/zsh-defer"
+        "getantidote/use-omz"
+      ];
+    };
+
 	};
 
   programs.zoxide = {

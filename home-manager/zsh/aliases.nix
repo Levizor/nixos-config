@@ -3,10 +3,6 @@
     shellAliases = {
       c = "clear";
 
-      ll = "ls -l";
-
-			la = "ls -la";
-
 			upgrade = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
 
 			nixconf = "nvim ~/nix/nixos/configuration.nix";
