@@ -5,9 +5,8 @@
 
     extraConfig = 
       let
-        scripts = "~/nix/home-manager/wm/scripts"
+        scripts = "~/nix/home-manager/wm/scripts";
       in 
-      concatStrings [
         ''
           $browser = librewolf
           $terminal = kitty
@@ -241,8 +240,7 @@
           windowrulev2 = float, class:(clipse)
           windowrulev2 = size 622 652, class:(clipse)
 
-        ''
-    ];
+        '';
 
 
     settings = {
@@ -278,7 +276,7 @@
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        initial_workspace_fullscreen = false;
+        initial_workspace_tracking= false;
       };
 
       general = {
@@ -337,7 +335,6 @@
         "clipse -listen"
       ];
 
-      ];
 
     };
 
