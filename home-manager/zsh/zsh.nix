@@ -151,7 +151,7 @@
     };
 
     antidote = {
-      enable = true;
+      enable = false;
       plugins = [
         "belak/zsh-utils path:completion"
         "wehlando/efibootmgr-zsh-completion"
