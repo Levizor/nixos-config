@@ -4,10 +4,10 @@
 	in 
 {
   imports = [
-    ./zsh.nix
     ./librewolf.nix
     ./git.nix
-    ./wm/hyprland.nix
+    ./wm/load.nix
+    ./zsh/load.nix
   ];
 
 	home = {
