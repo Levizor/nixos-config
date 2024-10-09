@@ -26,7 +26,7 @@
       enable = true;
       plugins = [
         "git" "sudo" "colored-man-pages" "copybuffer" "copyfile" "copypath"
-        "extract" "aliases" "cp" "adb" "globalias" "magic-enter" 
+        "extract" "aliases" "cp" "globalias" "magic-enter" 
       ];
     };
 	};

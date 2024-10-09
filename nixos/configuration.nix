@@ -66,6 +66,7 @@
      pulseaudioFull
      pavucontrol 
      clang
+     wl-clipboard
   ];
   
   # Enable CUPS to print documents.

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# command ls ~/.config/waybar/* | entr -r waybar &
+waybar&
+sleep 2
+waybar -b 2 --config ~/dotfiles/.config/waybar/first/config --style ~/dotfiles/.config/waybar/first/style.css &
+

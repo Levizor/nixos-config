@@ -7,6 +7,7 @@
     ./zsh.nix
     ./librewolf.nix
     ./git.nix
+    ./wm/hyprland.nix
   ];
 
 	home = {
@@ -23,12 +24,13 @@
       hyprpicker
       tree
       kitty
+      alacritty
       librewolf
       ungoogled-chromium
       brave
-      unstable.clipse
+      clipse
       zathura
-      cinnamon.nemo
+      nemo
       nomacs
       mpv
       wlogout
@@ -40,6 +42,7 @@
       oh-my-posh
       ripgrep
       fzf
+      ani-cli
 		];
 	};
 
