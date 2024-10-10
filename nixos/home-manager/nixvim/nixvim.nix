@@ -62,7 +62,7 @@
     #  For more options, you can see `:help option-list`
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#opts
     opts = {
-      relativenumber = true
+      relativenumber = true;
       mouse = "a";
       # Don't show the mode, since it's already in the statusline
       showmode = false;
