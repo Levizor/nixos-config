@@ -11,6 +11,8 @@
     ./zsh/load.nix
     ./alacritty.nix
     ./foot.nix
+    ./lsd.nix
+    ./nixvim/nixvim.nix
   ];
 
 	home = {
@@ -46,7 +48,6 @@
       easyeffects
       bluetuith
       vivid
-      lsd
       oh-my-posh
       ripgrep
       fzf

@@ -86,8 +86,16 @@
   services.libinput.enable = true;
 
   #sddm
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
+  };
+
+  boot.plymouth = {
+    enable = true;
+    theme = "breeze";
+  };
 
   #hyprland
   programs.hyprland = {
@@ -113,35 +121,49 @@
      pavucontrol 
      clang
      wl-clipboard
+     catppuccin-sddm.override{
+	flavor = "mocha";
+	font = "DejaVu Sans Mono";
+	fontSize = "14";
+     }
   ];
 
   
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-  system.stateVersion = "24.05"; # Did you read the comment?
 
 
   stylix={
     enable = true;
 
-    polarity = "dark";
-    image = ./lava_japan.jpg;
+    polarity = "either";
+    image = ./red_winter.jpg;
+    targets = {
+    	grub.useImage = true;
+    };
 
+    opacity = {
+	terminal = 0.6;
+    };
     fonts = {
-      sizes.terminal = 16;
-      sizes.desktop = 14;
+      sizes = {
+	terminal = 16;
+	desktop = 14;
+      };
+
       serif = {
         package = pkgs.dejavu_fonts;
+	# package = pkgs.fira-code-symbols;
         name = "DejaVu Serif";
       };
 
       sansSerif = {
-        package = pkgs.dejavu_fonts;
+        # package = pkgs.dejavu_fonts;
+	package = pkgs.fira-code-symbols;
         name = "DejaVu Sans";
       };
 
       monospace = {
-        package = pkgs.dejavu_fonts;
+        # package = pkgs.dejavu_fonts;
+	package = pkgs.fira-code-symbols;
         name = "DejaVu Sans Mono";
       };
 
@@ -154,5 +176,7 @@
 
 
 
+  services.printing.enable = true;
+  system.stateVersion = "24.05"; 
 }
 
