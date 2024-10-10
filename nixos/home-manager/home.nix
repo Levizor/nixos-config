@@ -9,6 +9,7 @@
     ./git.nix
     ./wm/load.nix
     ./zsh/load.nix
+    ./kitty.nix
   ];
 
 	home = {
@@ -30,7 +31,6 @@
 			fuzzel
       hyprpicker
       tree
-      kitty
       alacritty
       librewolf
       ungoogled-chromium
