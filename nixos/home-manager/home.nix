@@ -12,7 +12,7 @@
     ./alacritty.nix
     ./foot.nix
     ./lsd.nix
-    ./nixvim/nixvim.nix
+    ./nixvim.nix
   ];
 
 	home = {
