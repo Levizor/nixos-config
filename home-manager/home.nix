@@ -11,6 +11,11 @@
   ];
 
 	home = {
+
+    sessionVariables = {
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+        "$\{HOME}/.steam/root/compatabilitytools.d";
+    };
     enableNixpkgsReleaseCheck = false;
 		username = "levizor";
 		homeDirectory = "/home/levizor/";
@@ -44,6 +49,8 @@
       ripgrep
       fzf
       ani-cli
+      protonup
+      mangohud
 		];
 	};
 

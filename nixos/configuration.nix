@@ -9,6 +9,8 @@
       ./user.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nixpkgs.config.allowUnfree = true;
+  
 
   # boot.extraModulePackages = with config.boot.kernelPackages; [
   #   v4l2loopback
@@ -42,6 +44,45 @@
      pulse.enable = true;
   };
 
+  #OpenGL
+  hardware.opengl = {
+    enable = true;
+  };
+
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
+  #nvidia 
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true;
+      open = false;
+    
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:2:0:0";
+    };
+  };
+
+
+  specialisation = {
+    gaming-time.configuration = {
+      hardware.nvidia = {
+        prime.sync.enable = lib.mkForce true;
+        prime.offload = {
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
+        };
+      };
+    };
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
@@ -55,8 +96,15 @@
     xwayland.enable = true;
   };
 
-  #zsh
   programs.zsh.enable = true;
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+  programs.gamemode.enable = true;
+
+
   environment.systemPackages = with pkgs; [
      curl
      vim
@@ -68,6 +116,7 @@
      clang
      wl-clipboard
   ];
+
   
   # Enable CUPS to print documents.
   # services.printing.enable = true;
