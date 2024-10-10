@@ -10,6 +10,7 @@
     ./wm/load.nix
     ./zsh/load.nix
     ./alacritty.nix
+    ./foot.nix
   ];
 
 	home = {

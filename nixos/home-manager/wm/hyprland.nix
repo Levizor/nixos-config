@@ -8,7 +8,7 @@
           $scripts = ~/nix/home-manager/wm/scripts
 
           $browser = librewolf
-          $terminal = kitty
+          $terminal = foot
           $telegram = telegram-desktop
           $fileManager = thunar
           $menu = fuzzel
