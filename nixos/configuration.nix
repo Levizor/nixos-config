@@ -7,6 +7,7 @@
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ./disko-config.nix
       ./user.nix
+      <home-manager/nixos>
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
@@ -83,6 +84,8 @@
     };
   };
 
+
+
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
@@ -108,7 +111,6 @@
   environment.systemPackages = with pkgs; [
      curl
      vim
-     home-manager
      git
      brightnessctl
      pulseaudioFull
