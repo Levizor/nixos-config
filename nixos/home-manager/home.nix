@@ -4,7 +4,7 @@
 	in 
 {
   imports = [
-    ./stylix.nix
+    # ./stylix.nix
     ./librewolf.nix
     ./git.nix
     ./wm/load.nix

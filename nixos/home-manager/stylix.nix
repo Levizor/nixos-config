@@ -4,7 +4,7 @@
     enable = true;
 
     polarity = "light";
-    image = ./tree_light.jpg;
+    image = ./nixos/home-manager/tree_light.jpg;
 
     fonts = {
       serif = {

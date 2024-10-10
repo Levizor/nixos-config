@@ -119,5 +119,37 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
   system.stateVersion = "24.05"; # Did you read the comment?
+
+
+  stylix={
+    enable = true;
+
+    polarity = "light";
+    image = ./tree_light.jpg;
+
+    fonts = {
+      serif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Serif";
+      };
+
+      sansSerif = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans";
+      };
+
+      monospace = {
+        package = pkgs.dejavu_fonts;
+        name = "DejaVu Sans Mono";
+      };
+
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
+    };
+  };
+
+
 }
 
