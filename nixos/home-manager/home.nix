@@ -31,28 +31,29 @@
 			telegram-desktop
 			webcord
 			fuzzel
-      hyprpicker
-      tree
-      alacritty
-      librewolf
-      ungoogled-chromium
-      brave
-      clipse
-      zathura
-      nemo
-      nomacs
-      mpv
-      wlogout
-      grimblast
-      easyeffects
-      bluetuith
-      vivid
-      oh-my-posh
-      ripgrep
-      fzf
-      ani-cli
-      protonup
-      mangohud
+		      hyprpicker
+		      tree
+		      alacritty
+		      librewolf
+		      ungoogled-chromium
+		      brave
+		      clipse
+		      zathura
+		      nemo
+		      nomacs
+		      mpv
+		      wlogout
+		      grimblast
+		      easyeffects
+		      bluetuith
+		      vivid
+		      oh-my-posh
+		      ripgrep
+		      fzf
+		      ani-cli
+		      protonup
+		      mangohud
+		      teams-for-linux
 		];
 	};
 

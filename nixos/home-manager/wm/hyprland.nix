@@ -4,9 +4,10 @@
     xwayland.enable = true; 
 
     extraConfig = 
+    let 
+    	scripts = "~/nix/home-manager/wm/scripts";
+    in
         ''
-          $scripts = ~/nix/home-manager/wm/scripts
-
           $browser = librewolf
           $terminal = foot
           $telegram = telegram-desktop
@@ -40,13 +41,13 @@
           bind = $mainMod, KP_Add, exec, killall wpaperd | ls ~/.config/wpaperd/config.toml | entr -r wpaperd
 
           bind = $mainMod, Return, exec, $terminal 
-          bind = $mainMod SHIFT, Return, exec, $terminal -o background_opacity=0.4
+          bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
           bind = $mainMod, U, exec, $terminal --class btop -e btop 
           bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
           bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf
           bind = $mainMod, Q, killactive, 
-          bind = $mainMod Shift, Q, exec, $scripts/forcekill.sh
-          bind = $mainMod, KP_Insert, exec, $scripts/fixScreenshare.sh
+          bind = $mainMod Shift, Q, exec, ${scripts}/forcekill.sh
+          bind = $mainMod, KP_Insert, exec, ${scripts}/fixScreenshare.sh
           bind = $mainMod, E, exec, $fileManager --class files
           bind = CTRL_$mainMod, W, exec, $browser
           bind = $mainMod, C, exec, $terminal --class 'clipse' -e 'clipse'
@@ -189,7 +190,7 @@
 
 
       #switch layouts
-          bind = $mainMod, I, exec, $scripts/toggleLayout
+          bind = $mainMod, I, exec, ${scripts}/toggleLayout
 
       # Example special workspace (scratchpad)
           bind = $mainMod, S, togglespecialworkspace, terminal
@@ -206,11 +207,11 @@
           bindm = $mainMod, mouse:273, resizewindow
 
       #kill animations and other stuff for performance
-          bind = $mainMod, F1, exec, $scripts/performance.sh
-          bind = $mainMod, F2, exec, $scripts/gapsoff.sh
+          bind = $mainMod, F1, exec, ${scripts}/performance.sh
+          bind = $mainMod, F2, exec, ${scripts}/gapsoff.sh
 
           workspace=special:telegram, decorate:false, border:false, on-created-empty:$telegram #gapsin:0, gapsout:0
-          workspace=special:terminal, on-created-empty: $terminal -o background_opacity=0.6, 
+          workspace=special:terminal, on-created-empty: $terminal # -o background_opacity=0.6, 
           workspace=1, monitor:eDP-1
           workspace=2, monitor:eDP-1
           workspace=3, monitor:eDP-1

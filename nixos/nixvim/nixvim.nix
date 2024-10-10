@@ -1,10 +1,5 @@
 { pkgs, inputs, ... }: {
   imports = [
-    # Uncomment if you are using the home-manager module
-    # inputs.nixvim.homeManagerModules.nixvim
-    # Uncomment if you are using the nixos module
-    inputs.nixvim.nixosModules.nixvim
-
     # Plugins
     ./plugins/gitsigns.nix
     ./plugins/which-key.nix
@@ -62,6 +57,10 @@
     #  For more options, you can see `:help option-list`
     # https://nix-community.github.io/nixvim/NeovimOptions/index.html?highlight=globals#opts
     opts = {
+      tabstop = 2;
+      shiftwidth = 2;
+      expandtab = true;
+      smartindent = true;
       relativenumber = true;
       mouse = "a";
       # Don't show the mode, since it's already in the statusline

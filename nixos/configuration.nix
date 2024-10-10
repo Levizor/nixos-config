@@ -7,24 +7,27 @@
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ./disko-config.nix
       ./user.nix
-      <home-manager/nixos>
       ./nixvim/nixvim.nix
+      ./stylix.nix
+      <home-manager/nixos>
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
   
 
-  # boot.extraModulePackages = with config.boot.kernelPackages; [
-  #   v4l2loopback
-  # ];
-  # boot.extraModprobeConfig = ''
-  #   options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  # '';
   security.polkit.enable = true;
 
   #bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+
+    plymouth = {
+      enable = true;
+    };
+
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
 
@@ -38,6 +41,10 @@
   
   security.sudo.extraConfig = ''
     moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
+
+  security.sudo = {
+    wheelNeedsPassword = false;
+  };
 
   services.pipewire = {
      enable = true;
@@ -93,11 +100,6 @@
     theme = "catppuccin-mocha";
   };
 
-  boot.plymouth = {
-    enable = true;
-    theme = "breeze";
-  };
-
   #hyprland
   programs.hyprland = {
     enable = true;
@@ -122,58 +124,16 @@
      pavucontrol 
      clang
      wl-clipboard
-     catppuccin-sddm.override{
+     (catppuccin-sddm.override {
 	flavor = "mocha";
 	font = "DejaVu Sans Mono";
 	fontSize = "14";
+	loginBackground = false;
      }
+     )
   ];
 
-  
 
-
-  stylix={
-    enable = true;
-
-    polarity = "either";
-    image = ./red_winter.jpg;
-    targets = {
-    	grub.useImage = true;
-    };
-
-    opacity = {
-	terminal = 0.6;
-    };
-    fonts = {
-      sizes = {
-	terminal = 16;
-	desktop = 14;
-      };
-
-      serif = {
-        package = pkgs.dejavu_fonts;
-	# package = pkgs.fira-code-symbols;
-        name = "DejaVu Serif";
-      };
-
-      sansSerif = {
-        # package = pkgs.dejavu_fonts;
-	package = pkgs.fira-code-symbols;
-        name = "DejaVu Sans";
-      };
-
-      monospace = {
-        # package = pkgs.dejavu_fonts;
-	package = pkgs.fira-code-symbols;
-        name = "DejaVu Sans Mono";
-      };
-
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
-    };
-  };
 
 
 
