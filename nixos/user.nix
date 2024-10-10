@@ -10,6 +10,7 @@
     users.levizor = import ./home-manager/home.nix;
     useUserPackages = true;
     useGlobalPkgs = true;
+    backupFileExtension="backup";
   }; 
 
 }

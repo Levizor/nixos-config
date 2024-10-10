@@ -125,7 +125,7 @@
     enable = true;
 
     polarity = "light";
-    image = ./tree_light.jpg;
+    image = ./lava_japan.jpg;
 
     fonts = {
       serif = {

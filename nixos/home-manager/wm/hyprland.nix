@@ -283,8 +283,8 @@
         gaps_out = 15;
         border_size = 3;
 
-        "col.active_border" = "rgba(EEEEFFFF)";
-        "col.inactive_border" = "rgba(1C254100)";
+        # "col.active_border" = "rgba(EEEEFFFF)";
+        # "col.inactive_border" = "rgba(1C254100)";
 
         layout = "dwindle";
       };
