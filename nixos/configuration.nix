@@ -8,6 +8,7 @@
       ./disko-config.nix
       ./user.nix
       <home-manager/nixos>
+      ./nixvim/nixvim.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
