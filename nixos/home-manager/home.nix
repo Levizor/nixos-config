@@ -9,7 +9,7 @@
     ./git.nix
     ./wm/load.nix
     ./zsh/load.nix
-    ./kitty.nix
+    ./alacritty.nix
   ];
 
 	home = {

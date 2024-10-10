@@ -4,5 +4,6 @@
 		shellIntegration = {
 			enableZshIntegration = true;
 		};
+
 	};
 }

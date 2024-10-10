@@ -128,6 +128,8 @@
     image = ./lava_japan.jpg;
 
     fonts = {
+      sizes.terminal = 17;
+      sizes.desktop = 14;
       serif = {
         package = pkgs.dejavu_fonts;
         name = "DejaVu Serif";
@@ -149,6 +151,7 @@
       };
     };
   };
+
 
 
 }
