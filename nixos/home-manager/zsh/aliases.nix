@@ -3,11 +3,9 @@
     shellAliases = {
       c = "clear";
 
-			upgrade = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
+			rebuild = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
 
-			nixconf = "nvim ~/nix/nixos/configuration.nix";
-
-			conf = "home-manager switch --flake /home/levizor/nix --impure";
+			nixconf = "nvim ~/nix/.";
 
       mirrors="sudo reflector --verbose --latest 10 --country 'Poland' --age 6 --sort rate --save /etc/pacman.d/mirrorlist";
 

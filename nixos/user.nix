@@ -6,6 +6,10 @@
     extraGroups = [ "wheel" "NetworkManager" "input" "audio" "jackaudio"]; # Enable ‘sudo’ for the user.
   };
 
-  home-manager.users.levizor = import ./home-manager/home.nix;
+  home-manager = {
+    users.levizor = import ./home-manager/home.nix;
+    useUserPackages = true;
+    useGlobalPkgs = true;
+  }; 
 
 }

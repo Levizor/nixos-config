@@ -45,11 +45,7 @@
      pulse.enable = true;
   };
 
-  #OpenGL
-  hardware.opengl = {
-    enable = true;
-  };
-
+  #graphics
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 

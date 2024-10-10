@@ -4,6 +4,7 @@
 	in 
 {
   imports = [
+    ./stylix.nix
     ./librewolf.nix
     ./git.nix
     ./wm/load.nix
@@ -18,7 +19,7 @@
     };
     enableNixpkgsReleaseCheck = false;
 		username = "levizor";
-		homeDirectory = "/home/levizor/";
+		homeDirectory = "/home/levizor";
 		stateVersion = "24.05";
 
 		packages = with pkgs; [
