@@ -18,8 +18,10 @@
 	in {
 		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 			inherit system;
+
 			modules = [ 
-			  ./nixos/configuration.nix
+			  ./os
+        ./home-manager
 			  inputs.stylix.nixosModules.stylix
         		];
 			specialArgs = {

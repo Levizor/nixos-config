@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+path=~/.cache/peaclockk
+
+if [ -n "$(cat $path)" ]; then
+  kill -9 $(cat $path)
+  echo >$path
+  exit
+fi
+
+alacritty --class btop -e peaclock &
+echo $! >$path
