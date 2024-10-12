@@ -20,6 +20,7 @@
         ./alacritty.nix
         ./foot.nix
         ./lsd.nix
+        ./mako.nix
       ];
 
       home = {
@@ -94,8 +95,6 @@
           };
         };
       };
-
-      services.mako.enable = true;
     };
 
   };
