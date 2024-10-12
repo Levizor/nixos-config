@@ -43,6 +43,8 @@
 
       s="source ~/zsh_config/.zshrc";
 
+      home="nvim ~/nix/home-manager/default.nix";
+
     };
   };
 }
