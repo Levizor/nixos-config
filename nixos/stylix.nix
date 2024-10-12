@@ -1,5 +1,9 @@
 {pkgs, ...}:
 {
+
+  fonts.packages = with pkgs; [
+    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
+  ];
   stylix={
     enable = true;
 
@@ -19,27 +23,21 @@
       };
 
       serif = {
-        package = pkgs.dejavu_fonts;
-	# package = pkgs.fira-code-symbols;
-        name = "DejaVu Serif";
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        name = "FiraCodeNerdFont";
       };
 
       sansSerif = {
-        # package = pkgs.dejavu_fonts;
-	package = pkgs.fira-code-symbols;
-        name = "DejaVu Sans";
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        name = "FiraCodeNerdFont";
       };
 
       monospace = {
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
         # package = pkgs.dejavu_fonts;
-	package = pkgs.fira-code-symbols;
-        name = "DejaVu Sans Mono";
+        name = "FiraCodeNerdFontMono";
       };
 
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
     };
   };
 }

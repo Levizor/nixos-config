@@ -132,12 +132,6 @@
      pavucontrol 
      clang
      wl-clipboard
-     (catppuccin-sddm.override {
-	flavor = "mocha";
-	font = "DejaVu Sans Mono";
-	fontSize = "14";
-	loginBackground = false;
-     })
 
      (inputs.nvix.packages.${system}.base.extend {
         config.colorschemes.tokyonight.settings.transparent = true;
