@@ -10,7 +10,7 @@
     };
 
     opacity = {
-	terminal = 0.6;
+	terminal = 0.7;
     };
     fonts = {
       sizes = {

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
   {
   imports =
@@ -7,7 +7,6 @@
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ./disko-config.nix
       ./user.nix
-      ./nixvim/nixvim.nix
       ./stylix.nix
       <home-manager/nixos>
     ];
@@ -46,19 +45,11 @@
     wheelNeedsPassword = false;
   };
 
-  services.pipewire = {
-     enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
-     pulse.enable = true;
-  };
-
   #graphics
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 
   #nvidia 
-  services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
@@ -75,7 +66,6 @@
     };
   };
 
-
   specialisation = {
     gaming-time.configuration = {
       hardware.nvidia = {
@@ -90,15 +80,32 @@
 
 
 
+  #services
+  services = {
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
+    libinput.enable = true;
+    xserver.videoDrivers = ["nvidia"];
+ 
   #sddm
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    theme = "catppuccin-mocha";
+    displayManager.sddm = {
+      enable = false;
+      wayland.enable = true;
+      theme = "catppuccin-mocha";
+    };
+    displayManager.ly = {
+      enable = true;
+    };
+    printing.enable = true;
+
+    pipewire = {
+     enable = true;
+     alsa.enable = true;
+     alsa.support32Bit = true;
+     pulse.enable = true;
+    };
+
   };
+
 
   #hyprland
   programs.hyprland = {
@@ -115,6 +122,7 @@
   programs.gamemode.enable = true;
 
 
+
   environment.systemPackages = with pkgs; [
      curl
      vim
@@ -129,15 +137,17 @@
 	font = "DejaVu Sans Mono";
 	fontSize = "14";
 	loginBackground = false;
-     }
-     )
+     })
+
+     (inputs.nvix.packages.${system}.base.extend {
+        config.colorschemes.tokyonight.settings.transparent = true;
+     })
   ];
 
 
 
 
 
-  services.printing.enable = true;
   system.stateVersion = "24.05"; 
 }
 

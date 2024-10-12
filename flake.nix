@@ -5,16 +5,13 @@
 		nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
                 stylix.url = "github:danth/stylix";
+		nvix.url = "github:niksingh710/nvix";
+		nixvim.url = "github:mikaelfangel/nixvim-config";
 
-		nixvim = {
-			url = "github:nix-community/nixvim";
-
-			inputs.nixpkgs.follows = "nixpkgs";
-  		};
 	};
 
 
-	outputs = {nixpkgs, home-manager, ...}@inputs: 
+	outputs = {self, nixpkgs, home-manager, ...}@inputs : 
 
 	let 
 		system = "x86_64-linux";
@@ -22,12 +19,13 @@
 		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 			inherit system;
 			modules = [ 
-			  ./nixos/configuration.nix 
+			  ./nixos/configuration.nix
 			  inputs.stylix.nixosModules.stylix
-			  inputs.nixvim.nixosModules.nixvim
         		];
+			specialArgs = {
+			    inherit inputs self system;
+			};
 		};
-
 	};
 
 

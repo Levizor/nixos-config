@@ -18,7 +18,7 @@
 
     sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-        "$\{HOME}/.steam/root/compatabilitytools.d";
+        "$\{HOME}/.local/Steam/compatabilitytools.d";
     };
     enableNixpkgsReleaseCheck = false;
 		username = "levizor";
@@ -27,10 +27,8 @@
 
 		packages = with pkgs; [
 			neofetch
-			btop
 			telegram-desktop
 			webcord
-			fuzzel
 		      hyprpicker
 		      tree
 		      alacritty
@@ -58,12 +56,35 @@
 	};
 
 
-	programs.neovim = {
-		enable = true;
-		defaultEditor = true;
+	programs = {
+		obs-studio = {
+		    enable = true;
+		};
+
+		btop = {
+		    enable = true;
+		    settings = {
+			vim_keys = true;
+		    };
+		};
+	
+		bat = {
+		    enable = true;
+		};
+		
+		fzf = {
+		    enable = true;
+		    enableZshIntegration = true;
+		};
+		
+		fuzzel = {
+		    enable = true;
+		};
 	};
 
-	programs.obs-studio = {
-    enable = true;
-	};
+  services.mako.enable = true;
+
+
+
+	
 }
