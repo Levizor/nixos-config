@@ -61,7 +61,7 @@
   #nvidia 
   hardware.nvidia = {
     modesetting.enable = true;
-      open = false;
+    open = false;
     
     prime = {
       offload = {

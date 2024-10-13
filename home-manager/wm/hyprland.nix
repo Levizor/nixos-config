@@ -8,7 +8,7 @@
     	scripts = "~/nix/home-manager/wm/scripts";
     in
         ''
-          $browser = librewolf
+          $browser = floorp
           $terminal = footclient 
           $telegram = telegram-desktop
           $fileManager = nemo
@@ -102,7 +102,7 @@
           submap = reset 
 
       # will switch to a submap called resize
-          bind=ALT,R,submap,resize
+          bind=$mainMod,R,submap,resize
 
       # will start a submap called "resize"
           submap=resize

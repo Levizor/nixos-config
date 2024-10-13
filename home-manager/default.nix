@@ -62,6 +62,7 @@
           zoom-us
           hyprpicker
           hyprpaper
+          loupe
         ];
       };
 
