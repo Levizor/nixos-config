@@ -38,7 +38,6 @@
           neofetch
           telegram-desktop
           webcord
-          hyprpicker
           tree
           alacritty
           librewolf
@@ -62,6 +61,7 @@
           obsidian
           zoom-us
           hyprpicker
+          hyprpaper
         ];
       };
 
