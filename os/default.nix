@@ -27,7 +27,6 @@
       grub = {
         enable = true;
         efiSupport = true;
-        device = "/dev/nvme0n1p2";
         useOSProber = true;
       };
     };

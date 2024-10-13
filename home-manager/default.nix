@@ -60,11 +60,16 @@
           mangohud
           teams-for-linux
           obsidian
+          zoom-us
         ];
       };
 
 
       programs = {
+        wezterm = {
+          enable = true;
+          enableZshIntegration = true;
+        };
         feh.enable = true;
         swaylock = {
           enable = true;
@@ -90,10 +95,6 @@
             enableZshIntegration = true;
         };
 
-        bemenu = {
-          enable = true;
-        };
-        
         fuzzel = {
             enable = true;
           settings = {
