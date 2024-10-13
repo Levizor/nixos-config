@@ -12,7 +12,6 @@
 
       imports = [
         # ./stylix.nix
-        ./librewolf.nix
         ./floorp.nix
         ./git.nix
         ./wm

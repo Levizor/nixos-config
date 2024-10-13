@@ -19,22 +19,12 @@
 
   #bootloader
   boot = {
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/EFI";
-      };
-      grub = {
-        enable = true;
-        efiSupport = true;
-        useOSProber = true;
-      };
-    };
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
     plymouth = {
       enable = true;
     };
-
   };
 
   networking.hostName = "nixos"; # Define your hostname.
