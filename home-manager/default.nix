@@ -38,33 +38,34 @@
           neofetch
           telegram-desktop
           webcord
-              hyprpicker
-              tree
-              alacritty
-              librewolf
-              ungoogled-chromium
-              brave
-              clipse
-              zathura
-              nemo
-              nomacs
-              mpv
-              grimblast
-              easyeffects
-              bluetuith
-              vivid
-              ripgrep
-              fzf
-              ani-cli
-              protonup
-              mangohud
-              teams-for-linux
-              feh
+          hyprpicker
+          tree
+          alacritty
+          librewolf
+          ungoogled-chromium
+          brave
+          clipse
+          zathura
+          nemo
+          nomacs
+          mpv
+          grimblast
+          easyeffects
+          bluetuith
+          vivid
+          ripgrep
+          fzf
+          ani-cli
+          protonup
+          mangohud
+          teams-for-linux
+          obsidian
         ];
       };
 
 
       programs = {
+        feh.enable = true;
         swaylock = {
           enable = true;
         };
@@ -87,6 +88,10 @@
         fzf = {
             enable = true;
             enableZshIntegration = true;
+        };
+
+        bemenu = {
+          enable = true;
         };
         
         fuzzel = {

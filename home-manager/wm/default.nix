@@ -1,7 +1,7 @@
 {
   imports = [
     ./hyprland.nix
-    ./wpaperd.nix
+    # ./wpaperd.nix
     ./wlogout.nix
   ];
 

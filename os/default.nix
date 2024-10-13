@@ -19,8 +19,18 @@
 
   #bootloader
   boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/EFI";
+      };
+      grub = {
+        enable = true;
+        efiSupport = true;
+        device = "/dev/nvme0n1p2";
+        useOSProber = true;
+      };
+    };
 
     plymouth = {
       enable = true;
@@ -119,6 +129,7 @@
     gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
+
 
 
 
