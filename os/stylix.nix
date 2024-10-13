@@ -7,10 +7,10 @@
   stylix={
     enable = true;
 
-
+    
     polarity = "either";
     image = ./moons.jpg;
-
+    targets.feh.enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
     opacity = {
