@@ -62,27 +62,29 @@
       disablesetdesktopbackground = true;
       searchbar = "unified";
 
-      extensionsettings = {
+      ExtensionSettings = {
         # "*" = {
         #   installation_mode = "normal_installed"; 
         # };
         "ublock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "normal_installed"; 
+          installation_mode = "force_installed"; 
         };
 
         # privacy badger:
         "jid1-mnnxcxisbpnsxq@jetpack" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
+          installation_mode = "force_installed";
         };
 
         "vimium-c@gdh1995.cn" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/vimium-c/latest.xpi";
-          installation_mode = "force_installed";
+          installation_mode = "normal_installed";
         };
 
         "keepassxc-browser@keepassxc.org" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/keepassxc-browser/latest.xpi";
+          installation_mode = "force_installed";
         };
       };
     };
