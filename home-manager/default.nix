@@ -61,6 +61,7 @@
           teams-for-linux
           obsidian
           zoom-us
+          hyprpicker
         ];
       };
 

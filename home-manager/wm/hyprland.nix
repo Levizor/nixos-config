@@ -327,7 +327,6 @@
       };
 
       exec-once = [
-        "hyprpaper"
         "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "ls ~/.config/wpaperd/ | entr -r wpaperd"
