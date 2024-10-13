@@ -49,7 +49,6 @@
               nemo
               nomacs
               mpv
-              wlogout
               grimblast
               easyeffects
               bluetuith
@@ -60,11 +59,15 @@
               protonup
               mangohud
               teams-for-linux
+              feh
         ];
       };
 
 
       programs = {
+        swaylock = {
+          enable = true;
+        };
         obs-studio = {
             enable = true;
         };

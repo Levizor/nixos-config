@@ -12,11 +12,11 @@ if [ "$HYPRGAPSOUT" != 0 ]; then
         keyword general:gaps_in 0;\
         keyword general:gaps_out 0;\
         keyword decoration:rounding 0"
-  notify-send.sh -f -t 1000 Gaps: off
+  notify-send  -t 1000 Gaps: off
   exit
 fi
 hyprctl --batch "\
   keyword general:gaps_in $(cat ~/.cache/gaps_in);\
   keyword general:gaps_out $(cat ~/.cache/gaps_out);\
   keyword decoration:rounding $(cat ~/.cache/rounding)"
-notify-send.sh -f -t 1000 Gaps: on
+notify-send -t 1000 Gaps: on

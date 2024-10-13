@@ -131,6 +131,7 @@
      pavucontrol 
      clang
      wl-clipboard
+     libnotify
 
      (inputs.nvix.packages.${system}.base.extend {
         config.colorschemes.tokyonight.settings.transparent = true;
