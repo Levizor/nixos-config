@@ -66,10 +66,6 @@
 
 
       programs = {
-        wezterm = {
-          enable = true;
-          enableZshIntegration = true;
-        };
         feh.enable = true;
         swaylock = {
           enable = true;

@@ -9,7 +9,7 @@
     in
         ''
           $browser = librewolf
-          $terminal = foot
+          $terminal = footclient 
           $telegram = telegram-desktop
           $fileManager = nemo
           $menu = fuzzel
@@ -327,13 +327,12 @@
       };
 
       exec-once = [
+        "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        # "dotoold"
         "ls ~/.config/wpaperd/ | entr -r wpaperd"
         "waybar"
         "pipx ensurepath"
         "clipse -listen"
-        "wpaperd"
       ];
 
 

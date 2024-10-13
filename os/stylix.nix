@@ -7,19 +7,20 @@
   stylix={
     enable = true;
 
+
     polarity = "either";
     image = ./moons.jpg;
-    targets = {
-    	grub.useImage = true;
-    };
+
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
     opacity = {
-	terminal = 0.7;
+      terminal = 0.7;
     };
+
     fonts = {
       sizes = {
-	terminal = 16;
-	desktop = 14;
+        terminal = 16;
+        desktop = 14;
       };
 
       serif = {
