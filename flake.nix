@@ -2,9 +2,9 @@
 	description = "Config";
 	
 	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-                stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix";
 		nvix.url = "github:niksingh710/nvix";
 		nixvim.url = "github:mikaelfangel/nixvim-config";
 

@@ -45,6 +45,8 @@
 
       home="nvim ~/nix/home-manager/default.nix";
 
+      i="loupe";
+
     };
   };
 }

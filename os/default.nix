@@ -14,8 +14,13 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
   
+  nixpkgs.config.permittedInsecurePackages = [
+    "floorp-unwrapped-11.19.0"
+  ]; 
+
 
   security.polkit.enable = true;
+  security.rtkit.enable = true;
 
   #bootloader
   boot = {
@@ -44,10 +49,7 @@
     wheelNeedsPassword = false;
   };
 
-  #graphics
   hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-
   #nvidia 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -80,26 +82,30 @@
 
   #services
   services = {
+    upower = {
+      enable = true;
+    };
   # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
     xserver.videoDrivers = ["nvidia"];
  
   #sddm
     displayManager.sddm = {
-      enable = false;
+      enable = true;
       wayland.enable = true;
-      theme = "catppuccin-mocha";
+      # theme = "catppuccin-mocha";
     };
     displayManager.ly = {
-      enable = true;
+      enable = false;
     };
     printing.enable = true;
 
     pipewire = {
-     enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
-     pulse.enable = true;
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
     };
 
   };
@@ -108,14 +114,13 @@
   #hyprland
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
   };
 
+  programs.wireshark.enable = true;
   programs.zsh.enable = true;
-
   programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
+  enable = true;
+  gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
 
@@ -123,6 +128,7 @@
 
 
   environment.systemPackages = with pkgs; [
+     wireshark
      curl
      vim
      git

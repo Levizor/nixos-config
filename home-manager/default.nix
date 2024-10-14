@@ -5,8 +5,8 @@
 {
 
   home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = true;
+    # useUserPackages = true;
+    # useGlobalPkgs = true;
     backupFileExtension="backup";
     users.levizor = { 
 
@@ -39,7 +39,6 @@
           webcord
           tree
           alacritty
-          librewolf
           ungoogled-chromium
           brave
           clipse
@@ -62,12 +61,12 @@
           hyprpicker
           hyprpaper
           loupe
+          youtube-music
         ];
       };
 
 
       programs = {
-        feh.enable = true;
         swaylock = {
           enable = true;
         };
