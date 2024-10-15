@@ -47,6 +47,8 @@
 
       i="loupe";
 
+      get="nix-shell -p";
+
     };
   };
 }

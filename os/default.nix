@@ -79,6 +79,18 @@
   };
 
 
+  programs.regreet = {
+    enable = true;
+    settings = {
+      background = {
+        fit = "Cover";
+      };
+      GTK = {
+        application_prefer_dark_theme = true;
+      };
+    };
+    cageArgs = ["-s" "-m" "last"];
+  };
 
   #services
   services = {
@@ -87,16 +99,18 @@
     };
   # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
-    xserver.videoDrivers = ["nvidia"];
+    xserver = {
+      videoDrivers = ["nvidia"];
+    };
+
+    greetd = {
+      enable = true;
+    };
  
   #sddm
     displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      # theme = "catppuccin-mocha";
-    };
-    displayManager.ly = {
       enable = false;
+      wayland.enable = true;
     };
     printing.enable = true;
 

@@ -61,7 +61,6 @@
           hyprpaper
           loupe
           youtube-music
-          vesktop
         ];
       };
 

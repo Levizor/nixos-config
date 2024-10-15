@@ -15,6 +15,7 @@
         name = "profile_0";
         
         search = {
+          force = true;
           engines = {
             "Nix Packages" = {
               urls = [{
