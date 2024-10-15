@@ -11,7 +11,6 @@
     users.levizor = { 
 
       imports = [
-        ./stylix.nix
         ./floorp.nix
         ./git.nix
         ./wm
