@@ -11,7 +11,7 @@
     users.levizor = { 
 
       imports = [
-        # ./stylix.nix
+        ./stylix.nix
         ./floorp.nix
         ./git.nix
         ./wm
@@ -62,6 +62,7 @@
           hyprpaper
           loupe
           youtube-music
+          vesktop
         ];
       };
 

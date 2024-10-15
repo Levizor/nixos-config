@@ -1,31 +1,44 @@
 {pkgs, ...}:
 {
+
+  # fonts.packages = with pkgs; [
+  #   (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
+  # ];
   stylix={
     enable = true;
 
-    polarity = "light";
-    image = ./nixos/home-manager/tree_light.jpg;
+    
+    polarity = "either";
+    image = ./moons.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+
+    opacity = {
+      terminal = 0.7;
+    };
 
     fonts = {
+      sizes = {
+        terminal = 16;
+        desktop = 14;
+      };
+
       serif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Serif";
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        name = "FiraCodeNerdFont";
       };
 
       sansSerif = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans";
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        name = "FiraCodeNerdFont";
       };
 
       monospace = {
-        package = pkgs.dejavu_fonts;
-        name = "DejaVu Sans Mono";
+        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+        # package = pkgs.dejavu_fonts;
+        name = "FiraCodeNerdFontMono";
       };
 
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
     };
   };
 }
+
