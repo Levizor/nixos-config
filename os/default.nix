@@ -116,7 +116,7 @@
     enable = true;
   };
 
-  programs.wireshark.enable = true;
+  # programs.wireshark.enable = true;
   programs.zsh.enable = true;
   programs.steam = {
   enable = true;
@@ -128,7 +128,6 @@
 
 
   environment.systemPackages = with pkgs; [
-     wireshark
      curl
      vim
      git
@@ -138,6 +137,7 @@
      clang
      wl-clipboard
      libnotify
+     killall
 
      (inputs.nvix.packages.${system}.base.extend {
         config.colorschemes.tokyonight.settings.transparent = true;
