@@ -174,6 +174,9 @@
         config.colorschemes.tokyonight.settings.transparent = true;
      })
   ];
+  environment.variables = {
+    EDITOR = "nvim";
+  };
 
   system.stateVersion = "24.05"; 
 }

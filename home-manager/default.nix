@@ -65,6 +65,7 @@
           # networkmanagerapplet
           keepassxc
           yt-dlp
+          cmatrix
         ];
       };
 
