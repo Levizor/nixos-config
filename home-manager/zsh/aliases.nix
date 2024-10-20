@@ -45,9 +45,13 @@
 
       home="nvim ~/nix/home-manager/default.nix";
 
+      os="nvim ~/nix/os/default.nix";
+
       i="loupe";
 
       get="nix-shell -p";
+
+      uisudo="sudo -sE ";
 
     };
   };

@@ -1,9 +1,10 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
+  users.defaultUserShell = pkgs.zsh;
   users.users.levizor= {
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = [ "wheel" "NetworkManager" "input" "audio" "wireshark"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "input" "audio" "wireshark"]; # Enable ‘sudo’ for the user.
   };
 
 

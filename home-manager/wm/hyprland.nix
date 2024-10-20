@@ -7,8 +7,6 @@
     settings = {
       "$mainMod" = "SUPER";
 
-      monitor=",preferred, auto, 1";
-
       env = [
         "XCURSOR_SIZE, 30"
       ];
@@ -88,6 +86,7 @@
       };
 
       exec-once = [
+        "lxqt-policykit-agent"
         "hyprpaper"
         "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -103,6 +102,9 @@
     	scripts = "~/nix/home-manager/wm/scripts";
     in
         ''
+          monitor = eDP-1, 1920x1080@60, 0x0, 1,  
+          monitor = HDMI-A-1, preferred, auto, 1, #mirror, eDP-1
+
           $browser = floorp
           $terminal = footclient 
           $telegram = telegram-desktop
@@ -116,22 +118,22 @@
           $mainMod = SUPER
 
       #makes waybar with workspaces visible when pressing key
-      # bindt = , Alt_L, exec, pkill -o -SIGUSR1 waybar
-      # bindrt = $mainMod, Alt_L, exec, pkill -o -SIGUSR1 waybar
-          bind = $mainMod, Tab, exec, killall -SIGUSR1 waybar
+      # bindt = , SUPER_L, exec, killall  -SIGUSR1 .waybar-wrapped
+      # bindrt = $mainMod, SUPER_L, exec, killall  -SIGUSR1 .waybar-wrapped
+          # bind = $mainMod, Tab, exec, killall -SIGUSR1 .waybar-wrapped
 
           bind = $mainMod, KP_END, exec, killall waybar || waybar
 
       # bind = SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
 
-          binde = SUPER, H, exec, echo key kp4| dotoolc
-          binde = SUPER, J, exec, echo key kp2| dotoolc
-          binde = SUPER, K, exec, echo key kp8| dotoolc
-          binde = SUPER, L, exec, echo key kp6| dotoolc
-          binde = SUPER, U, exec, echo key kp9| dotoolc
-          binde = SUPER, D, exec, echo key kp3| dotoolc
-          binde = Ctrl, K, exec, echo key kp9| dotoolc
-          binde = Ctrl, J, exec, echo key kp3| dotoolc
+          # binde = SUPER, H, exec, echo key kp4| dotoolc
+          # binde = SUPER, J, exec, echo key kp2| dotoolc
+          # binde = SUPER, K, exec, echo key kp8| dotoolc
+          # binde = SUPER, L, exec, echo key kp6| dotoolc
+          # binde = SUPER, U, exec, echo key kp9| dotoolc
+          # binde = SUPER, D, exec, echo key kp3| dotoolc
+          # binde = Ctrl, K, exec, echo key kp9| dotoolc
+          # binde = Ctrl, J, exec, echo key kp3| dotoolc
           bind = $mainMod, KP_Subtract, exec, wpaperctl next
           bind = $mainMod, KP_Add, exec, killall wpaperd | ls ~/.config/wpaperd/config.toml | entr -r wpaperd
 

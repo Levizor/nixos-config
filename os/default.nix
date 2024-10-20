@@ -80,7 +80,7 @@
 
 
   programs.regreet = {
-    enable = true;
+    enable = false;
     settings = {
       background = {
         fit = "Cover";
@@ -100,16 +100,22 @@
   # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
     xserver = {
-      videoDrivers = ["nvidia"];
+      enable = true;
+      windowManager = {
+        i3 = {
+          enable = true;
+        };
+
+      };      videoDrivers = ["nvidia"];
     };
 
     greetd = {
-      enable = true;
+      enable = false;
     };
  
   #sddm
     displayManager.sddm = {
-      enable = false;
+      enable = true;
       wayland.enable = true;
     };
     printing.enable = true;
@@ -130,15 +136,21 @@
     enable = true;
   };
 
+  qt = {
+    enable = true;
+    platformTheme="gtk2";
+  };
+
   # programs.wireshark.enable = true;
   programs.zsh.enable = true;
+  programs.zsh.promptInit = ''
+    ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+  '';
   programs.steam = {
   enable = true;
   gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
-
-
 
 
   environment.systemPackages = with pkgs; [
@@ -149,9 +161,14 @@
      pulseaudioFull
      pavucontrol 
      clang
+     clang-tools
+     cmake
      wl-clipboard
      libnotify
      killall
+     rustup
+     openssl
+     lxqt.lxqt-policykit
 
      (inputs.nvix.packages.${system}.base.extend {
         config.colorschemes.tokyonight.settings.transparent = true;

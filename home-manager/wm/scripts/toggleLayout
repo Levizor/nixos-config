@@ -3,11 +3,11 @@
 CUR_LAYOUT=$(hyprctl getoption general:layout | head -n 1 | cut -f2 -d' ')
 
 if [[ $CUR_LAYOUT = 'master' ]]; then
-  killall -SIGUSR1 waybar
+  killall -SIGUSR1 .waybar-wrapped
   hyprctl --batch "keyword general:layout dwindle"
   notify-send -t 1000 "Layout" "Dwindle"
 else
-  killall -SIGUSR1 waybar
+  killall -SIGUSR1 .waybar-wrapped
   hyprctl --batch "keyword general:layout master"
   notify-send -t 1000 "Layout" "Master"
 fi

@@ -1,213 +1,133 @@
 {pkgs, ...}:
 {
   programs.waybar = {
-    enable = true;
+    enable = false;
     settings = {
-      mainBar = {
-        output = "eDP-1";
+      main = {
         layer = "top";
-        position = "left";
-        width = 28;
-        margin = "2 0 2 2";
-        spacing = 2;
+        position = "top";
         modules-left = [
           "clock"
-          "custom/sep"
-          "tray"
+          "hyprland/language"
+          "hyprland/mode"
+          "idle_inhibitor"
         ];
         modules-center = [
           "hyprland/workspaces"
         ];
         modules-right = [
-          # "custom/bluetooth_devices",
-          "custom/sep"
+          "cpu"
           "temperature"
-          "custom/sep"
           "pulseaudio"
-          "custom/powermenu"
-        ];
-        "custom/sep" = {
-          "format" = " ";
-        };
-        "custom/powermenu" = {
-          "on-click"= "~/.config/wofi/scripts/wofipowermenu.py";
-          "format" = "";
-          "tooltip" = false;
-        };
-        "custom/bluetooth_devices" = {
-          "exec" = "$HOME/.config/waybar/custom_modules/bluetooth_devices.sh";
-          "return-type" = "json";
-          "format" = "{}";
-          "justify" = "center";
-          "rotate" = 90;
-          "interval" = 5;
-          "on-click" = "blueman-manager";
-        };
-        "hyprland/workspaces" = {
-          "format" = "{icon}";
-          "on-click" = "activate";
-          "on-scroll-up" = "hyprctl dispatch workspace e-1";
-          "on-scroll-down" = "hyprctl dispatch workspace e+1";
-          "format-icons" = {
-            "active" = "";
-            "urgent" = "";
-            "default" = "";
-          };
-        };
-        "clock" = {
-          "tooltip" = true;
-          "format" = "{:%H\n%M}";
-          "tooltip-format" = "{:%Y-%m-%d}";
-        };
-        "tray" = {
-          "icon-size" = 18;
-          "show-passive-items" = "true";
-        };
-        "temperature" = {
-          "rotate" = 90;
-          "hwmon-path" = "/sys/class/hwmon/hwmon3/temp1_input";
-          "critical-threshold" = 80;
-          "format" = "{icon} {temperatureC}°C";
-          "format-icons" = [
-            ""
-            ""
-            ""
-          ];
-        };
-        "pulseaudio" = {
-          "rotate" = 90;
-          "format" = "{icon} {volume}%";
-          "format-bluetooth" = "{icon} {volume}%";
-          "format-muted" = "MUTE ";
-          "format-icons" = {
-            "headphones" = "";
-            "handsfree" = "";
-            "headset" = "";
-            "phone" = "";
-            "portable" = "";
-            "car" = "";
-            "default" = [
-              ""
-              ""
-            ];
-          };
-          "scroll-step" = 3;
-          "on-click" = "pavucontrol";
-          "on-click-right" = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-        };
-                # "custom/hello-from-waybar" = {
-      #   format = "hello {}";
-      #   max-length = 40;
-      #   interval = "once";
-      #   exec = pkgs.writeShellScript "hello-from-waybar" ''
-      #     echo "from within waybar"
-      #   '';
-      # };
-
-      };    
-
-      second = {
-        output = "HDMI-A-1";
-        layer = "top";
-        position = "right";
-        width = 28;
-        margin = "2 0 2 2";
-        spacing = 2;
-        modules-left = [
-          "clock"
-          "custom/sep"
+          "bluetooth"
+          "network"
           "tray"
         ];
-        modules-center = [
-          "hyprland/workspaces"
-        ];
-        modules-right = [
-          # "custom/bluetooth_devices",
-          "custom/sep"
-          "temperature"
-          "custom/sep"
-          "pulseaudio"
-          "custom/powermenu"
-        ];
-        "custom/sep" = {
-          "format" = " ";
-        };
-        "custom/powermenu" = {
-          "on-click"= "~/.config/wofi/scripts/wofipowermenu.py";
-          "format" = "";
-          "tooltip" = false;
-        };
-        "custom/bluetooth_devices" = {
-          "exec" = "$HOME/.config/waybar/custom_modules/bluetooth_devices.sh";
-          "return-type" = "json";
-          "format" = "{}";
-          "justify" = "center";
-          "rotate" = 90;
-          "interval" = 5;
-          "on-click" = "blueman-manager";
-        };
         "hyprland/workspaces" = {
-          "format" = "{icon}";
-          "on-click" = "activate";
-          "on-scroll-up" = "hyprctl dispatch workspace e-1";
-          "on-scroll-down" = "hyprctl dispatch workspace e+1";
-          "format-icons" = {
-            "active" = "";
-            "urgent" = "";
-            "default" = "";
+          disable-scroll = true;
+          all-outputs = true;
+          # format = "{icon}";
+          # format-icons = {
+          #   # "1" = "<span color=\"#D8DEE9\"></span>";
+          #   # "2" = "<span color=\"#88C0D0\"></span>";
+          #   # "3" = "<span color=\"#A3BE8C\"></span>";
+          #   # "4" = "<span color=\"#D8DEE9\"></span>";
+          #   urgent = "";
+          #   focused = "";
+          #   default = "";
+          # };
+        };
+        "hyprland/mode" = {
+          format = "<span style=\"italic\">{}</span>";
+        };
+        "hyprland/window" = {
+          format = "{}";
+          max-length = 50;
+          tooltip = false;
+        };
+        bluetooth = {
+          interval = 30;
+          format = "{icon}";
+          format-icons = {
+            enabled = "";
+            disabled = "";
           };
+          on-click = "blueberry";
         };
-        "clock" = {
-          "tooltip" = true;
-          "format" = "{:%H\n%M}";
-          "tooltip-format" = "{:%Y-%m-%d}";
+        idle_inhibitor = {
+          format = "{icon}";
+          format-icons = {
+            activated = "";
+            deactivated = "";
+          };
+          tooltip = "true";
         };
-        "tray" = {
-          "icon-size" = 18;
-          "show-passive-items" = "true";
+        tray = {
+          spacing = 5;
         };
-        "temperature" = {
-          "rotate" = 90;
-          "hwmon-path" = "/sys/class/hwmon/hwmon3/temp1_input";
-          "critical-threshold" = 80;
-          "format" = "{icon} {temperatureC}°C";
-          "format-icons" = [
-            ""
+        clock = {
+          format = "  {:%H:%M   %e %b}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          today-format = "<b>{}</b>";
+          on-click = "gnome-calendar";
+        };
+        cpu = {
+          interval = "1";
+          format = "  {max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>";
+          max-length = 13;
+          min-length = 13;
+          on-click = "kitty -e htop --sort-key PERCENT_CPU";
+          tooltip = false;
+        };
+        temperature = {
+          interval = "4";
+          hwmon-path = "/sys/class/hwmon/hwmon3/temp1_input";
+          critical-threshold = 74;
+          format-critical = "  {temperatureC}°C";
+          format = "{icon}  {temperatureC}°C";
+          format-icons = [
+            ""
             ""
-            ""
+            ""
           ];
+          max-length = 7;
+          min-length = 7;
         };
-        "pulseaudio" = {
-          "rotate" = 90;
-          "format" = "{icon} {volume}%";
-          "format-bluetooth" = "{icon} {volume}%";
-          "format-muted" = "MUTE ";
-          "format-icons" = {
-            "headphones" = "";
-            "handsfree" = "";
-            "headset" = "";
-            "phone" = "";
-            "portable" = "";
-            "car" = "";
-            "default" = [
+        network = {
+          format-wifi = "  {essid}";
+          format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+          format-linked = "{ifname} (No IP) ";
+          format-disconnected = "";
+          format-alt = "{ifname}: {ipaddr}/{cidr}";
+          family = "ipv4";
+          tooltip-format-wifi = "  {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n {bandwidthUpBits}  {bandwidthDownBits}";
+          tooltip-format-ethernet = " {ifname}\nIP: {ipaddr}\n {bandwidthUpBits}  {bandwidthDownBits}";
+        };
+        pulseaudio = {
+          scroll-step = 3;
+          format = "{icon} {volume}% {format_source}";
+          format-bluetooth = "{volume}% {icon} {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
+          format-source = "";
+          format-source-muted = "";
+          format-icons = {
+            headphone = "";
+            hands-free = "";
+            headset = "";
+            phone = "";
+            portable = "";
+            car = "";
+            default = [
+              ""
               ""
               ""
             ];
           };
-          "scroll-step" = 3;
-          "on-click" = "pavucontrol";
-          "on-click-right" = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+          on-click = "pavucontrol";
+          on-click-right = "pactl set-source-mute @DEFAULT_SOURCE@ toggle";
         };
-                # "custom/hello-from-waybar" = {
-      #   format = "hello {}";
-      #   max-length = 40;
-      #   interval = "once";
-      #   exec = pkgs.writeShellScript "hello-from-waybar" ''
-      #     echo "from within waybar"
-      #   '';
-      # };
-
-      };    
+      };
     };
   };
 }

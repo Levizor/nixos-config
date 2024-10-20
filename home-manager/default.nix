@@ -19,6 +19,7 @@
         ./foot.nix
         ./lsd.nix
         ./mako.nix
+        ./zellij.nix
       ];
 
       home = {
@@ -35,13 +36,11 @@
         packages = with pkgs; [
           neofetch
           telegram-desktop
-          webcord
           tree
           alacritty
           ungoogled-chromium
           brave
           clipse
-          zathura
           nemo
           nomacs
           mpv
@@ -53,7 +52,6 @@
           fzf
           ani-cli
           protonup
-          mangohud
           teams-for-linux
           obsidian
           zoom-us
@@ -62,11 +60,22 @@
           loupe
           youtube-music
           vesktop
+          jetbrains-toolbox
+          # imagemagick
+          # networkmanagerapplet
+          keepassxc
+          yt-dlp
         ];
       };
 
 
       programs = {
+        zathura = {
+          enable = true;
+          options = {
+            selection-clipboard = "clipboard";
+          };
+        };
         swaylock = {
           enable = true;
         };
