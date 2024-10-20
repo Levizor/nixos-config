@@ -62,10 +62,11 @@
           vesktop
           jetbrains-toolbox
           # imagemagick
-          # networkmanagerapplet
+          networkmanagerapplet
           keepassxc
           yt-dlp
           cmatrix
+          tlrc
         ];
       };
 

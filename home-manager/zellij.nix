@@ -91,7 +91,10 @@
 
           tab name="Edit" {
             pane {
-              plugin location="https://github.com/imsnif/monocle/releases/latest/download/monocle.wasm"
+              plugin location="https://github.com/imsnif/monocle/releases/latest/download/monocle.wasm"{
+                in_place true
+                kiosk true
+              }
             }
           }
           tab name="Whatever"
@@ -99,7 +102,7 @@
 
       '';
 
-      "zellij/layout/default.kdl".text = ''
+      "zellij/layouts/default.kdl".text = ''
         layout {
         default_tab_template {
           children
