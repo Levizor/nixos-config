@@ -9,6 +9,7 @@
       ./user.nix
       ./stylix.nix
       <home-manager/nixos>
+      ./sddm.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
@@ -113,11 +114,6 @@
       enable = false;
     };
  
-  #sddm
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
     printing.enable = true;
 
     pipewire = {
