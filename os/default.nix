@@ -9,7 +9,6 @@
       ./user.nix
       ./stylix.nix
       <home-manager/nixos>
-      ./sddm.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
@@ -18,6 +17,10 @@
   nixpkgs.config.permittedInsecurePackages = [
     "floorp-unwrapped-11.19.0"
   ]; 
+
+  nixpkgs.config.packageOverrides = pkgs: rec {
+    sddm-slice = pkgs.callPackage ./sddm.nix {};
+  };
 
 
   security.polkit.enable = true;
@@ -67,17 +70,19 @@
     };
   };
 
-  specialisation = {
-    gaming-time.configuration = {
-      hardware.nvidia = {
-        prime.sync.enable = lib.mkForce true;
-        prime.offload = {
-          enable = lib.mkForce false;
-          enableOffloadCmd = lib.mkForce false;
-        };
-      };
-    };
-  };
+  # specialisation = {
+  #   gaming-time.configuration = {
+  #     hardware.nvidia = {
+  #       prime.sync.enable = lib.mkForce true;
+  #       prime.offload = {
+  #         enable = lib.mkForce false;
+  #         enableOffloadCmd = lib.mkForce false;
+  #       };
+  #     };
+  #   };
+  # };
+
+  programs.wireshark.enable = true;
 
 
   programs.regreet = {
@@ -95,6 +100,11 @@
 
   #services
   services = {
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "sddm-slice";
+    };
     upower = {
       enable = true;
     };
@@ -169,6 +179,9 @@
      (inputs.nvix.packages.${system}.base.extend {
         config.colorschemes.tokyonight.settings.transparent = true;
      })
+
+    pkgs.libsForQt5.qt5.qtgraphicaleffects 
+    (callPackage ./sddm.nix {})
   ];
   environment.variables = {
     EDITOR = "nvim";
