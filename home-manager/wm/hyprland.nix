@@ -193,10 +193,10 @@
           bind = $mainMod, k, movefocus, u
           bind = $mainMod, j, movefocus, d
 
-          bind = $mainMod, grave, submap, Keys
-          submap = Keys
-          bind = $mainMod, grave, submap, reset
-          submap = reset 
+          # bind = $mainMod, grave, submap, Keys
+          # submap = Keys
+          # bind = $mainMod, grave, submap, reset
+          # submap = reset 
 
       # will switch to a submap called resize
           bind=$mainMod,R,submap,resize
@@ -213,7 +213,7 @@
           binde=,h,resizeactive,-30 0
           binde=,k,resizeactive,0 -30
           binde=,j,resizeactive,0 30
-          bind=,escape,submap,reset 
+          bind=,Escape,submap,reset 
           bind=,Return,submap, reset
           bind=$mainMod,r,submap, reset
 
@@ -221,18 +221,18 @@
 
 
           bind=$mainMod, pause, exec, wlogout
-          submap=System
-
-
-          bind = shift, s, exec, systemctl poweroff -i
-          bind = , r, exec, systemctl reboot
-          bind = , h, exec, systemctl hibernate
-          bind = , e, exit
-          bind = , l, exec, hyprctl dispatch submap reset & hyprlock
-
-          bind = , escape, submap, reset
-
-          submap=reset
+          # submap=System
+          #
+          #
+          # bind = shift, s, exec, systemctl poweroff -i
+          # bind = , r, exec, systemctl reboot
+          # bind = , h, exec, systemctl hibernate
+          # bind = , e, exit
+          # bind = , l, exec, hyprctl dispatch submap reset & hyprlock
+          #
+          # bind = , escape, submap, reset
+          #
+          # submap=reset
 
       # keybinds further down will be global again...
       #bind = $mainMod, Tab,cyclenext,          # change focus to another window

@@ -34,7 +34,6 @@
         stateVersion = "24.05";
 
         packages = with pkgs; [
-          neofetch
           telegram-desktop
           tree
           alacritty
@@ -67,6 +66,7 @@
           yt-dlp
           cmatrix
           tlrc
+          scenebuilder
         ];
       };
 
