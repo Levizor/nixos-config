@@ -1,16 +1,17 @@
-{ config, pkgs, ...}: 
-	let 
-    unstable = import <nixos-unstable> {config = {allowUnfree = true;};}; 
-	in 
+{ inputs, config, pkgs, ...}:
+	let
+    unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
+	in
 {
 
   home-manager = {
     # useUserPackages = true;
     # useGlobalPkgs = true;
     backupFileExtension="backup";
-    users.levizor = { 
+    users.levizor = {
 
       imports = [
+        inputs.home-manager.nixosModules.home-manager
         ./floorp.nix
         ./git.nix
         ./wm
@@ -25,7 +26,7 @@
       home = {
 
         sessionVariables = {
-          STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+          STEAM_EXTRA_COMPAT_TOOLS_PATHS =
             "$\{HOME}/.local/Steam/compatabilitytools.d";
         };
         enableNixpkgsReleaseCheck = false;
@@ -92,11 +93,11 @@
               force_tty = true;
             };
         };
-      
+
         bat = {
             enable = true;
         };
-        
+
         fzf = {
             enable = true;
             enableZshIntegration = true;
@@ -114,5 +115,5 @@
     };
 
   };
-	
+
 }

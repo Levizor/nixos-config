@@ -3,7 +3,7 @@
     shellAliases = {
       c = "clear";
 
-			rebuild = "sudo nixos-rebuild switch --flake /home/levizor/nix/ --impure";
+			rebuild = "sudo nixos-rebuild switch --flake /home/levizor/nix/";
 
 			nixconf = "nvim ~/nix/.";
 

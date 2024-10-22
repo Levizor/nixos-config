@@ -1,6 +1,6 @@
 {
 	description = "Config";
-	
+
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
@@ -15,25 +15,21 @@
 	};
 
 
-	outputs = {self, nixpkgs, home-manager, ...}@inputs : 
+	outputs = {self, nixpkgs, home-manager, ...}@inputs :
 
-	let 
+	let
 		system = "x86_64-linux";
 	in {
-		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			modules = [ 
-			  ./os
-        ./home-manager
-        ./disko-config.nix
-			  inputs.stylix.nixosModules.stylix
-        inputs.home-manager.nixosModules.home-manager
-        inputs.disko.nixosModules.disko
-        		];
-			specialArgs = {
-			    inherit inputs self system;
-			};
+		nixosConfigurations.nixos = {
+        default = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./hosts/default
+            ];
+          specialArgs = {
+              inherit inputs self system;
+          };
+        };
 		};
 	};
 
