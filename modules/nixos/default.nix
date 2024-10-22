@@ -2,18 +2,17 @@
 
   {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       ./user.nix
-      ./stylix.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnsupportedSystem = true;
-  
+
   nixpkgs.config.permittedInsecurePackages = [
     "floorp-unwrapped-11.19.0"
-  ]; 
+  ];
 
   nixpkgs.config.packageOverrides = pkgs: rec {
     sddm-slice = pkgs.callPackage ./sddm.nix {};
@@ -42,7 +41,7 @@
   time.timeZone = "Europe/Warsaw";
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
-  
+
   security.sudo.extraConfig = ''
     moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
 
@@ -51,11 +50,11 @@
   };
 
   hardware.graphics.enable = true;
-  #nvidia 
+  #nvidia
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
-    
+
     prime = {
       offload = {
         enable = true;
@@ -120,7 +119,7 @@
     greetd = {
       enable = false;
     };
- 
+
     printing.enable = true;
 
     pipewire = {
@@ -162,7 +161,7 @@
      git
      brightnessctl
      pulseaudioFull
-     pavucontrol 
+     pavucontrol
      clang
      clang-tools
      cmake
@@ -177,13 +176,12 @@
         config.colorschemes.tokyonight.settings.transparent = true;
      })
 
-    pkgs.libsForQt5.qt5.qtgraphicaleffects 
+    pkgs.libsForQt5.qt5.qtgraphicaleffects
     (callPackage ./sddm.nix {})
   ];
   environment.variables = {
     EDITOR = "nvim";
   };
 
-  system.stateVersion = "24.05"; 
+  system.stateVersion = "24.05";
 }
-

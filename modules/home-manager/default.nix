@@ -11,7 +11,6 @@
     users.levizor = {
 
       imports = [
-        inputs.home-manager.nixosModules.home-manager
         ./floorp.nix
         ./git.nix
         ./wm

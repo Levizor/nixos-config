@@ -15,22 +15,27 @@
 	};
 
 
-	outputs = {self, nixpkgs, home-manager, ...}@inputs :
+	outputs = {self, nixpkgs, home-manager, ...}@inputs:
 
 	let
 		system = "x86_64-linux";
-	in {
-		nixosConfigurations.nixos = {
-        default = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/default
-            ];
-          specialArgs = {
-              inherit inputs self system;
-          };
+	in
+  {
+		nixosConfigurations= {
+      default = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/default
+          ];
+        specialArgs = {
+            inherit inputs self system;
         };
+      };
 		};
+
+    modules = ./modules;
+
+
 	};
 
 
