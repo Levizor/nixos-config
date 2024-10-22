@@ -3,11 +3,15 @@
 	
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     stylix.url = "github:danth/stylix";
 		nvix.url = "github:niksingh710/nvix";
 		nixvim.url = "github:mikaelfangel/nixvim-config";
-
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 	};
 
 
@@ -22,7 +26,10 @@
 			modules = [ 
 			  ./os
         ./home-manager
+        ./disko-config.nix
 			  inputs.stylix.nixosModules.stylix
+        inputs.home-manager.nixosModules.home-manager
+        inputs.disko.nixosModules.disko
         		];
 			specialArgs = {
 			    inherit inputs self system;
