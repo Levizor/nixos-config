@@ -1,8 +1,11 @@
+let
+  scripts = ./scripts;
+in
 {
   wayland.windowManager.hyprland = {
     systemd.variables = ["--all"];
     enable = true;
-    xwayland.enable = true; 
+    xwayland.enable = true;
 
     settings = {
       "$mainMod" = "SUPER";
@@ -51,7 +54,7 @@
 
       decoration = {
         rounding = 5;
-        
+
         blur = {
           enabled = true;
           size = 3;
@@ -97,16 +100,13 @@
 
     };
 
-    extraConfig = 
-    let 
-    	scripts = "~/nix/home-manager/wm/scripts";
-    in
+    extraConfig =
         ''
-          monitor = eDP-1, 1920x1080@60, 0x0, 1,  
+          monitor = eDP-1, 1920x1080@60, 0x0, 1,
           monitor = HDMI-A-1, preferred, auto, 1, #mirror, eDP-1
 
           $browser = floorp
-          $terminal = footclient 
+          $terminal = footclient
           $telegram = telegram-desktop
           $fileManager = nemo
           $menu = fuzzel
@@ -137,12 +137,12 @@
           bind = $mainMod, KP_Subtract, exec, wpaperctl next
           bind = $mainMod, KP_Add, exec, killall wpaperd | ls ~/.config/wpaperd/config.toml | entr -r wpaperd
 
-          bind = $mainMod, Return, exec, $terminal 
+          bind = $mainMod, Return, exec, $terminal
           bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
-          bind = $mainMod, U, exec, $terminal -a btop -e btop 
+          bind = $mainMod, U, exec, $terminal -a btop -e btop
           # bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
           # bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf
-          bind = $mainMod, Q, killactive, 
+          bind = $mainMod, Q, killactive,
           bind = $mainMod Shift, Q, exec, ${scripts}/forcekill.sh
           bind = $mainMod, KP_Insert, exec, ${scripts}/fixScreenshare.sh
           bind = $mainMod, E, exec, $fileManager --class files
@@ -150,7 +150,7 @@
           bind = $mainMod, C, exec, $terminal -a 'clipse' -e 'clipse'
           bind = CTRL_$mainMod, P, exec, $player
           bind = $mainMod, T, exec, $telegram
-          bind = $mainMod, V, togglefloating, 
+          bind = $mainMod, V, togglefloating,
           bind = $mainMod, D, exec, $menu
           bind = $mainMod, P, pseudo, # dwindle
           bind = $mainMod, B, togglesplit, # dwindle
@@ -159,7 +159,7 @@
           bind = $mainMod, Print, exec, grimblast copy output screen
           bind = , scroll_lock , exec, pkill -n -SIGUSR1 waybar
           bind = , F10, exec, wl-copy $(hyprpicker)
-          
+
           bind = $mainMod, N, swapactiveworkspaces, eDP-1 HDMI-A-1
           bind = $mainMod, C, centerwindow
 
@@ -178,7 +178,7 @@
           bind = ,XF86MonBrightnessDown , exec, brightnessctl set 10%-
 
       #Notifitations
-      #bind = 
+      #bind =
 
           # bind = , F12, exec, nmcli device wifi
 
@@ -196,7 +196,7 @@
           # bind = $mainMod, grave, submap, Keys
           # submap = Keys
           # bind = $mainMod, grave, submap, reset
-          # submap = reset 
+          # submap = reset
 
       # will switch to a submap called resize
           bind=$mainMod,R,submap,resize
@@ -213,7 +213,7 @@
           binde=,h,resizeactive,-30 0
           binde=,k,resizeactive,0 -30
           binde=,j,resizeactive,0 30
-          bind=,Escape,submap,reset 
+          bind=,Escape,submap,reset
           bind=,Return,submap, reset
           bind=$mainMod,r,submap, reset
 
@@ -250,7 +250,7 @@
           bind = $mainMod, 9, workspace, 9
           bind = $mainMod, 0, workspace, 10
 
-      #Move active window in directions 
+      #Move active window in directions
           bind = $mainMod SHIFT, left, movewindow, l
           bind = $mainMod SHIFT, right, movewindow, r
           bind = $mainMod SHIFT, up, movewindow, u
@@ -308,7 +308,7 @@
           bind = $mainMod, F2, exec, ${scripts}/gapsoff.sh
 
           workspace=special:telegram, decorate:false, border:false, on-created-empty:$telegram #gapsin:0, gapsout:0
-          workspace=special:terminal, on-created-empty: $terminal -o main.font=FiraCodeNerdFontMono:size=14 -e zellij --layout dash # -o background_opacity=0.6, 
+          workspace=special:terminal, on-created-empty: $terminal -o main.font=FiraCodeNerdFontMono:size=14 #-e zellij --layout dash # -o background_opacity=0.6,
           workspace=1, monitor:eDP-1
           workspace=2, monitor:eDP-1
           workspace=3, monitor:eDP-1
@@ -323,9 +323,9 @@
       # windowrulev2 =  centered, floating:1
           windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
           windowrulev2 = workspace special:telegram, class:(org.telegram.desktop.*)
-          windowrulev2 =   size 95% 95%, class:(btop) 
-          windowrulev2 =   float, class:(btop) 
-          windowrulev2 = float, class:(files) 
+          windowrulev2 =   size 95% 95%, class:(btop)
+          windowrulev2 =   float, class:(btop)
+          windowrulev2 = float, class:(files)
           windowrulev2 = size 60% 60%, centered, title:(.*Files)$
       # windowrulev2 = size 50% 50%, centered, floating:1
           windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$

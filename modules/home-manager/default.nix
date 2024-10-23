@@ -19,7 +19,7 @@
         ./foot.nix
         ./lsd.nix
         ./mako.nix
-        ./zellij.nix
+        ./tmux.nix
       ];
 
       home = {
