@@ -25,7 +25,7 @@
       default = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/default
+          ./hosts/default/configuration.nix
           ];
         specialArgs = {
             inherit inputs self system;

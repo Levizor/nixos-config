@@ -1,9 +1,10 @@
 {inputs, outputs, ...}:
 {
   imports = [
-    outputs.modules/nixos
+    ../../modules/nixos
     ./hardware-configuration.nix
-    ./disko-configuration.nix
+    ./disko-config.nix
+    inputs.disko.nixosModules.disko
     ./home.nix
   ];
 }
