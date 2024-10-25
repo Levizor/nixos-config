@@ -19,7 +19,6 @@
     ani-cli
     protonup
     teams-for-linux
-    obsidian
     zoom-us
     hyprpicker
     hyprpaper
@@ -33,6 +32,7 @@
     yt-dlp
     cmatrix
     tlrc
+    obsidian
   ];
   programs = {
     obs-studio = {

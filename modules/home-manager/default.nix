@@ -6,7 +6,7 @@
 
   home-manager = {
     # useUserPackages = true;
-    # useGlobalPkgs = true;
+    useGlobalPkgs = true;
     backupFileExtension="backup";
     users.levizor = {
 

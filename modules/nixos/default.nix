@@ -1,13 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 
   {
-  imports =
-    [
-      ./user.nix
-      ./environment.nix
-    ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
-
   nixpkgs.config = {
     allowUnfree = true;
     allowUnsupportedSystem = true;
@@ -19,6 +13,11 @@
       sddm-slice = pkgs.callPackage ./sddm.nix {};
     };
   };
+  imports =
+    [
+      ./user.nix
+      ./environment.nix
+    ];
 
 
 
