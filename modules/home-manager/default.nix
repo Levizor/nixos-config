@@ -11,12 +11,8 @@
     users.levizor = {
 
       imports = [
-        ./floorp.nix
-        ./git.nix
         ./wm
         ./zsh/load.nix
-        ./lsd.nix
-        ./mako.nix
         ./packages.nix
         ./programs
         ./terminals
