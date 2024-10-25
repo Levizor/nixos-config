@@ -4,22 +4,39 @@
   imports =
     [
       ./user.nix
+      ./environment.nix
     ];
   nix.settings.experimental-features = ["nix-command" "flakes"];
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnsupportedSystem = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "floorp-unwrapped-11.19.0"
-  ];
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnsupportedSystem = true;
+    permittedInsecurePackages = [
+      "floorp-unwrapped-11.19.0"
+    ];
 
-  nixpkgs.config.packageOverrides = pkgs: rec {
-    sddm-slice = pkgs.callPackage ./sddm.nix {};
+    packageOverrides = pkgs: rec {
+      sddm-slice = pkgs.callPackage ./sddm.nix {};
+    };
   };
 
 
-  security.polkit.enable = true;
-  security.rtkit.enable = true;
+
+  # security.rtkit.enable = true;
+
+  security = {
+    polkit.enable = true;
+
+    sudo = {
+      wheelNeedsPassword = false;
+      extraConfig = ''
+        moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
+    };
+
+    pam.services.hyprlock = {
+      enable = true;
+    };
+  };
 
   #bootloader
   boot = {
@@ -33,37 +50,32 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
-  #bluetooth
-  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
 
-  security.sudo.extraConfig = ''
-    moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
+  hardware = {
+    #bluetooth
+    bluetooth.enable = true;
+    graphics.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      open = false;
 
-  security.sudo = {
-    wheelNeedsPassword = false;
-  };
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
 
-  hardware.graphics.enable = true;
-  #nvidia
-  hardware.nvidia = {
-    modesetting.enable = true;
-    open = false;
-
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:2:0:0";
       };
-
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:2:0:0";
     };
   };
+
 
   # specialisation = {
   #   gaming-time.configuration = {
@@ -79,7 +91,6 @@
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-
     ];
   };
 
@@ -121,9 +132,6 @@
       };      videoDrivers = ["nvidia"];
     };
 
-    greetd = {
-      enable = false;
-    };
 
     printing.enable = true;
 
@@ -160,33 +168,6 @@
   programs.gamemode.enable = true;
 
 
-  environment.systemPackages = with pkgs; [
-     curl
-     vim
-     git
-     brightnessctl
-     pulseaudioFull
-     pavucontrol
-     clang
-     clang-tools
-     cmake
-     wl-clipboard
-     libnotify
-     killall
-     rustup
-     openssl
-     lxqt.lxqt-policykit
-
-     (inputs.nvix.packages.${system}.base.extend {
-        config.colorschemes.tokyonight.settings.transparent = true;
-     })
-
-    pkgs.libsForQt5.qt5.qtgraphicaleffects
-    (callPackage ./sddm.nix {})
-  ];
-  environment.variables = {
-    EDITOR = "nvim";
-  };
 
   system.stateVersion = "24.05";
 }
