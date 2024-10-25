@@ -33,9 +33,6 @@
         moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
     };
 
-    pam.services.hyprlock = {
-      enable = true;
-    };
   };
 
   #bootloader
