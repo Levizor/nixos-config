@@ -7,15 +7,9 @@
 
 			nixconf = "nvim ~/nix/.";
 
-      mirrors="sudo reflector --verbose --latest 10 --country 'Poland' --age 6 --sort rate --save /etc/pacman.d/mirrorlist";
+      hypr="nvim ~/nix/modules/home-manager/wm/hyprland.nix";
 
-      hypr="nvim ~/.config/hypr/hyprland.conf";
-
-      binds="nvim ~/.config/hypr/binds.conf";
-
-      i3c="nvim ~/.config/i3/config";
-
-      aliases="nvim ~/nix/home-manager/zsh/aliases.nix";
+      aliases="nvim ~/nix/modules/home-manager/zsh/aliases.nix";
 
       zrc="nvim ~/nix/home-manager/zsh/zsh.nix";
 
@@ -53,6 +47,7 @@
 
       uisudo="sudo -sE ";
 
+      up="nvim ~/nix/modules/home-manager/packages.nix";
     };
   };
 }

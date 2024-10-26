@@ -32,10 +32,6 @@
         };
       };
 		};
-
-    modules = ./modules;
-
-
 	};
 
 

@@ -7,7 +7,13 @@
       default = {
         duration = "12h";
         mode = "center";
-        sorting = "ascending";
+        sorting = "random";
+        initial-transition = true;
+        transition = {
+          glitch-displace = {
+
+          };
+        };
       };
 
       any = {

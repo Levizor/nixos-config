@@ -11,6 +11,7 @@
 
     packageOverrides = pkgs: rec {
       sddm-slice = pkgs.callPackage ./sddm.nix {};
+      wpaperd = pkgs.callPackage ./wpaperd.nix {};
     };
   };
   imports =
