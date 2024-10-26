@@ -6,6 +6,7 @@
   # ];
   stylix={
     enable = true;
+    image = ./moons.jpg;
 
     cursor = {
       package = pkgs.nordzy-cursor-theme;
@@ -13,8 +14,6 @@
       size = 32;
     };
 
-    polarity = "dark";
-    # image = ./moons.jpg;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
     opacity = {

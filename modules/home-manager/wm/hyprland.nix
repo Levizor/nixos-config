@@ -1,7 +1,9 @@
+{lib, ...}:
 let
   scripts = ./scripts;
 in
 {
+  services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
     systemd.variables = ["--all"];
     enable = true;
@@ -92,8 +94,8 @@ in
         "lxqt-policykit-agent"
         "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "waybar"
         "clipse -listen"
+        "wpaperd"
       ];
 
 
@@ -284,6 +286,8 @@ in
           bind =  Win, 9, focusworkspaceoncurrentmonitor, 9
           bind =  Win, 0, focusworkspaceoncurrentmonitor, 10
 
+          bind = $mainMod, F6, exec, wpaperctl next-wallpaper
+          bind = $mainMod, F4, exec, wpaperctl previous-wallpaper
 
       #switch layouts
           bind = $mainMod, I, exec, ${scripts}/toggleLayout

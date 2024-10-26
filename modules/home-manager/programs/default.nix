@@ -7,5 +7,6 @@
     ./git.nix
     ./lsd.nix
     ./mako.nix
+    ./cava.nix
   ];
 }
