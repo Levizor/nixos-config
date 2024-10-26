@@ -28,9 +28,6 @@
         homeDirectory = "/home/levizor";
         stateVersion = "24.05";
       };
-      stylix.targets = {
-        hyprpaper.enable = lib.mkForce false;
-      };
     };
 
 
