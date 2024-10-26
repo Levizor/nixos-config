@@ -1,9 +1,6 @@
 {inputs, pkgs, ...}:
 {
 
-  imports = [
-    inputs.stylix.nixosModules.stylix
-  ];
   # fonts.packages = with pkgs; [
   #   (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
   # ];

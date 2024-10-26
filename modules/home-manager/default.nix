@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ...}:
+{ inputs, config, pkgs, lib, ...}:
 	let
     unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
 	in
@@ -29,5 +29,7 @@
         stateVersion = "24.05";
       };
     };
+
+
   };
 }

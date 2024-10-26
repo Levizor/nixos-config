@@ -7,11 +7,11 @@
       default = {
         duration = "12h";
         mode = "center";
-        sorting = "ascending"; 
+        sorting = "ascending";
       };
 
       any = {
-        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/moons.jpg";
+        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/Nord/";
       };
 
 

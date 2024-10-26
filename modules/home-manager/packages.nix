@@ -21,7 +21,6 @@
     teams-for-linux
     zoom-us
     hyprpicker
-    hyprpaper
     loupe
     youtube-music
     vesktop
