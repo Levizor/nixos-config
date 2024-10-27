@@ -139,6 +139,7 @@ in {
           bind = $mainMod, U, exec, $terminal -a btop -e btop
           # bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
           # bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf
+	  bind = $mainMod_Alt, p, exec, $terminal -e nvim ~/nix/modules/home-manager/packages.nix
           bind = $mainMod, Q, killactive,
           bind = $mainMod Shift, Q, exec, ${scripts}/forcekill.sh
           bind = $mainMod, KP_Insert, exec, ${scripts}/fixScreenshare.sh

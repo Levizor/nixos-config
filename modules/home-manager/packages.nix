@@ -39,6 +39,7 @@
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     dolphin
+    whatsie
   ];
   programs = {
     obs-studio = {
