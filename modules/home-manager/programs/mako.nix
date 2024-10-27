@@ -4,5 +4,4 @@
     defaultTimeout = 3000;
     borderRadius = 5;
   };
-
 }

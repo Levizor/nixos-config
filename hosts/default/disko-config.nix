@@ -1,11 +1,10 @@
-{inputs, ...}:
-{
-#sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /tmp/disk-config.nix
+{inputs, ...}: {
+  #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /tmp/disk-config.nix
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-	device = "/dev/nvme0n1";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -20,17 +19,17 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "umask=0077" ];
+                mountOptions = ["umask=0077"];
               };
             };
-	    swap = {
-	      size = "8G";
-	      content = {
-		type = "swap";
-		discardPolicy = "both";
-		resumeDevice = true;
-	      };
-	    };
+            swap = {
+              size = "8G";
+              content = {
+                type = "swap";
+                discardPolicy = "both";
+                resumeDevice = true;
+              };
+            };
             root = {
               size = "50G";
               content = {
@@ -39,14 +38,14 @@
                 mountpoint = "/";
               };
             };
-	    home = {
-	      size = "100%";
-	      content = {
-		type = "filesystem";
-		format = "ext4";
-		mountpoint = "/home";
-	      };
-	    };
+            home = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/home";
+              };
+            };
           };
         };
       };

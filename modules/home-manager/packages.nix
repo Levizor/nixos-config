@@ -1,5 +1,8 @@
-{inputs, pkgs, ...}:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     telegram-desktop
     tree
@@ -39,7 +42,7 @@
   ];
   programs = {
     obs-studio = {
-        enable = true;
+      enable = true;
     };
     bat = {
       enable = true;

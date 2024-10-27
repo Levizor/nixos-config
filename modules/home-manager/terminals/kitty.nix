@@ -1,9 +1,8 @@
 {
-	programs.kitty = {
-		enable = true;
-		shellIntegration = {
-			enableZshIntegration = true;
-		};
-
-	};
+  programs.kitty = {
+    enable = true;
+    shellIntegration = {
+      enableZshIntegration = true;
+    };
+  };
 }

@@ -1,20 +1,22 @@
-{config, pkgs, ...}:
-
 {
-	programs.zsh = {
-		enable = true;
-		dotDir = "zsh";
-		enableCompletion = true;
-		autosuggestion.enable = true;
-		syntaxHighlighting.enable = true;
-		historySubstringSearch.enable = true;
+  config,
+  pkgs,
+  ...
+}: {
+  programs.zsh = {
+    enable = true;
+    dotDir = "zsh";
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
 
     plugins = [
-          {
-            # Must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
-            name = "fzf-tab";
-            src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-          }
+      {
+        # Must be before plugins that wrap widgets, such as zsh-autosuggestions or fast-syntax-highlighting
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
     ];
 
     completionInit = ''
@@ -137,16 +139,25 @@
       fi
     '';
 
-		history = {
-			size = 10000;
-			path = "/home/levizor/zsh/history";
-		};
+    history = {
+      size = 10000;
+      path = "/home/levizor/zsh/history";
+    };
 
     oh-my-zsh = {
       enable = true;
       plugins = [
-        "git" "sudo" "colored-man-pages" "copybuffer" "copyfile" "copypath"
-        "extract" "aliases" "cp" "globalias" "magic-enter" 
+        "git"
+        "sudo"
+        "colored-man-pages"
+        "copybuffer"
+        "copyfile"
+        "copypath"
+        "extract"
+        "aliases"
+        "cp"
+        "globalias"
+        "magic-enter"
       ];
     };
 
@@ -159,8 +170,7 @@
         "getantidote/use-omz"
       ];
     };
-
-	};
+  };
 
   programs.zoxide = {
     enable = true;
@@ -169,5 +179,4 @@
       "--cmd cd"
     ];
   };
-
 }

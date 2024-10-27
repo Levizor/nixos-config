@@ -1,6 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
-
-  {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config = {
     allowUnfree = true;
@@ -14,13 +18,10 @@
       wpaperd = pkgs.callPackage ./wpaperd.nix {};
     };
   };
-  imports =
-    [
-      ./user.nix
-      ./environment.nix
-    ];
-
-
+  imports = [
+    ./user.nix
+    ./environment.nix
+  ];
 
   # security.rtkit.enable = true;
 
@@ -32,7 +33,6 @@
       extraConfig = ''
         moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
     };
-
   };
 
   #bootloader
@@ -47,11 +47,9 @@
 
   networking.hostName = "nixos"; # Define your hostname.
 
-
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   hardware = {
     #bluetooth
@@ -73,7 +71,6 @@
     };
   };
 
-
   # specialisation = {
   #   gaming-time.configuration = {
   #     hardware.nvidia = {
@@ -92,7 +89,6 @@
   };
 
   programs.wireshark.enable = true;
-
 
   programs.regreet = {
     enable = false;
@@ -117,7 +113,7 @@
     upower = {
       enable = true;
     };
-  # Enable touchpad support (enabled default in most desktopManager).
+    # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
     xserver = {
       enable = true;
@@ -125,10 +121,9 @@
         i3 = {
           enable = true;
         };
-
-      };      videoDrivers = ["nvidia"];
+      };
+      videoDrivers = ["nvidia"];
     };
-
 
     printing.enable = true;
 
@@ -139,9 +134,7 @@
       pulse.enable = true;
       wireplumber.enable = true;
     };
-
   };
-
 
   #hyprland
   programs.hyprland = {
@@ -150,7 +143,7 @@
 
   qt = {
     enable = true;
-    platformTheme="gtk2";
+    platformTheme = "gtk2";
   };
 
   # programs.wireshark.enable = true;
@@ -159,12 +152,10 @@
     ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
   '';
   programs.steam = {
-  enable = true;
-  gamescopeSession.enable = true;
+    enable = true;
+    gamescopeSession.enable = true;
   };
   programs.gamemode.enable = true;
-
-
 
   system.stateVersion = "24.05";
 }

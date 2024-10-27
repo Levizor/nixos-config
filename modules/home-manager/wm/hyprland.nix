@@ -1,8 +1,6 @@
-{lib, ...}:
-let
+{lib, ...}: let
   scripts = ./scripts;
-in
-{
+in {
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
     systemd.variables = ["--all"];
@@ -41,7 +39,7 @@ in
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        initial_workspace_tracking= false;
+        initial_workspace_tracking = false;
       };
 
       general = {
@@ -98,12 +96,9 @@ in
         "clipse -listen"
         "wpaperd"
       ];
-
-
     };
 
-    extraConfig =
-        ''
+    extraConfig = ''
           monitor = eDP-1, 1920x1080@60, 0x0, 1,
           monitor = HDMI-A-1, preferred, auto, 1, #mirror, eDP-1
 
@@ -341,7 +336,6 @@ in
           windowrulev2 = float, class:(clipse)
           windowrulev2 = size 622 652, class:(clipse)
 
-        '';
+    '';
   };
-
 }

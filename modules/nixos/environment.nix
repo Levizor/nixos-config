@@ -1,21 +1,24 @@
-{inputs, pkgs, ...}:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
-     curl
-     vim
-     git
-     brightnessctl
-     pulseaudioFull
-     pavucontrol
-     clang
-     clang-tools
-     cmake
-     wl-clipboard
-     libnotify
-     killall
-     rustup
-     openssl
-     lxqt.lxqt-policykit
+    curl
+    vim
+    git
+    brightnessctl
+    pulseaudioFull
+    pavucontrol
+    clang
+    clang-tools
+    cmake
+    wl-clipboard
+    libnotify
+    killall
+    rustup
+    openssl
+    lxqt.lxqt-policykit
 
     inputs.nixvim.packages."${system}".default
 

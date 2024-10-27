@@ -1,5 +1,4 @@
-{lib, ...}:
-{
+{lib, ...}: {
   programs.wpaperd = {
     enable = true;
 
@@ -23,9 +22,6 @@
       any = {
         path = lib.mkForce "/home/levizor/Pictures/Wallpapers/Nord/";
       };
-
-
     };
-
   };
 }

@@ -1,15 +1,17 @@
-{ inputs, config, pkgs, lib, ...}:
-	let
-    unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
-	in
 {
-
+  inputs,
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
+in {
   home-manager = {
     # useUserPackages = true;
     useGlobalPkgs = true;
-    backupFileExtension="backup";
+    backupFileExtension = "backup";
     users.levizor = {
-
       imports = [
         ./wm
         ./zsh/load.nix
@@ -20,8 +22,7 @@
 
       home = {
         sessionVariables = {
-          STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-            "$\{HOME}/.local/Steam/compatabilitytools.d";
+          STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
         };
         enableNixpkgsReleaseCheck = false;
         username = "levizor";
@@ -38,7 +39,7 @@
           name = "kvantum";
         };
       };
-      xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+      xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
         General.theme = "Utterly-Nord-Solid";
       };
       xdg.configFile."Kvantum/Utterly-Nord-Solid".source = "${pkgs.utterly-nord-plasma}/share/Kvantum/Utterly-Nord-Solid";

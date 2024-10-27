@@ -3,51 +3,51 @@
     shellAliases = {
       c = "clear";
 
-			def = "sudo nixos-rebuild switch --flake /home/levizor/nix/#default";
+      def = "sudo nixos-rebuild switch --flake /home/levizor/nix/#default";
 
-			nixconf = "nvim ~/nix/.";
+      nixconf = "nvim ~/nix/.";
 
-      hypr="nvim ~/nix/modules/home-manager/wm/hyprland.nix";
+      hypr = "nvim ~/nix/modules/home-manager/wm/hyprland.nix";
 
-      aliases="nvim ~/nix/modules/home-manager/zsh/aliases.nix";
+      aliases = "nvim ~/nix/modules/home-manager/zsh/aliases.nix";
 
-      zrc="nvim ~/nix/home-manager/zsh/zsh.nix";
+      zrc = "nvim ~/nix/home-manager/zsh/zsh.nix";
 
-      cp="cp -r";
+      cp = "cp -r";
 
-      tree="tree --dirsfirst";
+      tree = "tree --dirsfirst";
 
-      compress="compress()";
+      compress = "compress()";
 
-      pjatk="sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
+      pjatk = "sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
 
-      grub-update="sudo grub-mkconfig -o /boot/grub/grub.cfg";
+      grub-update = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
 
-      ls="lsd --group-directories-first";
+      ls = "lsd --group-directories-first";
 
-      la="lsd -a --group-directories-first";
+      la = "lsd -a --group-directories-first";
 
-      ll="lsd -al --group-directories-first";
+      ll = "lsd -al --group-directories-first";
 
-      cmatrix="cmatrix -C black";
+      cmatrix = "cmatrix -C black";
 
-      htheme="nvim ~/.config/hypr/hyprtheme.conf";
+      htheme = "nvim ~/.config/hypr/hyprtheme.conf";
 
-      z="zathura";
+      z = "zathura";
 
-      s="source ~/zsh_config/.zshrc";
+      s = "source ~/zsh_config/.zshrc";
 
-      home="nvim ~/nix/home-manager/default.nix";
+      home = "nvim ~/nix/home-manager/default.nix";
 
-      os="nvim ~/nix/os/default.nix";
+      os = "nvim ~/nix/os/default.nix";
 
-      i="loupe";
+      i = "loupe";
 
-      get="nix-shell -p";
+      get = "nix-shell -p";
 
-      uisudo="sudo -sE ";
+      uisudo = "sudo -sE ";
 
-      up="nvim ~/nix/modules/home-manager/packages.nix";
+      up = "nvim ~/nix/modules/home-manager/packages.nix";
     };
   };
 }

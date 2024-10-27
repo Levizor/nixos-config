@@ -6,6 +6,4 @@
     ./hyprlock.nix
     ./wpaperd.nix
   ];
-
-
 }

@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   programs.floorp = {
     enable = true;
     languagePacks = [
@@ -8,33 +7,41 @@
       "ru"
     ];
 
-    profiles = { 
+    profiles = {
       profile_0 = {
         id = 0;
         isDefault = true;
         name = "profile_0";
-        
+
         search = {
           force = true;
           engines = {
             "Nix Packages" = {
-              urls = [{
-                template = "https://search.nixos.org/packages";
-                params = [
-                  { name = "type"; value = "packages"; }
-                  { name = "query"; value = "{searchTerms}"; }
-                ];
-              }];
+              urls = [
+                {
+                  template = "https://search.nixos.org/packages";
+                  params = [
+                    {
+                      name = "type";
+                      value = "packages";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
 
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = [ "@np" ];
+              definedAliases = ["@np"];
             };
 
             "NixOS Wiki" = {
-              urls = [{ template = "https://wiki.nixos.org/index.php?search={searchTerms}"; }];
+              urls = [{template = "https://wiki.nixos.org/index.php?search={searchTerms}";}];
               iconUpdateURL = "https://wiki.nixos.org/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = [ "@nw" ];
+              definedAliases = ["@nw"];
             };
             "Brave" = {
               urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
@@ -63,7 +70,6 @@
           "privacy.donottrackheader.enabled" = true;
           "signon.rememberSignons" = false;
         };
-
       };
     };
 
@@ -78,10 +84,9 @@
       SearchBar = "unified";
 
       ExtensionSettings = {
-
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          installation_mode = "normal_installed"; 
+          installation_mode = "normal_installed";
         };
 
         "jid1-MnnxcxisBPnSXQ@jetpack" = {

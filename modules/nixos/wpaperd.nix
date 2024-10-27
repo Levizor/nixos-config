@@ -1,5 +1,12 @@
-{ lib, rustPlatform, fetchFromGitHub, pkg-config, libxkbcommon, wayland, libGL }:
-
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  pkg-config,
+  libxkbcommon,
+  wayland,
+  libGL,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "wpaperd";
   version = "1.1";
@@ -33,7 +40,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/danyspin97/wpaperd";
     license = licenses.gpl3Plus;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ DPDmancul fsnkty ];
+    maintainers = with maintainers; [DPDmancul fsnkty];
     mainProgram = "wpaperd";
   };
 }

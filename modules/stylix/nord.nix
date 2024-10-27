@@ -1,7 +1,11 @@
-{inputs, pkgs, nixpkgs, lib, ...}:
 {
-
-  stylix={
+  inputs,
+  pkgs,
+  nixpkgs,
+  lib,
+  ...
+}: {
+  stylix = {
     enable = true;
     image = ./moons.jpg;
     polarity = "dark";
@@ -39,7 +43,6 @@
         # package = pkgs.dejavu_fonts;
         name = "FiraCodeNerdFontMono";
       };
-
     };
   };
 }
