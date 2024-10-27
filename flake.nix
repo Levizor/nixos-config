@@ -1,11 +1,9 @@
 {
-	description = "Config";
+	description = "NixOS Config";
 
 	inputs = {
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
-		nvix.url = "github:niksingh710/nvix";
-		nixvim.url = "github:mikaelfangel/nixvim-config";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {

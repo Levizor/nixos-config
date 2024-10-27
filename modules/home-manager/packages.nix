@@ -33,6 +33,9 @@
     tlrc
     obsidian
     qbittorrent
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
+    dolphin
   ];
   programs = {
     obs-studio = {

@@ -14,6 +14,7 @@ in
 
       env = [
         "XCURSOR_SIZE, 30"
+        "QT_STYLE_OVERRIDE=kvantum"
       ];
 
       input = {
