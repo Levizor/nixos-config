@@ -9,9 +9,13 @@
         mode = "center";
         sorting = "random";
         initial-transition = true;
+        transition-time = 900;
         transition = {
-          glitch-displace = {
-
+          dissolve = {
+            line-width = 0.05;
+            spread-clr = [0.37 0.51 0.67];
+            hot-clr = [0.71 0.56 0.68];
+            intensity = 0.1;
           };
         };
       };

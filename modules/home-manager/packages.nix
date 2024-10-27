@@ -32,6 +32,7 @@
     cmatrix
     tlrc
     obsidian
+    qbittorrent
   ];
   programs = {
     obs-studio = {
@@ -39,6 +40,9 @@
     };
     bat = {
       enable = true;
+      config = {
+        theme = "Nord";
+      };
     };
   };
 }
