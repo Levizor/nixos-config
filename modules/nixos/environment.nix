@@ -17,9 +17,7 @@
      openssl
      lxqt.lxqt-policykit
 
-     (inputs.nvix.packages.${system}.base.extend {
-        config.colorschemes.tokyonight.settings.transparent = true;
-     })
+    inputs.nixvim.packages."${system}".default
 
     pkgs.libsForQt5.qt5.qtgraphicaleffects
     (callPackage ./sddm.nix {})
