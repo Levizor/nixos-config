@@ -11,7 +11,6 @@
     brave
     clipse
     nemo
-    nomacs
     mpv
     grimblast
     easyeffects
@@ -28,7 +27,6 @@
     youtube-music
     vesktop
     jetbrains-toolbox
-    # imagemagick
     networkmanagerapplet
     keepassxc
     yt-dlp
@@ -38,8 +36,9 @@
     qbittorrent
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
-    dolphin
     whatsie
+    putty
+    mousam
   ];
   programs = {
     obs-studio = {

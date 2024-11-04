@@ -88,6 +88,8 @@
     ];
   };
 
+
+
   programs.wireshark.enable = true;
 
   programs.regreet = {
@@ -105,6 +107,7 @@
 
   #services
   services = {
+    tlp.enable = true;
     displayManager.sddm = {
       enable = true;
       wayland.enable = true;

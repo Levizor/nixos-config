@@ -19,6 +19,8 @@
     rustup
     openssl
     lxqt.lxqt-policykit
+    zip
+    unzip
 
     inputs.nixvim.packages."${system}".default
 

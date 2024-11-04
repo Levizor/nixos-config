@@ -29,13 +29,13 @@
       };
 
       serif = {
-        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
-        name = "FiraCodeNerdFont";
+        package = pkgs.vegur;
+        name = "Vegur";
       };
 
       sansSerif = {
-        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
-        name = "FiraCodeNerdFont";
+        package = pkgs.vegur;
+        name = "Vegur";
       };
 
       monospace = {
