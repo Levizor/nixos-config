@@ -5,8 +5,6 @@
 }: {
   environment.systemPackages = with pkgs; [
     curl
-    steam-tui
-    steamcmd
     vim
     git
     brightnessctl
