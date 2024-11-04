@@ -139,6 +139,7 @@ in {
           bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
 
           bind = $mainMod, A, exec, $terminal -a btop -e ncpamixer
+          bind = CTRL_$mainMod, S, exec, nvidia-offload steam
           bind = $mainMod, U, exec, $terminal -a btop -e btop
           # bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
           # bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf

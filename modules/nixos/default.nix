@@ -72,34 +72,19 @@
     };
   };
 
-  # specialisation = {
-  #   gaming-time.configuration = {
-  #     hardware.nvidia = {
-  #       prime.sync.enable = lib.mkForce true;
-  #       prime.offload = {
-  #         enable = lib.mkForce false;
-  #         enableOffloadCmd = lib.mkForce false;
-  #       };
-  #     };
-  #   };
-  # };
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
     ];
   };
 
-
-
-  programs.wireshark.enable = true;
-
   #services
   services = {
     tlp.enable = true;
     displayManager.ly = {
-      enable = false;
+      enable = true;
       settings = {
-        animation = "doom";
+        animation = "matrix";
         hide_borders = true;
       };
     };
@@ -115,7 +100,6 @@
     libinput.enable = true;
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
       windowManager = {
         i3 = {
           enable = true;
