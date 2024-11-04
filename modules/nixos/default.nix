@@ -14,7 +14,7 @@
     ];
 
     packageOverrides = pkgs: rec {
-      sddm-slice = pkgs.callPackage ./sddm.nix {};
+      # sddm-slice = pkgs.callPackage ./sddm.nix {};
       wpaperd = pkgs.callPackage ./wpaperd.nix {};
     };
   };
@@ -108,10 +108,17 @@
   #services
   services = {
     tlp.enable = true;
+    displayManager.ly = {
+      enable = false;
+      settings = {
+        animation = "doom";
+        hide_borders = true;
+      };
+    };
     displayManager.sddm = {
-      enable = true;
+      enable = false;
       wayland.enable = true;
-      theme = "sddm-slice";
+      # theme = "sddm-slice";
     };
     upower = {
       enable = true;
@@ -120,6 +127,7 @@
     libinput.enable = true;
     xserver = {
       enable = true;
+      displayManager.gdm.enable = true;
       windowManager = {
         i3 = {
           enable = true;
@@ -156,7 +164,11 @@
   '';
   programs.steam = {
     enable = true;
-    gamescopeSession.enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
   };
   programs.gamemode.enable = true;
 

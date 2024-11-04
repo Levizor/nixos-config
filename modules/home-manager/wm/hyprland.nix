@@ -11,6 +11,7 @@ in {
       "$mainMod" = "SUPER";
 
       env = [
+        "XDG_CURRENT_DESKTOP, Hyprland"
         "XCURSOR_SIZE, 30"
         "QT_STYLE_OVERRIDE=kvantum"
       ];
@@ -136,6 +137,8 @@ in {
 
           bind = $mainMod, Return, exec, $terminal
           bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
+
+          bind = $mainMod, A, exec, $terminal -a btop -e ncpamixer
           bind = $mainMod, U, exec, $terminal -a btop -e btop
           # bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
           # bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf

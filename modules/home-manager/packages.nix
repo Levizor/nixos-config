@@ -4,6 +4,9 @@
   ...
 }: {
   home.packages = with pkgs; [
+    fzf
+    pavucontrol
+    ncpamixer
     telegram-desktop
     tree
     ungoogled-chromium

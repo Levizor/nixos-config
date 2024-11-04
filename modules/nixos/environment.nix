@@ -5,6 +5,8 @@
 }: {
   environment.systemPackages = with pkgs; [
     curl
+    steam-tui
+    steamcmd
     vim
     git
     brightnessctl
@@ -23,7 +25,7 @@
     inputs.nixvim.packages."${system}".default
 
     pkgs.libsForQt5.qt5.qtgraphicaleffects
-    (callPackage ./sddm.nix {})
+    # (callPackage ./sddm.nix {})
   ];
   environment.variables = {
     EDITOR = "nvim";

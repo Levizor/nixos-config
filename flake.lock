@@ -504,14 +504,17 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1730734378,
-        "narHash": "sha256-6oHnetLyFg0uPrF7Ziw09CjwXuIQH4OWDdoSxCtpUWQ=",
-        "path": "/home/levizor/nix/modules/nixvim",
-        "type": "path"
+        "lastModified": 1730734373,
+        "narHash": "sha256-HystKGngNNuRvl1U4qCYm6fRNf6sKlb6EJrv6y81nMY=",
+        "owner": "Levizor",
+        "repo": "nixvim",
+        "rev": "097f5927b18d760de3aaa7c0f55c227a702d4f96",
+        "type": "github"
       },
       "original": {
-        "path": "/home/levizor/nix/modules/nixvim",
-        "type": "path"
+        "owner": "Levizor",
+        "repo": "nixvim",
+        "type": "github"
       }
     },
     "nixvim_2": {
@@ -570,7 +573,24 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
+        "stable": "stable",
         "stylix": "stylix"
+      }
+    },
+    "stable": {
+      "locked": {
+        "lastModified": 1730327045,
+        "narHash": "sha256-xKel5kd1AbExymxoIfQ7pgcX6hjw9jCgbiBjiUfSVJ8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "080166c15633801df010977d9d7474b4a6c549d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-24.05",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "stylix": {
