@@ -31,21 +31,21 @@
               };
             };
             root = {
-              size = "60G";
+              size = "100%";
               content = {
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
               };
             };
-            home = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/home";
-              };
-            };
+            # home = {
+            #   size = "100%";
+            #   content = {
+            #     type = "filesystem";
+            #     format = "ext4";
+            #     mountpoint = "/home";
+            #   };
+            # };
           };
         };
       };

@@ -10,15 +10,13 @@
     brightnessctl
     pulseaudioFull
     pavucontrol
-    clang
-    clang-tools
     cmake
     wl-clipboard
     libnotify
     killall
     rustup
-    openssl
-    lxqt.lxqt-policykit
+    # openssl
+    # lxqt.lxqt-policykit
     zip
     unzip
 

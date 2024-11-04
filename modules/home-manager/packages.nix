@@ -6,21 +6,15 @@
   home.packages = with pkgs; [
     telegram-desktop
     tree
-    alacritty
     ungoogled-chromium
-    brave
     clipse
     nemo
     mpv
     grimblast
-    easyeffects
     bluetuith
-    vivid
     ripgrep
-    fzf
     ani-cli
     protonup
-    teams-for-linux
     zoom-us
     hyprpicker
     loupe
@@ -37,8 +31,6 @@
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     whatsie
-    putty
-    mousam
   ];
   programs = {
     obs-studio = {

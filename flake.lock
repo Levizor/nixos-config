@@ -504,8 +504,8 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1730635027,
-        "narHash": "sha256-qp7H5hV0W5Ux7hhr6PbRxn6MOwBX81W5lUshK5mnzks=",
+        "lastModified": 1730734378,
+        "narHash": "sha256-6oHnetLyFg0uPrF7Ziw09CjwXuIQH4OWDdoSxCtpUWQ=",
         "path": "/home/levizor/nix/modules/nixvim",
         "type": "path"
       },
