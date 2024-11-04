@@ -573,24 +573,7 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "stable": "stable",
         "stylix": "stylix"
-      }
-    },
-    "stable": {
-      "locked": {
-        "lastModified": 1730327045,
-        "narHash": "sha256-xKel5kd1AbExymxoIfQ7pgcX6hjw9jCgbiBjiUfSVJ8=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "080166c15633801df010977d9d7474b4a6c549d7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-24.05",
-        "repo": "nixpkgs",
-        "type": "github"
       }
     },
     "stylix": {

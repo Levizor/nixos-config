@@ -55,6 +55,7 @@
     #bluetooth
     bluetooth.enable = true;
     graphics.enable = true;
+    graphics.enable32Bit = true;
     nvidia = {
       modesetting.enable = true;
       open = false;
@@ -91,19 +92,6 @@
 
 
   programs.wireshark.enable = true;
-
-  programs.regreet = {
-    enable = false;
-    settings = {
-      background = {
-        fit = "Cover";
-      };
-      GTK = {
-        application_prefer_dark_theme = true;
-      };
-    };
-    cageArgs = ["-s" "-m" "last"];
-  };
 
   #services
   services = {
