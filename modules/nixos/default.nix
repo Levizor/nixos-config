@@ -11,19 +11,18 @@
     allowUnsupportedSystem = true;
     permittedInsecurePackages = [
       "floorp-unwrapped-11.19.0"
+      "freeimage-unstable-2021-11-01"
     ];
 
     packageOverrides = pkgs: rec {
-      # sddm-slice = pkgs.callPackage ./sddm.nix {};
       wpaperd = pkgs.callPackage ./wpaperd.nix {};
+      kew = pkgs.callPackage ./kew.nix {}; 
     };
   };
   imports = [
     ./user.nix
     ./environment.nix
   ];
-
-  # security.rtkit.enable = true;
 
   security = {
     polkit.enable = true;

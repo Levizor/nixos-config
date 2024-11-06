@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    ffmpeg
     fzf
     pavucontrol
     ncpamixer
@@ -34,6 +35,7 @@
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
     whatsie
+    filezilla
   ];
   programs = {
     obs-studio = {
