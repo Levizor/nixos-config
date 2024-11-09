@@ -1,4 +1,4 @@
-{lib, ...}: let
+{inputs, pkgs, lib, ...}: let
   scripts = ./scripts;
 in {
   services.hyprpaper.enable = lib.mkForce false;
@@ -6,6 +6,9 @@ in {
     systemd.variables = ["--all"];
     enable = true;
     xwayland.enable = true;
+    plugins = [
+      inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+    ];
 
     settings = {
       "$mainMod" = "SUPER";
@@ -62,6 +65,9 @@ in {
           size = 3;
           passes = 3;
         };
+        shadow = {
+          
+        };
       };
 
       animations = {
@@ -95,6 +101,7 @@ in {
         "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "clipse -listen"
+        "hyprctl seterror disable"
         "wpaperd"
       ];
     };
@@ -113,6 +120,7 @@ in {
           ### KEYBINDINGSS ###
           ####################
 
+          bind = $main, O, overview:toggle
           $mainMod = SUPER
 
       #makes waybar with workspaces visible when pressing key

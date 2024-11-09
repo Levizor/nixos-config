@@ -9,5 +9,6 @@
     ./lsd.nix
     ./mako.nix
     ./cava.nix
+    ./nh.nix
   ];
 }

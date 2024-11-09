@@ -21,6 +21,7 @@
     zip
     unzip
 
+
     inputs.nixvim.packages."${system}".default
 
     pkgs.libsForQt5.qt5.qtgraphicaleffects
@@ -29,4 +30,5 @@
   environment.variables = {
     EDITOR = "nvim";
   };
+  virtualisation.waydroid.enable = true;
 }
