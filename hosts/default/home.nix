@@ -1,10 +1,11 @@
 {
-  inputs,
+  inputs, 
   outputs,
+  lib,
   ...
 }: {
   imports = [
-    ../../modules/home-manager
+    ../../modules/home-manager 
     inputs.home-manager.nixosModules.home-manager
   ];
 }

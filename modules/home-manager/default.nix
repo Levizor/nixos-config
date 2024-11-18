@@ -2,8 +2,9 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
-}@inputs: let
+}: let
   unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
 in {
   home-manager = {

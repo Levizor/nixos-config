@@ -13,9 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-    };
   };
 
   outputs = {
