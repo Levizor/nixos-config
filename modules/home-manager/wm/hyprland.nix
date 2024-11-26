@@ -83,11 +83,9 @@ in {
       dwindle = {
         pseudotile = true;
         preserve_split = true;
-        no_gaps_when_only = false;
       };
 
       master = {
-        no_gaps_when_only = true;
       };
 
       exec-once = [
@@ -95,7 +93,7 @@ in {
         "foot --server"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "clipse -listen"
-        "hyprctl seterror disable"
+        # "hyprctl seterror disable"
         "wpaperd"
       ];
     };

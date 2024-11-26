@@ -20,6 +20,7 @@
     # lxqt.lxqt-policykit
     zip
     unzip
+    gcc
 
 
     inputs.nixvim.packages."${system}".default
