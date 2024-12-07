@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    hyprland-workspaces
     arduino
     ffmpeg
     fzf
@@ -37,6 +38,7 @@
     libsForQt5.qtstyleplugin-kvantum
     whatsie
     filezilla
+    onlyoffice-desktopeditors
   ];
   programs = {
     obs-studio = {

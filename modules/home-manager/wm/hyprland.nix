@@ -131,8 +131,6 @@ in {
           # binde = SUPER, D, exec, echo key kp3| dotoolc
           # binde = Ctrl, K, exec, echo key kp9| dotoolc
           # binde = Ctrl, J, exec, echo key kp3| dotoolc
-          bind = $mainMod, KP_Subtract, exec, wpaperctl next
-          bind = $mainMod, KP_Add, exec, killall wpaperd | ls ~/.config/wpaperd/config.toml | entr -r wpaperd
 
           bind = $mainMod, Return, exec, $terminal
           bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
@@ -311,7 +309,7 @@ in {
           bind = $mainMod, F2, exec, ${scripts}/gapsoff.sh
 
           workspace=special:telegram, decorate:false, border:false, on-created-empty:$telegram #gapsin:0, gapsout:0
-          workspace=special:terminal, on-created-empty: $terminal -o main.font=FiraCodeNerdFontMono:size=14 #-e zellij --layout dash # -o background_opacity=0.6,
+          workspace=special:terminal, on-created-empty: $terminal 
           workspace=1, monitor:eDP-1
           workspace=2, monitor:eDP-1
           workspace=3, monitor:eDP-1

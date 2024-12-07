@@ -128,7 +128,7 @@
     platformTheme = "gtk2";
   };
 
-  # programs.wireshark.enable = true;
+  programs.wireshark.enable = true;
   programs.zsh.enable = true;
   programs.zsh.promptInit = ''
     ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin

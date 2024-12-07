@@ -34,14 +34,13 @@
       };
 
       sansSerif = {
-        package = pkgs.vegur;
-        name = "Vegur";
+        package = pkgs.texlivePackages.opensans;
+        name = "Opensans";
       };
 
       monospace = {
-        package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
-        # package = pkgs.dejavu_fonts;
-        name = "FiraCodeNerdFontMono";
+        package = pkgs.nerd-fonts.fira-mono;
+        name = "FiraMonoNerdFontMono";
       };
     };
   };
