@@ -5,8 +5,8 @@
 }: {
   home.packages = with pkgs; [
     hyprland-workspaces
-    arduino
     ffmpeg
+    eog
     fzf
     pavucontrol
     ncpamixer
@@ -23,7 +23,6 @@
     protonup
     zoom-us
     hyprpicker
-    loupe
     youtube-music
     vesktop
     jetbrains-toolbox
@@ -39,6 +38,7 @@
     whatsie
     filezilla
     onlyoffice-desktopeditors
+    wireshark
   ];
   programs = {
     obs-studio = {

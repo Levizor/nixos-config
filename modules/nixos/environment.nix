@@ -16,17 +16,14 @@
     libnotify
     killall
     rustup
-    # openssl
-    # lxqt.lxqt-policykit
     zip
     unzip
     gcc
-
+    python
 
     inputs.nixvim.packages."${system}".default
 
     pkgs.libsForQt5.qt5.qtgraphicaleffects
-    # (callPackage ./sddm.nix {})
   ];
   environment.variables = {
     EDITOR = "nvim";

@@ -1,7 +1,8 @@
 {
   programs.zsh = {
     shellAliases = {
-      c = "clear";
+      c = "wl-copy";
+      p = "wl-paste";
 
       def = "nh os switch -H default";
 

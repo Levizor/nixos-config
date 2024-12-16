@@ -24,12 +24,16 @@ in {
         sessionVariables = {
           STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
         };
+        sessionPath = [
+          "$HOME/.cargo/bin/"
+        ];
+
         enableNixpkgsReleaseCheck = false;
         username = "levizor";
         homeDirectory = "/home/levizor";
         stateVersion = "24.05";
       };
-      # stylix.targets.hyprpaper.enable = lib.mkForce false;
+
       stylix.targets.bat.enable = false;
 
       qt = {
