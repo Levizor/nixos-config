@@ -5,6 +5,6 @@
     ./wezterm.nix
     ./tmux.nix
     #./zellij.nix
-    #./kitty.nix
+    ./kitty.nix
   ];
 }

@@ -19,7 +19,7 @@
     zip
     unzip
     gcc
-    python
+    python3
 
     inputs.nixvim.packages."${system}".default
 
