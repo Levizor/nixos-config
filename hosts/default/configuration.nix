@@ -14,6 +14,6 @@
     inputs.disko.nixosModules.disko
     ./home.nix
     inputs.stylix.nixosModules.stylix
-    ../../modules/stylix/nord.nix
+    ../../modules/stylix/dracula.nix
   ];
 }

@@ -21,6 +21,7 @@
 
       any = {
         path = lib.mkForce "/home/levizor/Pictures/Wallpapers/Nord/";
+        mode = lib.mkForce "center";
       };
     };
   };

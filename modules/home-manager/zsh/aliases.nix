@@ -30,7 +30,7 @@
 
       ll = "lsd -al --group-directories-first";
 
-      cmatrix = "cmatrix -C black";
+      cmatrix = "cmatrix -C blue";
 
       htheme = "nvim ~/.config/hypr/hyprtheme.conf";
 

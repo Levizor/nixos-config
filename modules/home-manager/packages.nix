@@ -4,9 +4,13 @@
   ...
 }: {
   home.packages = with pkgs; [
+    prismlauncher
+    cava
     hyprland-workspaces
     ffmpeg
     eog
+    loupe
+    pipes
     fzf
     pavucontrol
     ncpamixer

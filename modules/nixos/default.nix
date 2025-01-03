@@ -15,7 +15,6 @@
     ];
 
     packageOverrides = pkgs: rec {
-      wpaperd = pkgs.callPackage ./wpaperd.nix {};
       kew = pkgs.callPackage ./kew.nix {}; 
     };
   };
@@ -33,6 +32,7 @@
       extraConfig = ''
         moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
     };
+
   };
 
   #bootloader
@@ -65,7 +65,6 @@
           enable = true;
           enableOffloadCmd = true;
         };
-
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:2:0:0";
       };
@@ -83,6 +82,8 @@
   programs.hyprland = {
     enable = true;
   };
+
+  programs.hyprlock.enable = true;
 
   qt = {
     enable = true;
