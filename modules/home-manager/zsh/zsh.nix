@@ -5,7 +5,7 @@
 }: {
   programs.zsh = {
     enable = true;
-    dotDir = "zsh";
+    dotDir = ".zsh";
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -141,7 +141,7 @@
 
     history = {
       size = 10000;
-      path = "/home/levizor/zsh/history";
+      path = "/home/levizor/.zsh/history";
     };
 
     oh-my-zsh = {

@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    wcalc
     prismlauncher
     cava
     hyprland-workspaces
