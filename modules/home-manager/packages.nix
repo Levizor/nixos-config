@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    logisim
     wcalc
     prismlauncher
     cava
