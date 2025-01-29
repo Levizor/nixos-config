@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    logisim
+    thunderbird
     wcalc
     prismlauncher
     cava
