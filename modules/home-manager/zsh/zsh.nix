@@ -88,7 +88,7 @@
       zstyle ':completion:files' sort false
 
       # fzf-tab
-      zstyle ':fzf-tab:complete:*:*' fzf-preview 'eza --icons  -a --group-directories-first -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:*:*' fzf-preview 'lsd -a --group-directories-first -1 --color=always $realpath'
       zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
       zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:3:wrap'
       zstyle ':fzf-tab:*' fzf-command fzf
@@ -98,6 +98,9 @@
     '';
 
     initExtraFirst = ''
+      # magic-enter
+      zstyle -s ':zshzoo:magic-enter' command 'lsd'
+      zstyle -s ':zshzoo:magic-enter' git-command 'lsd'
 
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
       # - The first argument to the function ($1) is the base path to start traversal
