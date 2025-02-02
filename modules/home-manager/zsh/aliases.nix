@@ -3,7 +3,13 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    cop = "copypath";
+
+    cf = "copyfile";
+
     def = "nh os switch -H default";
+
+    adcom = "git commit -am";
 
     nixconf = "nvim ~/nix/.";
 

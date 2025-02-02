@@ -95,12 +95,13 @@
       zstyle ':fzf-tab:*' fzf-pad 4
       zstyle ':fzf-tab:*' fzf-min-height 100
       zstyle ':fzf-tab:*' switch-group ',' '.'
-    '';
 
-    initExtraFirst = ''
       # magic-enter
       zstyle -s ':zshzoo:magic-enter' command 'lsd'
       zstyle -s ':zshzoo:magic-enter' git-command 'lsd'
+    '';
+
+    initExtraFirst = ''
 
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
       # - The first argument to the function ($1) is the base path to start traversal
@@ -165,10 +166,9 @@
     };
 
     antidote = {
-      enable = false; # no for now
+      enable = true; # no for now
       plugins = [
         "belak/zsh-utils path:completion"
-        "wehlando/efibootmgr-zsh-completion"
         "romkatv/zsh-defer"
         "getantidote/use-omz"
       ];
