@@ -15,7 +15,7 @@
     ];
 
     packageOverrides = pkgs: rec {
-      kew = pkgs.callPackage ./kew.nix {}; 
+      kew = pkgs.callPackage ./kew.nix {};
     };
   };
   imports = [
@@ -32,7 +32,6 @@
       extraConfig = ''
         moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
     };
-
   };
 
   #bootloader
@@ -76,7 +75,6 @@
     libraries = with pkgs; [
     ];
   };
-
 
   #hyprland
   programs.hyprland = {

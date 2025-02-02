@@ -20,6 +20,8 @@ in {
         ./terminals
       ];
 
+      xdg.enable = true;
+
       home = {
         sessionVariables = {
           STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
