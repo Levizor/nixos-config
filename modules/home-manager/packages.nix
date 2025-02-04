@@ -4,17 +4,17 @@
   ...
 }: {
   home.packages = with pkgs; [
+    clock-rs
+    nix-prefetch-github
     android-tools
     krita
     thunderbird
     wcalc
     prismlauncher
     cava
-    hyprland-workspaces
     ffmpeg
     eog
     loupe
-    pipes
     fzf
     pavucontrol
     ncpamixer
@@ -54,9 +54,6 @@
     };
     bat = {
       enable = true;
-      config = {
-        theme = "Nord";
-      };
     };
   };
 }
