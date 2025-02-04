@@ -2,8 +2,10 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
+    timg
     clock-rs
     nix-prefetch-github
     android-tools
@@ -31,6 +33,7 @@
     protonup
     zoom-us
     hyprpicker
+    superfile
     youtube-music
     vesktop
     jetbrains-toolbox
