@@ -5,6 +5,9 @@
 }:
 {
   home.packages = with pkgs; [
+    webcord
+    discord-canary
+    hyprland-workspaces-tui
     timg
     clock-rs
     nix-prefetch-github
@@ -44,8 +47,8 @@
     tlrc
     obsidian
     qbittorrent
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
+    # libsForQt5.qt5ct
+    # libsForQt5.qtstyleplugin-kvantum
     whatsie
     filezilla
     onlyoffice-desktopeditors

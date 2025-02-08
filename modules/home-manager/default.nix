@@ -4,9 +4,15 @@
   lib,
   inputs,
   ...
-}: let
-  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
-in {
+}:
+let
+  unstable = import <nixos-unstable> {
+    config = {
+      allowUnfree = true;
+    };
+  };
+in
+{
   home-manager = {
     # useUserPackages = true;
     useGlobalPkgs = true;
@@ -36,19 +42,22 @@ in {
         stateVersion = "24.05";
       };
 
-      stylix.targets.bat.enable = false;
+      qt.enable = true;
 
-      qt = {
-        enable = true;
-        platformTheme.name = "qtct";
-        style = {
-          name = "kvantum";
-        };
-      };
-      xdg.configFile."Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini {}).generate "kvantum.kvconfig" {
-        General.theme = "Utterly-Nord-Solid";
-      };
-      xdg.configFile."Kvantum/Utterly-Nord-Solid".source = "${pkgs.utterly-nord-plasma}/share/Kvantum/Utterly-Nord-Solid";
+      # qt = {
+      #   enable = true;
+      #   platformTheme.name = "qtct";
+      #   style = {
+      #     name = "kvantum";
+      #   };
+      # };
+      # xdg.configFile."Kvantum/kvantum.kvconfig".source =
+      #   (pkgs.formats.ini { }).generate "kvantum.kvconfig"
+      #     {
+      #       General.theme = "Utterly-Nord-Solid";
+      #     };
+      # xdg.configFile."Kvantum/Utterly-Nord-Solid".source =
+      #   "${pkgs.utterly-nord-plasma}/share/Kvantum/Utterly-Nord-Solid";
     };
   };
 }

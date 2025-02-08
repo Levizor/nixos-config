@@ -4,11 +4,13 @@
   nixpkgs,
   lib,
   ...
-}: {
+}:
+{
   stylix = {
     enable = true;
     image = ./moons.jpg;
     polarity = "dark";
+    targets.qt.enable = true;
 
     cursor = {
       package = pkgs.nordzy-cursor-theme;

@@ -3,6 +3,8 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    clock = "clock-rs";
+
     cop = "copypath";
 
     cf = "copyfile";

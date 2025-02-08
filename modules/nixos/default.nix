@@ -4,8 +4,12 @@
   pkgs,
   inputs,
   ...
-}: {
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+}:
+{
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nixpkgs.config = {
     allowUnfree = true;
     allowUnsupportedSystem = true;
@@ -15,7 +19,7 @@
     ];
 
     packageOverrides = pkgs: rec {
-      kew = pkgs.callPackage ./kew.nix {};
+      kew = pkgs.callPackage ./kew.nix { };
     };
   };
   imports = [
@@ -29,8 +33,7 @@
 
     sudo = {
       wheelNeedsPassword = false;
-      extraConfig = ''
-        moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
+      extraConfig = ''moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
     };
   };
 
@@ -83,10 +86,10 @@
 
   programs.hyprlock.enable = true;
 
-  qt = {
-    enable = true;
-    platformTheme = "gtk2";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme = lib.mkForce "gtk2";
+  # };
 
   programs.wireshark.enable = true;
   programs.zsh.enable = true;
