@@ -4,7 +4,7 @@
   inputs = {
     pipewire-screenaudio.url = "github:IceDBorn/pipewire-screenaudio";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    stable.url = "github:nixos/nixpkgs/nixos-24.11";
     stylix.url = "github:danth/stylix";
     nixvim = {
       url = "github:Levizor/nixvim";
