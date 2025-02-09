@@ -2,7 +2,8 @@
   inputs,
   outputs,
   ...
-}: {
+}:
+{
   nixpkgs.config = {
     allowUnfree = true;
     allowUnsupportedSystem = true;

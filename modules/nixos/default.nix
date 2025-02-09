@@ -14,13 +14,9 @@
     allowUnfree = true;
     allowUnsupportedSystem = true;
     permittedInsecurePackages = [
-      "floorp-unwrapped-11.19.0"
+      # "floorp-unwrapped-11.19.0"
       "freeimage-unstable-2021-11-01"
     ];
-
-    packageOverrides = pkgs: rec {
-      kew = pkgs.callPackage ./kew.nix { };
-    };
   };
   imports = [
     ./user.nix

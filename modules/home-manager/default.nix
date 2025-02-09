@@ -5,15 +5,11 @@
   inputs,
   ...
 }:
-let
-  unstable = import <nixos-unstable> {
-    config = {
-      allowUnfree = true;
-    };
-  };
-in
 {
   home-manager = {
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     # useUserPackages = true;
     useGlobalPkgs = true;
     backupFileExtension = "backup";

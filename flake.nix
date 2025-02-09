@@ -2,6 +2,7 @@
   description = "NixOS Config";
 
   inputs = {
+    pipewire-screenaudio.url = "github:IceDBorn/pipewire-screenaudio";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-24.05";
     stylix.url = "github:danth/stylix";
@@ -19,24 +20,25 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations = {
-      default = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/default/configuration.nix
-        ];
-        specialArgs = {
-          inherit inputs self system;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+    in
+    {
+      nixosConfigurations = {
+        default = nixpkgs.lib.nixosSystem {
+          modules = [
+            ./hosts/default/configuration.nix
+          ];
+          specialArgs = {
+            inherit inputs self system;
+          };
         };
       };
     };
-  };
 }

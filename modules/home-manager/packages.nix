@@ -5,7 +5,6 @@
 }:
 {
   home.packages = with pkgs; [
-    webcord
     discord-canary
     hyprland-workspaces-tui
     timg

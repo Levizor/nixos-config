@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, inputs, ... }:
+{
   programs.floorp = {
     enable = true;
     languagePacks = [
@@ -6,6 +7,12 @@
       "uk"
       "ru"
     ];
+
+    package =
+      with pkgs;
+      (floorp.override {
+        nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
+      });
 
     profiles = {
       profile_0 = {
@@ -34,20 +41,20 @@
               ];
 
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
             };
 
             "NixOS Wiki" = {
-              urls = [{template = "https://wiki.nixos.org/index.php?search={searchTerms}";}];
+              urls = [ { template = "https://wiki.nixos.org/index.php?search={searchTerms}"; } ];
               iconUpdateURL = "https://wiki.nixos.org/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = ["@nw"];
+              definedAliases = [ "@nw" ];
             };
             "Brave" = {
-              urls = [{template = "https://search.brave.com/search?q={searchTerms}";}];
+              urls = [ { template = "https://search.brave.com/search?q={searchTerms}"; } ];
               iconUpdateURL = "https://brave.com/static-assets/images/brave-logo-sans-text.svg";
               updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = ["@b"];
+              definedAliases = [ "@b" ];
             };
           };
 
@@ -58,7 +65,8 @@
           "floorp.browser.sidebar.enable" = false;
           "floorp.lepton.interface" = 1;
           "userChrome.autohide.navbar" = true;
-          "browser.uiCustomization.state" = "{\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[\"vimium-c_gdh1995_cn-browser-action\",\"keepassxc-browser_keepassxc_org-browser-action\",\"queryamoid_kaply_com-browser-action\"],\"nav-bar\":[\"undo-closed-tab\",\"back-button\",\"forward-button\",\"sidebar-reverse-position-toolbar\",\"sidebar-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"urlbar-container\",\"customizableui-special-spring2\",\"save-to-pocket-button\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\",\"sponsorblocker_ajay_app-browser-action\",\"profile-manager\",\"jid1-mnnxcxisbpnsxq_jetpack-browser-action\",\"ublock0_raymondhill_net-browser-action\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"],\"statusBar\":[\"screenshot-button\",\"fullscreen-button\",\"status-text\"]},\"seen\":[\"developer-button\",\"sponsorblocker_ajay_app-browser-action\",\"vimium-c_gdh1995_cn-browser-action\",\"sidebar-reverse-position-toolbar\",\"undo-closed-tab\",\"profile-manager\",\"jid1-mnnxcxisbpnsxq_jetpack-browser-action\",\"keepassxc-browser_keepassxc_org-browser-action\",\"ublock0_raymondhill_net-browser-action\",\"queryamoid_kaply_com-browser-action\",\"workspaces-toolbar-button\"],\"dirtyAreaCache\":[\"nav-bar\",\"statusBar\",\"unified-extensions-area\",\"TabsToolbar\",\"PersonalToolbar\",\"toolbar-menubar\"],\"currentVersion\":20,\"newElementCount\":2}";
+          "browser.uiCustomization.state" =
+            "{\"placements\":{\"widget-overflow-fixed-list\":[],\"unified-extensions-area\":[\"vimium-c_gdh1995_cn-browser-action\",\"keepassxc-browser_keepassxc_org-browser-action\",\"queryamoid_kaply_com-browser-action\"],\"nav-bar\":[\"undo-closed-tab\",\"back-button\",\"forward-button\",\"sidebar-reverse-position-toolbar\",\"sidebar-button\",\"stop-reload-button\",\"customizableui-special-spring1\",\"urlbar-container\",\"customizableui-special-spring2\",\"save-to-pocket-button\",\"downloads-button\",\"fxa-toolbar-menu-button\",\"unified-extensions-button\",\"sponsorblocker_ajay_app-browser-action\",\"profile-manager\",\"jid1-mnnxcxisbpnsxq_jetpack-browser-action\",\"ublock0_raymondhill_net-browser-action\"],\"toolbar-menubar\":[\"menubar-items\"],\"TabsToolbar\":[\"tabbrowser-tabs\",\"new-tab-button\",\"alltabs-button\"],\"PersonalToolbar\":[\"import-button\",\"personal-bookmarks\"],\"statusBar\":[\"screenshot-button\",\"fullscreen-button\",\"status-text\"]},\"seen\":[\"developer-button\",\"sponsorblocker_ajay_app-browser-action\",\"vimium-c_gdh1995_cn-browser-action\",\"sidebar-reverse-position-toolbar\",\"undo-closed-tab\",\"profile-manager\",\"jid1-mnnxcxisbpnsxq_jetpack-browser-action\",\"keepassxc-browser_keepassxc_org-browser-action\",\"ublock0_raymondhill_net-browser-action\",\"queryamoid_kaply_com-browser-action\",\"workspaces-toolbar-button\"],\"dirtyAreaCache\":[\"nav-bar\",\"statusBar\",\"unified-extensions-area\",\"TabsToolbar\",\"PersonalToolbar\",\"toolbar-menubar\"],\"currentVersion\":20,\"newElementCount\":2}";
           "userChrome.centered.tab" = true;
           "userChrome.centered.urlbar" = true;
           "userChrome.urlView.always_show_page_actions" = true;
