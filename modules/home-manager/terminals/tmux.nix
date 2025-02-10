@@ -25,25 +25,6 @@ in
 
     plugins = with pkgs; [
       tmuxPlugins.better-mouse-mode
-
-      {
-        plugin = latest.tmuxPlugins.resurrect;
-        extraConfig = ''
-          set -g @resurrect-processes '\
-          "~hyprland-workspaces-tui->hyprland-workspaces-tui *" \
-          "~nvim->nvim" \ 
-          "~clock-rs->clock-rs"
-          '
-        '';
-      }
-      # {
-      #   plugin = tmuxPlugins.continuum;
-      #   extraConfig = ''
-      #     set -g @continuum-restore 'on'
-      #     set -g @continuum-boot 'on'
-      #     set -g @continuum-save-interval '10'
-      #   '';
-      # }
       {
         plugin = tmuxPlugins.extrakto;
       }

@@ -6,6 +6,6 @@
     ./tmux.nix
     #./zellij.nix
     # ./kitty.nix
-    ./ghostty.nix
+    ./rio.nix
   ];
 }
