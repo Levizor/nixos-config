@@ -29,4 +29,7 @@
     EDITOR = "nvim";
   };
   virtualisation.waydroid.enable = true;
+  virtualisation.docker = {
+    enable = true;
+  };
 }

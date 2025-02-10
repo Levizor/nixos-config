@@ -29,19 +29,21 @@ in
       {
         plugin = latest.tmuxPlugins.resurrect;
         extraConfig = ''
-          set -g @resurrect-strategy-vim 'session'
-          set -g @resurrect-strategy-nvim 'session'
-          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-processes '\
+          "~hyprland-workspaces-tui->hyprland-workspaces-tui *" \
+          "~nvim->nvim" \ 
+          "~clock-rs->clock-rs"
+          '
         '';
       }
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-boot 'on'
-          set -g @continuum-save-interval '10'
-        '';
-      }
+      # {
+      #   plugin = tmuxPlugins.continuum;
+      #   extraConfig = ''
+      #     set -g @continuum-restore 'on'
+      #     set -g @continuum-boot 'on'
+      #     set -g @continuum-save-interval '10'
+      #   '';
+      # }
       {
         plugin = tmuxPlugins.extrakto;
       }
@@ -49,4 +51,19 @@ in
     ];
 
   };
+
+  home.file.".tmuxp/scratchpad.yaml".text = ''
+    session_name: scratchpad
+    windows:
+      - window_name: dashboard
+        layout: main-horizontal
+        options:
+          main-pane-height: 99%
+        panes:
+          - focus: true
+          - hyprland-workspaces-tui -t nord
+      - window_name: nix
+        panes:
+          - cd ~/nix; nvim .
+  '';
 }
