@@ -33,7 +33,6 @@
     };
   };
 
-  #bootloader
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
@@ -43,11 +42,10 @@
     };
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
 
-  # Set your time zone.
   time.timeZone = "Europe/Warsaw";
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   hardware = {
     #bluetooth
@@ -80,15 +78,12 @@
     enable = true;
   };
 
-  programs.hyprlock.enable = true;
-
-  # qt = {
-  #   enable = true;
-  #   platformTheme = lib.mkForce "gtk2";
-  # };
+  # programs.hyprlock.enable = true;
 
   programs.wireshark.enable = true;
+
   programs.zsh.enable = true;
+  #required to use zsh over bash when using nix-shell
   programs.zsh.promptInit = ''
     ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
   '';
@@ -102,5 +97,5 @@
   };
   programs.gamemode.enable = true;
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

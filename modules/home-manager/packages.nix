@@ -5,6 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
+    distrobox
     discord-canary
     hyprland-workspaces-tui
     timg
@@ -17,7 +18,6 @@
     prismlauncher
     cava
     ffmpeg
-    eog
     loupe
     fzf
     pavucontrol
@@ -35,7 +35,6 @@
     protonup
     zoom-us
     hyprpicker
-    superfile
     youtube-music
     vesktop
     jetbrains-toolbox
@@ -46,8 +45,6 @@
     tlrc
     obsidian
     qbittorrent
-    # libsForQt5.qt5ct
-    # libsForQt5.qtstyleplugin-kvantum
     whatsie
     filezilla
     onlyoffice-desktopeditors

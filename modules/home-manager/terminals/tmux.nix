@@ -1,4 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  latest = import (pkgs.fetchFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev = "af5d88b95c92d42c7b9fa8405bb9a43ded847e32";
+    hash = "sha256-kxrtJ3/ishxpWENPHfy2JruM+A8x9XT/gnsqNkE1R5Q=";
+  }) { system = "x86_64-linux"; };
+in
 {
   programs.tmux = {
     enable = true;
@@ -19,7 +27,7 @@
       tmuxPlugins.better-mouse-mode
 
       {
-        plugin = tmuxPlugins.resurrect;
+        plugin = latest.tmuxPlugins.resurrect;
         extraConfig = ''
           set -g @resurrect-strategy-vim 'session'
           set -g @resurrect-strategy-nvim 'session'
@@ -34,6 +42,10 @@
           set -g @continuum-save-interval '10'
         '';
       }
+      {
+        plugin = tmuxPlugins.extrakto;
+      }
+      { plugin = inputs.minimal-tmux.packages.${pkgs.system}.default; }
     ];
 
   };

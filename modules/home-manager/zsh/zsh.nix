@@ -2,14 +2,11 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     dotDir = ".zsh";
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-    historySubstringSearch.enable = true;
 
     plugins = [
       {
@@ -19,19 +16,18 @@
       }
     ];
 
-    completionInit = ''
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
+
+    initExtra = ''
       # Load Zsh modules
-      # zmodload zsh/zle
-      # zmodload zsh/zpty
-      # zmodload zsh/complist
 
       # Initialize colors
       autoload -Uz colors
       colors
 
-      # Initialize completion system
-      # autoload -U compinit
-      # compinit
       _comp_options+=(globdots)
 
       # Load edit-command-line for ZLE
@@ -41,16 +37,14 @@
 
       # General completion behavior
       zstyle ':completion:*' completer _extensions _complete _approximate
+      zstyle ':completion:*' complete true
 
       # Use cache
       zstyle ':completion:*' use-cache on
       zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 
-      # Complete the alias
-      zstyle ':completion:*' complete true
-
       # Autocomplete options
-      zstyle ':completion:*' complete-options true
+      # zstyle ':completion:*' complete-options true
 
       # Completion matching control
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -83,26 +77,32 @@
       zstyle ':completion:*' sort false
       zstyle ":completion:*:git-checkout:*" sort false
       zstyle ':completion:*' file-sort modification
-      zstyle ':completion:*:eza' sort false
+      zstyle ':completion:*:lsd' sort false
       zstyle ':completion:complete:*:options' sort false
       zstyle ':completion:files' sort false
 
       # fzf-tab
-      zstyle ':fzf-tab:complete:*:*' fzf-preview 'lsd -a --group-directories-first -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd --group-directories-first -1 --color=always $realpath'
+      zstyle ':fzf-tab:complete:ls:*' fzf-preview 'lsd --group-directories-first -1 --color=always $realpath'
       zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
       zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:3:wrap'
       zstyle ':fzf-tab:*' fzf-command fzf
       zstyle ':fzf-tab:*' fzf-pad 4
       zstyle ':fzf-tab:*' fzf-min-height 100
       zstyle ':fzf-tab:*' switch-group ',' '.'
+      #tmux
+      zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+      zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
 
+      # apply to all command
+      zstyle ':fzf-tab:*' popup-min-size 50 8
+      # only apply to 'diff'
+      zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 12
       # magic-enter
       zstyle -s ':zshzoo:magic-enter' command 'lsd'
       zstyle -s ':zshzoo:magic-enter' git-command 'lsd'
-    '';
 
-    initExtraFirst = ''
-
+      # ==========
       # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
       # - The first argument to the function ($1) is the base path to start traversal
       # - See the source code (completion.{bash,zsh}) for the details.
@@ -123,9 +123,9 @@
         shift
 
         case "$command" in
-          cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-          ssh)          fzf --preview 'dig {}'                   "$@" ;;
-          *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
+          cd)           fzf-preview 'lsd --tree --color=always {} | head -200' "$@" ;;
+          ssh)          fzf-preview 'dig {}'                   "$@" ;;
+          *)            fzf-preview "$show_file_or_dir_preview" "$@" ;;
         esac
       }
 
@@ -160,13 +160,12 @@
         "extract"
         "aliases"
         "cp"
-        "globalias"
         "magic-enter"
       ];
     };
 
     antidote = {
-      enable = true; # no for now
+      enable = true;
       plugins = [
         "belak/zsh-utils path:completion"
         "romkatv/zsh-defer"

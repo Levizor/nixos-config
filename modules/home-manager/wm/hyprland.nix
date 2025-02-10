@@ -2,12 +2,14 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   scripts = ./scripts;
-in {
+in
+{
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
     enable = true;
     xwayland.enable = true;
 
@@ -322,7 +324,7 @@ in {
              bind = $mainMod, F2, exec, ${scripts}/gapsoff.sh
 
              workspace=special:telegram, decorate:false, border:false, on-created-empty:$telegram #gapsin:0, gapsout:0
-             workspace=special:terminal, on-created-empty: $terminal tmux
+             workspace=special:terminal, on-created-empty: $terminal tmux attach -t dashboard
              workspace=1, monitor:eDP-1
              workspace=2, monitor:eDP-1
              workspace=3, monitor:eDP-1

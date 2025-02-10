@@ -2,8 +2,12 @@
   description = "NixOS Config";
 
   inputs = {
-    pipewire-screenaudio.url = "github:IceDBorn/pipewire-screenaudio";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    minimal-tmux = {
+      url = "github:niksingh710/minimal-tmux-status";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    pipewire-screenaudio.url = "github:IceDBorn/pipewire-screenaudio";
     stable.url = "github:nixos/nixpkgs/nixos-24.11";
     stylix.url = "github:danth/stylix";
     nixvim = {

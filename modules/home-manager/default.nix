@@ -3,20 +3,20 @@
   pkgs,
   lib,
   inputs,
+  system,
   ...
 }:
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs;
+      inherit inputs system;
     };
-    # useUserPackages = true;
     useGlobalPkgs = true;
     backupFileExtension = "backup";
     users.levizor = {
       imports = [
         ./wm
-        ./zsh/load.nix
+        ./zsh
         ./packages.nix
         ./programs
         ./terminals
