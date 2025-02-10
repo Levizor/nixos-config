@@ -7,7 +7,7 @@
 }:
 {
 
-  imports = [ ./synth-midnight-dark.nix ];
+  imports = [ ./cyberdream.nix ];
   stylix = {
     enable = true;
     targets.qt.enable = true;
