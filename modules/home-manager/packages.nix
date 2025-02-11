@@ -5,6 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
+    vieb
     distrobox
     discord-canary
     hyprland-workspaces-tui

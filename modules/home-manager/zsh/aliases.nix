@@ -15,6 +15,8 @@
 
     adcom = "git commit -am";
 
+    battery = "upower -i $(upower -e | grep BAT) | grep -E 'state|to full|percentage'";
+
     nixconf = "nvim ~/nix/.";
 
     hypr = "nvim ~/nix/modules/home-manager/wm/hyprland.nix";
@@ -38,8 +40,6 @@
     la = "lsd -a --group-directories-first";
 
     ll = "lsd -al --group-directories-first";
-
-    cmatrix = "cmatrix -C blue";
 
     z = "zathura";
 

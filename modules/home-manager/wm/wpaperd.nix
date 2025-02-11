@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   programs.wpaperd = {
     enable = true;
 
@@ -10,7 +11,7 @@
         initial-transition = true;
         transition-time = 1000;
         transition = {
-          doom = {};
+          doom = { };
           # dissolve = { line-width = 0.05;
           #   spread-clr = [0.37 0.51 0.67];
           #   hot-clr = [0.71 0.56 0.68];
@@ -20,7 +21,7 @@
       };
 
       any = {
-        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/Nord/";
+        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/lain";
         mode = lib.mkForce "center";
       };
     };

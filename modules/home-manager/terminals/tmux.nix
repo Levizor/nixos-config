@@ -1,12 +1,4 @@
 { pkgs, inputs, ... }:
-let
-  latest = import (pkgs.fetchFromGitHub {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    rev = "af5d88b95c92d42c7b9fa8405bb9a43ded847e32";
-    hash = "sha256-kxrtJ3/ishxpWENPHfy2JruM+A8x9XT/gnsqNkE1R5Q=";
-  }) { system = "x86_64-linux"; };
-in
 {
   programs.tmux = {
     enable = true;
@@ -23,12 +15,20 @@ in
       bind-key f resize-pane -Z 
     '';
 
-    plugins = with pkgs; [
-      tmuxPlugins.better-mouse-mode
+    plugins = with pkgs.tmuxPlugins; [
+      better-mouse-mode
+      battery
       {
-        plugin = tmuxPlugins.extrakto;
+        plugin = extrakto;
       }
-      { plugin = inputs.minimal-tmux.packages.${pkgs.system}.default; }
+
+      {
+        plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
+        extraConfig = ''
+          bind-key b set-option status
+          set -g @minimal-tmux-status-right "%H:%M"
+        '';
+      }
     ];
 
   };
@@ -42,7 +42,7 @@ in
           main-pane-height: 99%
         panes:
           - focus: true
-          - hyprland-workspaces-tui -t nord
+          - hyprland-workspaces-tui -t dracula
       - window_name: nix
         panes:
           - cd ~/nix; nvim .

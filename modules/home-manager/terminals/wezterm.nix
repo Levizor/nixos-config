@@ -1,9 +1,6 @@
 {
   programs.wezterm = {
-    enable = false;
+    enable = true;
     enableZshIntegration = true;
-    extraConfig = ''
-      config.front_end = "WebGpu";
-    '';
   };
 }

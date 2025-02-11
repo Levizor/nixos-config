@@ -1,11 +1,12 @@
 {
   imports = [
-    # ./alacritty.nix
     ./foot.nix
-    # ./wezterm.nix
     ./tmux.nix
+    # they all consume too much memory :(
+    # ./alacritty.nix
+    ./wezterm.nix
     #./zellij.nix
-    # ./kitty.nix
-    ./rio.nix
+    ./kitty.nix
+    # ./rio.nix
   ];
 }

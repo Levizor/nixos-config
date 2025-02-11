@@ -19,18 +19,18 @@
       };
 
       serif = {
-        package = pkgs.vegur;
-        name = "Vegur";
+        package = pkgs.fira-sans;
+        name = "Fira Sans";
       };
 
       sansSerif = {
-        package = pkgs.texlivePackages.opensans;
-        name = "Opensans";
+        package = pkgs.fira-sans;
+        name = "Fira Sans";
       };
 
       monospace = {
-        package = pkgs.nerd-fonts.fira-mono;
-        name = "FiraMonoNerdFontMono";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Mono";
       };
     };
   };

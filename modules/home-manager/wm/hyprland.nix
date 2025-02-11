@@ -109,7 +109,7 @@ in
              monitor = HDMI-A-1, preferred, auto, 1,# mirror, eDP-1
 
              $browser = floorp
-             $terminal = footclient
+             $terminal = kitty -1
              $telegram = telegram-desktop
              $fileManager = nemo
              $menu = fuzzel
@@ -139,20 +139,20 @@ in
              # binde = Ctrl, J, exec, echo key kp3| dotoolc
 
              bind = $mainMod, Return, exec, $terminal
-             bind = $mainMod SHIFT, Return, exec, $terminal #-o background_opacity=0.4
+             bind = $mainMod SHIFT, Return, exec, $terminal -o # background_opacity=0.4
 
-             bind = $mainMod, A, exec, $terminal -a btop -e ncpamixer
+             bind = $mainMod, A, exec, $terminal --app-id btop ncpamixer
              bind = CTRL_$mainMod, S, exec, nvidia-offload steam
-             bind = $mainMod, U, exec, $terminal -a btop -e btop
-             # bind = $mainMod, KP_Prior, exec, $terminal -e nvim ~/.config/hypr/binds.conf
-             # bind = $mainMod, KP_HOME, exec, $terminal -e nvim ~/.config/hypr/hyprland.conf
-      bind = $mainMod_Alt, p, exec, $terminal -e nvim ~/nix/modules/home-manager/packages.nix
+             bind = $mainMod, U, exec, $terminal --app-id btop  btop
+             # bind = $mainMod, KP_Prior, exec, $terminal nvim ~/.config/hypr/binds.conf
+             # bind = $mainMod, KP_HOME, exec, $terminal nvim ~/.config/hypr/hyprland.conf
+      bind = $mainMod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix
              bind = $mainMod, Q, killactive,
              bind = $mainMod Shift, Q, exec, ${scripts}/forcekill.sh
              bind = $mainMod, KP_Insert, exec, ${scripts}/fixScreenshare.sh
              bind = $mainMod, E, exec, $fileManager --class files
              bind = CTRL_$mainMod, W, exec, $browser
-             bind = $mainMod, C, exec, $terminal -a 'clipse' -e 'clipse'
+             bind = $mainMod, C, exec, $terminal --app-id 'clipse' 'clipse'
              bind = CTRL_$mainMod, P, exec, $player
              bind = $mainMod, T, exec, $telegram
              bind = $mainMod, V, togglefloating,
