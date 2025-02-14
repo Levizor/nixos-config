@@ -5,51 +5,52 @@
 }:
 {
   home.packages = with pkgs; [
-    vieb
-    distrobox
-    discord-canary
-    hyprland-workspaces-tui
-    timg
-    clock-rs
-    nix-prefetch-github
     android-tools
-    krita
-    thunderbird
-    wcalc
-    prismlauncher
+    ani-cli
+    bluetuith
     cava
+    clipse
+    clock-rs
+    cmatrix
+    discord-canary
+    distrobox
     ffmpeg
-    loupe
+    filezilla
     fzf
-    pavucontrol
+    grimblast
+    hyprland-workspaces
+    hyprland-workspaces-tui
+    hyprpicker
+    jetbrains-toolbox
+    keepassxc
+    krita
+    loupe
+    mpv
     ncpamixer
+    nemo
+    networkmanagerapplet
+    nix-prefetch-github
+    obsidian
+    onlyoffice-desktopeditors
+    pavucontrol
+    prismlauncher
+    protonup
+    qbittorrent
+    ripgrep
     telegram-desktop
+    thunderbird
+    timg
+    tlrc
     tree
     ungoogled-chromium
-    clipse
-    nemo
-    mpv
-    grimblast
-    bluetuith
-    ripgrep
-    ani-cli
-    protonup
-    zoom-us
-    hyprpicker
-    youtube-music
     vesktop
-    jetbrains-toolbox
-    networkmanagerapplet
-    keepassxc
-    yt-dlp
-    cmatrix
-    tlrc
-    obsidian
-    qbittorrent
+    vieb
+    wcalc
     whatsie
-    filezilla
-    onlyoffice-desktopeditors
     wireshark
+    youtube-music
+    yt-dlp
+    zoom-us
   ];
   programs = {
     obs-studio = {

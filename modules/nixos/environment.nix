@@ -5,25 +5,23 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    curl
-    vim
-    git
     brightnessctl
-    pulseaudioFull
-    pavucontrol
     cmake
-    wl-clipboard
-    libnotify
-    killall
-    rustup
-    zip
-    unzip
+    curl
     gcc
-    python3
-
+    git
     inputs.nixvim.packages."${system}".default
-
+    killall
+    libnotify
+    pavucontrol
     pkgs.libsForQt5.qt5.qtgraphicaleffects
+    pulseaudioFull
+    python3
+    rustup
+    unzip
+    vim
+    wl-clipboard
+    zip
   ];
   environment.variables = {
     EDITOR = "nvim";
