@@ -13,9 +13,14 @@
     tmuxp.enable = true;
     newSession = true;
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "foot";
+    terminal = "xterm-kitty";
 
     extraConfig = ''
+
+      bind-key C-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
+      bind-key C-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
+      bind -n C-S-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
+      bind -n C-S-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
 
       # Switch between windows using Alt + [number]
       bind -n M-1 select-window -t 1
@@ -28,6 +33,7 @@
       bind -n M-8 select-window -t 8
       bind -n M-9 select-window -t 9
       bind -n M-0 select-window -t 0
+
 
       # Move between windows 
       bind -n C-Left previous-window
@@ -86,8 +92,8 @@
           ''
             # run-shell "\$\{$\{lib.getExe tmuxUpdateScript}}"
             bind-key b set-option status
-            set -g @minimal-tmux-status-right "%H:%M"
-            set -g @minimal-tmux-status-left-extra "#(/home/levizor/Projects/hwt/target/release/hyprland-workspaces-tui plain -pa ⭐)"
+            set -g @minimal-tmux-status-right"#(/home/levizor/Projects/hwt/target/release/hyprland-workspaces-tui plain -pa ⭐)"
+            set -g @minimal-tmux-status-right-extra "%H:%M"
             set -g status-left-length 20
             set -g status-interval 1
           '';
@@ -110,4 +116,20 @@
         panes:
           - cd ~/nix; nvim .
   '';
+
+  home.file.".config/tms/config.toml".text = ''
+    default_session = "scratchpad"
+
+    [[search_dirs]]
+    path = "/home/levizor"
+    depth = 1
+
+    [[search_dirs]]
+    path = "/home/levizor/Projects"
+    depth = 10
+  '';
+
+  home.packages = with pkgs; [
+    tmux-sessionizer
+  ];
 }

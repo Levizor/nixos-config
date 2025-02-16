@@ -17,6 +17,7 @@
     ffmpeg
     filezilla
     fzf
+    gh
     grimblast
     hyprland-workspaces
     hyprland-workspaces-tui

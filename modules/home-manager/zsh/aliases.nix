@@ -3,8 +3,6 @@
     c = "wl-copy";
     p = "wl-paste";
 
-    timg = "timg -ps";
-
     clock = "clock-rs";
 
     cop = "copypath";
