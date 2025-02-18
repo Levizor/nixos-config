@@ -79,23 +79,23 @@
       {
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
         extraConfig =
-          # let
-          #   tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
-          #     while true;
-          #     do
-          #       pgrep tmux &>/dev/null || break
-          #       tmux refresh-client -S;
-          #       sleep 0.2;
-          #     done &
-          #   '';
-          # in
+          let
+            tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
+              while true;
+              do
+                pgrep tmux &>/dev/null || break
+                tmux refresh-client -S;
+                sleep 0.1;
+              done &
+            '';
+          in
           ''
-            # run-shell "\$\{$\{lib.getExe tmuxUpdateScript}}"
             bind-key b set-option status
-            set -g @minimal-tmux-status-right"#(/home/levizor/Projects/hwt/target/release/hyprland-workspaces-tui plain -pa ⭐)"
-            set -g @minimal-tmux-status-right-extra "%H:%M"
+            set -g @minimal-tmux-status-right "%H:%M"
+            set -g @minimal-tmux-status-left-extra "#(/home/levizor/Projects/hwt/target/release/hyprland-workspaces-tui plain -p true)"
             set -g status-left-length 20
             set -g status-interval 1
+            run-shell "$\{${lib.getExe tmuxUpdateScript}}"
           '';
       }
     ];
@@ -111,10 +111,15 @@
           main-pane-height: 99%
         panes:
           - focus: true
-          - hyprland-workspaces-tui -t dracula
       - window_name: nix
         panes:
-          - cd ~/nix; nvim .
+          - cd ~/nix; nvim 
+  '';
+
+  home.file."config/hyprland-workspaces-tui/config.toml".text = ''
+    [plain_text_mode]
+    separator = " "
+    print_once = true
   '';
 
   home.file.".config/tms/config.toml".text = ''

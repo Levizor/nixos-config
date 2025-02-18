@@ -5,6 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
+    waybar
     android-tools
     ani-cli
     bluetuith

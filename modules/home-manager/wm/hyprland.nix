@@ -5,16 +5,36 @@
 }:
 let
   scripts = ./scripts;
+  monitors = [
+    "eDP-1"
+    "HDMI-A-1"
+  ];
 in
 {
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
-    systemd.variables = [ "--all" ];
     enable = true;
+
+    systemd = {
+      variables = [ "--all" ];
+      enableXdgAutostart = true;
+    };
     xwayland.enable = true;
 
     settings = {
-      "$mainMod" = "SUPER";
+      monitor = [
+        "${builtins.elemAt monitors 0}, 1920x1080@60, 0x0, 1,"
+        "${builtins.elemAt monitors 1}, preferred, auto, 1,# mirror, eDP-1"
+      ];
+
+      "$mod" = "SUPER";
+
+      "$browser" = "floorp";
+      "$terminal" = "kitty -1";
+      "$telegram" = "telegram-desktop";
+      "$fileManager" = "nemo";
+      "$menu" = "fuzzel";
+      "$player" = "youtube-music";
 
       env = [
         "XDG_CURRENT_DESKTOP, Hyprland"
@@ -54,9 +74,6 @@ in
         gaps_out = 15;
         border_size = 3;
 
-        # "col.active_border" = "rgba(EEEEFFFF)";
-        # "col.inactive_border" = "rgba(1C254100)";
-
         layout = "dwindle";
       };
 
@@ -95,263 +112,191 @@ in
       };
 
       exec-once = [
-        "lxqt-policykit-agent"
-        "foot --server"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "clipse -listen"
-        # "hyprctl seterror disable"
         "wpaperd"
       ];
+      bind =
+        [
+          # Utils
+          "$mod, Q, killactive,"
+          "$mod, V, togglefloating,"
+          "$mod, P, pseudo, # dwindle"
+          "$mod, F, fullscreen"
+
+          # Terminal launches
+          "$mod, Return, exec, $terminal"
+          "$mod SHIFT, Return, exec, $terminal -o # background_opacity=0.4"
+          "$mod, A, exec, $terminal --app-id btop ncpamixer"
+          "$mod, U, exec, $terminal --app-id btop  btop"
+          "$mod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix"
+
+          # Other application launches
+          "$mod, T, exec, $telegram"
+          "$mod, E, exec, $fileManager --class files"
+          "CTRL_$mod, W, exec, $browser"
+          "$mod, D, exec, $menu"
+          "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
+          "CTRL_$mod, P, exec, $player"
+          ", F10, exec, wl-copy $(hyprpicker)"
+          "$mod, pause, exec, wlogout"
+
+          # Switch wallpapers
+          "$mod, F6, exec, wpaperctl next-wallpaper"
+          "$mod, F4, exec, wpaperctl previous-wallpaper"
+
+          # Screenshots
+          ", Print , exec, grimblast copy ar"
+          "$mod, Print, exec, grimblast copy"
+
+          # Scripts
+          "$mod Shift, Q, exec, ${scripts}/forcekill.sh"
+          "$mod, F1, exec, ${scripts}/performance.sh"
+          "$mod, F2, exec, ${scripts}/gapsoff.sh"
+
+          # switch to specific language
+          # english
+          "bind = $mod_Shift, E, exec, hyprctl switchxkblayout all 0"
+          # ukrainian
+          "bind = $mod_Shift, U, exec, hyprctl switchxkblayout all 1"
+          # russian
+          "bind = $mod_Shift, R, exec, hyprctl switchxkblayout all 2"
+
+          # Volume
+          ",XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
+          "$mod, KP_Up,  exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
+          ",XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
+          "$mod, KP_Down,  exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
+          ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "$mod, KP_Begin, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
+          # Brightness
+          ",XF86MonBrightnessUp , exec, brightnessctl set +10%"
+          ",XF86MonBrightnessDown , exec, brightnessctl set 10%-"
+
+          # Move focus with mod + arrow keys
+          "$mod, left, movefocus, l"
+          "$mod, right, movefocus, r"
+          "$mod, up, movefocus, u"
+          "$mod, down, movefocus, d"
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
+
+          # Example special workspace (scratchpad)
+          "$mod, S, togglespecialworkspace, terminal"
+          "$mod SHIFT, S, movetoworkspace, special:terminal"
+          "$mod, T, togglespecialworkspace, telegram"
+          "$mod SHIFT, T, movetoworkspace, special:telegram"
+          "$mod, W, togglespecialworkspace, browser"
+          "$mod SHIFT, W, movetoworkspace, browser"
+
+          #Move active window in directions
+          "$mod SHIFT, left, movewindow, l"
+          "$mod SHIFT, right, movewindow, r"
+          "$mod SHIFT, up, movewindow, u"
+          "$mod SHIFT, down, movewindow, d"
+          "$mod SHIFT, l, movewindow, r"
+          "$mod SHIFT, h, movewindow, l"
+          "$mod SHIFT, k, movewindow, u"
+          "$mod SHIFT, j, movewindow, d"
+
+        ]
+        ++ (
+          #binds for workspaces
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "$mod, ${toString ws}, workspace, ${toString ws}"
+                "$mod SHIFT, ${toString ws}, movetoworkspace, ${toString ws}"
+                "$mod Alt, ${toString ws}, focusworkspaceoncurrentmonitor, ${toString ws} "
+              ]
+            ) 9
+          )
+        );
+
+      bindm = [
+        # Move/resize windows with mod + LMB/RMB and dragging
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
+
+      workspace =
+        [
+          "w[tv1], gapsout:0, gapsin:0"
+          "f[1], gapsout:0, gapsin:0"
+          "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
+          "special:terminal, border:false, on-created-empty:$terminal tmuxp load scratchpad, gapsin:0, gapsout:0"
+          "special:browser, on-created-empty:$browser, gapsin:0, gapsout:0"
+        ]
+        ++ (
+          # connect workspaces to monitors
+          builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "${
+                  if ws <= 5 then
+                    "${toString ws}, monitor:${builtins.elemAt monitors 0}"
+                  else
+                    "${toString ws}, monitor ${builtins.elemAt monitors 1}"
+                }"
+              ]
+            ) 9
+          )
+        );
+
+      windowrulev2 = [
+        "bordersize 0, floating:0, onworkspace:w[tv1]"
+        "rounding 0, floating:0, onworkspace:w[tv1]"
+        "bordersize 0, floating:0, onworkspace:f[1]"
+        "rounding 0, floating:0, onworkspace:f[1]"
+        "suppressevent maximize, class:.* # You'll probably like this."
+
+        "workspace special:telegram, class:(org.telegram.desktop.*)"
+
+        "size 95% 95%, class:(btop)"
+        "float, class:(btop)"
+
+        "float, class:(files)"
+        "size 60% 60%, centered, title:(.*Files)$"
+
+        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+        "noanim,class:^(xwaylandvideobridge)$"
+        "noinitialfocus,class:^(xwaylandvideobridge)$"
+        "maxsize 1 1,class:^(xwaylandvideobridge)$"
+        "noblur,class:^(xwaylandvideobridge)$"
+
+        "float, class:(clipse)"
+        "size 622 652, class:(clipse)"
+      ];
+
     };
 
     extraConfig = ''
-             monitor = eDP-1, 1920x1080@60, 0x0, 1,
-             monitor = HDMI-A-1, preferred, auto, 1,# mirror, eDP-1
-
-             $browser = floorp
-             $terminal = kitty -1
-             $telegram = telegram-desktop
-             $fileManager = nemo
-             $menu = fuzzel
-
-             ####################
-             ### KEYBINDINGSS ###
-             ####################
-
-             $mainMod = SUPER
-
-         #makes waybar with workspaces visible when pressing key
-         # bindt = , SUPER_L, exec, killall  -SIGUSR1 .waybar-wrapped
-         # bindrt = $mainMod, SUPER_L, exec, killall  -SIGUSR1 .waybar-wrapped
-             # bind = $mainMod, Tab, exec, killall -SIGUSR1 .waybar-wrapped
-
-             bind = $mainMod, KP_END, exec, killall waybar || waybar
-
-         # bind = SUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy
-
-             # binde = SUPER, H, exec, echo key kp4| dotoolc
-             # binde = SUPER, J, exec, echo key kp2| dotoolc
-             # binde = SUPER, K, exec, echo key kp8| dotoolc
-             # binde = SUPER, L, exec, echo key kp6| dotoolc
-             # binde = SUPER, U, exec, echo key kp9| dotoolc
-             # binde = SUPER, D, exec, echo key kp3| dotoolc
-             # binde = Ctrl, K, exec, echo key kp9| dotoolc
-             # binde = Ctrl, J, exec, echo key kp3| dotoolc
-
-             bind = $mainMod, Return, exec, $terminal
-             bind = $mainMod SHIFT, Return, exec, $terminal -o # background_opacity=0.4
-
-             bind = $mainMod, A, exec, $terminal --app-id btop ncpamixer
-             bind = CTRL_$mainMod, S, exec, nvidia-offload steam
-             bind = $mainMod, U, exec, $terminal --app-id btop  btop
-             # bind = $mainMod, KP_Prior, exec, $terminal nvim ~/.config/hypr/binds.conf
-             # bind = $mainMod, KP_HOME, exec, $terminal nvim ~/.config/hypr/hyprland.conf
-      bind = $mainMod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix
-             bind = $mainMod, Q, killactive,
-             bind = $mainMod Shift, Q, exec, ${scripts}/forcekill.sh
-             bind = $mainMod, KP_Insert, exec, ${scripts}/fixScreenshare.sh
-             bind = $mainMod, E, exec, $fileManager --class files
-             bind = CTRL_$mainMod, W, exec, $browser
-             bind = $mainMod, C, exec, $terminal --app-id 'clipse' 'clipse'
-             bind = CTRL_$mainMod, P, exec, $player
-             bind = $mainMod, T, exec, $telegram
-             bind = $mainMod, V, togglefloating,
-             bind = $mainMod, D, exec, $menu
-             bind = $mainMod, P, pseudo, # dwindle
-             bind = $mainMod, B, togglesplit, # dwindle
-             bind = $mainMod, F, fullscreen
-             bind =  , Print , exec, grimblast copy area
-             bind = $mainMod, Print, exec, grimblast copy output screen
-             bind = , scroll_lock , exec, pkill -n -SIGUSR1 waybar
-             bind = , F10, exec, wl-copy $(hyprpicker)
-
-             bind = $mainMod, N, swapactiveworkspaces, eDP-1 HDMI-A-1
-             bind = $mainMod, C, centerwindow
-
-         #groups
-             bind = $mainMod, W, togglegroup
-
-         #switch to specific language
-             # english
-             bind = $mainMod_Shift, E, exec, hyprctl switchxkblayout all 0
-             # ukrainian
-             bind = $mainMod_Shift, U, exec, hyprctl switchxkblayout all 1
-             # russian
-             bind = $mainMod_Shift, R, exec, hyprctl switchxkblayout all 2
-
-         #Volume and backlight
-             bind = ,XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +10%
-             bind = $mainMod, KP_Up,  exec, pactl set-sink-volume @DEFAULT_SINK@ +10%
-             bind = ,XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -10%
-             bind = $mainMod, KP_Down,  exec, pactl set-sink-volume @DEFAULT_SINK@ -10%
-             bind = , XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
-             bind = $mainMod, KP_Begin, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-             bind = ,XF86MonBrightnessUp , exec, brightnessctl set +10%
-             bind = ,XF86MonBrightnessDown , exec, brightnessctl set 10%-
-
-         #Notifitations
-         #bind =
-
-             # bind = , F12, exec, nmcli device wifi
-
-         # Move focus with mainMod + arrow keys
-             bind = $mainMod, left, movefocus, l
-             bind = $mainMod, right, movefocus, r
-             bind = $mainMod, up, movefocus, u
-             bind = $mainMod, down, movefocus, d
-
-             bind = $mainMod, h, movefocus, l
-             bind = $mainMod, l, movefocus, r
-             bind = $mainMod, k, movefocus, u
-             bind = $mainMod, j, movefocus, d
-
-             # bind = $mainMod, grave, submap, Keys
-             # submap = Keys
-             # bind = $mainMod, grave, submap, reset
-             # submap = reset
-
-         # will switch to a submap called resize
-             bind=$mainMod,R,submap,resize
-
-         # will start a submap called "resize"
-             submap=resize
-
-         # sets repeatable binds for resizing the active window
-             binde=,right,resizeactive,0 0
-             binde=,left,resizeactive,-10 0
-             binde=,up,resizeactive,0 -10
-             binde=,down,resizeactive,0 10
-             binde=,l,resizeactive,30 0
-             binde=,h,resizeactive,-30 0
-             binde=,k,resizeactive,0 -30
-             binde=,j,resizeactive,0 30
-             bind=,Escape,submap,reset
-             bind=,Return,submap, reset
-             bind=$mainMod,r,submap, reset
-
-             submap=reset
-
-
-             bind=$mainMod, pause, exec, wlogout
-             # submap=System
-             #
-             #
-             # bind = shift, s, exec, systemctl poweroff -i
-             # bind = , r, exec, systemctl reboot
-             # bind = , h, exec, systemctl hibernate
-             # bind = , e, exit
-             # bind = , l, exec, hyprctl dispatch submap reset & hyprlock
-             #
-             # bind = , escape, submap, reset
-             #
-             # submap=reset
-
-         # keybinds further down will be global again...
-         #bind = $mainMod, Tab,cyclenext,          # change focus to another window
-         #bind = $mainMod, Tab,bringactivetotop,   # bring it to the top
-
-         # Switch workspaces with mainMod + [0-9]
-             bind = $mainMod, 1, workspace, 1
-             bind = $mainMod, 2, workspace, 2
-             bind = $mainMod, 3, workspace, 3
-             bind = $mainMod, 4, workspace, 4
-             bind = $mainMod, 5, workspace, 5
-             bind = $mainMod, 6, workspace, 6
-             bind = $mainMod, 7, workspace, 7
-             bind = $mainMod, 8, workspace, 8
-             bind = $mainMod, 9, workspace, 9
-             bind = $mainMod, 0, workspace, 10
-
-         #Move active window in directions
-             bind = $mainMod SHIFT, left, movewindow, l
-             bind = $mainMod SHIFT, right, movewindow, r
-             bind = $mainMod SHIFT, up, movewindow, u
-             bind = $mainMod SHIFT, down, movewindow, d
-             bind = $mainMod SHIFT, l, movewindow, r
-             bind = $mainMod SHIFT, h, movewindow, l
-             bind = $mainMod SHIFT, k, movewindow, u
-             bind = $mainMod SHIFT, j, movewindow, d
-
-
-         # Move active window to a workspace with mainMod + SHIFT + [0-9]
-             bind = $mainMod SHIFT, 1, movetoworkspace, 1
-             bind = $mainMod SHIFT, 2, movetoworkspace, 2
-             bind = $mainMod SHIFT, 3, movetoworkspace, 3
-             bind = $mainMod SHIFT, 4, movetoworkspace, 4
-             bind = $mainMod SHIFT, 5, movetoworkspace, 5
-             bind = $mainMod SHIFT, 6, movetoworkspace, 6
-             bind = $mainMod SHIFT, 7, movetoworkspace, 7
-             bind = $mainMod SHIFT, 8, movetoworkspace, 8
-             bind = $mainMod SHIFT, 9, movetoworkspace, 9
-             bind = $mainMod SHIFT, 0, movetoworkspace, 10
-
-         #moveworkspacetocurrentmonitor
-             bind =  Win, 1, focusworkspaceoncurrentmonitor, 1
-             bind =  Win, 2, focusworkspaceoncurrentmonitor, 2
-             bind =  Win, 3, focusworkspaceoncurrentmonitor, 3
-             bind =  Win, 4, focusworkspaceoncurrentmonitor, 4
-             bind =  Win, 5, focusworkspaceoncurrentmonitor, 5
-             bind =  Win, 6, focusworkspaceoncurrentmonitor, 6
-             bind =  Win, 7, focusworkspaceoncurrentmonitor, 7
-             bind =  Win, 8, focusworkspaceoncurrentmonitor, 8
-             bind =  Win, 9, focusworkspaceoncurrentmonitor, 9
-             bind =  Win, 0, focusworkspaceoncurrentmonitor, 10
-
-             bind = $mainMod, F6, exec, wpaperctl next-wallpaper
-             bind = $mainMod, F4, exec, wpaperctl previous-wallpaper
-
-         #switch layouts
-             bind = $mainMod, I, exec, ${scripts}/toggleLayout
-
-         # Example special workspace (scratchpad)
-             bind = $mainMod, S, togglespecialworkspace, terminal
-             bind = $mainMod SHIFT, S, movetoworkspace, special:terminal
-             bind = $mainMod, T, togglespecialworkspace, telegram
-             bind = $mainMod SHIFT, T, movetoworkspace, special:telegram
-
-         # Scroll through existing workspaces with mainMod + scroll
-             bind = $mainMod, mouse_down, workspace, e+1
-             bind = $mainMod, mouse_up, workspace, e-1
-
-         # Move/resize windows with mainMod + LMB/RMB and dragging
-             bindm = $mainMod, mouse:272, movewindow
-             bindm = $mainMod, mouse:273, resizewindow
-
-         #kill animations and other stuff for performance
-             bind = $mainMod, F1, exec, ${scripts}/performance.sh
-             bind = $mainMod, F2, exec, ${scripts}/gapsoff.sh
-
-             workspace=special:telegram, decorate:false, border:false, on-created-empty:$telegram #gapsin:0, gapsout:0
-             workspace=special:terminal, on-created-empty: $terminal tmuxp load scratchpad 
-             workspace=1, monitor:eDP-1
-             workspace=2, monitor:eDP-1
-             workspace=3, monitor:eDP-1
-             workspace=4, monitor:eDP-1
-             workspace=5, monitor:eDP-1
-             workspace=6, monitor:HDMI-A-1
-             workspace=7, monitor:HDMI-A-1
-             workspace=8, monitor:HDMI-A-1
-             workspace=9, monitor:HDMI-A-1
-             workspace=10, monitor:HDMI-A-1
-
-         # windowrulev2 =  centered, floating:1
-             windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
-             windowrulev2 = workspace special:telegram, class:(org.telegram.desktop.*)
-             windowrulev2 =   size 95% 95%, class:(btop)
-             windowrulev2 =   float, class:(btop)
-             windowrulev2 = float, class:(files)
-             windowrulev2 = size 60% 60%, centered, title:(.*Files)$
-         # windowrulev2 = size 50% 50%, centered, floating:1
-             windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
-         # windowrulev2 = opacity 0.89 override 0.89 override,class:(floorp)
-             windowrulev2 = noanim,class:^(xwaylandvideobridge)$
-             windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
-             windowrulev2 = maxsize 1 1,class:^(xwaylandvideobridge)$
-             windowrulev2 = noblur,class:^(xwaylandvideobridge)$
-             windowrulev2 = float, class:(clipse)
-             windowrulev2 = size 622 652, class:(clipse)
-
+      # Resize submap
+          bind=$mod,R,submap,resize
+          submap=resize
+          binde=,right,resizeactive,0 0
+          binde=,left,resizeactive,-10 0
+          binde=,up,resizeactive,0 -10
+          binde=,down,resizeactive,0 10
+          binde=,l,resizeactive,30 0
+          binde=,h,resizeactive,-30 0
+          binde=,k,resizeactive,0 -30
+          binde=,j,resizeactive,0 30
+          bind=,Escape,submap,reset
+          bind=,Return,submap, reset
+          bind=$mod,r,submap, reset
+          submap=reset
     '';
   };
 }
