@@ -80,22 +80,14 @@
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
         extraConfig =
           let
-            tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
-              while true;
-              do
-                pgrep tmux &>/dev/null || break
-                tmux refresh-client -S;
-                sleep 0.1;
-              done &
-            '';
+            hyprland-workspaces-tui = pkgs.hyprland-workspaces-tui;
           in
           ''
             bind-key b set-option status
             set -g @minimal-tmux-status-right "%H:%M"
-            set -g @minimal-tmux-status-left-extra "#(/home/levizor/Projects/hwt/target/release/hyprland-workspaces-tui plain -p true)"
+            set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
             set -g status-left-length 20
             set -g status-interval 1
-            run-shell "$\{${lib.getExe tmuxUpdateScript}}"
           '';
       }
     ];

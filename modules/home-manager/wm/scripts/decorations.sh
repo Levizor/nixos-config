@@ -1,15 +1,13 @@
 #!/usr/bin/env sh
-HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
+HYPRGAMEMODE=$(hyprctl getoption decoration:blur:enabled | awk 'NR==1{print $2}')
 if [ "$HYPRGAMEMODE" = 1 ]; then
   hyprctl --batch "\
-        keyword animations:enabled 0;\
         keyword decoration:drop_shadow 0;\
         keyword decoration:blur:enabled 0;"
-  notify-send -t 1000 Pretties: Off
+  notify-send -t 1000 Decorations: Off
   exit
 fi
 hyprctl --batch "\
-        keyword animations:enabled 1;\
         keyword decoration:drop_shadow 1;\
         keyword decoration:blur:enabled 1;"
-notify-send -t 1000 Pretties: On
+notify-send -t 1000 Decorations: On

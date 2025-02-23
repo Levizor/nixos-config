@@ -5,11 +5,11 @@
 }:
 {
   home.packages = with pkgs; [
-    waybar
     android-tools
     ani-cli
     bluetuith
     cava
+    chafa
     clipse
     clock-rs
     cmatrix
@@ -25,6 +25,7 @@
     hyprpicker
     jetbrains-toolbox
     keepassxc
+    kew
     krita
     loupe
     mpv
@@ -47,6 +48,7 @@
     ungoogled-chromium
     vesktop
     vieb
+    waybar
     wcalc
     whatsie
     wireshark

@@ -111,11 +111,25 @@ in
       master = {
       };
 
-      exec-once = [
-        # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "clipse -listen"
-        "wpaperd"
-      ];
+      exec-once =
+        let
+
+          tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
+            while true;
+            do
+              pgrep tmux &>/dev/null || break
+              tmux refresh-client -S;
+              sleep 0.1;
+            done &
+          '';
+        in
+        [
+          # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+          "${lib.getExe tmuxUpdateScript}"
+          "clipse -listen"
+          "wpaperd"
+        ];
+
       bind =
         [
           # Utils
@@ -146,13 +160,14 @@ in
           "$mod, F4, exec, wpaperctl previous-wallpaper"
 
           # Screenshots
-          ", Print , exec, grimblast copy ar"
+          ", Print , exec, grimblast copy area"
           "$mod, Print, exec, grimblast copy"
 
           # Scripts
           "$mod Shift, Q, exec, ${scripts}/forcekill.sh"
-          "$mod, F1, exec, ${scripts}/performance.sh"
-          "$mod, F2, exec, ${scripts}/gapsoff.sh"
+          "$mod, F1, exec, ${scripts}/decorations.sh"
+          "$mod, F2, exec, ${scripts}/animations.sh"
+          "$mod, F3, exec, ${scripts}/gapsoff.sh"
 
           # switch to specific language
           # english
