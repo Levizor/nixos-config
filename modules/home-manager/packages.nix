@@ -9,7 +9,6 @@
     ani-cli
     bluetuith
     cava
-    chafa
     clipse
     clock-rs
     cmatrix
@@ -25,7 +24,6 @@
     hyprpicker
     jetbrains-toolbox
     keepassxc
-    kew
     krita
     loupe
     mpv
