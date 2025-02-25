@@ -84,7 +84,13 @@
           }
         ],
         "final_space": true,
-        "version": 3
+        "version": 3,
+
+        "transient_prompt": {
+          "background": "transparent",
+          "foreground": "#ffffff",
+          "template": "> "
+        }
       }
     '';
   };
