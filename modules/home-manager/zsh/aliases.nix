@@ -13,6 +13,8 @@
 
     def = "nh os switch -H default";
 
+    min = "nh os switch -H minimal";
+
     adcom = "git commit -am";
 
     battery = "upower -i $(upower -e | grep BAT) | grep -E 'state|to full|percentage'";

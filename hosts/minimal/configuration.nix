@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  config,
   ...
 }:
 {
@@ -8,6 +9,7 @@
     allowUnfree = true;
     allowUnsupportedSystem = true;
   };
+
   imports = [
     ../../modules/nixos
     ./hardware-configuration.nix
@@ -19,4 +21,7 @@
     ../../modules/home-manager
     inputs.home-manager.nixosModules.home-manager
   ];
+  home-manager.extraSpecialArgs = {
+    inherit (config) myopts;
+  };
 }

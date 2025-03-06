@@ -31,7 +31,6 @@
       ...
     }@inputs:
     let
-      system = "x86_64-linux";
       mylib = import ./mylib/default.nix { inherit inputs; };
     in
     with mylib;
@@ -40,5 +39,7 @@
         default = mkSystem ./hosts/default/configuration.nix;
         minimal = mkSystem ./hosts/minimal/configuration.nix;
       };
+
+      options = ./modules/options;
     };
 }

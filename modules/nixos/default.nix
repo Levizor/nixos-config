@@ -1,23 +1,18 @@
 {
-  config,
   lib,
   pkgs,
-  inputs,
+  myopts,
+  config,
   ...
 }:
+let
+  myopts = config.myopts;
+in
 {
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-    permittedInsecurePackages = [
-      # "floorp-unwrapped-11.19.0"
-      "freeimage-unstable-2021-11-01"
-    ];
-  };
   imports = [
     ./user.nix
     ./environment.nix
@@ -67,35 +62,38 @@
     };
   };
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-    ];
+  programs = {
+    zsh = {
+      enable = true;
+      #required to use zsh over bash when using nix-shell
+      promptInit = ''
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+      '';
+    };
+
+    hyprland = {
+      enable = true;
+    };
+
+    steam = {
+      enable = myopts.steam;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
+
+    gamemode.enable = myopts.steam;
+    wireshark.enable = myopts.additionalPackages;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+      ];
+    };
+
   };
-
-  #hyprland
-  programs.hyprland = {
-    enable = true;
-  };
-
-  # programs.hyprlock.enable = true;
-
-  programs.wireshark.enable = true;
-
-  programs.zsh.enable = true;
-  #required to use zsh over bash when using nix-shell
-  programs.zsh.promptInit = ''
-    ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
-  '';
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
-  };
-  programs.gamemode.enable = true;
 
   system.stateVersion = "24.11";
 }

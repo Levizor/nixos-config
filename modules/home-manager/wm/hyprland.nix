@@ -43,7 +43,7 @@ in
       ];
 
       input = {
-        kb_layout = "us,ua,ru";
+        kb_layout = "us,ua,ru,pl";
         # kb_variant = ", ua";
         kb_options = "grp:alt_space_toggle";
 
@@ -180,6 +180,8 @@ in
           "bind = $mod_Shift, U, exec, hyprctl switchxkblayout all 1"
           # russian
           "bind = $mod_Shift, R, exec, hyprctl switchxkblayout all 2"
+          # polish
+          "bind = $mod_Shift, P, exec, hyprctl switchxkblayout all 3"
 
           # Volume
           ",XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"

@@ -11,8 +11,8 @@ rec {
         inherit inputs outputs mylib;
       };
       modules = [
+        outputs.options
         config
-        outputs.nixosModules.default
       ];
     };
 

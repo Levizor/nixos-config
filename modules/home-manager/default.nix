@@ -2,16 +2,16 @@
   config,
   pkgs,
   lib,
+  outputs,
   inputs,
-  system,
+  myopts,
   ...
 }:
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs system;
+      inherit inputs outputs myopts;
     };
-    useGlobalPkgs = true;
     backupFileExtension = "backup";
     users.levizor = {
       imports = [
@@ -39,21 +39,6 @@
       };
 
       qt.enable = true;
-
-      # qt = {
-      #   enable = true;
-      #   platformTheme.name = "qtct";
-      #   style = {
-      #     name = "kvantum";
-      #   };
-      # };
-      # xdg.configFile."Kvantum/kvantum.kvconfig".source =
-      #   (pkgs.formats.ini { }).generate "kvantum.kvconfig"
-      #     {
-      #       General.theme = "Utterly-Nord-Solid";
-      #     };
-      # xdg.configFile."Kvantum/Utterly-Nord-Solid".source =
-      #   "${pkgs.utterly-nord-plasma}/share/Kvantum/Utterly-Nord-Solid";
     };
   };
 }

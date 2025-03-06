@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  config,
   ...
 }:
 {
@@ -8,13 +9,22 @@
     allowUnfree = true;
     allowUnsupportedSystem = true;
   };
+  myopts.additionalPackages = true;
+  myopts.steam = true;
+
   imports = [
     ../../modules/nixos
+
     ./hardware-configuration.nix
     ./disko-config.nix
     inputs.disko.nixosModules.disko
-    ./home.nix
     inputs.stylix.nixosModules.stylix
     ../../modules/stylix
+
+    ../../modules/home-manager
+    inputs.home-manager.nixosModules.home-manager
   ];
+  home-manager.extraSpecialArgs = {
+    inherit (config) myopts;
+  };
 }

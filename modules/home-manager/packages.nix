@@ -1,61 +1,64 @@
 {
   inputs,
+  lib,
   pkgs,
+  myopts,
   ...
 }:
 {
-  home.packages = with pkgs; [
-    xdragon
-    teams-for-linux
-    android-tools
-    ani-cli
-    bluetuith
-    cava
-    clipse
-    clock-rs
-    cmatrix
-    discord-canary
-    distrobox
-    ffmpeg
-    filezilla
-    fzf
-    gh
-    grimblast
-    hyprland-workspaces
-    hyprland-workspaces-tui
-    hyprpicker
-    jetbrains-toolbox
-    keepassxc
-    krita
-    loupe
-    mpv
-    ncpamixer
-    nemo
-    networkmanagerapplet
-    nix-prefetch-github
-    obsidian
-    onlyoffice-desktopeditors
-    pavucontrol
-    prismlauncher
-    protonup
-    qbittorrent
-    ripgrep
-    telegram-desktop
-    thunderbird
-    timg
-    tlrc
-    tree
-    ungoogled-chromium
-    vesktop
-    vieb
-    waybar
-    wcalc
-    whatsie
-    wireshark
-    youtube-music
-    yt-dlp
-    zoom-us
-  ];
+  nixpkgs.config.allowUnfree = true;
+  home.packages =
+    with pkgs;
+    [
+      xdragon
+      bluetuith
+      cava
+      clipse
+      clock-rs
+      cmatrix
+      ffmpeg
+      fzf
+      grimblast
+      hyprpicker
+      keepassxc
+      loupe
+      mpv
+      ncpamixer
+      networkmanagerapplet
+      nix-prefetch-github
+      pavucontrol
+      ripgrep
+      telegram-desktop
+      tlrc
+      tree
+    ]
+    ++ lib.optionals myopts.additionalPackages [
+      zoom-us
+      protonup
+      yt-dlp
+      youtube-music
+      ungoogled-chromium
+      vesktop
+      thunderbird
+      timg
+      obsidian
+      onlyoffice-desktopeditors
+      filezilla
+      qbittorrent
+      whatsie
+      wcalc
+      teams-for-linux
+      android-tools
+      ani-cli
+      discord-canary
+      distrobox
+      gh
+      hyprland-workspaces-tui
+      jetbrains-toolbox
+      krita
+      prismlauncher
+      # wireshark
+    ];
   programs = {
     obs-studio = {
       enable = true;
