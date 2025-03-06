@@ -17,7 +17,6 @@
     pkgs.libsForQt5.qt5.qtgraphicaleffects
     pulseaudioFull
     python3
-    rustup
     unzip
     vim
     wl-clipboard
@@ -26,6 +25,7 @@
   environment.variables = {
     EDITOR = "nvim";
   };
+  programs.nano.enable = false;
   virtualisation.waydroid.enable = true;
   virtualisation.docker = {
     enable = true;

@@ -108,7 +108,7 @@
           - cd ~/nix; nvim 
   '';
 
-  home.file."config/hyprland-workspaces-tui/config.toml".text = ''
+  home.file.".config/hyprland-workspaces-tui/config.toml".text = ''
     [plain_text_mode]
     separator = " "
     print_once = true

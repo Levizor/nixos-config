@@ -81,14 +81,14 @@ in
         rounding = 5;
 
         blur = {
-          enabled = true;
+          enabled = false;
           size = 3;
           passes = 3;
         };
       };
 
       animations = {
-        enabled = true;
+        enabled = false;
 
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
 
@@ -131,6 +131,10 @@ in
         ];
 
       bind =
+        let
+          screenshotDir = "${builtins.getEnv "HOME"}/Pictures/Screenshots";
+          home.file."Pictures/Screenshots/".exists = true;
+        in
         [
           # Utils
           "$mod, Q, killactive,"
@@ -161,7 +165,7 @@ in
 
           # Screenshots
           ", Print , exec, grimblast copy area"
-          "$mod, Print, exec, grimblast copy"
+          "$mod, Print, exec, grimblast copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
 
           # Scripts
           "$mod Shift, Q, exec, ${scripts}/forcekill.sh"
@@ -205,7 +209,7 @@ in
           "$mod, T, togglespecialworkspace, telegram"
           "$mod SHIFT, T, movetoworkspace, special:telegram"
           "$mod, W, togglespecialworkspace, browser"
-          "$mod SHIFT, W, movetoworkspace, browser"
+          "$mod SHIFT, W, movetoworkspace, special:browser"
 
           #Move active window in directions
           "$mod SHIFT, left, movewindow, l"
