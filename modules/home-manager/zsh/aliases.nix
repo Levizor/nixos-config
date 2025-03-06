@@ -3,6 +3,8 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    dad = "xdragon -a -x";
+
     clock = "clock-rs";
 
     cop = "copypath";

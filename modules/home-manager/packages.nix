@@ -5,6 +5,8 @@
 }:
 {
   home.packages = with pkgs; [
+    xdragon
+    teams-for-linux
     android-tools
     ani-cli
     bluetuith
