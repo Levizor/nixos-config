@@ -9,8 +9,11 @@
     allowUnfree = true;
     allowUnsupportedSystem = true;
   };
-  myopts.additionalPackages = true;
-  myopts.steam = true;
+
+  myopts = {
+    additionalPackages = true;
+    steam = true;
+  };
 
   imports = [
     ../../modules/nixos
@@ -24,6 +27,7 @@
     ../../modules/home-manager
     inputs.home-manager.nixosModules.home-manager
   ];
+
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;
   };

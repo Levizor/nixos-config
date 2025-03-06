@@ -6,6 +6,7 @@
 {
   environment = {
     systemPackages = with pkgs; [
+      # libsForQt5.qt5.qtgraphicaleffects
       brightnessctl
       cmake
       curl
@@ -15,7 +16,6 @@
       killall
       libnotify
       pavucontrol
-      # pkgs.libsForQt5.qt5.qtgraphicaleffects
       pulseaudioFull
       python3
       unzip
