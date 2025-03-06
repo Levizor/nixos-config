@@ -37,13 +37,6 @@
       nixosConfigurations = {
         default = nixpkgs.lib.nixosSystem {
           modules = [
-            (
-              { pkgs, modulesPath, ... }:
-              {
-                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
-                networking.wireless.enable = false;
-              }
-            )
             ./hosts/default/configuration.nix
           ];
           specialArgs = {
