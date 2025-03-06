@@ -11,7 +11,7 @@
 
     cf = "copyfile";
 
-    def = "nh os switch -H default";
+    lap = "nh os switch -H laptop";
 
     min = "nh os switch -H minimal";
 

@@ -36,7 +36,7 @@
     with mylib;
     {
       nixosConfigurations = {
-        default = mkSystem ./hosts/default/configuration.nix;
+        laptop = mkSystem ./hosts/laptop/configuration.nix;
         minimal = mkSystem ./hosts/minimal/configuration.nix;
       };
 
