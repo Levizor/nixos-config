@@ -71,7 +71,7 @@
           "userChrome.centered.urlbar" = true;
           "userChrome.urlView.always_show_page_actions" = true;
           "floorp.tabsleep.enabled" = true;
-          "floorp.tabsleep.tabTimeoutMinutes" = 5;
+          "floorp.tabsleep.tabTimeoutMinutes" = 20;
           "toolkit.tabbox.switchByScrolling" = true;
           "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
           "privacy.globalprivacycontrol.enabled" = true;

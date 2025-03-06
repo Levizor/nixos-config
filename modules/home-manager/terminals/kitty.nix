@@ -26,6 +26,7 @@
       map kitty_mod+down neighboring_window bottom
       map kitty_mod+right neighboring_window right
       map kitty_mod+up neighboring_window top
+      map kitty_mod+a>0 remote_control set-background-opacity 0
     '';
   };
 }

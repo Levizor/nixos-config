@@ -5,6 +5,7 @@
 }:
 {
   home.packages = with pkgs; [
+    teams-for-linux
     android-tools
     ani-cli
     bluetuith
