@@ -32,17 +32,13 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      mylib = import ./mylib/default.nix { inherit inputs; };
     in
+    with mylib;
     {
       nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./hosts/default/configuration.nix
-          ];
-          specialArgs = {
-            inherit inputs self system;
-          };
-        };
+        default = mkSystem ./hosts/default/configuration.nix;
+        minimal = mkSystem ./hosts/minimal/configuration.nix;
       };
     };
 }
