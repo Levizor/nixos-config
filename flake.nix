@@ -38,6 +38,7 @@
       nixosConfigurations = {
         laptop = mkSystem ./hosts/laptop/configuration.nix;
         minimal = mkSystem ./hosts/minimal/configuration.nix;
+        live-iso = mkSystem ./hosts/live-iso/configuration.nix;
       };
 
       options = ./modules/options;
