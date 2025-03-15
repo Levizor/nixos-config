@@ -8,12 +8,6 @@
       "ru"
     ];
 
-    package =
-      with pkgs;
-      (floorp.override {
-        nativeMessagingHosts = [ inputs.pipewire-screenaudio.packages.${pkgs.system}.default ];
-      });
-
     profiles = {
       profile_0 = {
         id = 0;
@@ -92,6 +86,10 @@
       SearchBar = "unified";
 
       ExtensionSettings = {
+        "deArrow@ajay.app" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
+          installation_mode = "normal_installed";
+        };
         "uBlock0@raymondhill.net" = {
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "normal_installed";
