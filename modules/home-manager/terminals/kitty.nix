@@ -7,7 +7,7 @@
 
     settings = {
       dynamic_background_opacity = true;
-      disable_ligutre = "cursor";
+      disable_ligatures = "cursor";
       cursor_trail = 50;
       scrollback_pager = "bat";
       scrollback_pager_history_size = 10;
