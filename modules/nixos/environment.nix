@@ -30,9 +30,9 @@
 
   programs.nano.enable = false;
   virtualisation = {
-    waydroid.enable = true;
-    docker = {
-      enable = true;
-    };
+    # waydroid.enable = true;
+    # docker = {
+    #   enable = true;
+    # };
   };
 }
