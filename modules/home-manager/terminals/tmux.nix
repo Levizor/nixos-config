@@ -71,7 +71,7 @@
 
     plugins = with pkgs.tmuxPlugins; [
       better-mouse-mode
-      battery
+
       {
         plugin = extrakto;
       }
@@ -84,7 +84,7 @@
           in
           ''
             bind-key b set-option status
-            set -g @minimal-tmux-status-right "%H:%M"
+            set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
             set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
             set -g status-left-length 20
             set -g status-interval 1
