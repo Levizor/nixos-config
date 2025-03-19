@@ -33,7 +33,8 @@
       tree
     ]
     ++ lib.optionals myopts.additionalPackages [
-      zoom-us
+      teams-for-linux
+      cargo
       protonup
       yt-dlp
       youtube-music
@@ -50,13 +51,12 @@
       teams-for-linux
       android-tools
       ani-cli
-      discord-canary
       distrobox
-      gh
       hyprland-workspaces-tui
+      tray-tui
       jetbrains-toolbox
       krita
-      prismlauncher
+      # prismlauncher
       # wireshark
     ];
   programs = {
