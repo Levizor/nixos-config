@@ -10,6 +10,8 @@
   home.packages =
     with pkgs;
     [
+      # gimp
+      github-cli
       xdragon
       bluetuith
       cava
