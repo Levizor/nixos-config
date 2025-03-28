@@ -108,6 +108,24 @@
           - cd ~/nix; nvim 
   '';
 
+  home.file.".tmuxp/pw.yaml".text = ''
+    session_name: pw
+    windows:
+      - window_name: nvim
+        layout: main-horizontal
+        options:
+          main-pane-height: 99%
+        panes:
+          - cd ~/Projects/pw/; nvim
+      - window_name: server
+        shell_command_before:
+          - cd ~/Projects/pw/
+        panes:
+          - shell_command:
+              - nohup floorp http://localhost:1111
+              - zola serve
+  '';
+
   home.file.".config/hyprland-workspaces-tui/config.toml".text = ''
     [plain_text_mode]
     separator = " "
