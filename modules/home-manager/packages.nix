@@ -35,6 +35,7 @@
       tree
     ]
     ++ lib.optionals myopts.additionalPackages [
+      zola
       teams-for-linux
       cargo
       protonup
