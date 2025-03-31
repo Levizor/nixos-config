@@ -62,6 +62,18 @@ in
     };
   };
 
+  specialisation = {
+    gaming-time.configuration = {
+      hardware.nvidia = {
+        prime.sync.enable = lib.mkForce true;
+        prime.offload = {
+          enable = lib.mkForce false;
+          enableOffloadCmd = lib.mkForce false;
+        };
+      };
+    };
+  };
+
   programs = {
     zsh = {
       enable = true;
