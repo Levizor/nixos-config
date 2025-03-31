@@ -11,7 +11,6 @@
     with pkgs;
     [
       # gimp
-      github-cli
       xdragon
       bluetuith
       cava
@@ -35,6 +34,7 @@
       tree
     ]
     ++ lib.optionals myopts.additionalPackages [
+      github-cli
       zola
       teams-for-linux
       cargo
@@ -59,6 +59,7 @@
       tray-tui
       jetbrains-toolbox
       krita
+      discord-canary
       # prismlauncher
       # wireshark
     ];
