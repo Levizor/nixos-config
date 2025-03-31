@@ -222,7 +222,6 @@ in
           "$mod SHIFT, h, movewindow, l"
           "$mod SHIFT, k, movewindow, u"
           "$mod SHIFT, j, movewindow, d"
-
         ]
         ++ (
           #binds for workspaces
@@ -231,13 +230,14 @@ in
               i:
               let
                 ws = i + 1;
+                key = if i == 9 then 0 else i + 1;
               in
               [
-                "$mod, ${toString ws}, workspace, ${toString ws}"
-                "$mod SHIFT, ${toString ws}, movetoworkspace, ${toString ws}"
-                "$mod Alt, ${toString ws}, focusworkspaceoncurrentmonitor, ${toString ws} "
+                "$mod, ${toString key}, workspace, ${toString ws}"
+                "$mod SHIFT, ${toString key}, movetoworkspace, ${toString ws}"
+                "$mod Alt, ${toString key}, focusworkspaceoncurrentmonitor, ${toString ws} "
               ]
-            ) 9
+            ) 10
           )
         );
 
@@ -268,10 +268,10 @@ in
                   if ws <= 5 then
                     "${toString ws}, monitor:${builtins.elemAt monitors 0}"
                   else
-                    "${toString ws}, monitor ${builtins.elemAt monitors 1}"
+                    "${toString ws}, monitor:${builtins.elemAt monitors 1}"
                 }"
               ]
-            ) 9
+            ) 10
           )
         );
 
