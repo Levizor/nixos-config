@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   #sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /tmp/disk-config.nix
   disko.devices = {
     disk = {
@@ -19,7 +20,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["umask=0077"];
+                mountOptions = [ "umask=0077" ];
               };
             };
             swap = {
@@ -38,14 +39,14 @@
                 mountpoint = "/";
               };
             };
-             home = {
-               size = "100%";
-               content = {
-                 type = "filesystem";
-                 format = "ext4";
-                 mountpoint = "/home";
-               };
-             };
+            home = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/home";
+              };
+            };
           };
         };
       };
