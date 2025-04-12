@@ -34,6 +34,7 @@
       tree
     ]
     ++ lib.optionals myopts.additionalPackages [
+      cmake
       github-cli
       zola
       teams-for-linux

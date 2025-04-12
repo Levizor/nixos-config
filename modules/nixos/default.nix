@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  myopts,
   config,
   ...
 }:
@@ -33,45 +32,19 @@ in
     loader.efi.canTouchEfiVariables = true;
 
     plymouth = {
-      enable = true;
+      enable = myopts.hardware;
     };
   };
 
   networking.hostName = "nixos";
-
   time.timeZone = "Europe/Warsaw";
+
   networking.networkmanager.enable = true;
 
   hardware = {
-    #bluetooth
-    bluetooth.enable = true;
-    graphics.enable = true;
-    graphics.enable32Bit = true;
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:2:0:0";
-      };
-    };
-  };
-
-  specialisation = {
-    gaming-time.configuration = {
-      hardware.nvidia = {
-        prime.sync.enable = lib.mkForce true;
-        prime.offload = {
-          enable = lib.mkForce false;
-          enableOffloadCmd = lib.mkForce false;
-        };
-      };
-    };
+    bluetooth.enable = myopts.hardware;
+    graphics.enable = myopts.hardware;
+    graphics.enable32Bit = myopts.hardware;
   };
 
   programs = {
