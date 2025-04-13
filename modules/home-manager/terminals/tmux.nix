@@ -2,10 +2,12 @@
   pkgs,
   inputs,
   lib,
+  myopts,
   ...
 }:
 {
   programs.tmux = {
+    shortcut = if myopts.server then "a" else "b";
     enable = true;
     mouse = true;
     keyMode = "vi";
@@ -16,6 +18,9 @@
     terminal = "xterm-kitty";
 
     extraConfig = ''
+
+      set -s set-clipboard on
+      set -g allow-passthrough
 
       bind-key C-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
       bind-key C-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
@@ -79,16 +84,19 @@
       {
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
         extraConfig =
-          let
-            hyprland-workspaces-tui = pkgs.hyprland-workspaces-tui;
-          in
-          ''
-            bind-key b set-option status
-            set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
-            set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
-            set -g status-left-length 20
-            set -g status-interval 1
-          '';
+          if !myopts.server then
+            let
+              hyprland-workspaces-tui = pkgs.hyprland-workspaces-tui;
+            in
+            ''
+              bind-key b set-option status
+              set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
+              set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
+              set -g status-left-length 20
+              set -g status-interval 1
+            ''
+          else
+            "";
       }
     ];
 

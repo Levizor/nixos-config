@@ -6,6 +6,7 @@
       steam = lib.mkEnableOption "Enable steam";
       sound = lib.mkEnableOption "Enable sound";
       hardware = lib.mkEnableOption "Enable hardware stuff (bluetooth, graphic settings)";
+      server = lib.mkEnableOption "Server flag configuration";
     };
   };
 
@@ -15,6 +16,7 @@
       steam = lib.mkDefault false;
       sound = lib.mkDefault true;
       hardware = lib.mkDefault true;
+      server = lib.mkDefault false;
     };
   };
 

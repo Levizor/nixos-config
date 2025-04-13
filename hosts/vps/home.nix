@@ -1,8 +1,13 @@
-{ inputs, outputs, ... }:
+{
+  inputs,
+  outputs,
+  myopts,
+  ...
+}:
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs outputs;
+      inherit inputs outputs myopts;
     };
     backupFileExtension = "backup";
     users.levizor = {
@@ -29,6 +34,10 @@
         username = "levizor";
         homeDirectory = "/home/levizor";
         stateVersion = "24.05";
+      };
+
+      programs = {
+        tmux.prefix = "C-a";
       };
     };
   };

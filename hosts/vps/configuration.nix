@@ -3,10 +3,15 @@
   lib,
   inputs,
   modulesPath,
+  config,
   outputs,
   ...
 }:
 {
+  myopts = {
+    server = true;
+  };
+
   imports = [
     inputs.disko.nixosModules.disko
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -17,6 +22,10 @@
     inputs.home-manager.nixosModules.home-manager
     ./home.nix
   ];
+
+  home-manager.extraSpecialArgs = {
+    inherit (config) myopts;
+  };
 
   nix.settings.experimental-features = [
     "nix-command"
