@@ -26,20 +26,26 @@
     efiInstallAsRemovable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    fastfetch
-    git
-    python3
-    curl
-    vim
-    zip
-    unzip
-    killall
-    btop
-    tmux
-    inputs.nixvim.packages."${system}".default
-    ripgrep
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      btop
+      curl
+      fastfetch
+      git
+      inputs.nixvim.packages."${system}".default
+      killall
+      lsd
+      ncurses
+      python3
+      ripgrep
+      tmux
+      unzip
+      vim
+      zip
+    ];
+
+    enableAllTerminfo = true;
+  };
 
   users.users.root = {
     initialPassword = "lol123";
