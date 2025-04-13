@@ -13,6 +13,8 @@
 
     lap = "nh os switch -H laptop";
 
+    vps = "nh os switch -H vps";
+
     min = "nh os switch -H minimal";
 
     adcom = "git commit -am";
