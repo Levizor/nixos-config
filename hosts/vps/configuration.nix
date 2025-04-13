@@ -74,6 +74,9 @@
         homeDirectory = "/home/levizor";
         stateVersion = "24.05";
       };
+    };
+  };
+
   programs = {
     zsh = {
       enable = true;
