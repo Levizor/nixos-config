@@ -12,6 +12,8 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./hardware-configuration.nix
     ./disko-config.nix
+    ./../../modules/nixos/user.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   services = {
@@ -35,6 +37,7 @@
     btop
     tmux
     inputs.nixvim.packages."${system}".default
+    ripgrep
   ];
 
   users.users.root = {
@@ -43,6 +46,16 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB5O6fGFVOhzBoAea+v0f+ciZB7u2NWKr4Xw0CsFJFZ7 levizor@nixos"
     ];
 
+  };
+
+  programs = {
+    zsh = {
+      enable = true;
+      #required to use zsh over bash when using nix-shell
+      promptInit = ''
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+      '';
+    };
   };
 
 }
