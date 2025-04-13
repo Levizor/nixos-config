@@ -3,6 +3,7 @@
   lib,
   inputs,
   modulesPath,
+  outputs,
   ...
 }:
 {
@@ -12,6 +13,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./hardware-configuration.nix
     ./disko-config.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   services = {
@@ -43,6 +45,34 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB5O6fGFVOhzBoAea+v0f+ciZB7u2NWKr4Xw0CsFJFZ7 levizor@nixos"
     ];
 
+  };
+
+  home-manager = {
+    extraSpecialArgs = {
+      inherit inputs outputs;
+    };
+    backupFileExtension = "backup";
+    users.levizor = {
+      imports =
+        let
+          homePath = ./../../modules/home-manager;
+        in
+        [
+          (homePath + "/zsh")
+          (homePath + "/terminals/tmux.nix")
+        ];
+
+      home = {
+        sessionPath = [
+          "$HOME/.cargo/bin/"
+        ];
+
+        enableNixpkgsReleaseCheck = false;
+        username = "levizor";
+        homeDirectory = "/home/levizor";
+        stateVersion = "24.05";
+      };
+    };
   };
 
 }

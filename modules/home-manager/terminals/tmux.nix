@@ -106,6 +106,7 @@
       - window_name: nix
         panes:
           - cd ~/nix; nvim 
+      - window_name: vps
   '';
 
   home.file.".tmuxp/pw.yaml".text = ''
