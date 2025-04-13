@@ -13,6 +13,7 @@
     (modulesPath + "/profiles/qemu-guest.nix")
     ./hardware-configuration.nix
     ./disko-config.nix
+    ./../../modules/nixos/user.nix
     inputs.home-manager.nixosModules.home-manager
   ];
 
@@ -37,6 +38,7 @@
     btop
     tmux
     inputs.nixvim.packages."${system}".default
+    ripgrep
   ];
 
   users.users.root = {
@@ -72,6 +74,13 @@
         homeDirectory = "/home/levizor";
         stateVersion = "24.05";
       };
+  programs = {
+    zsh = {
+      enable = true;
+      #required to use zsh over bash when using nix-shell
+      promptInit = ''
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+      '';
     };
   };
 
