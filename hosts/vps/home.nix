@@ -17,6 +17,7 @@
           (programPath + "/nh.nix")
           (programPath + "/git.nix")
           (programPath + "/lsd.nix")
+          (programPath + "/fzf.nix")
         ];
 
       home = {
