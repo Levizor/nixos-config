@@ -2,6 +2,7 @@
   description = "NixOS Config";
 
   inputs = {
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";

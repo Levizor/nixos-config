@@ -21,6 +21,12 @@
     ./../../modules/nixos/user.nix
     inputs.home-manager.nixosModules.home-manager
     ./home.nix
+    inputs.nix-minecraft.nixosModules.minecraft-servers
+    ./minecraft.nix
+  ];
+
+  nixpkgs.overlays = [
+    inputs.nix-minecraft.overlay
   ];
 
   home-manager.extraSpecialArgs = {
