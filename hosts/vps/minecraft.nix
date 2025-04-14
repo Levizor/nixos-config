@@ -12,6 +12,7 @@
         package = pkgs.fabricServers.fabric-1_21_5;
 
         serverProperties = {
+          level-seed = "428903728248565923";
           online-mode = false;
           server-port = 25565;
           difficulty = "hard";
@@ -21,18 +22,9 @@
           motd = "NixOS Minecraft Server!";
 
           allow-nether = false;
-
           max-world-size = 5000;
         };
         symlinks = with pkgs; {
-          plugins = linkFarmFromDrvs "plugins" (
-            builtins.attrValues {
-              AuthMeReReloaded = fetchurl {
-                url = "https://cdn.modrinth.com/data/3IEZ9vol/versions/oezVemzR/AuthMe-5.7.0-FORK-Universal.jar";
-                sha256 = "sha256-C/uW2T8LZZeR303yuYuV3C1twashF4fw8byXpgTWEi4=";
-              };
-            }
-          );
           mods = linkFarmFromDrvs "mods" (
             builtins.attrValues {
               Fabric-API = fetchurl {
@@ -65,14 +57,9 @@
                 sha256 = "sha256-oRe2t4GnqZtaRqrYpaRLUU/5GuuTJ6SUN32jVjqhFY4=";
               };
 
-              CardBoard = fetchurl {
-                url = "https://cdn.modrinth.com/data/MLYQ9VGP/versions/9N4AXvHR/Cardboard-1.21.4.jar";
-                sha256 = "sha256-zUsYto6yu6996RnysxYQuuAB6CHxEr+v0QXLBfzN2KQ=";
-              };
-
-              Icommon = fetchurl {
-                url = "https://cdn.modrinth.com/data/SVKv1SZo/versions/caR6lov0/iCommon-Fabric-bundle.jar";
-                sha256 = "sha256-EgtUJR74tVDBC+CBL/Ye99njKAUrDxIte148acRKzwg=";
+              EasyAuth = fetchurl {
+                url = "https://cdn.modrinth.com/data/aZj58GfX/versions/MdRRckj6/easyauth-mc1.21.5-3.1.11.jar";
+                sha256 = "sha256-7Yb8JQ5er/gsaM5xg6W+8M9nTaYcXcWZKG+lg2AohMQ=";
               };
             }
           );
