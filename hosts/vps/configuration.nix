@@ -25,9 +25,16 @@
     ./minecraft.nix
   ];
 
-  nixpkgs.overlays = [
-    inputs.nix-minecraft.overlay
-  ];
+  nixpkgs = {
+    overlays = [
+      inputs.nix-minecraft.overlay
+    ];
+    config = {
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
+    };
+
+  };
 
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;
@@ -83,6 +90,16 @@
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
       '';
     };
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [
+      25565
+    ];
+    allowedTCPPorts = [
+      25565
+    ];
   };
 
 }
