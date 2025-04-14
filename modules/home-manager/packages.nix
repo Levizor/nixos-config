@@ -61,7 +61,7 @@
       jetbrains-toolbox
       krita
       discord-canary
-      # prismlauncher
+      prismlauncher
       # wireshark
     ];
   programs = {
