@@ -12,6 +12,7 @@
       19132
     ];
   };
+
   services = {
     minecraft-servers = {
       enable = true;
@@ -38,26 +39,32 @@
         symlinks = with pkgs; {
           mods = linkFarmFromDrvs "mods" (
             builtins.attrValues {
+
               Fabric-API = fetchurl {
                 url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/FZ4q3wQK/fabric-api-0.119.9%2B1.21.5.jar";
                 sha256 = "sha256-Bo9zMisO6IKtyXsgzse4sqIvfA595bnxEyLRKJBhIqo=";
               };
+
               Lithium = fetchurl {
                 url = "https://cdn.modrinth.com/data/gvQqBUqZ/versions/VWYoZjBF/lithium-fabric-0.16.2%2Bmc1.21.5.jar";
                 sha256 = "sha256-XqvnQxASa4M0l3JJxi5Ej6TMHUWgodOmMhwbzWuMYGg=";
               };
+
               MemoryLeakFix = fetchurl {
                 url = "https://cdn.modrinth.com/data/NRjRiSSD/versions/5xvCCRjJ/memoryleakfix-fabric-1.17%2B-1.1.5.jar";
                 sha256 = "sha256-uKwz1yYuAZcQ3SXkVBFmFrye0fcU7ZEFlLKKTB2lrd4=";
               };
+
               Krypton = fetchurl {
                 url = "https://cdn.modrinth.com/data/fQEb0iXm/versions/neW85eWt/krypton-0.2.9.jar";
                 sha256 = "sha256-uGYia+H2DPawZQxBuxk77PMKfsN8GEUZo3F1zZ3MY6o=";
               };
+
               FerriteCore = fetchurl {
                 url = "https://cdn.modrinth.com/data/uXXizFIs/versions/CtMpt7Jr/ferritecore-8.0.0-fabric.jar";
                 sha256 = "sha256-K5C/AMKlgIw8U5cSpVaRGR+HFtW/pu76ujXpxMWijuo=";
               };
+
               Chunky = fetchurl {
                 url = "https://cdn.modrinth.com/data/fALzjamp/versions/mhLtMoLk/Chunky-Fabric-1.4.36.jar";
                 sha256 = "sha256-vLttrvBeviawvhMk2ZcjN5KecT4Qy+os4FEqMPYB77U=";
@@ -108,14 +115,10 @@
                 url = "https://cdn.modrinth.com/data/nNk5jjlY/versions/fufCCAwc/vanilla-disable-portals-1.2.7.jar";
                 sha256 = "sha256-zPpMl4aW37JtATVKM4CpU+Vw/n4iS16ut4mD8PVOudI=";
               };
-
             }
           );
         };
-
       };
-
     };
-
   };
 }
