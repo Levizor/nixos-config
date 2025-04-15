@@ -1,5 +1,17 @@
 { pkgs, lib, ... }:
 {
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [
+      25565
+      #bedrock with geyser
+      19132
+    ];
+    allowedTCPPorts = [
+      25565
+      19132
+    ];
+  };
   services = {
     minecraft-servers = {
       enable = true;
@@ -18,11 +30,10 @@
           difficulty = "hard";
           gamemode = "survival";
           max-players = 10;
-          white-list = true;
+          white-list = false;
           motd = "NixOS Minecraft Server!";
 
-          allow-nether = false;
-          max-world-size = 5000;
+          max-world-size = 3000;
         };
         symlinks = with pkgs; {
           mods = linkFarmFromDrvs "mods" (
@@ -61,6 +72,43 @@
                 url = "https://cdn.modrinth.com/data/aZj58GfX/versions/MdRRckj6/easyauth-mc1.21.5-3.1.11.jar";
                 sha256 = "sha256-7Yb8JQ5er/gsaM5xg6W+8M9nTaYcXcWZKG+lg2AohMQ=";
               };
+
+              GeyserMC = fetchurl {
+                url = "https://cdn.modrinth.com/data/wKkoqHrH/versions/qzYhEQza/geyser-fabric-Geyser-Fabric-2.7.0-b808.jar";
+                sha256 = "sha256-jM77YMbsxN6bgpgDEfVhT0NYJ/ZO0KjvTcbkUzbo9uc=";
+              };
+
+              FloodGate = fetchurl {
+                url = "https://cdn.modrinth.com/data/bWrNNfkb/versions/nyg969vQ/Floodgate-Fabric-2.2.4-b43.jar";
+                sha256 = "sha256-UbF/VyMY4Eo0SbtZqsCr0739kYbYK2ku0URZNjUPrSU=";
+              };
+
+              SkinRestorer = fetchurl {
+                url = "https://cdn.modrinth.com/data/ghrZDhGW/versions/KXaMmwFV/skinrestorer-2.3.0%2B1.21.5-fabric.jar";
+                sha256 = "sha256-JIWcOf1P9W0lfHWemFb/k4uiL7cILFpsMMO+noNeRGg=";
+              };
+
+              EasyWhitelist = fetchurl {
+                url = "https://cdn.modrinth.com/data/LODybUe5/versions/4ndHE533/easywhitelist-mc1.20-rc1-1.0.1.jar";
+                sha256 = "sha256-frtzUbOO50Askwjyz+kGqZeBWB0K/xbu2Y/XTHU+7c0=";
+              };
+
+              Sleep = fetchurl {
+                url = "https://cdn.modrinth.com/data/WTzuSu8P/versions/qlOH7jKR/sleep-v.4.0.2.jar";
+                sha256 = "sha256-BytI7H8+b7lvN0+CghvrvdZZfGwoL6OEDbTI4lW9S8Y=";
+              };
+
+              #Allows different versions
+              ViaFabric = fetchurl {
+                url = "https://cdn.modrinth.com/data/YlKdE5VK/versions/n9T0mzox/ViaFabric-0.4.18%2B104-main.jar";
+                sha256 = "sha256-jN0jvX0/AmSDMl98whKbojFQmlV/tqpJk0RuKePg55M=";
+              };
+
+              VanilaDisablePortals = fetchurl {
+                url = "https://cdn.modrinth.com/data/nNk5jjlY/versions/fufCCAwc/vanilla-disable-portals-1.2.7.jar";
+                sha256 = "sha256-zPpMl4aW37JtATVKM4CpU+Vw/n4iS16ut4mD8PVOudI=";
+              };
+
             }
           );
         };
