@@ -25,13 +25,14 @@
         package = pkgs.fabricServers.fabric-1_21_5;
 
         serverProperties = {
-          level-seed = "428903728248565923";
+          spawn-protection = 0;
           online-mode = false;
+          level-seed = "428903728248565923";
           server-port = 25565;
           difficulty = "hard";
           gamemode = "survival";
           max-players = 10;
-          white-list = false;
+          white-list = true;
           motd = "NixOS Minecraft Server!";
 
           max-world-size = 3000;
