@@ -25,9 +25,10 @@
         package = pkgs.fabricServers.fabric-1_21_5;
 
         serverProperties = {
+          view-distance = 16;
           spawn-protection = 0;
           online-mode = false;
-          level-seed = "428903728248565923";
+          level-seed = "-2032795982907864146";
           server-port = 25565;
           difficulty = "hard";
           gamemode = "survival";
@@ -115,6 +116,17 @@
               VanilaDisablePortals = fetchurl {
                 url = "https://cdn.modrinth.com/data/nNk5jjlY/versions/fufCCAwc/vanilla-disable-portals-1.2.7.jar";
                 sha256 = "sha256-zPpMl4aW37JtATVKM4CpU+Vw/n4iS16ut4mD8PVOudI=";
+              };
+
+              CraterLib = fetchurl {
+                url = "https://cdn.modrinth.com/data/Nn8Wasaq/versions/iT7V02Tu/CraterLib-Fabric-1.21.5-2.1.4.jar";
+                sha256 = "sha256-qhgJa5/Y8WQmBPerFlEORFO0cnnmwnUwx595+aqPa7A=";
+              };
+
+              #depends on CraterLib
+              MaintainanceMode = fetchurl {
+                url = "https://cdn.modrinth.com/data/QOkEkSap/versions/D2XXq4an/MaintenanceMode-Universal-1.3.1.jar";
+                sha256 = "sha256-D4USREyl/vrxHt+bhe9KN+1ZZZrE4yE8xD9Z7t7/KEE=";
               };
             }
           );
