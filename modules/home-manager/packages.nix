@@ -11,11 +11,10 @@
     with pkgs;
     [
       # gimp
-      xdragon
+      bat
       bluetuith
       cava
       clipse
-      clock-rs
       cmatrix
       ffmpeg
       fzf
@@ -25,51 +24,41 @@
       loupe
       mpv
       ncpamixer
-      networkmanagerapplet
-      nix-prefetch-github
       pavucontrol
       ripgrep
       telegram-desktop
       tlrc
       tree
+      xdragon
     ]
     ++ lib.optionals myopts.additionalPackages [
-      cmake
-      github-cli
-      zola
-      teams-for-linux
-      cargo
-      protonup
-      yt-dlp
-      youtube-music
-      ungoogled-chromium
-      vesktop
-      thunderbird
-      timg
-      obsidian
-      onlyoffice-desktopeditors
-      filezilla
-      qbittorrent
-      whatsie
-      wcalc
-      teams-for-linux
+      # wireshark
       android-tools
       ani-cli
-      distrobox
+      cargo
+      clock-rs
+      cmake
+      filezilla
+      github-cli
       hyprland-workspaces-tui
-      tray-tui
       jetbrains-toolbox
       krita
-      discord-canary
+      networkmanagerapplet
+      nix-prefetch-github
+      obsidian
+      onlyoffice-desktopeditors
       prismlauncher
-      # wireshark
+      protonup
+      qbittorrent
+      teams-for-linux
+      thunderbird
+      timg
+      tray-tui
+      ungoogled-chromium
+      vesktop
+      youtube-music
+      yt-dlp
+      zola
+      obs-studio
     ];
-  programs = {
-    obs-studio = {
-      enable = true;
-    };
-    bat = {
-      enable = true;
-    };
-  };
 }
