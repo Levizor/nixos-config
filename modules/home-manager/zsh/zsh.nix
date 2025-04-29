@@ -21,7 +21,7 @@
     syntaxHighlighting.enable = true;
     historySubstringSearch.enable = true;
 
-    initExtra = ''
+    initContent = ''
       # Load Zsh modules
 
       # Initialize colors

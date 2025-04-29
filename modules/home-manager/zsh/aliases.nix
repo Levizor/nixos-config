@@ -39,11 +39,11 @@
 
     grub-update = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
 
-    ls = "lsd --group-directories-first";
+    # ls = "lsd --group-directories-first";
 
-    la = "lsd -a --group-directories-first";
+    # la = "lsd -a --group-directories-first";
 
-    ll = "lsd -al --group-directories-first";
+    # ll = "lsd -al --group-directories-first";
 
     z = "zathura";
 

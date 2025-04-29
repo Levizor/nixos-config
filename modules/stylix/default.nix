@@ -6,11 +6,12 @@
   ...
 }:
 {
-
   imports = [ ./cyberdream.nix ];
   stylix = {
     enable = true;
-    targets.qt.enable = true;
+    targets = {
+      qt.enable = true;
+    };
 
     fonts = {
       sizes = {

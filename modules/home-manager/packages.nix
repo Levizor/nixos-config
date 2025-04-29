@@ -13,7 +13,6 @@
       # gimp
       bat
       bluetuith
-      cava
       clipse
       cmatrix
       ffmpeg

@@ -1,5 +1,6 @@
 { pkgs, inputs, ... }:
 {
+  stylix.targets.floorp.profileNames = [ "profile_0" ];
   programs.floorp = {
     enable = true;
     languagePacks = [
@@ -40,13 +41,13 @@
 
             "NixOS Wiki" = {
               urls = [ { template = "https://wiki.nixos.org/index.php?search={searchTerms}"; } ];
-              iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+              icon = "https://wiki.nixos.org/favicon.png";
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = [ "@nw" ];
             };
             "Brave" = {
               urls = [ { template = "https://search.brave.com/search?q={searchTerms}"; } ];
-              iconUpdateURL = "https://brave.com/static-assets/images/brave-logo-sans-text.svg";
+              icon = "https://brave.com/static-assets/images/brave-logo-sans-text.svg";
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = [ "@b" ];
             };
