@@ -10,6 +10,7 @@
 {
   myopts = {
     server = true;
+    hardware = false;
   };
 
   imports = [
