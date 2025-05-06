@@ -31,14 +31,14 @@
 
     variables = {
       EDITOR = "nvim";
+      NIXPKGS_ALLOW_UNFREE = 1;
     };
   };
 
   programs.nano.enable = false;
   virtualisation = {
-    # waydroid.enable = true;
-    # docker = {
-    #   enable = true;
-    # };
+    docker = {
+      enable = true;
+    };
   };
 }
