@@ -17,16 +17,17 @@
   };
 
   imports = [
-    ../../modules/nixos
-
     ./hardware-configuration.nix
     ./disko-config.nix
     inputs.disko.nixosModules.disko
-    inputs.stylix.nixosModules.stylix
-    ../../modules/stylix
+
+    ../../modules/nixos
 
     ../../modules/home-manager
     inputs.home-manager.nixosModules.home-manager
+
+    ../../modules/stylix
+    inputs.stylix.nixosModules.stylix
   ];
 
   home-manager.extraSpecialArgs = {
@@ -35,7 +36,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    # open = false;
 
     prime = {
       offload = {
