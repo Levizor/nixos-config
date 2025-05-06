@@ -1,4 +1,5 @@
 {
+  pkgs,
   inputs,
   outputs,
   config,
@@ -58,5 +59,12 @@
         };
       };
     };
+  };
+
+  nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      icu
+    ];
   };
 }
