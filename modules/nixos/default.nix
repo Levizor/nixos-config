@@ -13,10 +13,13 @@ in
     "flakes"
   ];
   imports = [
+    ./networking.nix
     ./user.nix
     ./environment.nix
     ./services.nix
   ];
+
+  time.timeZone = "Europe/Warsaw";
 
   security = {
     polkit.enable = true;
@@ -28,6 +31,7 @@ in
   };
 
   boot = {
+    kernelPackages = pkgs.linuxPackages_6_1;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
@@ -36,12 +40,13 @@ in
     };
   };
 
-  networking.hostName = "nixos";
-  time.timeZone = "Europe/Warsaw";
-
-  networking.networkmanager.enable = true;
-
   hardware = {
+    enableAllFirmware = true;
+    nvidia = {
+      modesetting.enable = true;
+      open = true;
+    };
+
     bluetooth.enable = myopts.hardware;
     graphics.enable = myopts.hardware;
     graphics.enable32Bit = myopts.hardware;
@@ -71,12 +76,6 @@ in
 
     gamemode.enable = myopts.steam;
     wireshark.enable = myopts.additionalPackages;
-
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-      ];
-    };
 
   };
 
