@@ -19,5 +19,4 @@
       server = lib.mkDefault false;
     };
   };
-
 }
