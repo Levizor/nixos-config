@@ -3,6 +3,8 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    tree = "lsd --tree";
+
     dad = "xdragon -a -x";
 
     clock = "clock-rs";
@@ -30,8 +32,6 @@
     zrc = "nvim ~/nix/home-manager/zsh/zsh.nix";
 
     cp = "cp -r";
-
-    tree = "tree --dirsfirst";
 
     compress = "compress()";
 

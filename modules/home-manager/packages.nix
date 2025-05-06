@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   pkgs,
   myopts,
@@ -8,6 +9,12 @@
 {
   nixpkgs.config.allowUnfree = true;
   home.packages =
+    let
+      stable = import inputs.stable {
+        config = config.nixpkgs.config;
+        system = pkgs.system;
+      };
+    in
     with pkgs;
     [
       # gimp
@@ -21,33 +28,33 @@
       hyprpicker
       keepassxc
       loupe
-      mpv
       ncpamixer
       pavucontrol
       ripgrep
       telegram-desktop
+      vlc
+      mpv
       tlrc
-      tree
       xdragon
     ]
     ++ lib.optionals myopts.additionalPackages [
-      # wireshark
+      postman
       android-tools
       ani-cli
+      appimage-run
       cargo
       clock-rs
-      cmake
       filezilla
-      github-cli
       hyprland-workspaces-tui
       jetbrains-toolbox
+      jetbrains.rider
+      jetbrains.idea-ultimate
       krita
       networkmanagerapplet
       nix-prefetch-github
       obsidian
       onlyoffice-desktopeditors
       prismlauncher
-      protonup
       qbittorrent
       teams-for-linux
       thunderbird
@@ -60,4 +67,35 @@
       zola
       obs-studio
     ];
+
+  home.file.".ideavimrc".text = ''
+
+    set clipboard=unnamedplus
+    set relativenumber
+    set quickscope
+    let mapleader=" "
+    set undofile
+
+    map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
+    map <Leader>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+    map <Leader>ff <action>(com.mituuz.fuzzier.FuzzierVCS)
+    map <Leader>g <action>(com.mituuz.fuzzier.FuzzyGrep)
+    map <Leader>x :bd!<CR>
+
+    map > >gv
+    map < <gv
+
+    map <C-d> <C-d>zz
+    map <C-u> <C-u>zz
+
+    map n nzzzv
+    map N Nzzzv
+
+    map bn :bnext<CR>
+    map bp :bprev<CR>
+
+    nmap <C-h> :action KJumpAction.Word0<cr>
+    nmap <C-l> :action KJumpAction.Line<cr>
+  '';
+
 }
