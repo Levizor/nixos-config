@@ -36,7 +36,7 @@
           white-list = true;
           motd = "NixOS Minecraft Server!";
 
-          max-world-size = 3000;
+          # max-world-size = 3000;
         };
         symlinks = with pkgs; {
           mods = linkFarmFromDrvs "mods" (
@@ -127,6 +127,26 @@
               MaintainanceMode = fetchurl {
                 url = "https://cdn.modrinth.com/data/QOkEkSap/versions/D2XXq4an/MaintenanceMode-Universal-1.3.1.jar";
                 sha256 = "sha256-D4USREyl/vrxHt+bhe9KN+1ZZZrE4yE8xD9Z7t7/KEE=";
+              };
+
+              PlayersLadder = fetchurl {
+                url = "https://cdn.modrinth.com/data/YCcTxyDM/versions/5q9dW9LT/playerladder-fabric-1.21.4-0.7.2-beta.jar";
+                sha256 = "sha256-42/a724WFyovPpIODeKdfonm+EYgODltznIF1a9CUEo=";
+              };
+
+              Sit = fetchurl {
+                url = "https://cdn.modrinth.com/data/EsYqsGV4/versions/LQzcYAOs/sit%21-1.2.3.2%2B1.21.5.jar";
+                sha256 = "sha256-h8PXI8wc8tix8LswP106RKfT1bTg1D5kyy7fkBGGuLE=";
+              };
+
+              FconfigLib = fetchurl {
+                url = "https://cdn.modrinth.com/data/8cuS4dwo/versions/VEwOoOSv/fconfiglib-1.1.1.jar";
+                sha256 = "sha256-h7x1zaSawLCmRk1OwXqI3crXtSEkdNLu2sQ0F3e2Dms=";
+              };
+
+              ClothConfig = fetchurl {
+                url = "https://cdn.modrinth.com/data/9s6osm5g/versions/qA00xo1O/cloth-config-18.0.145-fabric.jar";
+                sha256 = "sha256-7GcBJ2Gu6GwUCpEDWMSd28JLhS6YBweUBwVyHhv/Xn8=";
               };
             }
           );
