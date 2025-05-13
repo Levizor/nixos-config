@@ -59,4 +59,15 @@
 
     ns = "nh search ";
   };
+
+  programs.zsh.initContent = ''
+    clone() {
+      if [ -z "$1" ]; then
+        echo "Usage: clone <repo-name>"
+        return 1
+      fi
+      git clone "git@github.com:Levizor/$1.git"
+    }
+
+  '';
 }
