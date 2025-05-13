@@ -89,6 +89,10 @@
               hyprland-workspaces-tui = pkgs.hyprland-workspaces-tui;
             in
             ''
+              set -g status-bg black
+              set -g @minimal-tmux-fg "black"
+              set -g @minimal-tmux-bg "green"
+              set -g @minimal-tmux-use-arrow true
               bind-key b set-option status
               set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
               set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
