@@ -5,6 +5,8 @@
 
     tree = "lsd --tree";
 
+    cal = "cal -m3";
+
     dad = "xdragon -a -x";
 
     clock = "clock-rs";

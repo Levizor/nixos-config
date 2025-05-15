@@ -33,20 +33,18 @@
       ripgrep
       telegram-desktop
       vlc
-      mpv
       tlrc
       xdragon
     ]
     ++ lib.optionals myopts.additionalPackages [
-      postman
-      android-tools
+      # postman
+      # android-tools
       ani-cli
       appimage-run
       cargo
       clock-rs
-      filezilla
+      # filezilla
       hyprland-workspaces-tui
-      jetbrains-toolbox
       jetbrains.rider
       jetbrains.idea-ultimate
       krita
