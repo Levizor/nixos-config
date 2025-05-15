@@ -30,8 +30,14 @@ in
     };
   };
 
+  specialisation = {
+    linux_6_1_lts.configuration = {
+      boot.kernelPackages = pkgs.linuxPackages_6_1;
+    };
+  };
+
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_1;
+    # kernelPackages = pkgs.linuxPackages_6_1;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 

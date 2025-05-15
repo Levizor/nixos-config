@@ -37,7 +37,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    # open = false;
+    open = lib.mkForce false;
 
     prime = {
       offload = {
