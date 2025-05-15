@@ -124,7 +124,8 @@ in
           '';
         in
         [
-          # "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+          # ensures screensharing
+          "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
           "${lib.getExe tmuxUpdateScript}"
           "clipse -listen"
           "wpaperd"
