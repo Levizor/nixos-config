@@ -25,7 +25,6 @@
         pavucontrol
         pulseaudioFull
         brightnessctl
-        libnotify
         wl-clipboard
       ];
 
