@@ -149,10 +149,6 @@
     default_session = "scratchpad"
 
     [[search_dirs]]
-    path = "/home/levizor"
-    depth = 1
-
-    [[search_dirs]]
     path = "/home/levizor/Projects"
     depth = 10
   '';
