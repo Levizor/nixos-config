@@ -1,16 +1,34 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }:
 let
   scripts = ./scripts;
+
   monitors = [
-    "eDP-1"
-    "HDMI-A-1"
+    {
+      name = "eDP-1";
+      config = "1920x1080@60, 0x0, 1,";
+    }
+    {
+      name = "HDMI-A-1";
+      config = "preferred, auto, 1,";
+    }
   ];
+  monitorNames = map (m: m.name) monitors;
+
+  scriptsDir = "${config.home.homeDirectory}/.config/hypr/scripts";
+  scriptDefs = import ./scripts.nix {
+    inherit lib monitors;
+  };
 in
 {
+  home.file = lib.mkMerge [
+    scriptDefs.home.file
+  ];
+
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
     enable = true;
@@ -22,10 +40,7 @@ in
     xwayland.enable = true;
 
     settings = {
-      monitor = [
-        "${builtins.elemAt monitors 0}, 1920x1080@60, 0x0, 1,"
-        "${builtins.elemAt monitors 1}, preferred, auto, 1,# mirror, eDP-1"
-      ];
+      monitor = map (m: "${m.name}, ${m.config}") monitors;
 
       "$mod" = "SUPER";
 
@@ -44,7 +59,6 @@ in
 
       input = {
         kb_layout = "us,ua,ru,pl";
-        # kb_variant = ", ua";
         kb_options = "grp:alt_space_toggle";
 
         follow_mouse = 1;
@@ -133,8 +147,7 @@ in
 
       bind =
         let
-          screenshotDir = "${builtins.getEnv "HOME"}/Pictures/Screenshots";
-          home.file."Pictures/Screenshots/".exists = true;
+          screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
         in
         [
           # Utils
@@ -173,6 +186,10 @@ in
           "$mod, F1, exec, ${scripts}/decorations.sh"
           "$mod, F2, exec, ${scripts}/animations.sh"
           "$mod, F3, exec, ${scripts}/gapsoff.sh"
+
+          "$mod, F7, exec, ${scriptsDir}/toggleMonitor.sh 0"
+          "$mod, F8, exec, ${scriptsDir}/toggleMonitor.sh 1"
+          "$mod, F9, exec, ${scriptsDir}/toggleMonitor.sh 2"
 
           # switch to specific language
           # english
@@ -230,13 +247,12 @@ in
             builtins.genList (
               i:
               let
-                ws = i + 1;
-                key = if i == 9 then 0 else i + 1;
+                ws = toString i;
               in
               [
-                "$mod, ${toString key}, workspace, ${toString ws}"
-                "$mod SHIFT, ${toString key}, movetoworkspace, ${toString ws}"
-                "$mod Alt, ${toString key}, focusworkspaceoncurrentmonitor, ${toString ws} "
+                "$mod, ${ws}, workspace, ${ws}"
+                "$mod SHIFT, ${ws}, movetoworkspace, ${ws}"
+                "$mod Alt, ${ws}, focusworkspaceoncurrentmonitor, ${ws} "
               ]
             ) 10
           )
@@ -249,6 +265,25 @@ in
       ];
 
       workspace =
+        let
+          totalWorkspaces = 10;
+
+          mod = a: b: a - (a / b) * b;
+
+          numMonitors = builtins.length monitorNames;
+          basePerMonitor = totalWorkspaces / numMonitors;
+          extra = mod totalWorkspaces numMonitors;
+          # Assign workspace numbers to monitor indices
+          workspaceAssignments = builtins.concatLists (
+            builtins.genList (
+              i:
+              let
+                count = basePerMonitor + (if i < extra then 1 else 0);
+              in
+              builtins.genList (_: i) count
+            ) numMonitors
+          );
+        in
         [
           "w[tv1], gapsout:0, gapsin:0"
           "f[1], gapsout:0, gapsin:0"
@@ -256,25 +291,15 @@ in
           "special:terminal, border:false, on-created-empty:$terminal tmuxp load scratchpad, gapsin:0, gapsout:0"
           "special:browser, on-created-empty:$browser, gapsin:0, gapsout:0"
         ]
-        ++ (
-          # connect workspaces to monitors
-          builtins.concatLists (
-            builtins.genList (
-              i:
-              let
-                ws = i + 1;
-              in
-              [
-                "${
-                  if ws <= 5 then
-                    "${toString ws}, monitor:${builtins.elemAt monitors 0}"
-                  else
-                    "${toString ws}, monitor:${builtins.elemAt monitors 1}"
-                }"
-              ]
-            ) 10
-          )
-        );
+        ++ (builtins.genList (
+          i:
+          let
+            ws = toString (i);
+            monitorIndex = builtins.elemAt workspaceAssignments i;
+            monitor = builtins.elemAt monitorNames monitorIndex;
+          in
+          "${ws}, monitor:${monitor}"
+        ) totalWorkspaces);
 
       windowrulev2 = [
         "bordersize 0, floating:0, onworkspace:w[tv1]"
@@ -319,6 +344,8 @@ in
           bind=,Return,submap, reset
           bind=$mod,r,submap, reset
           submap=reset
+
+          source = ~/.config/hypr/impure.conf
     '';
   };
 }
