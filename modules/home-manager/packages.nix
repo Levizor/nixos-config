@@ -35,6 +35,7 @@
       vlc
       tlrc
       xdragon
+      neovim-remote
     ]
     ++ lib.optionals myopts.additionalPackages [
       # postman
