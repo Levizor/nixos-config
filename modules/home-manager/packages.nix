@@ -64,6 +64,7 @@
       yt-dlp
       zola
       obs-studio
+      lazygit
     ];
 
   home.file.".ideavimrc".text = ''
