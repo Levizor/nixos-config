@@ -5,8 +5,6 @@
   ...
 }:
 let
-  scripts = ./scripts;
-
   monitors = [
     {
       name = "eDP-1";
@@ -25,6 +23,10 @@ let
 
   monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
   tmuxUpdateScript = lib.getExe scriptDefs.tmuxUpdateScript;
+  animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
+  decorationsToggleScript = lib.getExe scriptDefs.decorationsToggleScript;
+  gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
+  forceKillScript = lib.getExe scriptDefs.forceKillScript;
 in
 {
   services.hyprpaper.enable = lib.mkForce false;
@@ -169,10 +171,10 @@ in
           "$mod, Print, exec, grimblast copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
 
           # Scripts
-          "$mod Shift, Q, exec, ${scripts}/forcekill.sh"
-          "$mod, F1, exec, ${scripts}/decorations.sh"
-          "$mod, F2, exec, ${scripts}/animations.sh"
-          "$mod, F3, exec, ${scripts}/gapsoff.sh"
+          "$mod Shift, Q, exec, ${forceKillScript}"
+          "$mod, F1, exec, ${decorationsToggleScript}"
+          "$mod, F2, exec, ${animationsToggleScript}"
+          "$mod, F3, exec, ${gapsToggleScript}"
 
           "$mod, F7, exec, ${monitorToggleScript} 0"
           "$mod, F8, exec, ${monitorToggleScript} 1"
