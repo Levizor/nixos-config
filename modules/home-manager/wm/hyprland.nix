@@ -19,16 +19,14 @@ let
   ];
   monitorNames = map (m: m.name) monitors;
 
-  scriptsDir = "${config.home.homeDirectory}/.config/hypr/scripts";
   scriptDefs = import ./scripts.nix {
-    inherit lib monitors;
+    inherit pkgs lib monitors;
   };
+
+  monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
+  tmuxUpdateScript = lib.getExe scriptDefs.tmuxUpdateScript;
 in
 {
-  home.file = lib.mkMerge [
-    scriptDefs.home.file
-  ];
-
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
     enable = true;
@@ -125,25 +123,14 @@ in
       master = {
       };
 
-      exec-once =
-        let
-
-          tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
-            while true;
-            do
-              pgrep tmux &>/dev/null || break
-              tmux refresh-client -S;
-              sleep 0.1;
-            done &
-          '';
-        in
-        [
-          # ensures screensharing
-          "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-          "${lib.getExe tmuxUpdateScript}"
-          "clipse -listen"
-          "wpaperd"
-        ];
+      exec-once = [
+        # ensures screensharing
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "${tmuxUpdateScript}"
+        "clipse -listen"
+        "wpaperd"
+        "nvim --listen /tmp/nvimsocket"
+      ];
 
       bind =
         let
@@ -187,9 +174,9 @@ in
           "$mod, F2, exec, ${scripts}/animations.sh"
           "$mod, F3, exec, ${scripts}/gapsoff.sh"
 
-          "$mod, F7, exec, ${scriptsDir}/toggleMonitor.sh 0"
-          "$mod, F8, exec, ${scriptsDir}/toggleMonitor.sh 1"
-          "$mod, F9, exec, ${scriptsDir}/toggleMonitor.sh 2"
+          "$mod, F7, exec, ${monitorToggleScript} 0"
+          "$mod, F8, exec, ${monitorToggleScript} 1"
+          "$mod, F9, exec, ${monitorToggleScript} 2"
 
           # switch to specific language
           # english
