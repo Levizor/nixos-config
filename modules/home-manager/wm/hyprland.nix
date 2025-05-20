@@ -229,6 +229,10 @@ in
           "$mod SHIFT, h, movewindow, l"
           "$mod SHIFT, k, movewindow, u"
           "$mod SHIFT, j, movewindow, d"
+
+          "$mod, 0, workspace, 10"
+          "$mod SHIFT, 0, movetoworkspace, 10"
+          "$mod Alt, 0, focusworkspaceoncurrentmonitor, 10 "
         ]
         ++ (
           #binds for workspaces
@@ -236,14 +240,14 @@ in
             builtins.genList (
               i:
               let
-                ws = toString i;
+                ws = toString (i + 1);
               in
               [
                 "$mod, ${ws}, workspace, ${ws}"
                 "$mod SHIFT, ${ws}, movetoworkspace, ${ws}"
                 "$mod Alt, ${ws}, focusworkspaceoncurrentmonitor, ${ws} "
               ]
-            ) 10
+            ) 9
           )
         );
 
@@ -283,7 +287,7 @@ in
         ++ (builtins.genList (
           i:
           let
-            ws = toString (i);
+            ws = toString (i + 1);
             monitorIndex = builtins.elemAt workspaceAssignments i;
             monitor = builtins.elemAt monitorNames monitorIndex;
           in
