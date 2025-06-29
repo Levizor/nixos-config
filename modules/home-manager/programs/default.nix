@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
+    ./ssh.nix
     ./zathura.nix
     ./btop.nix
     ./fuzzel.nix
