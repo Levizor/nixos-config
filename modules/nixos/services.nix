@@ -29,7 +29,6 @@
           enable = true;
         };
       };
-      videoDrivers = [ "nvidia" ];
     };
 
     printing.enable = true;

@@ -30,12 +30,6 @@ in
     };
   };
 
-  specialisation = {
-    linux_6_1_lts.configuration = {
-      boot.kernelPackages = pkgs.linuxPackages_6_1;
-    };
-  };
-
   boot = {
     # kernelPackages = pkgs.linuxPackages_6_1;
     loader.systemd-boot.enable = true;
@@ -48,10 +42,6 @@ in
 
   hardware = {
     enableAllFirmware = true;
-    nvidia = {
-      modesetting.enable = true;
-      open = true;
-    };
 
     bluetooth.enable = myopts.hardware;
     graphics.enable = myopts.hardware;
