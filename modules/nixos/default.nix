@@ -34,10 +34,6 @@ in
     # kernelPackages = pkgs.linuxPackages_6_1;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-
-    plymouth = {
-      enable = myopts.hardware;
-    };
   };
 
   hardware = {
