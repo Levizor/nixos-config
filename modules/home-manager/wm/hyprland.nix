@@ -21,6 +21,8 @@ let
     inherit pkgs lib monitors;
   };
 
+  home.file.".config/hypr/impure.conf".enable = true;
+
   monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
   tmuxUpdateScript = lib.getExe scriptDefs.tmuxUpdateScript;
   animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
