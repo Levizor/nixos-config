@@ -22,6 +22,7 @@ in
   time.timeZone = "Europe/Warsaw";
 
   security = {
+    rtkit.enable = true;
     polkit.enable = true;
 
     sudo = {
@@ -38,7 +39,6 @@ in
 
   hardware = {
     enableAllFirmware = true;
-
     bluetooth.enable = myopts.hardware;
     graphics.enable = myopts.hardware;
     graphics.enable32Bit = myopts.hardware;
