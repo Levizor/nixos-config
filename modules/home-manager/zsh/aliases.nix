@@ -3,6 +3,8 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    sz = "du -sh";
+
     tree = "lsd --tree";
 
     cal = "cal -m3";
