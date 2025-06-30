@@ -21,7 +21,7 @@
       };
 
       any = {
-        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/lain";
+        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/picturesque/";
         mode = lib.mkForce "center";
       };
     };
