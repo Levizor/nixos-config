@@ -1,6 +1,5 @@
 # Load Zsh modules
 
-source functions.zsh
 # Initialize colors
 autoload -Uz colors
 colors
@@ -30,8 +29,8 @@ zstyle ':completion:*' keep-prefix true
 # Group matches and describe
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-grouped false
-zstyle ':completion:*' list-separator '''
-zstyle ':completion:*' group-name '''
+zstyle ':completion:*' list-separator ''
+zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:warnings' format '%F{red}%B-- No match for: %d --%b%f'
@@ -40,7 +39,7 @@ zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*:descriptions' format '[%d]'
 
 # Colors
-zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # Directories
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
@@ -108,7 +107,7 @@ _fzf_comprun() {
 
 # Make sure that the terminal is in application mode when zle is active, since
 # only then values from $terminfo are valid
-if (( ''${+terminfo[smkx]} )) && (( ''${+terminfo[rmkx]} )); then
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   function zle-line-init() {
     echoti smkx
   }
