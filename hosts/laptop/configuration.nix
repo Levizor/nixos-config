@@ -43,4 +43,11 @@
       ];
     };
   };
+
+  specialisation.performance.configuration = {
+    powerManagement.cpuFreqGovernor = "performance";
+  };
+
+    
+  programs.gamemode.enable = true;
 }
