@@ -48,10 +48,10 @@ in
 
       "$browser" = "floorp";
       "$terminal" = "kitty -1";
-      "$telegram" = "telegram-desktop";
-      "$fileManager" = "nemo";
-      "$menu" = "fuzzel";
-      "$player" = "youtube-music";
+      "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
+      "$fileManager" = "${lib.getExe pkgs.nemo}";
+      "$menu" = "${lib.getExe pkgs.fuzzel}";
+      "$player" = "${lib.getExe pkgs.youtube-music}";
 
       env = [
         "XDG_CURRENT_DESKTOP, Hyprland"
@@ -162,7 +162,7 @@ in
           "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
           ", F10, exec, wl-copy $(hyprpicker)"
-          "$mod, pause, exec, wlogout"
+          "$mod, home, exec, wlogout"
 
           # Switch wallpapers
           "$mod, F6, exec, wpaperctl next-wallpaper"
