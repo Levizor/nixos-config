@@ -41,8 +41,8 @@
 
 
       # Move between windows 
-      bind -n C-Left previous-window
-      bind -n C-Right next-window
+      bind -n M-C-Left previous-window
+      bind -n M-C-Right next-window
 
       # Vim-style pane navigation (Alt + h/j/k/l)
       bind -n M-h select-pane -L
@@ -71,6 +71,10 @@
 
       bind -n M-f resize-pane -Z 
       bind-key f resize-pane -Z 
+
+      bind c new-window -c "#{pane_current_path}"
+      bind '"' split-window -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"     
       set -g escape-time 0
     '';
 
