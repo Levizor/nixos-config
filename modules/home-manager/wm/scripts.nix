@@ -48,14 +48,19 @@ in
     '';
   };
 
-  tmuxUpdateScript = pkgs.writeShellScriptBin "tmuxUpdateScript" ''
-    while true;
-    do
-      pgrep tmux &>/dev/null || break
-      tmux refresh-client -S;
-      sleep 0.1;
-    done &
-  '';
+  tmuxInitScript = pkgs.writeShellApplication {
+    name = "tmuxInitScript";
+    runtimeInputs = [ pkgs.tmux ];
+    text = ''
+      tmux has-session -t dashboard 2>/dev/null || tmuxp load -d dashboard
+      tmux has-session -t dev 2>/dev/null || tmuxp load -d dev
+      while true;
+      do
+        pgrep tmux &>/dev/null || break
+        tmux refresh-client -S;
+        sleep 0.1;
+      done & '';
+  };
 
   animationsToggleScript = pkgs.writeShellApplication {
     name = "animationsToggleScript";

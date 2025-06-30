@@ -24,7 +24,7 @@ let
   home.file.".config/hypr/impure.conf".enable = true;
 
   monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
-  tmuxUpdateScript = lib.getExe scriptDefs.tmuxUpdateScript;
+  tmuxInitScript = lib.getExe scriptDefs.tmuxInitScript;
   animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
   decorationsToggleScript = lib.getExe scriptDefs.decorationsToggleScript;
   gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
@@ -130,7 +130,7 @@ in
       exec-once = [
         # ensures screensharing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "${tmuxUpdateScript}"
+        "${tmuxInitScript}"
         "clipse -listen"
         "wpaperd"
         "nvim --listen /tmp/nvimsocket"
@@ -214,7 +214,7 @@ in
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
 
-          # Example special workspace (scratchpad)
+          # special workspaces
           "$mod, S, togglespecialworkspace, terminal"
           "$mod SHIFT, S, movetoworkspace, special:terminal"
           "$mod, T, togglespecialworkspace, telegram"
@@ -283,7 +283,7 @@ in
           "w[tv1], gapsout:0, gapsin:0"
           "f[1], gapsout:0, gapsin:0"
           "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
-          "special:terminal, border:false, on-created-empty:$terminal tmuxp load scratchpad, gapsin:0, gapsout:0"
+          "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dev, gapsin:0, gapsout:0"
           "special:browser, on-created-empty:$browser, gapsin:0, gapsout:0"
         ]
         ++ (builtins.genList (

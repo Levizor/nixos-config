@@ -43,6 +43,8 @@
       # Move between windows 
       bind -n M-C-Left previous-window
       bind -n M-C-Right next-window
+      bind -n M-C-h previous-window
+      bind -n M-C-l next-window
 
       # Vim-style pane navigation (Alt + h/j/k/l)
       bind -n M-h select-pane -L
@@ -76,6 +78,26 @@
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"     
       set -g escape-time 0
+
+      bind -n M-d run-shell "
+        current_session=\$(tmux display-message -p '#{session_name}'); \
+        dashboard_exists=\$(tmux list-sessions | grep -c '^dashboard:'); \
+        last_session=\$(tmux show-options -gqv @last_session); \
+        if [ \"\$current_session\" = \"dashboard\" ]; then \
+          if [ -n \"\$last_session\" ] && tmux has-session -t \"\$last_session\" 2>/dev/null; then \
+            tmux set-option -g @last_session \"\$current_session\"; \
+            tmux switch-client -t \"\$last_session\"; \
+          else \
+            tmux switch-client -t dev; \
+          fi; \
+        else \
+          tmux set-option -g @last_session \"\$current_session\"; \
+          if [ \"\$dashboard_exists\" -eq 0 ]; then \
+            tmuxp load -d dashboard; \
+            sleep 0.5; \
+          fi; \
+          tmux switch-client -t dashboard; \
+        fi"
     '';
 
     plugins = with pkgs.tmuxPlugins; [
@@ -110,19 +132,30 @@
 
   };
 
-  home.file.".tmuxp/scratchpad.yaml".text = ''
-    session_name: scratchpad
+  home.file.".tmuxp/dashboard.yaml".text = ''
+    session_name: dashboard
     windows:
-      - window_name: dashboard
-        layout: main-horizontal
-        options:
-          main-pane-height: 99%
+      - window_name: btop
         panes:
-          - focus: true
+          - shell_command:
+              - btop
+      - window_name: tray-tui
+        panes:
+          - shell_command:
+              - tray-tui
+  '';
+
+  home.file.".tmuxp/dev.yaml".text = ''
+    session_name: dev
+    windows:
+      - window_name: main
+        panes:
+          - shell_command:
+              - # empty, bare shell
       - window_name: nix
         panes:
-          - cd ~/nix; nvim 
-      - window_name: vps
+          - shell_command:
+              - cd ~/nix/ 
   '';
 
   home.file.".tmuxp/pw.yaml".text = ''
