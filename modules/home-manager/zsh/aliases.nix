@@ -33,7 +33,7 @@
 
     zrc = "nvim ~/nix/home-manager/zsh/zsh.nix";
 
-    cp = "cp -r";
+    cp = "rsync -r --info=progress2 --human-readable";
 
     compress = "compress()";
 
