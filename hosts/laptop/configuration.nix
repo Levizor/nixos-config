@@ -48,6 +48,7 @@
     powerManagement.cpuFreqGovernor = "performance";
   };
 
-    
   programs.gamemode.enable = true;
+
+  virtualisation.docker.enable = true;
 }
