@@ -12,4 +12,6 @@
     ./cava.nix
     ./nh.nix
   ];
+  programs.brave.enable = true;
+
 }
