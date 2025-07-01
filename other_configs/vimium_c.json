@@ -1,0 +1,42 @@
+{
+	"name": "Vimium C",
+	"@time": "7/1/2025, 12:33:24 PM",
+	"time": 1751366004577,
+	"environment": {
+		"extension": "2.12.3",
+		"platform": "linux",
+		"firefox": 128
+	},
+	"exclusionRules": [],
+	"keyLayout": 2,
+	"searchEngines": [
+		"go|gg|google|Google: https://www.google.com/search?q=%s \\",
+		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
+		"  blank=https://www.google.com/ Google",
+		"br|brave: https://search.brave.com/search?q=%s Brave",
+		"d|dd|ddg|duckduckgo: https://duckduckgo.com/?q=%s DuckDuckGo",
+		"m|gm|g.map|gmap: https://www.google.com/maps?q=%s \\",
+		"  blank=https://www.google.com/maps Google Maps",
+		"y|yt: https://www.youtube.com/results?search_query=%s \\",
+		"  blank=https://www.youtube.com/ YouTube",
+		"w|wiki: https://www.wikipedia.org/w/index.php?search=%s Wikipedia",
+		"",
+		"a|ae|ali|alie|aliexp: https://www.aliexpress.com/wholesale?SearchText=%s \\",
+		"  blank=https://www.aliexpress.com/ AliExpress",
+		"\\:i: vimium://sed/s/^//,lower\\ $S re= Lower case",
+		"v.m|math: vimium://math\\ $S re= Calculate",
+		"v.p: vimium://parse\\ $S re= Redo Search",
+		"gh|github: https://github.com/search?q=$s \\",
+		"  blank=https://github.com/ GitHub Repo",
+		"js\\:|Js: javascript:\\ $S; JavaScript",
+		"n|NixPKGS: https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s",
+		"hm|HM Opts: https://home-manager-options.extranix.com/?query=%s&release=master",
+		"nw|NixWiki: https://nixos.wiki/index.php?search=%s&go=Go",
+		"nv|nixvim: https://nix-community.github.io/nixvim/search/?query=%s",
+		"no|NixOS Opts: https://search.nixos.org/options?channel=unstable&size=50&sort=relevance&type=packages&query=%s",
+		"git|Levizor: https://github.com/Levizor/%s",
+		""
+	],
+	"searchUrl": "https://search.brave.com/search?q=$s Brave",
+	"vimSync": true
+}
