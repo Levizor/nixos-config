@@ -45,6 +45,18 @@
               updateInterval = 24 * 60 * 60 * 1000; # every day
               definedAliases = [ "@nw" ];
             };
+
+            "NixVim" = {
+              urls = [
+                {
+                  template = "https://nix-community.github.io/nixvim/search/?option_scope=0&option=plugins.nvim-surround.settings&query={searchTerms}";
+                }
+              ];
+              icon = "https://wiki.nixos.org/favicon.png";
+              updateInterval = 24 * 60 * 60 * 1000; # every day
+              definedAliases = [ "@nv" ];
+
+            };
             "Brave" = {
               urls = [ { template = "https://search.brave.com/search?q={searchTerms}"; } ];
               icon = "https://brave.com/static-assets/images/brave-logo-sans-text.svg";
