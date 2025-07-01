@@ -36,6 +36,7 @@
       tlrc
       xdragon
       neovim-remote
+      typst
     ]
     ++ lib.optionals myopts.additionalPackages [
       # postman
