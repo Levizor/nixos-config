@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
-{
-  stylix.targets.floorp.profileNames = [ "profile_0" ];
-  programs.floorp = {
+let
+  config = {
     enable = true;
     languagePacks = [
       "en-US"
@@ -137,4 +136,10 @@
       };
     };
   };
+in
+{
+  stylix.targets.floorp.profileNames = [ "profile_0" ];
+  stylix.targets.firefox.profileNames = [ "profile_0" ];
+  programs.floorp = config;
+  programs.firefox = config;
 }
