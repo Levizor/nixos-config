@@ -21,8 +21,6 @@ let
     inherit pkgs lib monitors;
   };
 
-  home.file.".config/hypr/impure.conf".enable = true;
-
   monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
   tmuxInitScript = lib.getExe scriptDefs.tmuxInitScript;
   animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
@@ -43,7 +41,6 @@ in
 
     settings = {
       monitor = map (m: "${m.name}, ${m.config}") monitors;
-
       "$mod" = "SUPER";
 
       "$browser" = "floorp";
@@ -52,6 +49,7 @@ in
       "$fileManager" = "${lib.getExe pkgs.nemo}";
       "$menu" = "${lib.getExe pkgs.fuzzel}";
       "$player" = "${lib.getExe pkgs.youtube-music}";
+      "source" = "~/.config/hypr/impure.conf";
 
       env = [
         "XDG_CURRENT_DESKTOP, Hyprland"
@@ -130,6 +128,7 @@ in
 
       exec-once = [
         # ensures screensharing
+        "touch ~/.config/hypr/impure.conf"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "${tmuxInitScript}"
         "clipse -listen"
@@ -341,7 +340,6 @@ in
           bind=$mod,r,submap, reset
           submap=reset
 
-          source = ~/.config/hypr/impure.conf
     '';
   };
 }
