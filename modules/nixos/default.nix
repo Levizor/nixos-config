@@ -8,10 +8,16 @@ let
   myopts = config.myopts;
 in
 {
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    trusted-users = [
+      "root"
+      "levizor"
+    ];
+  };
   imports = [
     ./networking.nix
     ./user.nix
@@ -55,6 +61,15 @@ in
 
     hyprland = {
       enable = true;
+    };
+
+    wayfire = {
+      enable = true;
+      plugins = with pkgs.wayfirePlugins; [
+        wcm
+        wf-shell
+        wayfire-plugins-extra
+      ];
     };
 
     steam = {
