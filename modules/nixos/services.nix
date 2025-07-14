@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   services = {
     # automounting and virtual filesystems
@@ -39,6 +40,16 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       wireplumber.enable = true;
+    };
+
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql;
+      ensureDatabases = [ "mydb" ];
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database DBuser auth-method
+        local all      all    trust
+      '';
     };
   };
 }
