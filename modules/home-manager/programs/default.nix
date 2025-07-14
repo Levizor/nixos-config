@@ -13,4 +13,6 @@
     ./nh.nix
     ./chromium.nix
   ];
+
+  programs.mpv.enable = true;
 }
