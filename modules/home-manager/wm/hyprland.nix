@@ -162,7 +162,7 @@ in
           "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
           ", F10, exec, wl-copy $(hyprpicker)"
-          "$mod, home, exec, wlogout"
+          "$mod, Escape, exec, wlogout"
 
           # Switch wallpapers
           "$mod, F6, exec, wpaperctl next-wallpaper"
