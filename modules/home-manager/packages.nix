@@ -39,6 +39,7 @@
       typst
     ]
     ++ lib.optionals myopts.additionalPackages [
+      whatsie
       # postman
       # android-tools
       ani-cli
@@ -54,7 +55,7 @@
       nix-prefetch-github
       obsidian
       onlyoffice-desktopeditors
-      prismlauncher
+      # prismlauncher
       qbittorrent
       teams-for-linux
       thunderbird
@@ -92,8 +93,8 @@
     map n nzzzv
     map N Nzzzv
 
-    map bn :bnext<CR>
-    map bp :bprev<CR>
+    map <Leader>bn :bnext<CR>
+    map <Leader>bp :bprev<CR>
 
     nmap <C-h> :action KJumpAction.Word0<cr>
     nmap <C-l> :action KJumpAction.Line<cr>
