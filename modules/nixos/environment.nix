@@ -35,9 +35,4 @@
   };
 
   programs.nano.enable = false;
-  virtualisation = {
-    docker = {
-      enable = true;
-    };
-  };
 }
