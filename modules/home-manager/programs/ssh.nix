@@ -10,6 +10,11 @@
         identityFile = "~/.ssh/github";
         identitiesOnly = true;
       };
+
+      "aur.archlinux.org" = {
+        user = "aur";
+        identityFile = "~/.ssh/aur";
+      };
     };
   };
 }
