@@ -5,7 +5,6 @@ clone() {
   fi
   git clone "git@github.com:Levizor/$1.git"
 }
-
 down() {
   local move=0
   local count=1
@@ -29,8 +28,11 @@ down() {
     esac
   done
 
-  files=($(find ~/Downloads -type f -printf '%T@ %p\n' 2>/dev/null | \
-    sort -n | tail -n "$count" | cut -d' ' -f2-))
+  # Use null delimiter to properly handle filenames with spaces
+  while IFS= read -r -d '' file; do
+    files+=("$file")
+  done < <(find ~/Downloads -type f -printf '%T@ %p\0' 2>/dev/null | \
+    sort -zn | tail -z -n "$count" | cut -z -d' ' -f2-)
 
   for f in "${files[@]}"; do
     if [[ $move -eq 1 ]]; then
