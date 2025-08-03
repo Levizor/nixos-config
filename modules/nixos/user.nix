@@ -14,6 +14,7 @@
       "audio"
       "wireshark"
       "minecraft"
+      "libvirtd"
     ];
     initialHashedPassword = "";
   };
