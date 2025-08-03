@@ -50,5 +50,23 @@
 
   programs.gamemode.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+    };
+
+    libvirtd = {
+      enable = true;
+    };
+  };
+
+  programs.virt-manager.enable = true;
+  environment.systemPackages = with pkgs; [
+    virt-viewer
+    qemu
+    libvirt
+    virtio-win
+    wget
+    quickemu
+  ];
 }
