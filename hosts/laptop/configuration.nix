@@ -31,6 +31,10 @@
     inputs.stylix.nixosModules.stylix
   ];
 
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+
+  boot.kernelModules = [ "v4l2loopback" ];
+
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;
   };
