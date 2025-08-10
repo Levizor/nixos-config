@@ -66,7 +66,6 @@
       youtube-music
       yt-dlp
       zola
-      obs-studio
       lazygit
     ];
 
