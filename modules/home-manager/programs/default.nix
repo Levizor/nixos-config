@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
+    ./obs.nix
     ./distrobox.nix
     ./ssh.nix
     ./zathura.nix
