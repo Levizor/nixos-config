@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   services.wpaperd = {
     enable = true;
@@ -21,7 +21,7 @@
       };
 
       any = {
-        path = lib.mkForce "/home/levizor/Pictures/Wallpapers/picturesque/";
+        path = lib.mkForce "${config.home.homeDirectory}/Pictures/Wallpapers/picturesque/";
         mode = lib.mkForce "center";
       };
     };

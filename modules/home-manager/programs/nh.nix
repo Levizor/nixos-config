@@ -2,6 +2,6 @@
 {
   programs.nh = {
     enable = true;
-    flake = "/home/levizor/nix";
+    flake = "${config.home.homeDirectory}/nix";
   };
 }

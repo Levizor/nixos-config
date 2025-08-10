@@ -7,7 +7,7 @@
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".zsh";
+    dotDir = "${config.home.homeDirectory}/.zsh";
 
     plugins = [
       {
@@ -29,7 +29,7 @@
 
     history = {
       size = 10000;
-      path = "/home/levizor/.zsh/history";
+      path = "${config.programs.zsh.dotDir}/.zsh/history";
     };
 
     oh-my-zsh = {

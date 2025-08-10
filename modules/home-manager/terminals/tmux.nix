@@ -3,6 +3,7 @@
   inputs,
   lib,
   myopts,
+  config,
   ...
 }:
 {
@@ -186,7 +187,7 @@
     default_session = "scratchpad"
 
     [[search_dirs]]
-    path = "/home/levizor/Projects"
+    path = "${config.home.homeDirectory}/Projects"
     depth = 10
   '';
 
