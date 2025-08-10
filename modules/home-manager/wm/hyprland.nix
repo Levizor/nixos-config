@@ -27,6 +27,7 @@ let
   decorationsToggleScript = lib.getExe scriptDefs.decorationsToggleScript;
   gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
   forceKillScript = lib.getExe scriptDefs.forceKillScript;
+  openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
 in
 {
   services.hyprpaper.enable = lib.mkForce false;
@@ -43,7 +44,7 @@ in
       monitor = map (m: "${m.name}, ${m.config}") monitors;
       "$mod" = "SUPER";
 
-      "$browser" = "floorp";
+      "$browser" = "brave";
       "$terminal" = "kitty -1";
       "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
       "$fileManager" = "${lib.getExe pkgs.nemo}";
@@ -130,10 +131,11 @@ in
         # ensures screensharing
         "touch ~/.config/hypr/impure.conf"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "hyprctl dispatch workspace 2"
         "${tmuxInitScript}"
+        "${openOnFocusScript}"
         "clipse -listen"
         "wpaperd"
-        "nvim --listen /tmp/nvimsocket"
       ];
 
       bind =
@@ -217,10 +219,8 @@ in
           # special workspaces
           "$mod, S, togglespecialworkspace, terminal"
           "$mod SHIFT, S, movetoworkspace, special:terminal"
-          "$mod, T, togglespecialworkspace, telegram"
-          "$mod SHIFT, T, movetoworkspace, special:telegram"
-          "$mod, W, togglespecialworkspace, browser"
-          "$mod SHIFT, W, movetoworkspace, special:browser"
+          # "$mod, T, togglespecialworkspace, telegram"
+          # "$mod SHIFT, T, movetoworkspace, special:telegram"
 
           #Move active window in directions
           "$mod SHIFT, left, movewindow, l"
@@ -232,6 +232,10 @@ in
           "$mod SHIFT, k, movewindow, u"
           "$mod SHIFT, j, movewindow, d"
 
+          "$mod, W, workspace, 6"
+          "$mod Alt, W, focusworkspaceoncurrentmonitor, 6 "
+          "$mod, T, workspace, 1"
+          "$mod, T, focusworkspaceoncurrentmonitor, 1"
           "$mod, 0, workspace, 10"
           "$mod SHIFT, 0, movetoworkspace, 10"
           "$mod Alt, 0, focusworkspaceoncurrentmonitor, 10 "
@@ -284,7 +288,6 @@ in
           "f[1], gapsout:0, gapsin:0"
           "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
           "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dev, gapsin:0, gapsout:0"
-          "special:browser, on-created-empty:$browser, gapsin:0, gapsout:0"
         ]
         ++ (builtins.genList (
           i:
@@ -319,6 +322,31 @@ in
 
         "float, class:(clipse)"
         "size 622 652, class:(clipse)"
+
+        # Telegram
+        "workspace 1, class: ^(?i).*(telegram).*"
+
+        # KeePassXC
+        "workspace 2, class:^(?i).*(keepassxc).*"
+
+        # Music
+        "workspace 3, class:^(?i).*(youtube_music|ytmdesktop).*"
+
+        # Vesktop /
+        "workspace 4, class:^(vesktop)$"
+
+        # Teams
+        "workspace 5, class:^(teams-for-linux)$"
+
+        # Browser (WS6)
+        "workspace 6, class:^(?i).*(firefox|chromium|brave|floorp).*"
+
+        # Steam + Games
+        "workspace 8, class:^(steam)$"
+        "workspace 9, title:^(.*)$, class:^(steam_app_.*)$"
+
+        # MPV
+        "workspace 10, class:^(mpv)$"
       ];
 
     };

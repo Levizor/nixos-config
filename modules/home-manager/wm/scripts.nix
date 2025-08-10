@@ -9,6 +9,7 @@ let
   monitorConfigs = map (m: m.config) monitors;
   commonDependencies = with pkgs; [
     libnotify
+    jq
   ];
 in
 {
@@ -135,6 +136,47 @@ in
       pid=$(hyprctl activewindow | grep -E 'pid:' | grep -oE '[0-9]+')
       notify-send -t 3000 "Process Killed" "$pid: $(ps -p "$pid" -o comm=)"
       kill -9 "$pid"
+    '';
+  };
+
+  openOnFocusScript = pkgs.writeShellApplication {
+    name = "openOnFocusScript";
+    runtimeInputs = commonDependencies;
+    text = ''
+        #!/usr/bin/env bash
+        # Map workspace ID to application command
+      declare -A workspace_apps=(
+            [1]="Telegram"
+            [2]="keepassxc"
+            [3]="youtube-music"       
+            [4]="vesktop"
+            [5]="teams-for-linux"
+            [6]="brave"
+            [7]="kitty -1"              
+            [8]="steam"
+        )
+
+        last_ws=""
+
+        while true; do
+            wsid=$(hyprctl activeworkspace -j | jq -r '.id')
+
+            if [[ "$wsid" != "$last_ws" ]]; then
+                last_ws="$wsid"
+
+                if [[ -n "''${workspace_apps[$wsid]}" ]]; then
+                    # Check if workspace has any windows
+                    clients=$(hyprctl clients -j | jq "[.[] | select(.workspace.id == $wsid)] | length")
+
+                    if [[ "$clients" -eq 0 ]]; then
+                        notify-send -t 2000 "Launching ''${workspace_apps[$wsid]}"
+                        ''${workspace_apps[$wsid]} &
+                    fi
+                fi
+            fi
+
+            sleep 0.3
+        done
     '';
   };
 }
