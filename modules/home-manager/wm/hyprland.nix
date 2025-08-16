@@ -339,7 +339,7 @@ in
         "workspace 5, class:^(teams-for-linux)$"
 
         # Browser (WS6)
-        "workspace 6, class:^(?i).*(firefox|chromium|brave|floorp).*"
+        "workspace 6, class:^(?i).*(firefox|chromium|brave|floorp|zen).*"
 
         # Steam + Games
         "workspace 8, class:^(steam)$"

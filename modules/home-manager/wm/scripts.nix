@@ -151,7 +151,7 @@ in
             [3]="youtube-music"       
             [4]="vesktop"
             [5]="teams-for-linux"
-            [6]="brave"
+            [6]="zen"
             [7]="kitty -1"              
             [8]="steam"
         )
