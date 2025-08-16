@@ -31,6 +31,10 @@
     };
 
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
