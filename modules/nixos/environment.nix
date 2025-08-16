@@ -19,6 +19,8 @@
         vim
         zip
         unzip
+        man-pages
+        man-pages-posix
       ]
       ++ lib.optionals config.myopts.sound [
         # I now some things aren't about sound, I am too lazy to make more options
@@ -35,4 +37,5 @@
   };
 
   programs.nano.enable = false;
+  documentation.dev.enable = true;
 }
