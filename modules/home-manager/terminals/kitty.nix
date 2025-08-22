@@ -25,8 +25,13 @@
       map kitty_mod+left neighboring_window left
       map kitty_mod+down neighboring_window bottom
       map kitty_mod+right neighboring_window right
-      map kitty_mod+up neighboring_window top
       map kitty_mod+a>0 remote_control set-background-opacity 0
+      map kitty_mod+up neighboring_window top
+
+      scrollback_lines 2000
+      scrollback_pager nvim -c "setlocal nonumber norelativenumber nowrap noshowmode" -c "normal! G" -
+      # map kitty_mod+0 show_scrollback         
+      map kitty_mod+0 launch --type=tab --stdin-source=@screen_scrollback nvim -c "normal! G" -
     '';
   };
 }
