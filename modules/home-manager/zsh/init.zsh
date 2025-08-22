@@ -117,3 +117,7 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
   zle -N zle-line-init
   zle -N zle-line-finish
 fi
+
+# Magic enter oh-my-zsh plugin setup
+MAGIC_ENTER_OTHER_COMMAND='ls'
+MAGIC_ENTER_GIT_COMMAND='ls'
