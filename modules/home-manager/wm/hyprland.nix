@@ -44,7 +44,7 @@ in
       monitor = map (m: "${m.name}, ${m.config}") monitors;
       "$mod" = "SUPER";
 
-      "$browser" = "brave";
+      "$browser" = "zen";
       "$terminal" = "kitty -1";
       "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
       "$fileManager" = "${lib.getExe pkgs.nemo}";
@@ -133,7 +133,7 @@ in
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprctl dispatch workspace 2"
         "${tmuxInitScript}"
-        "${openOnFocusScript}"
+        # "${openOnFocusScript}"
         "clipse -listen"
         "wpaperd"
       ];
