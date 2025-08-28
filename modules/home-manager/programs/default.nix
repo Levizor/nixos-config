@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
+    ./zen.nix
     ./obs.nix
     ./distrobox.nix
     ./ssh.nix

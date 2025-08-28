@@ -20,6 +20,7 @@
         ./packages.nix
         ./programs
         ./terminals
+        inputs.zen-browser.homeModules.beta
       ];
 
       xdg.enable = true;
