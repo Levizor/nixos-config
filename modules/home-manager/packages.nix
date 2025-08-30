@@ -60,7 +60,6 @@
       teams-for-linux
       thunderbird
       timg
-      inputs.zen-browser.packages."${system}".default
       tray-tui
       ungoogled-chromium
       vesktop
