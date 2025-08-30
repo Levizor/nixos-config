@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -34,6 +35,9 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     systemd = {
       variables = [ "--all" ];
       enableXdgAutostart = true;
@@ -55,7 +59,8 @@ in
       env = [
         "XDG_CURRENT_DESKTOP, Hyprland"
         "XCURSOR_SIZE, 30"
-        "QT_STYLE_OVERRIDE=kvantum"
+        "QT_STYLE_OVERRIDE, kvantum"
+        "NIXOS_OZONE_WL, 1"
       ];
 
       input = {

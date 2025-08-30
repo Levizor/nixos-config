@@ -91,7 +91,7 @@
           "zen.workspaces.continue-where-left-off" = true;
           "zen.workspaces.hide-default-container-indicator" = false;
           "zen.workspaces.separate-essentials" = false;
-
+          "zen.view.compact.hide-tabbar" = false;
         };
       };
     };
@@ -115,6 +115,8 @@
         "extensions.webextensions.ExtensionStorageIDB.migrated.sponsorBlocker@ajay.app" = true;
         "extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net" = true;
         "extensions.webextensions.ExtensionStorageIDB.migrated.vimium-c@gdh1995.cn" = true;
+        "signon.rememberSignons" = false;
+        "sidebar.old-sidebar.has-used" = true;
       };
 
       DisableTelemetry = true;
@@ -154,14 +156,11 @@
           install_url = "https://github.com/mkaply/queryamoid/releases/download/v0.2/query_amo_addon_id-0.2-fx.xpi";
           installation_mode = "normal_installed";
         };
-        "addon@darkreader.org" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          installation_mode = "normal_installed";
-        };
+        # "addon@darkreader.org" = {
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
       };
     };
-  };
-  home.file.".zen/profile_0" = {
-    source = ./zen-themes.json;
   };
 }
