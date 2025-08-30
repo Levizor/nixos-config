@@ -42,3 +42,20 @@ down() {
     fi
   done
 }
+
+json2nix() {
+  tmpfile=$(mktemp)
+  cat > "$tmpfile"
+  nix eval --raw --impure --expr "
+    let
+      j = builtins.fromJSON (builtins.readFile \"$tmpfile\");
+      showValue = v:
+        if builtins.isString v then \"\\\"\" + v + \"\\\"\"
+        else if builtins.isInt v then builtins.toString v
+        else if builtins.isBool v then (if v then \"true\" else \"false\")
+        else builtins.toString v;
+      showAttr = key: value: key + \" = \" + (showValue value) + \";\";
+    in (builtins.concatStringsSep \"\\n\" (map (k: showAttr k j.\${k}) (builtins.attrNames j))) + \"\\n\"
+  "
+  rm -f "$tmpfile"
+}
