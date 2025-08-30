@@ -1,6 +1,14 @@
-{ config, ... }:
 {
-  programs.zen = {
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+  programs.zen-browser = {
     enable = true;
 
     profiles = {
@@ -63,6 +71,26 @@
           privateDefault = "Brave";
         };
         settings = {
+          "zen.keyboard.shortcuts.version" = 9;
+          "zen.sidebar-expanded" = false;
+          "zen.mods.updated-value-observer" = true;
+          "zen.sidebar.enabled" = false;
+          "zen.tabs.show-newtab-vertical" = false;
+          "zen.theme.accent-color" = "#d4bbff";
+          "zen.theme.color-prefs.colorful" = true;
+          "zen.ui.migration.version" = 2;
+          "zen.urlbar.behavior" = "float";
+          "zen.view.compact.hide-toolbar" = true;
+          "zen.view.compact.should-enable-at-startup" = true;
+          "zen.view.compact.toolbar-flash-popup" = true;
+          "zen.view.sidebar-expanded" = false;
+          "zen.view.split-view.change-on-hover" = true;
+          "zen.view.use-single-toolbar" = false;
+          "zen.welcome-screen.seen" = true;
+          "zen.welcomeScreen.seen" = true;
+          "zen.workspaces.continue-where-left-off" = true;
+          "zen.workspaces.hide-default-container-indicator" = false;
+          "zen.workspaces.separate-essentials" = false;
 
         };
       };
@@ -71,7 +99,6 @@
     policies = {
 
       Preferences = {
-        "accessibility.browsewithcaret" = true;
         "app.normandy.first_run" = false;
         "app.update.auto" = false;
         "app.update.disable_button.showUpdateHistory" = false;
@@ -88,26 +115,6 @@
         "extensions.webextensions.ExtensionStorageIDB.migrated.sponsorBlocker@ajay.app" = true;
         "extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net" = true;
         "extensions.webextensions.ExtensionStorageIDB.migrated.vimium-c@gdh1995.cn" = true;
-        "zen.keyboard.shortcuts.version" = 9;
-        "zen.mods.milestone" = "1.15b";
-        "zen.mods.updated-value-observer" = true;
-        "zen.sidebar.enabled" = false;
-        "zen.tabs.show-newtab-vertical" = false;
-        "zen.theme.accent-color" = "#d4bbff";
-        "zen.theme.color-prefs.colorful" = true;
-        "zen.ui.migration.version" = 2;
-        "zen.urlbar.behavior" = "float";
-        "zen.view.compact.hide-toolbar" = true;
-        "zen.view.compact.should-enable-at-startup" = true;
-        "zen.view.compact.toolbar-flash-popup" = true;
-        "zen.view.sidebar-expanded" = false;
-        "zen.view.split-view.change-on-hover" = true;
-        "zen.view.use-single-toolbar" = false;
-        "zen.welcome-screen.seen" = true;
-        "zen.welcomeScreen.seen" = true;
-        "zen.workspaces.continue-where-left-off" = true;
-        "zen.workspaces.hide-default-container-indicator" = false;
-        "zen.workspaces.separate-essentials" = false;
       };
 
       DisableTelemetry = true;
@@ -153,5 +160,8 @@
         };
       };
     };
+  };
+  home.file.".zen/profile_0" = {
+    source = ./zen-themes.json;
   };
 }
