@@ -435,11 +435,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1756221264,
-        "narHash": "sha256-1FPAiMQ9GnMHutAIdvhcg/vHvlSM5tetKzC4ClQtaXc=",
+        "lastModified": 1756557904,
+        "narHash": "sha256-Us+JfQoJIV8SnnZuLkpseoRgLH50uz9Igpmj7hNuYOg=",
         "owner": "Levizor",
         "repo": "Hyprland",
-        "rev": "cea65bf0bdbad1a4b112b56b40ef61f07e1ac246",
+        "rev": "93667b934f768e8c1ff8843fa0539f29b42e9824",
         "type": "github"
       },
       "original": {
