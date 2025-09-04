@@ -59,3 +59,44 @@ json2nix() {
   "
   rm -f "$tmpfile"
 }
+
+
+ffcompress() {
+  if [[ $# -lt 1 ]]; then
+    echo "Usage: ffcompress [-d] <input_file> [output_file]"
+    echo "  -d   Use H.264 for Discord"
+    return 1
+  fi
+
+  local discord=false
+  if [[ "$1" == "-d" ]]; then
+    discord=true
+    shift
+  fi
+
+  local input="$1"
+  shift
+
+  local output
+  if [[ $# -ge 1 ]]; then
+    output="$1"
+  else
+    local base="${input%.*}"
+    local ext="${input##*.}"
+    output="${base}_compressed.${ext}"
+  fi
+
+  if $discord; then
+    # Discord-friendly compression (H.264 + AAC)
+    ffmpeg -hide_banner -v error -stats -i "$input" \
+      -c:v libx264 -crf 23 -preset medium \
+      -c:a aac -b:a 128k "$output"
+  else
+    # Default compression (H.265 + AAC)
+    ffmpeg -hide_banner -v error -stats -i "$input" \
+      -c:v libx265 -crf 28 -preset medium \
+      -c:a aac -b:a 128k "$output"
+  fi
+
+  echo "✅ Compression complete: $output"
+}
