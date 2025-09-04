@@ -6,6 +6,111 @@
   config,
   ...
 }:
+let
+  toggleSessionScript = pkgs.writeShellApplication {
+    name = "toggleTmuxSessionScript";
+    runtimeInputs = with pkgs; [
+      tmux
+      tmuxp
+    ];
+    text = ''
+      current_session=$(tmux display-message -p '#{session_name}'); 
+      dashboard_exists=$(tmux list-sessions | grep -c '^dashboard:'); 
+      last_session=$(tmux show-options -gqv @last_session); 
+      if [ "$current_session" = "dashboard" ]; then 
+        if [ -n "$last_session" ] && tmux has-session -t "$last_session" 2>/dev/null; then 
+          tmux set-option -g @last_session "$current_session"; 
+          tmux switch-client -t "$last_session"; 
+        else 
+          tmux switch-client -t dev; 
+        fi; 
+      else 
+        tmux set-option -g @last_session "$current_session"; 
+        if [ "$dashboard_exists" -eq 0 ]; then 
+          tmuxp load -d dashboard; 
+          sleep 0.5; 
+        fi; 
+        tmux switch-client -t dashboard; 
+      fi
+    '';
+  };
+
+  rebuildScript = pkgs.writeShellApplication {
+    name = "rebuild";
+    runtimeInputs = with pkgs; [
+      libnotify
+    ];
+
+    text = ''
+      host="laptop"
+
+      notify-send -t 3000 "🔧 Starting NixOS rebuild on $host..."
+
+      if nh os switch -H "$host"; then
+        notify-send -t 5000 "✅ NixOS rebuild on $host succeeded!"
+      else
+        notify-send -t 5000 "❌ NixOS rebuild on $host failed!"
+      fi
+
+    '';
+
+  };
+
+  tmuxRebuildBind = pkgs.writeShellApplication {
+    name = "rebuildBind";
+    runtimeInputs = with pkgs; [
+      tmux
+      tmuxp
+      libnotify
+    ];
+
+    text = ''
+      # Usage:
+      silent=false
+
+      # Parse optional -s flag
+      if [[ "''${1:-}" == "-s" ]]; then
+        silent=true
+        shift
+      fi
+
+      TARGET_WINDOW="nix-rebuild"
+      CMD="${lib.getExe rebuildScript}"
+
+      current_session=$(tmux display-message -p '#{session_name}')
+      dashboard_exists=$(tmux list-sessions | grep -c '^dashboard:')
+
+      if $silent; then
+        # Silent mode: only send command to dashboard
+        if [[ "$dashboard_exists" -eq 0 ]]; then
+          echo "Dashboard session not running!"
+          exit 1
+        fi
+        tmux send-keys -t "dashboard:''${TARGET_WINDOW}" "$CMD" C-m
+        exit 0
+      fi
+
+      # Normal toggle mode
+      if [ "$current_session" = "dashboard" ]; then
+        # Already in dashboard → switch to target window + run command
+        tmux select-window -t "dashboard:''${TARGET_WINDOW}"
+        tmux send-keys -t "dashboard:''${TARGET_WINDOW}" "$CMD" C-m
+      else
+        # Coming from another session
+        tmux set-option -g @last_session "$current_session"
+        if [ "$dashboard_exists" -eq 0 ]; then
+          tmuxp load -d dashboard
+          sleep 0.5
+        fi
+        tmux switch-client -t dashboard
+        tmux select-window -t "dashboard:''${TARGET_WINDOW}"
+        tmux send-keys -t "dashboard:''${TARGET_WINDOW}" "$CMD" C-m
+      fi
+
+    '';
+
+  };
+in
 {
   programs.tmux = {
     shortcut = if myopts.server then "a" else "b";
@@ -47,6 +152,12 @@
       bind -n M-C-h previous-window
       bind -n M-C-l next-window
 
+      # Swap windows
+
+      bind -n M-C-S-Left swap-window -t -1 \; select-window -t -1
+
+      bind -n M-C-S-Right swap-window -t +1 \; select-window -t +1
+
       # Vim-style pane navigation (Alt + h/j/k/l)
       bind -n M-h select-pane -L
       bind -n M-j select-pane -D
@@ -64,10 +175,6 @@
       bind -n M-J swap-pane -D
       bind -n M-K swap-pane -U
 
-      bind -n M-S-Left swap-pane -t -1
-      bind -n M-S-Right swap-pane -t +1
-      bind -n M-S-Down swap-pane -D
-      bind -n M-S-Up swap-pane -U
 
       bind -n M-q kill-pane
       bind -n C-q kill-window
@@ -80,25 +187,9 @@
       bind % split-window -h -c "#{pane_current_path}"     
       set -g escape-time 0
 
-      bind -n M-d run-shell "
-        current_session=\$(tmux display-message -p '#{session_name}'); \
-        dashboard_exists=\$(tmux list-sessions | grep -c '^dashboard:'); \
-        last_session=\$(tmux show-options -gqv @last_session); \
-        if [ \"\$current_session\" = \"dashboard\" ]; then \
-          if [ -n \"\$last_session\" ] && tmux has-session -t \"\$last_session\" 2>/dev/null; then \
-            tmux set-option -g @last_session \"\$current_session\"; \
-            tmux switch-client -t \"\$last_session\"; \
-          else \
-            tmux switch-client -t dev; \
-          fi; \
-        else \
-          tmux set-option -g @last_session \"\$current_session\"; \
-          if [ \"\$dashboard_exists\" -eq 0 ]; then \
-            tmuxp load -d dashboard; \
-            sleep 0.5; \
-          fi; \
-          tmux switch-client -t dashboard; \
-        fi"
+      bind -n M-d run-shell "${lib.getExe toggleSessionScript}"
+      bind -n M-r run-shell "${lib.getExe tmuxRebuildBind}"
+      bind -n M-R run-shell "${lib.getExe tmuxRebuildBind} -s"
     '';
 
     plugins = with pkgs.tmuxPlugins; [
@@ -136,6 +227,10 @@
   home.file.".tmuxp/dashboard.yaml".text = ''
     session_name: dashboard
     windows:
+      - window_name: nix-rebuild
+        panes: 
+          - shell_command:
+              - cd ~/nix/; ${lib.getExe pkgs.neofetch}
       - window_name: btop
         panes:
           - shell_command:
