@@ -39,6 +39,11 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tray-tui = {
+      url = "github:Levizor/tray-tui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
