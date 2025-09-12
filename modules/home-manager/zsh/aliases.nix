@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.zsh.shellAliases = {
     c = "wl-copy";
@@ -54,7 +54,7 @@
 
     s = "source ~/zsh_config/.zshrc";
 
-    i = "loupe";
+    i = "${lib.getExe pkgs.loupe}";
 
     get = "nix-shell -p";
 

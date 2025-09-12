@@ -138,7 +138,7 @@ in
     profiles = profiles;
   };
   programs.firefox = {
-    enable = true;
+    enable = false;
     policies = policies;
     profiles = profiles;
   };
