@@ -11,6 +11,7 @@
     enable = true;
     targets = {
       qt.enable = true;
+      gtk.enable = true;
     };
 
     fonts = {

@@ -9,7 +9,6 @@
     systemPackages =
       with pkgs;
       [
-        # libsForQt5.qt5.qtgraphicaleffects
         curl
         gcc
         git
