@@ -29,6 +29,7 @@
 
     ../../modules/stylix
     inputs.stylix.nixosModules.stylix
+    ./tailscale.nix
   ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -43,6 +44,7 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        libpulseaudio
         icu
       ];
     };
