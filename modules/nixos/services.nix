@@ -51,5 +51,6 @@
         local all      all    trust
       '';
     };
+    flatpak.enable = true;
   };
 }
