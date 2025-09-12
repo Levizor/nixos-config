@@ -203,9 +203,6 @@ in
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
         extraConfig =
           if !myopts.server then
-            let
-              hyprland-workspaces-tui = pkgs.hyprland-workspaces-tui;
-            in
             ''
               set -g status-bg black
               set -g @minimal-tmux-fg "black"
@@ -213,7 +210,7 @@ in
               set -g @minimal-tmux-use-arrow true
               bind-key b set-option status
               set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
-              set -g @minimal-tmux-status-left-extra "#(${lib.getExe hyprland-workspaces-tui} plain -p true)"
+              set -g @minimal-tmux-status-left-extra "#(${lib.getExe pkgs.hyprland-workspaces-tui} plain -p true)"
               set -g status-left-length 20
               set -g status-interval 1
             ''
