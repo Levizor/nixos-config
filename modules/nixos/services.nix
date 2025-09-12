@@ -43,7 +43,7 @@
     };
 
     postgresql = {
-      enable = true;
+      enable = false;
       package = pkgs.postgresql;
       ensureDatabases = [ "mydb" ];
       authentication = pkgs.lib.mkOverride 10 ''
