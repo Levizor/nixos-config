@@ -40,6 +40,7 @@
     ]
     ++ lib.optionals myopts.additionalPackages [
       whatsie
+      inputs.tray-tui.packages.${system}.tray-tui
       # postman
       # android-tools
       ani-cli
@@ -56,12 +57,14 @@
       obsidian
       onlyoffice-desktopeditors
       # prismlauncher
+      # mcpelauncher-ui-qt
+      mcpelauncher-client
       qbittorrent
       teams-for-linux
       thunderbird
       timg
-      tray-tui
-      ungoogled-chromium
+      # tray-tui
+      # ungoogled-chromium
       vesktop
       youtube-music
       yt-dlp
