@@ -57,18 +57,16 @@
       obsidian
       onlyoffice-desktopeditors
       # prismlauncher
-      # mcpelauncher-ui-qt
       mcpelauncher-client
       qbittorrent
       teams-for-linux
       thunderbird
       timg
-      # tray-tui
       # ungoogled-chromium
       vesktop
       youtube-music
       yt-dlp
-      zola
+      # zola
       lazygit
     ];
 

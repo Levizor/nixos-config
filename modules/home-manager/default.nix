@@ -36,8 +36,6 @@
         stateVersion = "24.05";
       };
 
-      qt.enable = true;
-
     };
 
   };

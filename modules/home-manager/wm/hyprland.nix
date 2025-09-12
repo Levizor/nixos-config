@@ -57,10 +57,8 @@ in
 
       env = [
         "XDG_CURRENT_DESKTOP, Hyprland"
-        # "WAYLAND_DISPLAY, wayland-1"
         "GTK_USE_PORTAL=1"
         "XCURSOR_SIZE, 30"
-        "QT_STYLE_OVERRIDE, kvantum"
         "NIXOS_OZONE_WL, 1"
       ];
 
@@ -136,7 +134,7 @@ in
       exec-once = [
         # ensures screensharing
         "touch ~/.config/hypr/impure.conf"
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_USE_PORTAL"
         "hyprctl dispatch workspace 2"
         "${tmuxInitScript}"
         # "${openOnFocusScript}"
