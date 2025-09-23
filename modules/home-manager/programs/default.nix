@@ -18,13 +18,19 @@
   ];
 
   programs.mpv.enable = true;
-  xdg.mimeApps = {
-    enable = true;
-    defaultApplications = {
-      "image/png" = [ "org.gnome.Loupe.desktop" ];
-      "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
-      "image/gif" = [ "org.gnome.Loupe.desktop" ];
-      "image/webp" = [ "org.gnome.Loupe.desktop" ];
+  xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "image/png" = [ "org.gnome.Loupe.desktop" ];
+        "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
+        "image/gif" = [ "org.gnome.Loupe.desktop" ];
+        "image/webp" = [ "org.gnome.Loupe.desktop" ];
+        "text/*" = [ "nvim.desktop" ];
+        "text/plain" = [ "nvim.desktop" ];
+        "text/x-log" = [ "nvim.desktop" ];
+        "text/markdown" = [ "nvim.desktop" ];
+      };
     };
   };
 

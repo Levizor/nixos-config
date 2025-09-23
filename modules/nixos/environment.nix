@@ -31,6 +31,7 @@
 
     variables = {
       EDITOR = "nvim";
+      TERMINAL = "kitty -1";
       NIXPKGS_ALLOW_UNFREE = 1;
     };
   };

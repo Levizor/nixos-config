@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       main = {
-        terminal = "foot";
+        terminal = "kitty -1";
       };
     };
   };
