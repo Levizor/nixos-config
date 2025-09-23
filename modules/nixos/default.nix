@@ -45,7 +45,7 @@ in
   };
 
   hardware = {
-    enableAllFirmware = true;
+    enableAllFirmware = false;
     bluetooth.enable = myopts.hardware;
     graphics.enable = myopts.hardware;
     graphics.enable32Bit = myopts.hardware;
@@ -67,7 +67,7 @@ in
     };
 
     wayfire = {
-      enable = true;
+      enable = false;
       plugins = with pkgs.wayfirePlugins; [
         wcm
         wf-shell
