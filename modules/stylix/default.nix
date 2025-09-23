@@ -12,6 +12,7 @@
     targets = {
       qt.enable = true;
       gtk.enable = true;
+      zen-browser.profileNames = ["profile_0"];
     };
 
     fonts = {
