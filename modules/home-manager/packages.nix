@@ -39,7 +39,6 @@
       typst
     ]
     ++ lib.optionals myopts.additionalPackages [
-      whatsie
       inputs.tray-tui.packages.${system}.tray-tui
       # postman
       # android-tools
@@ -49,9 +48,10 @@
       clock-rs
       # filezilla
       hyprland-workspaces-tui
-      jetbrains.rider
+      # jetbrains.rider
       jetbrains.idea-ultimate
-      krita
+      jetbrains.pycharm-professional
+      pinta
       networkmanagerapplet
       nix-prefetch-github
       obsidian
