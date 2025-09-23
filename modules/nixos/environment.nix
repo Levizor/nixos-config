@@ -22,7 +22,7 @@
         man-pages-posix
       ]
       ++ lib.optionals config.myopts.sound [
-        # I now some things aren't about sound, I am too lazy to make more options
+        # I know some things aren't about sound, I am too lazy to make more options
         pavucontrol
         pulseaudioFull
         brightnessctl
