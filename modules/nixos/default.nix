@@ -62,9 +62,8 @@ in
 
     hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      # portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
 
     wayfire = {
@@ -78,8 +77,8 @@ in
 
     steam = {
       enable = myopts.steam;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
+      # remotePlay.openFirewall = true;
+      # dedicatedServer.openFirewall = true;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
       ];
