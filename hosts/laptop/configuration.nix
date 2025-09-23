@@ -44,7 +44,6 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
-        libpulseaudio
         icu
       ];
     };
@@ -64,10 +63,6 @@
 
   programs.virt-manager.enable = true;
   environment.systemPackages = with pkgs; [
-    virt-viewer
-    qemu
-    libvirt
-    virtio-win
     wget
     quickemu
   ];
