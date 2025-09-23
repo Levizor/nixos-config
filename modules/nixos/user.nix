@@ -15,6 +15,7 @@
       "wireshark"
       "minecraft"
       "libvirtd"
+      "docker"
     ];
     initialHashedPassword = "";
   };
