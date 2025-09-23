@@ -56,6 +56,7 @@ in
       "source" = "~/.config/hypr/impure.conf";
 
       env = [
+        "TERMINAL, kitty -1"
         "XDG_CURRENT_DESKTOP, Hyprland"
         "GTK_USE_PORTAL=1"
         "XCURSOR_SIZE, 30"
@@ -76,10 +77,6 @@ in
 
         sensitivity = 0;
         repeat_delay = 250;
-      };
-
-      gestures = {
-        workspace_swipe = true;
       };
 
       misc = {
@@ -164,6 +161,7 @@ in
           "$mod, T, exec, $telegram"
           "$mod, E, exec, $fileManager --class files"
           "CTRL_$mod, W, exec, $browser"
+          "$mod, W, exec, pgrep -x '.*$browser.*' > /dev/null || $browser"
           "$mod, D, exec, $menu"
           "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
@@ -266,6 +264,11 @@ in
         "$mod, mouse:272, movewindow"
         "$mod, mouse:273, resizewindow"
       ];
+
+      # gesture = [
+      #   "3, swipe, workspace"
+      #   "3, pinch, fullscreen "
+      # ];
 
       workspace =
         let

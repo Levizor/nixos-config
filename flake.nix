@@ -6,7 +6,7 @@
     stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     hyprland = {
-      url = "github:Levizor/Hyprland";
+      url = "github:hyprwm/Hyprland";
     };
 
     minimal-tmux = {
