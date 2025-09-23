@@ -32,20 +32,18 @@
       pavucontrol
       ripgrep
       telegram-desktop
-      vlc
       tlrc
       xdragon
       neovim-remote
       typst
     ]
     ++ lib.optionals myopts.additionalPackages [
-      inputs.tray-tui.packages.${system}.tray-tui
+      # inputs.tray-tui.packages.${system}.tray-tui
+      tray-tui
       # postman
       # android-tools
       ani-cli
-      appimage-run
       cargo
-      clock-rs
       # filezilla
       hyprland-workspaces-tui
       # jetbrains.rider
@@ -57,9 +55,8 @@
       obsidian
       onlyoffice-desktopeditors
       # prismlauncher
-      mcpelauncher-client
       qbittorrent
-      teams-for-linux
+      # teams-for-linux
       thunderbird
       timg
       # ungoogled-chromium
