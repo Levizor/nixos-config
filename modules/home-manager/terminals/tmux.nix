@@ -115,6 +115,7 @@ in
   programs.tmux = {
     shortcut = if myopts.server then "a" else "b";
     enable = true;
+    focusEvents = true;
     mouse = true;
     keyMode = "vi";
     clock24 = true;
@@ -126,7 +127,8 @@ in
     extraConfig = ''
 
       set -s set-clipboard on
-      set -g allow-passthrough
+      set -gq allow-passthrough on
+      set -g visual-activity off
 
       bind-key C-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
       bind-key C-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
@@ -206,11 +208,27 @@ in
             ''
               set -g status-bg black
               set -g @minimal-tmux-fg "black"
-              set -g @minimal-tmux-bg "green"
+              set -g @minimal-tmux-bg "blue"
               set -g @minimal-tmux-use-arrow true
               bind-key b set-option status
-              set -g @minimal-tmux-status-right "#(echo 🔋$(upower -i $(upower -e | grep 'BAT') | awk '/percentage:/ {print $2}')) | %H:%M"
+              set -g @minimal-tmux-expanded-icon "󰊓 "
+              set -g @minimal-tmux-show-expanded-icons-for-all-tabs true
+
+              set -g @minimal-tmux-indicator-str "  #S  "
               set -g @minimal-tmux-status-left-extra "#(${lib.getExe pkgs.hyprland-workspaces-tui} plain -p true)"
+              set -g @minimal-tmux-status-right "\
+              #( \
+                vol=\$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print \$2}'); \
+                if [ \"\$vol\" = yes ]; then \
+                  echo -n '🔇'; \
+                else \
+                  echo -n '🔊'; \
+                fi; \
+                echo -n ' | '; \
+                upower -i \$(upower -e | grep 'BAT') | \
+                  awk '/state:/ { if (\$2==\"discharging\") icon=\"🔋\"; else if (\$2==\"fully-charged\") icon=\"✅\"; else icon=\"⚡\" } \
+                       /percentage:/ { print icon \$2 }'; \
+              ) | %H:%M"
               set -g status-left-length 20
               set -g status-interval 1
             ''
