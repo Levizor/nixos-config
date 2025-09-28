@@ -44,6 +44,11 @@
       url = "github:Levizor/tray-tui";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dark-text = {
+      url = "github:Levizor/dark-text";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

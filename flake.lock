@@ -100,6 +100,26 @@
         "type": "github"
       }
     },
+    "dark-text": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1759056226,
+        "narHash": "sha256-3RlKApEdquNkNRsGAkdXPheFBRW5mWsp6Ap7Ol7LOKQ=",
+        "owner": "Levizor",
+        "repo": "dark-text",
+        "rev": "06dc0ca6d51a6a93bd20efc06f2f05f1add9de90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Levizor",
+        "repo": "dark-text",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -904,6 +924,7 @@
     },
     "root": {
       "inputs": {
+        "dark-text": "dark-text",
         "disko": "disko",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

@@ -40,6 +40,7 @@
     ++ lib.optionals myopts.additionalPackages [
       # inputs.tray-tui.packages.${system}.tray-tui
       tray-tui
+      inputs.dark-text.packages.${system}.default
       # postman
       # android-tools
       ani-cli
