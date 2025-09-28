@@ -15,6 +15,7 @@
     ./cava.nix
     ./nh.nix
     ./chromium.nix
+    ./direnv.nix
   ];
 
   programs.mpv.enable = true;
