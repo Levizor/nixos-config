@@ -2,6 +2,7 @@
 
 {
   programs.ssh = {
+    enableDefaultConfig = true;
     enable = true;
     matchBlocks = {
       "github.com" = {
