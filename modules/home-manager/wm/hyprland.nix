@@ -29,6 +29,8 @@ let
   gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
   forceKillScript = lib.getExe scriptDefs.forceKillScript;
   openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
+
+  brightnessctl = lib.getExe pkgs.brightnessctl;
 in
 {
   services.hyprpaper.enable = lib.mkForce false;
@@ -41,7 +43,7 @@ in
       variables = [ "--all" ];
       enableXdgAutostart = true;
     };
-    xwayland.enable = true;
+    xwayland.enable = false;
 
     settings = {
       monitor = map (m: "${m.name}, ${m.config}") monitors;
@@ -205,8 +207,8 @@ in
           "$mod, KP_Begin, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
 
           # Brightness
-          ",XF86MonBrightnessUp , exec, brightnessctl set +10%"
-          ",XF86MonBrightnessDown , exec, brightnessctl set 10%-"
+          ",XF86MonBrightnessUp , exec, ${brightnessctl} set +10%"
+          ",XF86MonBrightnessDown , exec, ${brightnessctl} set 10%-"
 
           # Move focus with mod + arrow keys
           "$mod, left, movefocus, l"

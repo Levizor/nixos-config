@@ -20,13 +20,11 @@
         unzip
         man-pages
         man-pages-posix
+        wl-clipboard
       ]
       ++ lib.optionals config.myopts.sound [
-        # I know some things aren't about sound, I am too lazy to make more options
         pavucontrol
         pulseaudioFull
-        brightnessctl
-        wl-clipboard
       ];
 
     variables = {
