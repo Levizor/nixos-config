@@ -57,7 +57,7 @@
       onlyoffice-desktopeditors
       # prismlauncher
       qbittorrent
-      # teams-for-linux
+      teams-for-linux
       thunderbird
       timg
       # ungoogled-chromium
