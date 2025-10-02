@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  mylib,
   outputs,
   inputs,
   myopts,
@@ -10,7 +11,12 @@
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs outputs myopts;
+      inherit
+        inputs
+        outputs
+        myopts
+        mylib
+        ;
     };
     backupFileExtension = "backup";
     users.levizor = {

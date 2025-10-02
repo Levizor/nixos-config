@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  mylib,
   outputs,
   config,
   lib,
@@ -25,7 +26,6 @@
     ../../modules/nixos
 
     ../../modules/home-manager
-    inputs.home-manager.nixosModules.home-manager
 
     ../../modules/stylix
     inputs.stylix.nixosModules.stylix

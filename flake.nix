@@ -53,18 +53,40 @@
 
   outputs =
     {
+      self,
+      nixpkgs,
+      home-manager,
       ...
     }@inputs:
     let
-      mylib = import ./mylib/default.nix { inherit inputs; };
+      linux = "x86_64-linux";
+      mkSystem =
+
+        system: configPath:
+        inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = rec {
+            inherit inputs;
+          };
+          modules = [
+            self.outputs.options
+            home-manager.nixosModules.home-manager
+            configPath
+            (
+              { pkgs, lib, ... }:
+              {
+                _module.args.mylib = import ./mylib { inherit pkgs lib inputs; };
+              }
+            )
+          ];
+        };
     in
-    with mylib;
     {
       nixosConfigurations = {
-        laptop = mkSystem ./hosts/laptop/configuration.nix;
-        minimal = mkSystem ./hosts/minimal/configuration.nix;
-        live-iso = mkSystem ./hosts/live-iso/configuration.nix;
-        vps = mkSystem ./hosts/vps/configuration.nix;
+        laptop = mkSystem linux ./hosts/laptop/configuration.nix;
+        minimal = mkSystem linux ./hosts/minimal/configuration.nix;
+        live-iso = mkSystem linux ./hosts/live-iso/configuration.nix;
+        vps = mkSystem linux ./hosts/vps/configuration.nix;
       };
 
       options = ./modules/options;
