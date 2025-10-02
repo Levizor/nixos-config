@@ -2,6 +2,7 @@
   inputs,
   pkgs,
   config,
+  mylib,
   ...
 }:
 {
@@ -21,6 +22,7 @@
         man-pages
         man-pages-posix
         wl-clipboard
+        mylib.toggle
       ]
       ++ lib.optionals config.myopts.sound [
         pavucontrol
