@@ -20,7 +20,7 @@
       # gimp
       bat
       bluetuith
-      clipse
+      # clipse
       cmatrix
       ffmpeg
       fzf
@@ -60,7 +60,7 @@
       teams-for-linux
       thunderbird
       timg
-      # ungoogled-chromium
+      ungoogled-chromium
       vesktop
       youtube-music
       yt-dlp
