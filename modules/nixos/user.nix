@@ -18,7 +18,7 @@
         "libvirtd"
         "docker"
       ];
-      initialHashedPassword = "";
+      initialPassword = "password";
     };
 
   };
