@@ -18,6 +18,7 @@
       focus_follows_mouse = true;
       confirm_os_window_close = 2;
       tab_title_template = "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg.tab}{tab.last_focused_progress_percent}{index}:{title}";
+      window_padding_width = 8;
 
     };
 
