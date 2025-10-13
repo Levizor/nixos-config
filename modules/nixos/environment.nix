@@ -7,6 +7,7 @@
 }:
 {
   environment = {
+    enableAllTerminfo = true;
     systemPackages =
       with pkgs;
       [
