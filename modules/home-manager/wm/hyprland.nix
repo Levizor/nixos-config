@@ -53,7 +53,6 @@ in
       "$terminal" = "kitty -1";
       "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
       "$fileManager" = "${lib.getExe pkgs.nemo}";
-      "$menu" = "${lib.getExe pkgs.fuzzel}";
       "$player" = "${lib.getExe pkgs.youtube-music}";
       "source" = "~/.config/hypr/impure.conf";
 
@@ -137,7 +136,7 @@ in
         "hyprctl dispatch workspace 2"
         "${tmuxInitScript}"
         # "${openOnFocusScript}"
-        "clipse -listen"
+        # "clipse -listen"
         "wpaperd"
       ];
 
@@ -164,11 +163,15 @@ in
           "$mod, E, exec, $fileManager --class files"
           "CTRL_$mod, W, exec, $browser"
           "$mod, W, exec, pgrep -x '.*$browser.*' > /dev/null || $browser"
-          "$mod, D, exec, $menu"
-          "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
+          # "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
           ", F10, exec, wl-copy $(hyprpicker)"
           "$mod, Escape, exec, wlogout"
+
+          # vicinae deeplinks
+          "$mod, D, exec, vicinae vicinae://toggle"
+          "$mod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
+          "$mod, space, exec, vicinae vicinae://extensions/vicinae/wm/switch-windows"
 
           # Switch wallpapers
           "$mod, F6, exec, wpaperctl next-wallpaper"
@@ -329,9 +332,9 @@ in
         "maxsize 1 1,class:^(xwaylandvideobridge)$"
         "noblur,class:^(xwaylandvideobridge)$"
 
-        "float, class:(clipse)"
-        "size 622 652, class:(clipse)"
-
+        # "float, class:(clipse)"
+        # "size 622 652, class:(clipse)"
+        #
         # Telegram
         "workspace 1, class: ^(?i).*(telegram).*"
 
