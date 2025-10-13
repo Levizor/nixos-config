@@ -8,6 +8,9 @@
   myopts,
   ...
 }:
+let
+  stateVersion = "25.11";
+in
 {
   home-manager = {
     extraSpecialArgs = {
@@ -18,7 +21,21 @@
         mylib
         ;
     };
+
     backupFileExtension = "backup";
+
+    users.root = {
+      imports = [
+        ./zsh
+        ./terminals
+      ];
+      home = {
+        username = "root";
+        homeDirectory = "/root";
+        stateVersion = stateVersion;
+      };
+    };
+
     users.levizor = {
       imports = [
         ./wm
@@ -39,7 +56,7 @@
         enableNixpkgsReleaseCheck = false;
         username = "levizor";
         homeDirectory = "/home/levizor";
-        stateVersion = "24.05";
+        stateVersion = stateVersion;
       };
 
     };
