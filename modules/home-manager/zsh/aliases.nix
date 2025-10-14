@@ -4,6 +4,8 @@
     c = "wl-copy";
     p = "wl-paste";
 
+    mirror = "hyprctl keyword monitor HDMI-A-1, preferred, auto, 1, mirror, eDP-1";
+
     sz = "du -sh";
 
     tree = "lsd --tree";
