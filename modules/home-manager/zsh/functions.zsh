@@ -100,31 +100,3 @@ ffcompress() {
 
   echo "✅ Compression complete: $output"
 }
-
-showdirs() {
-  # Usage: showdirs <max_files> <dir1> [dir2 ...]
-  # Example: showdirs 2 bin lib64 etc
-
-  local max_files="$1"
-  shift
-
-  if [[ -z "$max_files" || -z "$1" ]]; then
-    echo "Usage: showdirs <max_files> <dir1> [dir2 ...]"
-    return 1
-  fi
-
-  for dir in "$@"; do
-    if [[ -d "$dir" ]]; then
-      echo "$dir"
-      # List up to N entries inside the directory, indented with 2 spaces
-      lsd --tree --depth 1 --ignore-glob ".*" "$dir" \
-        | tail -n +2 \
-        | head -n "$max_files" \
-        | sed 's/^/  /'
-      echo
-    else
-      echo "$dir (not a directory)"
-      echo
-    fi
-  done
-}

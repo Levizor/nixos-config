@@ -17,7 +17,7 @@ zstyle ':completion:*' complete true
 
 # Use cache
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZDOTDIR/.zcompcache"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 
 # Autocomplete options
 # zstyle ':completion:*' complete-options true

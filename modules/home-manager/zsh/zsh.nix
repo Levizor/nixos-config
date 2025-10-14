@@ -5,7 +5,7 @@
   ...
 }:
 {
-  programs.zsh = rec {
+  programs.zsh = {
     enable = true;
     dotDir = "${config.home.homeDirectory}/.zsh";
 
@@ -29,7 +29,7 @@
 
     history = {
       size = 10000;
-      path = "${dotDir}/.zsh/history";
+      path = "${config.programs.zsh.dotDir}/.zsh/history";
     };
 
     oh-my-zsh = {
