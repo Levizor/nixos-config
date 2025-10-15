@@ -43,7 +43,7 @@ in
       variables = [ "--all" ];
       enableXdgAutostart = true;
     };
-    xwayland.enable = false;
+    xwayland.enable = true;
 
     settings = {
       monitor = map (m: "${m.name}, ${m.config}") monitors;
