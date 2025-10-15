@@ -8,7 +8,7 @@
   programs.git = {
     enable = true;
     userName = "Levizor";
-    userEmail = "levizorri@gmail.com";
+    userEmail = "levizor@disroot.org";
 
     hooks = {
       post-checkout = mylib.toggleableDerivation "dark-text" (
