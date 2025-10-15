@@ -26,7 +26,6 @@
       fzf
       grimblast
       hyprpicker
-      keepassxc
       loupe
       ncpamixer
       pavucontrol
@@ -55,7 +54,6 @@
       nix-prefetch-github
       obsidian
       onlyoffice-desktopeditors
-      # prismlauncher
       qbittorrent
       teams-for-linux
       thunderbird
@@ -64,8 +62,8 @@
       vesktop
       youtube-music
       yt-dlp
-      # zola
       lazygit
+      # prismlauncher
     ];
 
   home.file.".ideavimrc".text = ''

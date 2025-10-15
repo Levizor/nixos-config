@@ -17,6 +17,7 @@
     ./chromium.nix
     ./direnv.nix
     ./vicinae.nix
+    ./keepassxc.nix
   ];
 
   programs.mpv.enable = true;
