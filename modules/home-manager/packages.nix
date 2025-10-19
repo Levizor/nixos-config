@@ -48,7 +48,7 @@
       hyprland-workspaces-tui
       # jetbrains.rider
       jetbrains.idea-ultimate
-      jetbrains.pycharm-professional
+      stable.jetbrains.pycharm-professional
       pinta
       networkmanagerapplet
       nix-prefetch-github
