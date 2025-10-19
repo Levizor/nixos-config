@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    lab-flake.url = "path:./hosts/lab/";
 
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
@@ -54,12 +55,15 @@
       url = "github:vicinaehq/vicinae";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      stable,
       home-manager,
       ...
     }@inputs:
@@ -67,8 +71,8 @@
       linux = "x86_64-linux";
       mkSystem =
 
-        system: configPath:
-        inputs.nixpkgs.lib.nixosSystem {
+        system: nixpkgs: configPath:
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = rec {
             inherit inputs;
@@ -88,10 +92,11 @@
     in
     {
       nixosConfigurations = {
-        laptop = mkSystem linux ./hosts/laptop/configuration.nix;
-        minimal = mkSystem linux ./hosts/minimal/configuration.nix;
-        live-iso = mkSystem linux ./hosts/live-iso/configuration.nix;
-        vps = mkSystem linux ./hosts/vps/configuration.nix;
+        laptop = mkSystem linux nixpkgs ./hosts/laptop/configuration.nix;
+        minimal = mkSystem linux nixpkgs ./hosts/minimal/configuration.nix;
+        live-iso = mkSystem linux nixpkgs ./hosts/live-iso/configuration.nix;
+        vps = mkSystem linux stable ./hosts/vps/configuration.nix;
+        lab = inputs.lab-flake.nixosConfigurations.lab;
       };
 
       options = ./modules/options;
