@@ -24,6 +24,7 @@ in
     ./user.nix
     ./environment.nix
     ./services.nix
+    ./console.nix
   ];
 
   time.timeZone = "Europe/Warsaw";

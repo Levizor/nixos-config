@@ -1,11 +1,12 @@
 { pkgs, ... }:
 {
-  console = {
+  services.kmscon = {
     enable = true;
-    packages = with pkgs; [
-      nerd-fonts.fira-code
+    fonts = [
+      {
+        name = "FiraCode Nerd Font Mono";
+        package = pkgs.nerd-fonts.fira-code;
+      }
     ];
-
-    font = "FiraCodeNerdFontMono-Regular";
   };
 }
