@@ -63,6 +63,7 @@
       youtube-music
       yt-dlp
       lazygit
+      gemini-cli
       # prismlauncher
     ];
 
