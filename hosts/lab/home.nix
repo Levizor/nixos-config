@@ -2,12 +2,13 @@
   inputs,
   outputs,
   myopts,
+  mylib,
   ...
 }:
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs outputs;
+      inherit inputs outputs mylib;
     };
     backupFileExtension = "backup";
     users.levizor = {
@@ -20,7 +21,7 @@
           (homePath + "/zsh")
           (homePath + "/terminals/tmux.nix")
           (programPath + "/nh.nix")
-          # (programPath + "/git.nix")
+          (programPath + "/git.nix")
           (programPath + "/lsd.nix")
           (programPath + "/fzf.nix")
         ];

@@ -4,6 +4,7 @@
   modulesPath,
   pkgs,
   config,
+  mylib,
   lib,
   ...
 }:
