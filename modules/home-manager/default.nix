@@ -9,7 +9,7 @@
   ...
 }:
 let
-  stateVersion = "25.11";
+  stateVersion = "25.05";
 in
 {
   home-manager = {
