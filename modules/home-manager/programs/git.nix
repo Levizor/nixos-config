@@ -7,8 +7,20 @@
 {
   programs.git = {
     enable = true;
-    userName = "Levizor";
-    userEmail = "levizor@disroot.org";
+    settings = {
+      user = {
+        name = "Levizor";
+        email = "levizor@disroot.org";
+      };
+
+      push = {
+        autoSetupRemote = true;
+      };
+      init = {
+        defaultBranch = "main";
+      };
+
+    };
 
     hooks = {
       post-checkout = mylib.toggleableDerivation "dark-text" (
@@ -23,14 +35,6 @@
       );
     };
 
-    extraConfig = {
-      push = {
-        autoSetupRemote = true;
-      };
-      init = {
-        defaultBranch = "main";
-      };
-    };
   };
 
 }
