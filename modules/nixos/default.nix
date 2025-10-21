@@ -3,19 +3,19 @@
 }:
 {
   imports = [
-    ./common.nix
-    ./graphical
-    ./networking.nix
-    ./environment.nix
-    ./console.nix
-    ./nvim.nix
-    ./sound.nix
-    ./flatpak.nix
     ./battery.nix
+    ./common.nix
+    ./console.nix
+    ./environment.nix
     ./filesystems.nix
-    ./printing.nix
-    ./steam.nix
+    ./flatpak.nix
+    ./graphical
     ./hardware.nix
+    ./networking.nix
+    ./nvim.nix
+    ./printing.nix
+    ./sound.nix
+    ./steam.nix
   ];
 
 }
