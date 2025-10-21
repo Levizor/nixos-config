@@ -13,7 +13,7 @@
     inputs.disko.nixosModules.disko
     inputs.stylix.nixosModules.stylix
     ./hardware-config.nix
-    ./disko-configuration.nix
+    ./disko-config.nix
     ./home.nix
     ../../modules/stylix
   ]
@@ -38,4 +38,11 @@
   };
 
   system.stateVersion = "25.05";
+
+  virtualisation.vmVariant = {
+    virtualisation = {
+      memorySize = 8192;
+      cores = 4;
+    };
+  };
 }
