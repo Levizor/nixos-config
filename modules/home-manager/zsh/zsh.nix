@@ -5,6 +5,7 @@
   ...
 }:
 {
+  programs.fzf.enable = true;
   programs.zsh = {
     enable = true;
     dotDir = "${config.home.homeDirectory}/.zsh";
