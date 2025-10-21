@@ -66,14 +66,7 @@ zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:*' fzf-pad 4
 zstyle ':fzf-tab:*' fzf-min-height 100
 zstyle ':fzf-tab:*' switch-group ',' '.'
-#tmux
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
 
-# apply to all command
-zstyle ':fzf-tab:*' popup-min-size 50 8
-# only apply to 'diff'
-zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 12
 # magic-enter
 zstyle -s ':zshzoo:magic-enter' command 'lsd'
 zstyle -s ':zshzoo:magic-enter' git-command 'lsd'

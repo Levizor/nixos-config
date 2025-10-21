@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  myopts,
   ...
 }:
 {
@@ -26,6 +27,16 @@
     initContent = lib.concatStringsSep "\n" [
       (builtins.readFile ./init.zsh)
       (builtins.readFile ./functions.zsh)
+      (lib.optionalString (!myopts.server) ''
+        #tmux
+        zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+        zstyle ':fzf-tab:complete:cd:*' popup-pad 30 0
+
+        # apply to all command
+        zstyle ':fzf-tab:*' popup-min-size 50 8
+        # only apply to 'diff'
+        zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 12
+      '')
     ];
 
     history = {
