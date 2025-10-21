@@ -15,7 +15,7 @@
 
   myopts = {
     additionalPackages = true;
-    steam = true;
+    hostName = "nixlaptop";
   };
 
   imports = [
