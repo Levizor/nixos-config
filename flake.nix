@@ -70,21 +70,25 @@
       mkSystem =
 
         system: nixpkgs: configPath:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
             inherit inputs user system;
+            mylib = import ./mylib {
+              inherit pkgs inputs;
+              lib = pkgs.lib;
+            };
           };
           modules = [
             self.outputs.options
             home-manager.nixosModules.home-manager
             configPath
-            (
-              { pkgs, lib, ... }:
-              {
-                _module.args.mylib = import ./mylib { inherit pkgs lib inputs; };
-              }
-            )
             (
               { ... }:
               {
