@@ -3,12 +3,14 @@
   outputs,
   myopts,
   mylib,
+  system,
+  user,
   ...
 }:
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs outputs mylib;
+      inherit inputs outputs mylib user system;
     };
     backupFileExtension = "backup";
     users.levizor = {
@@ -18,6 +20,8 @@
         "programs/nh"
         "programs/git"
         "programs/btop"
+	"programs/ssh"
+	"programs/direnv"
       ];
 
       home = {

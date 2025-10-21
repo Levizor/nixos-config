@@ -12,7 +12,7 @@
   imports = [
     inputs.disko.nixosModules.disko
     inputs.stylix.nixosModules.stylix
-    ./hardware-config.nix
+    ./hardware-configuration.nix
     ./disko-config.nix
     ./home.nix
     ../../modules/stylix
