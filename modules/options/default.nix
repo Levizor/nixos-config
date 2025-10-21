@@ -1,21 +1,29 @@
 { lib, ... }:
 {
-  options = {
+  options = with lib.types; {
     myopts = {
       additionalPackages = lib.mkEnableOption "Enable additional packages in Home Manager";
-      steam = lib.mkEnableOption "Enable steam";
-      sound = lib.mkEnableOption "Enable sound";
-      hardware = lib.mkEnableOption "Enable hardware stuff (bluetooth, graphic settings)";
-      server = lib.mkEnableOption "Server flag configuration";
+      server = lib.mkEnableOption "Server configuration";
+      git = {
+        user = lib.mkOption {
+          type = str;
+          default = null;
+        };
+        email = lib.mkOption {
+          type = str;
+          default = null;
+        };
+      };
+      hostName = lib.mkOption {
+        type = str;
+        default = "nixos";
+      };
     };
   };
 
   config = {
     myopts = {
       additionalPackages = lib.mkDefault false;
-      steam = lib.mkDefault false;
-      sound = lib.mkDefault true;
-      hardware = lib.mkDefault true;
       server = lib.mkDefault false;
     };
   };

@@ -66,13 +66,14 @@
     }@inputs:
     let
       linux = "x86_64-linux";
+      user = "levizor";
       mkSystem =
 
         system: nixpkgs: configPath:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = rec {
-            inherit inputs;
+          specialArgs = {
+            inherit inputs user system;
           };
           modules = [
             self.outputs.options
@@ -82,6 +83,15 @@
               { pkgs, lib, ... }:
               {
                 _module.args.mylib = import ./mylib { inherit pkgs lib inputs; };
+              }
+            )
+            (
+              { ... }:
+              {
+                myopts.git = {
+                  user = "Levizor";
+                  email = "levizor@disroot.org";
+                };
               }
             )
           ];
