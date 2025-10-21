@@ -1,7 +1,12 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   networking = {
-    hostName = "nixos";
+    hostName = config.myopts.hostName;
     firewall = {
       enable = true;
       trustedInterfaces = [
