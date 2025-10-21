@@ -6,10 +6,6 @@
     stable.url = "github:nixos/nixpkgs/nixos-24.11";
     lab-flake.url = "path:./hosts/lab/";
 
-    # hyprland = {
-    #   url = "github:hyprwm/Hyprland";
-    # };
-
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -54,6 +50,11 @@
     vicinae.url = "github:vicinaehq/vicinae";
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    # };
+
   };
 
   outputs =
@@ -73,11 +74,14 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfree = true;
+            config = {
+              allowUnfree = true;
+              allowUnsupportedSystem = true;
+            };
           };
         in
         nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = {
             inherit inputs user system;
             mylib = import ./mylib {
@@ -107,7 +111,7 @@
         minimal = mkSystem linux nixpkgs ./hosts/minimal/configuration.nix;
         live-iso = mkSystem linux nixpkgs ./hosts/live-iso/configuration.nix;
         vps = mkSystem linux stable ./hosts/vps/configuration.nix;
-        lab = inputs.lab-flake.nixosConfigurations.lab;
+        lab = mkSystem linux nixpkgs ./hosts/lab/configuration.nix;
       };
 
       options = ./modules/options;
