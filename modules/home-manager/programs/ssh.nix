@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  user,
+  ...
+}:
 
 {
   programs.ssh = {
@@ -7,7 +12,7 @@
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
-        user = "levizor";
+        user = user;
         identityFile = "~/.ssh/github";
         identitiesOnly = true;
       };

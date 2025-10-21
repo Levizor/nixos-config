@@ -6,6 +6,8 @@
   outputs,
   inputs,
   myopts,
+  system,
+  user,
   ...
 }:
 let
@@ -19,6 +21,8 @@ in
         outputs
         myopts
         mylib
+        system
+        user
         ;
     };
 
@@ -36,7 +40,7 @@ in
       };
     };
 
-    users.levizor = {
+    users."${user}" = {
       imports = [
         ./wm
         ./zsh
@@ -54,8 +58,8 @@ in
         ];
 
         enableNixpkgsReleaseCheck = false;
-        username = "levizor";
-        homeDirectory = "/home/levizor";
+        username = user;
+        homeDirectory = "/home/${user}";
         stateVersion = stateVersion;
       };
 

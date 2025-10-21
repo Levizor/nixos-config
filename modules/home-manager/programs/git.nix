@@ -2,6 +2,7 @@
   pkgs,
   lib,
   mylib,
+  myopts,
   ...
 }:
 {
@@ -9,8 +10,8 @@
     enable = true;
     settings = {
       user = {
-        name = "Levizor";
-        email = "levizor@disroot.org";
+        name = myopts.git.user;
+        email = myopts.git.email;
       };
 
       push = {
