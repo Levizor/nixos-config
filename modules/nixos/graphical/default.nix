@@ -1,6 +1,7 @@
 {
   imports = [
     ./displayManager.nix
+    ./xdg.nix
     ./wayland.nix
   ];
 
