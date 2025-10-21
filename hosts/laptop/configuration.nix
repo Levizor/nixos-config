@@ -22,7 +22,6 @@
 
     ../../modules/stylix
     inputs.stylix.nixosModules.stylix
-    ./tailscale.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
@@ -38,6 +37,7 @@
     "printing"
     "sound"
     "steam"
+    "tailscale"
   ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
