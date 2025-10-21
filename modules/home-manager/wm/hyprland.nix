@@ -54,7 +54,6 @@ in
       "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
       "$fileManager" = "${lib.getExe pkgs.nemo}";
       "$player" = "${lib.getExe pkgs.youtube-music}";
-      "source" = "~/.config/hypr/impure.conf";
 
       env = [
         "TERMINAL, kitty -1"
@@ -130,8 +129,8 @@ in
       };
 
       exec-once = [
-        # ensures screensharing
         "touch ~/.config/hypr/impure.conf"
+        # ensures screensharing
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_USE_PORTAL"
         "hyprctl dispatch workspace 2"
         "${tmuxInitScript}"
@@ -365,21 +364,22 @@ in
 
     extraConfig = ''
       # Resize submap
-          bind=$mod,R,submap,resize
-          submap=resize
-          binde=,right,resizeactive,0 0
-          binde=,left,resizeactive,-10 0
-          binde=,up,resizeactive,0 -10
-          binde=,down,resizeactive,0 10
-          binde=,l,resizeactive,30 0
-          binde=,h,resizeactive,-30 0
-          binde=,k,resizeactive,0 -30
-          binde=,j,resizeactive,0 30
-          bind=,Escape,submap,reset
-          bind=,Return,submap, reset
-          bind=$mod,r,submap, reset
-          submap=reset
+      bind=$mod,R,submap,resize
+      submap=resize
+      binde=,right,resizeactive,0 0
+      binde=,left,resizeactive,-10 0
+      binde=,up,resizeactive,0 -10
+      binde=,down,resizeactive,0 10
+      binde=,l,resizeactive,30 0
+      binde=,h,resizeactive,-30 0
+      binde=,k,resizeactive,0 -30
+      binde=,j,resizeactive,0 30
+      bind=,Escape,submap,reset
+      bind=,Return,submap, reset
+      bind=$mod,r,submap, reset
+      submap=reset
 
+      source = ~/.config/hypr/impure.conf
     '';
   };
 }
