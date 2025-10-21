@@ -12,19 +12,13 @@
     };
     backupFileExtension = "backup";
     users.levizor = {
-      imports =
-        let
-          homePath = ./../../modules/home-manager;
-          programPath = (homePath + "/programs");
-        in
-        [
-          (homePath + "/zsh")
-          (homePath + "/terminals/tmux.nix")
-          (programPath + "/nh.nix")
-          (programPath + "/git.nix")
-          (programPath + "/lsd.nix")
-          (programPath + "/fzf.nix")
-        ];
+      imports = mylib.useModules ./../../modules/home-manager [
+        "zsh"
+        "terminals/tmux"
+        "programs/nh"
+        "programs/git"
+        "programs/btop"
+      ];
 
       home = {
         enableNixpkgsReleaseCheck = false;

@@ -2,16 +2,11 @@
   inputs,
   outputs,
   config,
+  mylib,
   ...
 }:
 {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
-
   imports = [
-    ../../modules/nixos
     ./hardware-configuration.nix
     ./disko-config.nix
     inputs.disko.nixosModules.disko
@@ -20,7 +15,20 @@
 
     ../../modules/home-manager
     inputs.home-manager.nixosModules.home-manager
+  ]
+  + mylib.useModules ./../../modules/nixos [
+    "common"
+    "hardware"
+    "battery"
+    "graphical"
+    "networking"
+    "printing"
+    "sound"
+    "nvim"
+    "filesystems"
+    "environment"
   ];
+
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;
   };

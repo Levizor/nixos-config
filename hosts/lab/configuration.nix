@@ -9,44 +9,29 @@
   ...
 }:
 {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnsupportedSystem = true;
-    };
-  };
-
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    (modulesPath + "/profiles/qemu-guest.nix")
-    ./../../modules/nixos/user.nix
+    inputs.disko.nixosModules.disko
+    inputs.stylix.nixosModules.stylix
     ./hardware-config.nix
     ./disko-configuration.nix
     ./home.nix
+    ../../modules/stylix
+  ]
+  ++ mylib.useModules ./../../modules/nixos [
+    "common"
+    "networking"
+    "console"
+    "environment"
+    "filesystems"
+    "sound" # :)
   ];
 
-  myopts.server = true;
+  myopts = {
+    server = true;
+    hostName = "nixlab";
+  };
 
   services.openssh.enable = true;
-
-  environment = {
-    enableAllTerminfo = true;
-    systemPackages = [
-      inputs.nixvim.packages."${system}".default
-    ];
-    variables.EDITOR = "nvim";
-  };
-
-  programs = {
-    nano.enable = false;
-    zsh = {
-      enable = true;
-      #required to use zsh over bash when using nix-shell
-      promptInit = ''
-        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
-      '';
-    };
-  };
 
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;

@@ -8,11 +8,6 @@
   ...
 }:
 {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
-
   myopts = {
     additionalPackages = true;
     hostName = "nixlaptop";
@@ -23,13 +18,26 @@
     ./disko-config.nix
     inputs.disko.nixosModules.disko
 
-    ../../modules/nixos
-
     ../../modules/home-manager
 
     ../../modules/stylix
     inputs.stylix.nixosModules.stylix
     ./tailscale.nix
+  ]
+  ++ mylib.useModules ./../../modules/nixos [
+    "common"
+    "battery"
+    "console"
+    "environment"
+    "filesystems"
+    "flatpak"
+    "graphical"
+    "hardware"
+    "networking"
+    "nvim"
+    "printing"
+    "sound"
+    "steam"
   ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -49,21 +57,14 @@
     };
   };
 
-  programs.gamemode.enable = true;
-
   virtualisation = {
-    docker = {
-      enable = true;
-    };
-
-    libvirtd = {
-      enable = true;
-    };
+    docker.enable = true;
+    libvirtd.enable = true;
   };
 
   programs.virt-manager.enable = true;
+
   environment.systemPackages = with pkgs; [
-    wget
     quickemu
   ];
 }

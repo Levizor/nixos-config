@@ -3,29 +3,37 @@
   outputs,
   config,
   modulesPath,
+  mylib,
   lib,
   ...
 }:
 {
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  networking.firewall.enable = lib.mkForce false;
 
-  networking.firewall.enable = false;
-  # networking.networkmanager.enable = lib.mkForce false;
-  services.openssh.enable = true;
+  myopts.hostName = "nixiso";
 
   imports = [
-    ../../modules/nixos
     inputs.stylix.nixosModules.stylix
+    (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
     ../../modules/stylix
     ../../modules/home-manager
-    inputs.home-manager.nixosModules.home-manager
+  ]
+  ++ mylib.useModules ./../../modules/nixos [
+    "common"
+    "hardware"
+    "battery"
+    "graphical"
+    "networking"
+    "printing"
+    "sound"
+    "nvim"
+    "filesystems"
+    "environment"
   ];
+
   home-manager.extraSpecialArgs = {
     inherit (config) myopts;
   };
