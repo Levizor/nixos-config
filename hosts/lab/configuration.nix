@@ -16,6 +16,7 @@
     ./disko-config.nix
     ./home.nix
     ../../modules/stylix
+    ./cage.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
@@ -25,6 +26,7 @@
     "filesystems"
     "sound" # :)
     "nvim"
+    "tailscale"
   ];
 
   myopts = {

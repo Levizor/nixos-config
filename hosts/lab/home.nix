@@ -10,18 +10,25 @@
 {
   home-manager = {
     extraSpecialArgs = {
-      inherit inputs outputs mylib user system;
+      inherit
+        inputs
+        outputs
+        mylib
+        user
+        system
+        ;
     };
     backupFileExtension = "backup";
     users.levizor = {
       imports = mylib.useModules ./../../modules/home-manager [
         "zsh"
         "terminals/tmux"
+        "terminals/kitty"
         "programs/nh"
         "programs/git"
         "programs/btop"
-	"programs/ssh"
-	"programs/direnv"
+        "programs/ssh"
+        "programs/direnv"
       ];
 
       home = {
