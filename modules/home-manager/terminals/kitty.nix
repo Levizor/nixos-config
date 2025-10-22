@@ -30,6 +30,11 @@
       map kitty_mod+a>0 remote_control set-background-opacity 0
       map kitty_mod+up neighboring_window top
 
+      map ctrl+shift+up scroll_line_up
+      map ctrl+shift+down scroll_line_down
+      map ctrl+shift+page_up scroll_page_up
+      map ctrl+shift+page_down scroll_page_down
+
       scrollback_lines 2000
       scrollback_pager nvim -c "setlocal nonumber norelativenumber nowrap noshowmode" -c "normal! G" -
       # map kitty_mod+0 show_scrollback         
