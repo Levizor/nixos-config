@@ -286,6 +286,14 @@ in
               - nohup floorp http://localhost:1111
               - zola serve
   '';
+  home.file.".tmuxp/lab.yaml".text = ''
+    session_name: lab
+    windows: 
+      - window_name: lab 
+        panes: 
+          - shell_command:
+            - ${lib.getExe pkgs.wlr-randr} --output DP-1 --transform 90; cd
+  '';
 
   home.file.".config/hyprland-workspaces-tui/config.toml".text = ''
     [plain_text_mode]
