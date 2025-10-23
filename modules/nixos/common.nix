@@ -30,6 +30,9 @@
         "docker"
       ];
       initialPassword = "password";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKu2iVrpee6R9cf80o7lu1qqf9EnEDdquqn5kJir+Lbk levizor@nixlaptop"
+      ];
     };
 
   };
