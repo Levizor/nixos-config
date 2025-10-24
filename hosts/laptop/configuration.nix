@@ -8,9 +8,11 @@
   ...
 }:
 {
+  networking.hostName = "nixlaptop";
+
   myopts = {
     additionalPackages = true;
-    hostName = "nixlaptop";
+    nh.host = "laptop";
   };
 
   imports = [

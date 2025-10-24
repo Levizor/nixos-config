@@ -9,6 +9,7 @@
   ...
 }:
 {
+  networking.hostName = "nixlab";
   imports = [
     inputs.disko.nixosModules.disko
     inputs.stylix.nixosModules.stylix
@@ -33,7 +34,7 @@
 
   myopts = {
     server = true;
-    hostName = "nixlab";
+    nh.host = "lab";
   };
 
   services.openssh.enable = true;

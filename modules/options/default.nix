@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   options = with lib.types; {
-    myopts = {
+    myopts = rec {
       additionalPackages = lib.mkEnableOption "Enable additional packages in Home Manager";
       server = lib.mkEnableOption "Server configuration";
       git = {
@@ -14,7 +14,8 @@
           default = null;
         };
       };
-      hostName = lib.mkOption {
+
+      nh.host = lib.mkOption {
         type = str;
         default = "nixos";
       };

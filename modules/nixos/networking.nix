@@ -1,12 +1,10 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }:
 {
   networking = {
-    hostName = config.myopts.hostName;
     firewall = {
       enable = true;
       trustedInterfaces = [
