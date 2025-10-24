@@ -113,7 +113,7 @@ let
 in
 {
   programs.tmux = {
-    shortcut = if myopts.server then "a" else "b";
+    shortcut = "b";
     enable = true;
     focusEvents = true;
     mouse = true;
@@ -289,7 +289,7 @@ in
               - zola serve
   '';
   home.file.".tmuxp/lab.yaml".text = ''
-    session_name: lab
+    session_name: dashboard
     windows: 
       - window_name: dashboard
         panes: 
