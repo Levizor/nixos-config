@@ -16,4 +16,5 @@ rec {
     toggleableDerivation
     ;
   inherit (helpers) useModules;
+  inherit (helpers) prefixList;
 }
