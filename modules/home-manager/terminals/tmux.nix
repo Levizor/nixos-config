@@ -42,7 +42,7 @@ let
     ];
 
     text = ''
-      host="laptop"
+      host=${myopts.nh.host}
 
       notify-send -t 3000 "🔧 Starting NixOS rebuild on $host..."
 
@@ -192,6 +192,9 @@ in
       bind -n M-d run-shell "${lib.getExe toggleSessionScript}"
       bind -n M-r run-shell "${lib.getExe tmuxRebuildBind}"
       bind -n M-R run-shell "${lib.getExe tmuxRebuildBind} -s"
+
+      bind-key b set-option status
+      bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
     '';
 
     plugins = with pkgs.tmuxPlugins; [
@@ -203,37 +206,36 @@ in
 
       {
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
-        extraConfig =
-          if !myopts.server then
-            ''
-              set -g status-bg black
-              set -g @minimal-tmux-fg "black"
-              set -g @minimal-tmux-bg "blue"
-              set -g @minimal-tmux-use-arrow true
-              bind-key b set-option status
-              set -g @minimal-tmux-expanded-icon "󰊓 "
-              set -g @minimal-tmux-show-expanded-icons-for-all-tabs true
+        extraConfig = ''
+          set -g status-bg black
+          set -g @minimal-tmux-fg "black"
+          set -g @minimal-tmux-bg "blue"
+          set -g @minimal-tmux-use-arrow true
+          set -g @minimal-tmux-expanded-icon "󰊓 "
+          set -g @minimal-tmux-show-expanded-icons-for-all-tabs true
 
-              set -g @minimal-tmux-indicator-str "  #S  "
-              set -g @minimal-tmux-status-left-extra "#(${lib.getExe pkgs.hyprland-workspaces-tui} plain -p true)"
-              set -g @minimal-tmux-status-right "\
-              #( \
-                vol=\$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print \$2}'); \
-                if [ \"\$vol\" = yes ]; then \
-                  echo -n '🔇'; \
-                else \
-                  echo -n '🔊'; \
-                fi; \
-                echo -n ' | '; \
-                upower -i \$(upower -e | grep 'BAT') | \
-                  awk '/state:/ { if (\$2==\"discharging\") icon=\"🔋\"; else if (\$2==\"fully-charged\") icon=\"✅\"; else icon=\"⚡\" } \
-                       /percentage:/ { print icon \$2 }'; \
-              ) | %H:%M"
-              set -g status-left-length 20
-              set -g status-interval 1
-            ''
-          else
-            "";
+          set -g @minimal-tmux-status-right "%H:%M"
+        ''
+        + lib.optionalString (!myopts.server) ''
+          set -g @minimal-tmux-status-left-extra "#(${lib.getExe pkgs.hyprland-workspaces-tui} plain -p true)"
+          set -g @minimal-tmux-status-right "\
+          #( \
+            vol=\$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print \$2}'); \
+            if [ \"\$vol\" = yes ]; then \
+              echo -n '🔇'; \
+            else \
+              echo -n '🔊'; \
+            fi; \
+            echo -n ' | '; \
+            upower -i \$(upower -e | grep 'BAT') | \
+              awk '/state:/ { if (\$2==\"discharging\") icon=\"🔋\"; else if (\$2==\"fully-charged\") icon=\"✅\"; else icon=\"⚡\" } \
+                   /percentage:/ { print icon \$2 }'; \
+          ) | %H:%M"
+
+          set -g @minimal-tmux-indicator-str "  #S  "
+          set -g status-left-length 20
+          set -g status-interval 1
+        '';
       }
     ];
 
@@ -289,7 +291,7 @@ in
   home.file.".tmuxp/lab.yaml".text = ''
     session_name: lab
     windows: 
-      - window_name: lab 
+      - window_name: dashboard
         panes: 
           - shell_command:
             - ${lib.getExe pkgs.wlr-randr} --output DP-1 --transform 90; cd
@@ -302,11 +304,11 @@ in
   '';
 
   home.file.".config/tms/config.toml".text = ''
-    default_session = "scratchpad"
+    default_session = "dashboard"
 
     [[search_dirs]]
-    path = "${config.home.homeDirectory}/Projects"
-    depth = 10
+    path = "${config.home.homeDirectory}"
+    depth = 3
   '';
 
   home.packages = with pkgs; [

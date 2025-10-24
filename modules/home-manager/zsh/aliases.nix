@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  myopts,
+  ...
+}:
 {
   programs.zsh.shellAliases = {
     c = "wl-copy";
@@ -20,7 +25,7 @@
 
     cf = "copyfile";
 
-    lap = "nh os switch -H laptop";
+    nhs = "nh os switch -H ${myopts.nh.host}";
 
     vps = "nh os switch -H vps";
 
