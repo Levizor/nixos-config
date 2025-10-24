@@ -7,7 +7,7 @@
 
 {
   programs.ssh = {
-    enableDefaultConfig = true;
+    enableDefaultConfig = false;
     enable = true;
     matchBlocks = {
       "github.com" = {
@@ -20,6 +20,19 @@
       "aur.archlinux.org" = {
         user = "aur";
         identityFile = "~/.ssh/aur";
+      };
+
+      "*" = {
+        forwardAgent = false;
+        addKeysToAgent = "no";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+        controlMaster = "no";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "no";
       };
     };
   };
