@@ -1,6 +1,8 @@
 {
   inputs,
+  outputs,
   system,
+  user,
   modulesPath,
   pkgs,
   config,
@@ -10,15 +12,22 @@
 }:
 {
   networking.hostName = "nixlab";
+
+  myopts = {
+    server = true;
+    nh.host = "lab";
+  };
+
   imports = [
     inputs.disko.nixosModules.disko
     inputs.stylix.nixosModules.stylix
     ./hardware-configuration.nix
     ./disko-config.nix
-    ./home.nix
     ../../modules/stylix
     ./cage.nix
     ./funnel.nix
+
+    ./../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
@@ -32,16 +41,28 @@
     "searx"
   ];
 
-  myopts = {
-    server = true;
-    nh.host = "lab";
+  home-manager = {
+    users."${user}" = {
+      imports = mylib.useModules ./../../modules/home (
+        lib.flatten [
+          (mylib.prefixList "programs/" [
+            "btop"
+            "direnv"
+            "git"
+            "nh"
+            "ssh"
+          ])
+          (mylib.prefixList "terminals/" [
+            "kitty"
+            "tmux"
+          ])
+          "zsh"
+        ]
+      );
+    };
   };
 
   services.openssh.enable = true;
-
-  home-manager.extraSpecialArgs = {
-    inherit (config) myopts;
-  };
 
   system.stateVersion = "25.05";
 
@@ -53,6 +74,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    alsa-utils
+    sox
   ];
 }

@@ -1,11 +1,12 @@
 {
+  config,
   inputs,
   outputs,
   myopts,
   mylib,
   system,
   user,
-
+  ...
 }:
 {
   home-manager = {
@@ -13,11 +14,11 @@
       inherit
         inputs
         outputs
-        myopts
         mylib
         system
         user
         ;
+      inherit (config) myopts;
     };
 
     backupFileExtension = "backup";

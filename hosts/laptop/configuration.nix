@@ -5,6 +5,7 @@
   outputs,
   config,
   lib,
+  user,
   ...
 }:
 {
@@ -17,13 +18,14 @@
 
   imports = [
     ./hardware-configuration.nix
+
     ./disko-config.nix
     inputs.disko.nixosModules.disko
 
-    ../../modules/home-manager
-
     ../../modules/stylix
     inputs.stylix.nixosModules.stylix
+
+    ../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
@@ -42,13 +44,40 @@
     "tailscale"
   ];
 
+  home-manager = {
+    users."${user}" = {
+      imports = mylib.useModules ./../../modules/home (
+        lib.flatten [
+          (mylib.prefixList "programs/" [
+            "btop"
+            "direnv"
+            "zen"
+            "chromium"
+            "fzf"
+            "git"
+            "keepassxc"
+            "mako"
+            "nh"
+            "obs"
+            "ssh"
+            "vicinae"
+            "zathura"
+          ])
+          (mylib.prefixList "terminals/" [
+            "kitty"
+            "tmux"
+          ])
+          "wm"
+          "zsh"
+          "packages"
+        ]
+      );
+    };
+  };
+
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
   boot.kernelModules = [ "v4l2loopback" ];
-
-  home-manager.extraSpecialArgs = {
-    inherit (config) myopts;
-  };
 
   programs = {
     nix-ld = {
