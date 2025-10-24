@@ -55,7 +55,6 @@
       obsidian
       onlyoffice-desktopeditors
       qbittorrent
-      teams-for-linux
       thunderbird
       timg
       ungoogled-chromium
