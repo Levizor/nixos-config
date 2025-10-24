@@ -51,4 +51,8 @@
       cores = 4;
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    alsa-utils
+  ];
 }
