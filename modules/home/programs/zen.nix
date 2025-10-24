@@ -178,4 +178,8 @@
       };
     };
   };
+
+  stylix.targets.zen-browser.profileNames = [
+    "profile_0"
+  ];
 }

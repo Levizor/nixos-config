@@ -17,10 +17,8 @@
     in
     with pkgs;
     [
-      # gimp
       bat
       bluetuith
-      # clipse
       cmatrix
       ffmpeg
       fzf
@@ -40,14 +38,13 @@
       # inputs.tray-tui.packages.${system}.tray-tui
       tray-tui
       inputs.dark-text.packages.${system}.default
-      # postman
       # android-tools
       ani-cli
       cargo
       # filezilla
       hyprland-workspaces-tui
       # jetbrains.rider
-      jetbrains.idea-ultimate
+      # jetbrains.idea-ultimate
       stable.jetbrains.pycharm-professional
       pinta
       networkmanagerapplet
