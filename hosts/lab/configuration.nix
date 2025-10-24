@@ -17,6 +17,7 @@
     ./home.nix
     ../../modules/stylix
     ./cage.nix
+    ./funnel.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
@@ -27,6 +28,7 @@
     "sound" # :)
     "nvim"
     "tailscale"
+    "searx"
   ];
 
   myopts = {
