@@ -1,14 +1,15 @@
 {
 	"name": "Vimium C",
-	"@time": "7/1/2025, 12:33:24 PM",
-	"time": 1751366004577,
+	"@time": "10/25/2025, 12:58:09 AM",
+	"time": 1761346689620,
 	"environment": {
 		"extension": "2.12.3",
 		"platform": "linux",
-		"firefox": 128
+		"firefox": 144
 	},
 	"exclusionRules": [],
 	"keyLayout": 2,
+	"preferBrowserSearch": false,
 	"searchEngines": [
 		"go|gg|google|Google: https://www.google.com/search?q=%s \\",
 		"  www.google.com re=/^(?:\\.[a-z]{2,4})?\\/search\\b.*?[#&?]q=([^#&]*)/i\\",
@@ -35,8 +36,9 @@
 		"nv|nixvim: https://nix-community.github.io/nixvim/search/?query=%s",
 		"no|NixOS Opts: https://search.nixos.org/options?channel=unstable&size=50&sort=relevance&type=packages&query=%s",
 		"git|Levizor: https://github.com/Levizor/%s",
+		"s|searx: https://nixlab.worm-chameleon.ts.net/search?q=%s SearXNG",
 		""
 	],
-	"searchUrl": "https://search.brave.com/search?q=$s Brave",
+	"searchUrl": "https://nixlab.worm-chameleon.ts.net/search?q=$s SearXNG",
 	"vimSync": true
 }
