@@ -75,6 +75,11 @@
     };
   };
 
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "${user}";
+  };
+
   environment.systemPackages = with pkgs; [
     sox
   ];
