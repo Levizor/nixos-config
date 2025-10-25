@@ -31,6 +31,7 @@
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "common"
+    "graphical/xserver"
     "networking"
     "console"
     "environment"
@@ -59,6 +60,7 @@
           "zsh"
         ]
       );
+
     };
   };
 
