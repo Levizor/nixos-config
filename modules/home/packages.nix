@@ -18,15 +18,10 @@
     with pkgs;
     [
       bat
-      bluetuith
       cmatrix
       ffmpeg
       fzf
-      grimblast
-      hyprpicker
       loupe
-      ncpamixer
-      pavucontrol
       ripgrep
       telegram-desktop
       tlrc
