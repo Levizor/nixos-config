@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }@args:
 {
   options = with lib.types; {
     myopts = rec {
@@ -19,6 +19,60 @@
         type = str;
         default = "nixos";
       };
+
+      tailscale = {
+        magicDns = lib.mkOption {
+          type = str;
+          example = "worm-chameleon.ts.net";
+        };
+
+        hostName = lib.mkOption {
+          type = str;
+          default = config.networking.hostName;
+        };
+
+        address =
+          let
+            cfg = config.myopts.tailscale;
+          in
+          lib.mkOption {
+            type = str;
+            default =
+              if (cfg.hostName != "" && cfg.magicDns != null) then
+                "${cfg.hostName}.${cfg.magicDns}"
+              else
+                throw ''
+                  The tailscale address is required, but tailscale.hostName or tailscale.magicDns is not provided.
+                '';
+          };
+
+        ip = lib.mkOption { type = str; };
+
+      };
+
+      monitors = lib.mkOption {
+        type = listOf (
+          submodule (
+            { config, ... }:
+            {
+              options = {
+                name = lib.mkOption {
+                  type = str;
+                };
+                config = lib.mkOption {
+                  type = str;
+                };
+              };
+            }
+          )
+        );
+      };
+
+      wallpaperPack = lib.mkOption {
+        type = str;
+        default = "picturesque";
+      };
+
     };
   };
 

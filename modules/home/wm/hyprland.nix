@@ -3,20 +3,12 @@
   config,
   pkgs,
   lib,
+  myopts,
   ...
 }:
 let
-  monitors = [
-    {
-      name = "eDP-1";
-      config = "1920x1080@60, 0x0, 1,";
-    }
-    {
-      name = "HDMI-A-1";
-      config = "preferred, auto, 1,";
-    }
-  ];
-  monitorNames = map (m: m.name) monitors;
+  monitors = myopts.monitors;
+  monitorNames = map (m: m.name) myopts.monitors;
 
   scriptDefs = import ./scripts.nix {
     inherit pkgs lib monitors;
@@ -363,6 +355,8 @@ in
     };
 
     extraConfig = ''
+      render:expand_undersized_textures = false
+
       # Resize submap
       bind=$mod,R,submap,resize
       submap=resize

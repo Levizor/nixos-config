@@ -14,6 +14,18 @@
   myopts = {
     additionalPackages = true;
     nh.host = "laptop";
+    monitors = [
+      {
+        name = "eDP-1";
+        config = "1920x1080@60, 0x0, 1,";
+      }
+      {
+        name = "HDMI-A-1";
+        config = "preferred, auto, 1,";
+      }
+    ];
+
+    wallpaperPack = "picturesque";
   };
 
   imports = [
@@ -28,7 +40,6 @@
     ../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
-    "common"
     "battery"
     "console"
     "environment"
@@ -42,6 +53,7 @@
     "sound"
     "steam"
     "tailscale"
+    "searx"
   ];
 
   home-manager = {
@@ -62,6 +74,7 @@
             "ssh"
             "vicinae"
             "zathura"
+            "mpv"
           ])
           (mylib.prefixList "terminals/" [
             "kitty"

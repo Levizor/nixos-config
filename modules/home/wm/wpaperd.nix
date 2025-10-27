@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  myopts,
+  ...
+}:
 {
   services.wpaperd = {
     enable = true;
@@ -21,7 +26,7 @@
       };
 
       any = {
-        path = lib.mkForce "${config.home.homeDirectory}/Pictures/Wallpapers/picturesque/";
+        path = lib.mkForce "${config.home.homeDirectory}/Pictures/Wallpapers/${myopts.wallpaperPack}/";
         mode = lib.mkForce "center";
       };
     };

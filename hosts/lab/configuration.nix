@@ -1,11 +1,7 @@
 {
   inputs,
-  outputs,
-  system,
   user,
-  modulesPath,
   pkgs,
-  config,
   mylib,
   lib,
   ...
@@ -14,8 +10,15 @@
   networking.hostName = "nixlab";
 
   myopts = {
-    server = true;
     nh.host = "lab";
+    monitors = [
+      {
+        name = "DP-1";
+        config = "preferred, auto, 1, transform, 1";
+      }
+    ];
+
+    wallpaperPack = "vertical";
   };
 
   imports = [
@@ -24,16 +27,14 @@
     ./hardware-configuration.nix
     ./disko-config.nix
     ../../modules/stylix
-    ./cage.nix
-    ./funnel.nix
+    # ./cage.nix
+    ./searx-funnel.nix
 
     ./../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
-    "common"
-    "graphical/xserver"
+    "graphical/wayland"
     "networking"
-    "console"
     "environment"
     "filesystems"
     "sound" # :)
@@ -58,15 +59,24 @@
             "tmux"
           ])
           "zsh"
+          "wm/hyprland"
+          "wm/wpaperd"
         ]
       );
-
+      wayland.windowManager.hyprland.xwayland.enable = false;
     };
   };
 
-  services.openssh.enable = true;
+  programs.hyprland.xwayland.enable = false;
 
-  system.stateVersion = "25.05";
+  services = {
+    openssh.enable = true;
+    getty.autologinUser = user;
+  };
+
+  environment.systemPackages = with pkgs; [
+    sox
+  ];
 
   virtualisation.vmVariant = {
     virtualisation = {
@@ -74,13 +84,4 @@
       cores = 4;
     };
   };
-
-  services.displayManager.autoLogin = {
-    enable = true;
-    user = "${user}";
-  };
-
-  environment.systemPackages = with pkgs; [
-    sox
-  ];
 }
