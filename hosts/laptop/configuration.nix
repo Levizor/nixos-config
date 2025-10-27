@@ -1,11 +1,10 @@
 {
   pkgs,
-  inputs,
   mylib,
-  outputs,
   config,
   lib,
   user,
+  modPath,
   ...
 }:
 {
@@ -26,22 +25,22 @@
     ];
 
     wallpaperPack = "picturesque";
+
   };
 
   imports = [
     ./hardware-configuration.nix
     ./disko-config.nix
-    inputs.disko.nixosModules.disko
-
-    ../../modules/home/common.nix
+    # For virtual machines
+    # ./virtual.nix
   ]
-  ++ mylib.useModules ./../../modules/nixos [
-    "stylix"
+  ++ mylib.useModules (modPath + "/nixos") [
     "battery"
     "console"
+    "docker"
     "environment"
     "filesystems"
-    "flatpak"
+    # "flatpak"
     "graphical"
     "hardware"
     "networking"
@@ -49,28 +48,29 @@
     "printing"
     "sound"
     "steam"
+    "stylix"
     "tailscale"
   ];
 
   home-manager = {
     users."${user}" = {
-      imports = mylib.useModules ./../../modules/home (
+      imports = mylib.useModules (modPath + "/home") (
         lib.flatten [
           (mylib.prefixList "programs/" [
             "btop"
-            "direnv"
-            "zen"
             "chromium"
+            "direnv"
             "fzf"
             "git"
             "keepassxc"
             "mako"
+            "mpv"
             "nh"
             "obs"
             "ssh"
             "vicinae"
             "zathura"
-            "mpv"
+            "zen"
           ])
           (mylib.prefixList "terminals/" [
             "kitty"
@@ -81,30 +81,25 @@
           "packages"
         ]
       );
-    };
-  };
 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-
-  boot.kernelModules = [ "v4l2loopback" ];
-
-  programs = {
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        icu
+      home.packages = [
+        # laptop specific packages
       ];
     };
   };
 
-  virtualisation = {
-    docker.enable = true;
-    libvirtd.enable = true;
-  };
+  # Required for JetBrains Rider
+  # programs = {
+  #   nix-ld = {
+  #     enable = true;
+  #     libraries = with pkgs; [
+  #       icu
+  #     ];
+  #   };
+  # };
 
-  programs.virt-manager.enable = true;
+  # For virtual camera in OBS
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
-  environment.systemPackages = with pkgs; [
-    quickemu
-  ];
+  boot.kernelModules = [ "v4l2loopback" ];
 }

@@ -79,6 +79,8 @@
               allowUnsupportedSystem = true;
             };
           };
+
+          modPath = ./modules;
         in
         nixpkgs.lib.nixosSystem {
           inherit system pkgs;
@@ -87,16 +89,19 @@
               inputs
               user
               system
+              modPath
               ;
             mylib = import ./mylib {
-              inherit pkgs inputs;
+              inherit pkgs inputs system;
               lib = pkgs.lib;
             };
           };
           modules = [
+            inputs.disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             configPath
             ./modules/nixos/common.nix
+            ./modules/home/common.nix
             ./modules/options
           ];
         };

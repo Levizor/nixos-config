@@ -22,13 +22,9 @@
   };
 
   imports = [
-    inputs.disko.nixosModules.disko
     ./hardware-configuration.nix
     ./disko-config.nix
-    # ./cage.nix
     ./searx-funnel.nix
-
-    ./../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "stylix"
