@@ -8,8 +8,8 @@
 {
   services.tailscale.enable = true;
 
-  systemd.services.tailscale-funnel = {
-    description = "Run Tailscale Funnel on 127.0.0.1:8080";
+  systemd.services.searx-funnel = {
+    description = "Run Tailscale Funnel on searx";
 
     after = [ "tailscaled.service" ];
     wants = [ "tailscaled.service" ];
