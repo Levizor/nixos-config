@@ -2,7 +2,6 @@
   config,
   inputs,
   outputs,
-  myopts,
   mylib,
   system,
   user,

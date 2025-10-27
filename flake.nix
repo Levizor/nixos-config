@@ -83,25 +83,21 @@
         nixpkgs.lib.nixosSystem {
           inherit system pkgs;
           specialArgs = {
-            inherit inputs user system;
+            inherit
+              inputs
+              user
+              system
+              ;
             mylib = import ./mylib {
               inherit pkgs inputs;
               lib = pkgs.lib;
             };
           };
           modules = [
-            self.outputs.options
             home-manager.nixosModules.home-manager
             configPath
-            (
-              { ... }:
-              {
-                myopts.git = {
-                  user = "Levizor";
-                  email = "levizor@disroot.org";
-                };
-              }
-            )
+            ./modules/nixos/common.nix
+            ./modules/options
           ];
         };
     in
@@ -113,7 +109,5 @@
         vps = mkSystem linux stable ./hosts/vps/configuration.nix;
         lab = mkSystem linux nixpkgs ./hosts/lab/configuration.nix;
       };
-
-      options = ./modules/options;
     };
 }

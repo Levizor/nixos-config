@@ -1,5 +1,17 @@
 { pkgs, user, ... }:
 {
+
+  myopts = {
+    git = {
+      user = "Levizor";
+      email = "levizor@disroot.org";
+    };
+
+    tailscale = {
+      magicDns = "worm-chameleon.ts.net";
+    };
+  };
+
   nix.settings = {
     experimental-features = [
       "nix-command"
