@@ -17,9 +17,10 @@
     ./direnv.nix
     ./vicinae.nix
     ./keepassxc.nix
+    ./mpv.nix
+    # ./nextcloud.nix
   ];
 
-  programs.mpv.enable = true;
   xdg = {
     mimeApps = {
       enable = true;
