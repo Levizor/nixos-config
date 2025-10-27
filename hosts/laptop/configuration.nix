@@ -30,16 +30,13 @@
 
   imports = [
     ./hardware-configuration.nix
-
     ./disko-config.nix
     inputs.disko.nixosModules.disko
-
-    ../../modules/stylix
-    inputs.stylix.nixosModules.stylix
 
     ../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
+    "stylix"
     "battery"
     "console"
     "environment"

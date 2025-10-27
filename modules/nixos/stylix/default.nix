@@ -6,7 +6,10 @@
   ...
 }:
 {
-  imports = [ ./cyberdream.nix ];
+  imports = [
+    inputs.stylix.nixosModules.stylix
+    ./cyberdream.nix
+  ];
   stylix = {
     enable = true;
     targets = {

@@ -23,16 +23,15 @@
 
   imports = [
     inputs.disko.nixosModules.disko
-    inputs.stylix.nixosModules.stylix
     ./hardware-configuration.nix
     ./disko-config.nix
-    ../../modules/stylix
     # ./cage.nix
     ./searx-funnel.nix
 
     ./../../modules/home/common.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
+    "stylix"
     "graphical/wayland"
     "networking"
     "environment"
@@ -53,6 +52,8 @@
             "git"
             "nh"
             "ssh"
+            "mpv"
+            "zen"
           ])
           (mylib.prefixList "terminals/" [
             "kitty"
@@ -64,6 +65,9 @@
         ]
       );
       wayland.windowManager.hyprland.xwayland.enable = false;
+      home.packages = with pkgs; [
+        timg
+      ];
     };
   };
 
