@@ -1,15 +1,29 @@
-{ config, myopts, ... }:
+{
+  config,
+  myopts,
+  pkgs,
+  ...
+}:
+let
+  hostName = config.networking.hostName;
+in
 {
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud32;
 
-    hostName = config.networking.hostName;
-    https = false;
+    hostName = hostName;
+    https = true;
 
-    config.trusted_domains = [
-      config.hostName
-    ];
-    cron.enable = true;
+    settings = {
+      trusted_domains = [ myopts.tailscale.address ];
+      overwritewebroot = "/nextcloud";
+    };
 
+    config = {
+      dbtype = "sqlite";
+      adminpassFile = "/var/lib/nextcloud/admin-pass-secret";
+    };
   };
+
 }
