@@ -53,7 +53,6 @@
     "sound"
     "steam"
     "tailscale"
-    "searx"
   ];
 
   home-manager = {
