@@ -2,6 +2,8 @@
   pkgs,
   lib,
   monitors,
+  myopts,
+  browser,
   ...
 }:
 let
@@ -151,7 +153,7 @@ in
             [3]="youtube-music"       
             [4]="vesktop"
             [5]="teams-for-linux"
-            [6]="zen"
+            [6]="${browser}"
             [7]="kitty -1"              
             [8]="steam"
         )

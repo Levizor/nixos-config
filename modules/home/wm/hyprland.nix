@@ -10,8 +10,21 @@ let
   monitors = myopts.monitors;
   monitorNames = map (m: m.name) myopts.monitors;
 
+  browser = if myopts.browser == null then "" else lib.getExe myopts.browser;
+  brightnessctl = lib.getExe pkgs.brightnessctl;
+  grimblast = lib.getExe pkgs.grimblast;
+  hyprpicker = lib.getExe pkgs.hyprpicker;
+  ncpamixer = lib.getExe pkgs.ncpamixer;
+  btop = lib.getExe pkgs.btop;
+
   scriptDefs = import ./scripts.nix {
-    inherit pkgs lib monitors;
+    inherit
+      pkgs
+      lib
+      monitors
+      myopts
+      browser
+      ;
   };
 
   monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
@@ -22,7 +35,6 @@ let
   forceKillScript = lib.getExe scriptDefs.forceKillScript;
   openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
 
-  brightnessctl = lib.getExe pkgs.brightnessctl;
 in
 {
   services.hyprpaper.enable = lib.mkForce false;
@@ -41,7 +53,7 @@ in
       monitor = map (m: "${m.name}, ${m.config}") monitors;
       "$mod" = "SUPER";
 
-      "$browser" = "zen";
+      "$browser" = "${browser}";
       "$terminal" = "kitty -1";
       "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
       "$fileManager" = "${lib.getExe pkgs.nemo}";
@@ -145,8 +157,8 @@ in
           # Terminal launches
           "$mod, Return, exec, $terminal"
           "$mod SHIFT, Return, exec, $terminal -o # background_opacity=0.4"
-          "$mod, A, exec, $terminal --app-id btop ncpamixer"
-          "$mod, U, exec, $terminal --app-id btop  btop"
+          "$mod, A, exec, $terminal --app-id fl ${ncpamixer}"
+          "$mod, U, exec, $terminal --app-id fl ${btop}"
           "$mod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix"
 
           # Other application launches
@@ -156,7 +168,7 @@ in
           "$mod, W, exec, pgrep -x '.*$browser.*' > /dev/null || $browser"
           # "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
-          ", F10, exec, wl-copy $(hyprpicker)"
+          ", F10, exec, wl-copy $(${hyprpicker})"
           "$mod, Escape, exec, wlogout"
 
           # vicinae deeplinks
@@ -169,8 +181,8 @@ in
           "$mod, F4, exec, wpaperctl previous-wallpaper"
 
           # Screenshots
-          ", Print , exec, grimblast copy area"
-          "$mod, Print, exec, grimblast copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
+          ", Print , exec, ${grimblast} copy area"
+          "$mod, Print, exec, ${grimblast} copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
 
           # Scripts
           "$mod Shift, Q, exec, ${forceKillScript}"
@@ -311,8 +323,8 @@ in
 
         "workspace special:telegram, class:(org.telegram.desktop.*)"
 
-        "size 95% 95%, class:(btop)"
-        "float, class:(btop)"
+        "size 95% 95%, class:(fl)"
+        "float, class:(fl)"
 
         "float, class:(files)"
         "size 60% 60%, centered, title:(.*Files)$"
