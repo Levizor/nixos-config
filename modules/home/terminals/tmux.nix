@@ -208,8 +208,7 @@ in
         plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
         extraConfig = ''
           set -g status-bg black
-          set -g @minimal-tmux-fg "black"
-          set -g @minimal-tmux-bg "blue"
+          set -g @minimal-tmux-bg blue
           set -g @minimal-tmux-use-arrow true
           set -g @minimal-tmux-expanded-icon "󰊓 "
           set -g @minimal-tmux-show-expanded-icons-for-all-tabs true
@@ -314,4 +313,6 @@ in
   home.packages = with pkgs; [
     tmux-sessionizer
   ];
+
+  stylix.targets.tmux.enable = false;
 }
