@@ -67,7 +67,7 @@
 
     uisudo = "sudo -sE ";
 
-    up = "nvim ~/nix/modules/home-manager/packages.nix";
+    up = "nvim ~/nix/modules/home/packages.nix";
 
     ns = "nh search ";
   };
