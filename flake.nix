@@ -1,9 +1,9 @@
 {
-  description = "NixOS Config";
+  description = "Levizor NixOS Config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    stable.url = "github:nixos/nixpkgs/nixos-25.05";
     lab-flake.url = "path:./hosts/lab/";
 
     minimal-tmux = {
