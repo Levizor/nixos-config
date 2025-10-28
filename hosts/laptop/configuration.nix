@@ -63,7 +63,6 @@
             "fzf"
             "git"
             "keepassxc"
-            "mako"
             "mpv"
             "nh"
             "obs"
