@@ -7,7 +7,16 @@
   ...
 }:
 let
-  monitors = myopts.monitors;
+  monitors =
+    if myopts.monitors == null then
+      [
+        {
+          name = "none";
+          config = "none";
+        }
+      ]
+    else
+      myopts.monitors;
   monitorNames = map (m: m.name) myopts.monitors;
 
   browser = if myopts.browser == null then "" else lib.getExe myopts.browser;
@@ -54,7 +63,11 @@ in
     xwayland.enable = true;
 
     settings = {
-      monitor = map (m: "${m.name}, ${m.config}") monitors;
+      monitor =
+        if myopts.monitors != null then
+          map (m: "${m.name}, ${m.config}") monitors
+        else
+          ", preferred, auto, 1";
       "$mod" = "SUPER";
 
       "$browser" = "${browser}";
@@ -282,7 +295,13 @@ in
       #   "3, pinch, fullscreen "
       # ];
 
-      workspace =
+      workspace = [
+        "w[tv1], gapsout:0, gapsin:0"
+        "f[1], gapsout:0, gapsin:0"
+        "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
+        "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dashboard dev, gapsin:0, gapsout:0"
+      ]
+      ++ lib.optional (myopts.monitors != null) (
         let
           totalWorkspaces = 10;
 
@@ -302,13 +321,7 @@ in
             ) numMonitors
           );
         in
-        [
-          "w[tv1], gapsout:0, gapsin:0"
-          "f[1], gapsout:0, gapsin:0"
-          "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
-          "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dashboard dev, gapsin:0, gapsout:0"
-        ]
-        ++ (builtins.genList (
+        builtins.genList (
           i:
           let
             ws = toString (i + 1);
@@ -316,7 +329,8 @@ in
             monitor = builtins.elemAt monitorNames monitorIndex;
           in
           "${ws}, monitor:${monitor}"
-        ) totalWorkspaces);
+        ) totalWorkspaces
+      );
 
       windowrulev2 = [
         "bordersize 0, floating:0, onworkspace:w[tv1]"

@@ -58,21 +58,24 @@
       };
 
       monitors = lib.mkOption {
-        type = listOf (
-          submodule (
-            { config, ... }:
-            {
-              options = {
-                name = lib.mkOption {
-                  type = str;
+        type = nullOr (
+          listOf (
+            submodule (
+              { config, ... }:
+              {
+                options = {
+                  name = lib.mkOption {
+                    type = str;
+                  };
+                  config = lib.mkOption {
+                    type = str;
+                  };
                 };
-                config = lib.mkOption {
-                  type = str;
-                };
-              };
-            }
+              }
+            )
           )
         );
+        default = null;
       };
 
       wallpaperPack = lib.mkOption {
