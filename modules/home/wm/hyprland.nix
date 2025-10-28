@@ -37,6 +37,10 @@ let
 
 in
 {
+
+  imports = [
+    ./mako.nix
+  ];
   services.hyprpaper.enable = lib.mkForce false;
   wayland.windowManager.hyprland = {
     enable = true;

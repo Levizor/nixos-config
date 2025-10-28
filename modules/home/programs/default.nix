@@ -10,7 +10,6 @@
     ./fuzzel.nix
     ./firefox.nix
     ./git.nix
-    ./mako.nix
     ./cava.nix
     ./nh.nix
     ./chromium.nix
