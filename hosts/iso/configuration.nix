@@ -1,28 +1,24 @@
 {
   inputs,
-  outputs,
-  config,
   modulesPath,
   mylib,
   lib,
+  user,
+  modPath,
   ...
 }:
 {
 
-  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
-  networking.firewall.enable = lib.mkForce false;
-
-  myopts.hostName = "nixiso";
+  networking = {
+    hostName = "nixiso";
+    firewall.enable = lib.mkForce false;
+  };
 
   imports = [
-    inputs.stylix.nixosModules.stylix
     (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix")
-    ../../modules/stylix
-    ../../modules/home-manager
   ]
-  ++ mylib.useModules ./../../modules/nixos [
-    "common"
+  ++ mylib.useModules (modPath + "/nixos") [
+    "stylix"
     "hardware"
     "battery"
     "graphical"
@@ -34,8 +30,30 @@
     "environment"
   ];
 
-  home-manager.extraSpecialArgs = {
-    inherit (config) myopts;
+  home-manager = {
+    users."${user}" = {
+      imports = mylib.useModules (modPath + "/home") (
+        lib.flatten [
+          (mylib.prefixList "programs/" [
+            "btop"
+            "git"
+            "vicinae"
+            "zathura"
+            "zen"
+          ])
+          (mylib.prefixList "terminals/" [
+            "kitty"
+            "tmux"
+          ])
+          "wm/hyprland"
+          "zsh"
+        ]
+      );
+
+      home.packages = [
+        # laptop specific packages
+      ];
+    };
   };
 
   isoImage.squashfsCompression = "gzip -Xcompression-level 1";
