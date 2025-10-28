@@ -110,7 +110,7 @@
       nixosConfigurations = {
         laptop = mkSystem linux nixpkgs ./hosts/laptop/configuration.nix;
         minimal = mkSystem linux nixpkgs ./hosts/minimal/configuration.nix;
-        live-iso = mkSystem linux nixpkgs ./hosts/live-iso/configuration.nix;
+        iso = mkSystem linux nixpkgs ./hosts/iso/configuration.nix;
         vps = mkSystem linux stable ./hosts/vps/configuration.nix;
         lab = mkSystem linux nixpkgs ./hosts/lab/configuration.nix;
       };
