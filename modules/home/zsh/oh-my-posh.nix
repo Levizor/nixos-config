@@ -12,7 +12,7 @@
               {
                 "foreground": "#5ef1ff",
                 "style": "plain",
-                "template": "<#5ea1ff>\u250f[</>{{ .UserName }}<#5ea1ff>]</>",
+                "template": "<#5ea1ff>\u250f[</>{{ .UserName }}{{ if .SSHSession }}@{{ .HostName }}{{end}}<#5ea1ff>]</>",
                 "type": "session"
               },
               {
