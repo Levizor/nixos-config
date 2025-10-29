@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-25.05";
-    lab-flake.url = "path:./hosts/lab/";
 
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
