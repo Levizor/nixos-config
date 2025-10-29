@@ -301,7 +301,7 @@ in
         "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
         "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dashboard dev, gapsin:0, gapsout:0"
       ]
-      ++ lib.optional (myopts.monitors != null) (
+      ++ lib.optionals (myopts.monitors != null) (
         let
           totalWorkspaces = 10;
 
