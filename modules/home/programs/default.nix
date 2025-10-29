@@ -24,6 +24,8 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
+        "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+        "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
         "image/png" = [ "org.gnome.Loupe.desktop" ];
         "image/jpeg" = [ "org.gnome.Loupe.desktop" ];
         "image/gif" = [ "org.gnome.Loupe.desktop" ];
