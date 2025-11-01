@@ -25,7 +25,6 @@
       ripgrep
       telegram-desktop
       tlrc
-      xdragon
       neovim-remote
       typst
     ]
