@@ -17,7 +17,7 @@
 
     cal = "cal -m3";
 
-    dad = "xdragon -a -x";
+    dad = "${lib.getExe pkgs.dragon-drop} -a -x";
 
     clock = "clock-rs";
 
