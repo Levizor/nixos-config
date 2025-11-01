@@ -87,6 +87,10 @@
     };
   };
 
+  services.auto-cpufreq = {
+    enable = true;
+  };
+
   # Required for JetBrains Rider
   # programs = {
   #   nix-ld = {
