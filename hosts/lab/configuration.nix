@@ -43,6 +43,7 @@
       imports = mylib.useModules ./../../modules/home (
         lib.flatten [
           (mylib.prefixList "programs/" [
+            "xdg"
             "btop"
             "direnv"
             "git"

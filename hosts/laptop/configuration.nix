@@ -57,6 +57,7 @@
       imports = mylib.useModules (modPath + "/home") (
         lib.flatten [
           (mylib.prefixList "programs/" [
+            "xdg"
             "btop"
             "chromium"
             "direnv"
