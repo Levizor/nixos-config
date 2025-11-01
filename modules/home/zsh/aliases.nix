@@ -37,11 +37,11 @@
 
     nixconf = "nvim ~/nix/.";
 
-    hypr = "nvim ~/nix/modules/home-manager/wm/hyprland.nix";
+    hypr = "nvim ~/nix/modules/home/wm/hyprland.nix";
 
-    aliases = "nvim ~/nix/modules/home-manager/zsh/aliases.nix";
+    aliases = "nvim ~/nix/modules/home/zsh/aliases.nix";
 
-    zrc = "nvim ~/nix/home-manager/zsh/zsh.nix";
+    zrc = "nvim ~/nix/home/zsh/zsh.nix";
 
     cp = "rsync -r --info=progress2 --human-readable";
 
