@@ -15,9 +15,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nixvim = {
+    #   url = "github:Levizor/nixvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     nixvim = {
-      url = "github:Levizor/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Levizor/nvix";
     };
 
     disko = {
