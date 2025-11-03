@@ -37,8 +37,10 @@ down() {
   for f in "${files[@]}"; do
     if [[ $move -eq 1 ]]; then
       mv -v "$f" "$target/"
+      echo "Moved $f to $target"
     else
-      rsync -r --info=progress2 --human-readable "$f" "$target/"
+      rsync -r --info=progress2,name0 --human-readable "$f" "$target/"&&
+      echo "Copied $f to $target"
     fi
   done
 }
