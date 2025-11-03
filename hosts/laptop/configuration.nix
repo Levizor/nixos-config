@@ -93,14 +93,19 @@
   };
 
   # Required for JetBrains Rider
-  # programs = {
-  #   nix-ld = {
-  #     enable = true;
-  #     libraries = with pkgs; [
-  #       icu
-  #     ];
-  #   };
+  programs = {
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        icu
+      ];
+    };
+  };
+
+  # specialisation."noFirewall".configuration = {
+  #   networking.firewall.enable = lib.mkForce false;
   # };
+
 
   # For virtual camera in OBS
   boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];

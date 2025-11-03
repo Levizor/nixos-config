@@ -20,7 +20,4 @@
     };
   };
 
-  specialisation."noFirewall".configuration = {
-    networking.firewall.enable = lib.mkForce false;
-  };
 }
