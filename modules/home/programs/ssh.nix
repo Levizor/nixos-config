@@ -17,6 +17,13 @@
         identitiesOnly = true;
       };
 
+      "github-pjatk.com" = {
+        hostname = "github.com";
+        user = user;
+        identityFile = "~/.ssh/github-pjatk";
+        identitiesOnly = true;
+      };
+
       "aur.archlinux.org" = {
         user = "aur";
         identityFile = "~/.ssh/aur";
