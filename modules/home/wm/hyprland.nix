@@ -182,7 +182,7 @@ in
           "$mod, T, exec, $telegram"
           "$mod, E, exec, $fileManager --class files"
           "CTRL_$mod, W, exec, $browser"
-          "$mod, W, exec, pgrep -x '.*$browser.*' > /dev/null || $browser"
+          "$mod, W, exec, pgrep -x '.*(firefox|chromium|brave|floorp|zen).*' > /dev/null || $browser"
           # "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
           "CTRL_$mod, P, exec, $player"
           ", F10, exec, wl-copy $(${hyprpicker})"
