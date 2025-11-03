@@ -37,7 +37,7 @@
       cargo
       # filezilla
       hyprland-workspaces-tui
-      # jetbrains.rider
+      jetbrains.rider
       # jetbrains.idea-ultimate
       stable.jetbrains.pycharm-professional
       pinta
