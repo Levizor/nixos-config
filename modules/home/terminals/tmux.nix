@@ -14,23 +14,23 @@ let
       tmuxp
     ];
     text = ''
-      current_session=$(tmux display-message -p '#{session_name}'); 
-      dashboard_exists=$(tmux list-sessions | grep -c '^dashboard:'); 
-      last_session=$(tmux show-options -gqv @last_session); 
-      if [ "$current_session" = "dashboard" ]; then 
-        if [ -n "$last_session" ] && tmux has-session -t "$last_session" 2>/dev/null; then 
-          tmux set-option -g @last_session "$current_session"; 
-          tmux switch-client -t "$last_session"; 
-        else 
-          tmux switch-client -t dev; 
-        fi; 
-      else 
-        tmux set-option -g @last_session "$current_session"; 
-        if [ "$dashboard_exists" -eq 0 ]; then 
-          tmuxp load -d dashboard; 
-          sleep 0.5; 
-        fi; 
-        tmux switch-client -t dashboard; 
+      current_session=$(tmux display-message -p '#{session_name}');
+      dashboard_exists=$(tmux list-sessions | grep -c '^dashboard:');
+      last_session=$(tmux show-options -gqv @last_session);
+      if [ "$current_session" = "dashboard" ]; then
+        if [ -n "$last_session" ] && tmux has-session -t "$last_session" 2>/dev/null; then
+          tmux set-option -g @last_session "$current_session";
+          tmux switch-client -t "$last_session";
+        else
+          tmux switch-client -t dev;
+        fi;
+      else
+        tmux set-option -g @last_session "$current_session";
+        if [ "$dashboard_exists" -eq 0 ]; then
+          tmuxp load -d dashboard;
+          sleep 0.5;
+        fi;
+        tmux switch-client -t dashboard;
       fi
     '';
   };
@@ -39,6 +39,7 @@ let
     name = "rebuild";
     runtimeInputs = with pkgs; [
       libnotify
+      nh
     ];
 
     text = ''
@@ -148,7 +149,7 @@ in
       bind -n M-0 select-window -t 0
 
 
-      # Move between windows 
+      # Move between windows
       bind -n M-C-Left previous-window
       bind -n M-C-Right next-window
       bind -n M-C-h previous-window
@@ -181,12 +182,12 @@ in
       bind -n M-q kill-pane
       bind -n C-q kill-window
 
-      bind -n M-f resize-pane -Z 
-      bind-key f resize-pane -Z 
+      bind -n M-f resize-pane -Z
+      bind-key f resize-pane -Z
 
       bind c new-window -c "#{pane_current_path}"
       bind '"' split-window -c "#{pane_current_path}"
-      bind % split-window -h -c "#{pane_current_path}"     
+      bind % split-window -h -c "#{pane_current_path}"
       set -g escape-time 0
 
       bind -n M-d run-shell "${lib.getExe toggleSessionScript}"
@@ -244,7 +245,7 @@ in
     session_name: dashboard
     windows:
       - window_name: nix-rebuild
-        panes: 
+        panes:
           - shell_command:
               - cd ~/nix/; ${lib.getExe pkgs.neofetch}
       - window_name: btop
@@ -267,7 +268,7 @@ in
       - window_name: nix
         panes:
           - shell_command:
-              - cd ~/nix/ 
+              - cd ~/nix/
   '';
 
   home.file.".tmuxp/pw.yaml".text = ''
@@ -289,9 +290,9 @@ in
   '';
   home.file.".tmuxp/lab.yaml".text = ''
     session_name: dashboard
-    windows: 
+    windows:
       - window_name: dashboard
-        panes: 
+        panes:
           - shell_command:
             - ${lib.getExe pkgs.wlr-randr} --output DP-1 --transform 90; cd
   '';
