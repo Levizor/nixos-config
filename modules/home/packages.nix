@@ -54,6 +54,7 @@
       yt-dlp
       lazygit
       gemini-cli
+      fd
       # prismlauncher
     ];
 
