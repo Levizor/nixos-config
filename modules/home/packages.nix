@@ -38,6 +38,7 @@
       # filezilla
       hyprland-workspaces-tui
       jetbrains.rider
+      jetbrains-toolbox
       # jetbrains.idea-ultimate
       stable.jetbrains.pycharm-professional
       pinta
