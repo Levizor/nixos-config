@@ -45,7 +45,6 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKu2iVrpee6R9cf80o7lu1qqf9EnEDdquqn5kJir+Lbk levizor@nixlaptop"
       ];
     };
-
   };
 
   programs = {
@@ -69,13 +68,4 @@
 
   system.stateVersion = "25.05";
 
-  boot = {
-
-    # kernelPackages = pkgs.linuxPackages_6_1;
-
-    loader.systemd-boot.enable = true;
-
-    loader.efi.canTouchEfiVariables = true;
-
-  };
 }
