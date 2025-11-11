@@ -108,7 +108,20 @@
 
 
   # For virtual camera in OBS
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot = {
+    kernelModules = [ "v4l2loopback" ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    # kernelPackages = pkgs.linuxPackages_6_1;
 
-  boot.kernelModules = [ "v4l2loopback" ];
+    loader.systemd-boot.enable = false;
+    loader.grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+    };
+
+    loader.efi.canTouchEfiVariables = true;
+
+  };
+
 }
