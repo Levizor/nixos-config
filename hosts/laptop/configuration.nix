@@ -30,7 +30,7 @@
 
   imports = [
     ./hardware-configuration.nix
-    ./disko-config.nix
+    ./new-disko-config.nix
     # For virtual machines
     # ./virtual.nix
   ]
@@ -106,14 +106,12 @@
   #   networking.firewall.enable = lib.mkForce false;
   # };
 
-
   # For virtual camera in OBS
   boot = {
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
     # kernelPackages = pkgs.linuxPackages_6_1;
 
-    loader.systemd-boot.enable = false;
     loader.grub = {
       enable = true;
       efiSupport = true;
@@ -121,7 +119,6 @@
     };
 
     loader.efi.canTouchEfiVariables = true;
-
   };
 
 }
