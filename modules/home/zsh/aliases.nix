@@ -15,8 +15,6 @@
 
     tree = "lsd --tree";
 
-    cal = "cal -m3";
-
     dad = "${lib.getExe pkgs.dragon-drop} -a -x";
 
     clock = "clock-rs";
