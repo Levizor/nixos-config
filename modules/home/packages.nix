@@ -17,6 +17,7 @@
     in
     with pkgs;
     [
+      duf
       bat
       cmatrix
       ffmpeg
