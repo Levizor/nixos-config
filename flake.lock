@@ -502,11 +502,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1762197810,
-        "narHash": "sha256-FNL4XGmq3A2w+s3LrZKHTmWWGpPnrqIweJkJOGH9Is0=",
+        "lastModified": 1763160132,
+        "narHash": "sha256-QacOkEhLsJ1J46UDDlCt9twQ56tKE3iAEFJT5x6ZFkQ=",
         "owner": "Levizor",
         "repo": "nvix",
-        "rev": "ce08519e62c132d9739af290455977e0aac17d1c",
+        "rev": "43ed8dfe5d583b277fbdaaa4ce6d2641066901c6",
         "type": "github"
       },
       "original": {
