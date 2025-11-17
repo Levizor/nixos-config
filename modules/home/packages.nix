@@ -4,6 +4,7 @@
   lib,
   pkgs,
   myopts,
+  system,
   ...
 }:
 {
@@ -12,7 +13,7 @@
     let
       stable = import inputs.stable {
         config = config.nixpkgs.config;
-        system = pkgs.system;
+        system = system;
       };
     in
     with pkgs;

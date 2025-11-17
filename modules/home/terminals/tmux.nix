@@ -4,6 +4,7 @@
   lib,
   myopts,
   config,
+  system,
   ...
 }:
 let
@@ -206,7 +207,7 @@ in
       }
 
       {
-        plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
+        plugin = inputs.minimal-tmux.packages.${system}.default;
         extraConfig = ''
           set -g status-bg black
           set -g @minimal-tmux-bg blue
