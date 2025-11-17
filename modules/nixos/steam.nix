@@ -11,4 +11,8 @@
     };
     gamemode.enable = steam.enable;
   };
+  hardware = {
+    graphics.enable = true;
+    graphics.enable32Bit = true;
+  };
 }
