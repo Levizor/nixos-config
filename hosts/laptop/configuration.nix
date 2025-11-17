@@ -31,6 +31,7 @@
   imports = [
     ./hardware-configuration.nix
     ./new-disko-config.nix
+    ./snapper.nix
     # For virtual machines
     # ./virtual.nix
   ]
