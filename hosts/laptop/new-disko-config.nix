@@ -34,7 +34,16 @@
                     mountOptions = [
                       "noatime"
                       "compress=zstd:3"
-                      "ssd"
+                      "space_cache=v2"
+                    ];
+                  };
+
+                  "@root/.snapshots" = {
+                    mountpoint = "/.snapshots";
+                    mountOptions = [
+                      "noatime"
+                      "compress=zstd:3"
+                      "space_cache=v2"
                     ];
                   };
 
@@ -43,7 +52,7 @@
                     mountOptions = [
                       "noatime"
                       "compress=zstd:3"
-                      "ssd"
+                      "space_cache=v2"
                     ];
                   };
 
@@ -62,18 +71,19 @@
                     mountOptions = [
                       "noatime"
                       "compress=zstd:3"
-                      "ssd"
+                      "space_cache=v2"
                     ];
                   };
 
-                  "@snapshots" = {
-                    mountpoint = "/.snapshots";
+                  "@home/.snapshots" = {
+                    mountpoint = "/home/.snapshots";
                     mountOptions = [
                       "noatime"
                       "compress=zstd:3"
-                      "ssd"
+                      "space_cache=v2"
                     ];
                   };
+
                 };
               };
             };
