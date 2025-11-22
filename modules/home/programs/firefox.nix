@@ -1,6 +1,5 @@
 { pkgs, inputs, ... }:
 let
-  system = pkgs.system;
   profiles = {
     profile_0 = {
       id = 0;
