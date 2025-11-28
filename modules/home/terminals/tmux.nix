@@ -132,11 +132,6 @@ in
       set -gq allow-passthrough on
       set -g visual-activity off
 
-      bind-key C-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
-      bind-key C-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
-      bind -n C-S-p display-popup -E -w 80% -h 80% -T "TMS" "tms"
-      bind -n C-S-s display-popup -E -w 80% -h 80% -T "Switch session" "tms switch"
-
       # Switch between windows using Alt + [number]
       bind -n M-1 select-window -t 1
       bind -n M-2 select-window -t 2
@@ -181,11 +176,11 @@ in
 
 
       bind -n M-q kill-pane
-      bind -n C-q kill-window
 
       bind -n M-f resize-pane -Z
       bind-key f resize-pane -Z
 
+      bind c new-window -c "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
@@ -194,6 +189,8 @@ in
       bind -n M-d run-shell "${lib.getExe toggleSessionScript}"
       bind -n M-r run-shell "${lib.getExe tmuxRebuildBind}"
       bind -n M-R run-shell "${lib.getExe tmuxRebuildBind} -s"
+
+      bind -n M-s source-file ~/.config/tmux/tmux.conf \; display "Resourced"
 
       bind-key b set-option status
       bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
@@ -236,6 +233,24 @@ in
           set -g @minimal-tmux-indicator-str "  #S  "
           set -g status-left-length 20
           set -g status-interval 1
+        '';
+      }
+
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-processes 'ssh btop tray-tui watch "~nvim -> nvim"'
+          set -g @resurrect-save 'S'
+          set -g @resurrect-restore 'R'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '15' # minutes
         '';
       }
     ];
@@ -303,18 +318,6 @@ in
     separator = " "
     print_once = true
   '';
-
-  home.file.".config/tms/config.toml".text = ''
-    default_session = "dashboard"
-
-    [[search_dirs]]
-    path = "${config.home.homeDirectory}"
-    depth = 3
-  '';
-
-  home.packages = with pkgs; [
-    tmux-sessionizer
-  ];
 
   stylix.targets.tmux.enable = false;
 }

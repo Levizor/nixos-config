@@ -55,6 +55,8 @@ in
     name = "tmuxInitScript";
     runtimeInputs = [ pkgs.tmux ];
     text = ''
+      echo "Initializing tmux"
+      tmux start-server
       tmux has-session -t dashboard 2>/dev/null || tmuxp load -d dashboard
       tmux has-session -t dev 2>/dev/null || tmuxp load -d dev
       while true;
@@ -150,11 +152,11 @@ in
       declare -A workspace_apps=(
             [1]="Telegram"
             [2]="keepassxc"
-            [3]="youtube-music"       
+            [3]="youtube-music"
             [4]="vesktop"
             [5]="teams-for-linux"
             [6]="${browser}"
-            [7]="kitty -1"              
+            [7]="kitty -1"
             [8]="steam"
         )
 

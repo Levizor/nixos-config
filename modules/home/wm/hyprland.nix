@@ -299,7 +299,8 @@ in
         "w[tv1], gapsout:0, gapsin:0"
         "f[1], gapsout:0, gapsin:0"
         "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
-        "special:terminal, border:false, on-created-empty:$terminal tmuxp load --yes dashboard dev, gapsin:0, gapsout:0"
+        "special:terminal, border:false, on-created-empty:$terminal tmux attach, gapsin:0, gapsout:0"
+        # tmuxp load --yes dashboard dev
       ]
       ++ lib.optionals (myopts.monitors != null) (
         let
