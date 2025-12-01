@@ -27,6 +27,7 @@
     with pkgs;
     [
       duf
+      fd
       bat
       cmatrix
       ffmpeg
@@ -65,7 +66,7 @@
       yt-dlp
       lazygit
       gemini-cli
-      fd
+      blender
       # prismlauncher
     ];
 
