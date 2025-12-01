@@ -58,6 +58,7 @@
       imports = mylib.useModules (modPath + "/home") (
         lib.flatten [
           (mylib.prefixList "programs/" [
+            "distrobox"
             "xdg"
             "btop"
             "chromium"
@@ -121,5 +122,7 @@
 
     loader.efi.canTouchEfiVariables = true;
   };
+
+  hardware.amdgpu.opencl.enable = true;
 
 }
