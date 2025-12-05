@@ -5,6 +5,10 @@
 }:
 {
   networking = {
+    wireless = {
+      enable = false;
+      iwd.enable = true;
+    };
     firewall = {
       enable = true;
       trustedInterfaces = [
@@ -13,6 +17,7 @@
     };
     networkmanager = {
       enable = true;
+      wifi.backend = "iwd";
       plugins = with pkgs; [
         networkmanager-openvpn
         networkmanager-sstp
