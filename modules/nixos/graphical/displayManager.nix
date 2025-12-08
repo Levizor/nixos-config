@@ -5,6 +5,7 @@
       settings = {
         animation = "matrix";
         hide_borders = true;
+        session_log = false;
       };
     };
 
