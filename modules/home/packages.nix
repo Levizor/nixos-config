@@ -7,6 +7,12 @@
   system,
   ...
 }:
+let
+  stable = import inputs.stable {
+    config = config.nixpkgs.config;
+    system = system;
+  };
+in
 {
   nixpkgs.config.allowUnfree = true;
   programs.nix-search-tv = {
@@ -18,12 +24,6 @@
     enableZshIntegration = true;
   };
   home.packages =
-    let
-      stable = import inputs.stable {
-        config = config.nixpkgs.config;
-        system = system;
-      };
-    in
     with pkgs;
     [
       duf
@@ -40,8 +40,8 @@
       typst
     ]
     ++ lib.optionals myopts.additionalPackages [
-      # inputs.tray-tui.packages.${system}.tray-tui
-      tray-tui
+      inputs.tray-tui.packages.${system}.tray-tui
+      # tray-tui
       inputs.dark-text.packages.${system}.default
       # android-tools
       ani-cli
