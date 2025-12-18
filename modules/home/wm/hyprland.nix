@@ -4,6 +4,7 @@
   pkgs,
   lib,
   myopts,
+  system,
   ...
 }:
 let
@@ -56,6 +57,24 @@ in
 
     package = null;
     portalPackage = null;
+
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprexpo
+      hyprscrolling
+    ];
+
+    settings.plugin = {
+      hyprexpo = {
+        columns = 3;
+        gap_size = 5;
+        workspace_method = "center current";
+      };
+
+      hyprscrolling = {
+        column_width = 1;
+      };
+
+    };
     systemd = {
       variables = [ "--all" ];
       enableXdgAutostart = true;
@@ -112,7 +131,7 @@ in
         gaps_out = 15;
         border_size = 3;
 
-        layout = "dwindle";
+        layout = "scrolling";
       };
 
       decoration = {
@@ -165,6 +184,17 @@ in
           screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
         in
         [
+          # Plugins
+          "$mod_Alt, Escape, hyprexpo:expo, toggle"
+
+          # hyprscrolling
+          "$mod, period, layoutmsg, move +col"
+          "$mod, comma, layoutmsg, move -col"
+          "$mod SHIFT, period, layoutmsg, movewindowto r"
+          "$mod SHIFT, comma, layoutmsg, movewindowto l"
+          "$mod SHIFT, up, layoutmsg, movewindowto u"
+          "$mod SHIFT, down, layoutmsg, movewindowto d"
+
           # Utils
           "$mod, Q, killactive,"
           "$mod, V, togglefloating,"
