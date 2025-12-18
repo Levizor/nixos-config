@@ -38,8 +38,10 @@ in
       tlrc
       neovim-remote
       typst
+      cachix
     ]
     ++ lib.optionals myopts.additionalPackages [
+      heroic
       inputs.tray-tui.packages.${system}.tray-tui
       # tray-tui
       inputs.dark-text.packages.${system}.default
@@ -60,7 +62,7 @@ in
       qbittorrent
       thunderbird
       timg
-      ungoogled-chromium
+      # ungoogled-chromium
       vesktop
       youtube-music
       yt-dlp
