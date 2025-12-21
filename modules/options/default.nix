@@ -24,7 +24,7 @@
 
       nh.host = lib.mkOption {
         type = str;
-        default = "nixos";
+        default = "laptop";
       };
 
       tailscale = {
