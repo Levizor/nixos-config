@@ -54,9 +54,9 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-    };
+    # hyprland = {
+    #   url = "github:hyprwm/Hyprland";
+    # };
 
   };
 
