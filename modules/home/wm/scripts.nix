@@ -14,7 +14,7 @@ let
     jq
   ];
 in
-{
+rec {
   monitorToggleScript = pkgs.writeShellApplication {
     name = "monitorToggleScript";
     runtimeInputs = commonDependencies;
@@ -181,6 +181,73 @@ in
 
             sleep 0.3
         done
+    '';
+  };
+
+  switchFocusedMachineScript = pkgs.writeShellApplication {
+    name = "switchFocusedMachineScript";
+    runtimeInputs = with pkgs; [ jq ];
+    text = ''
+      if [ "$#" -ne 1 ]; then
+        echo "Usage: switchFocusedMachineScript <0|1>"
+        exit 1
+      fi
+
+      TARGET="$1"
+
+      # Get current cursor Y position
+      Y=$(hyprctl cursorpos -j | jq '.y')
+
+      case "$TARGET" in
+        0)
+          # Switch to laptop (move cursor far left)
+          hyprctl dispatch movecursor -10 "$Y"
+          ;;
+        1)
+          # Switch to PC (move cursor far right)
+          hyprctl dispatch movecursor 10000 "$Y"
+          ;;
+        *)
+          echo "Invalid argument: $TARGET (expected 0 or 1)"
+          exit 1
+          ;;
+      esac
+    '';
+  };
+
+  seamlessFocusNav = pkgs.writeShellApplication {
+    name = "seamlessWorkspaceNav";
+    runtimeInputs = commonDependencies;
+    text = ''
+      if [ "$#" -ne 2 ]; then
+        echo "Usage: seamlessFocusNav <l|r> <0|1>"
+        exit 1
+      fi
+
+      DIR="$1"
+      FALLBACK="$2"
+
+      # Try to move focus and capture output
+      OUTPUT=$(hyprctl dispatch movefocus "$DIR" 2>&1 || true)
+
+      # Hyprland prints this when there is nowhere to move
+      if echo "$OUTPUT" | grep -q "does not make sense"; then
+        # Get current cursor position
+        X=$(hyprctl cursorpos -j | jq '.x')
+        Y=$(hyprctl cursorpos -j | jq '.y')
+
+        # Pre-nudge cursor away from edge to ensure crossing triggers lan-mouse
+        if [ "$FALLBACK" -eq 1 ]; then
+          # moving to PC, nudge left → right
+          hyprctl dispatch movecursor $((X - 5)) "$Y"
+        else
+          # moving to laptop, nudge right → left
+          hyprctl dispatch movecursor $((X + 5)) "$Y"
+        fi
+
+        # Call the switch script
+        ${lib.getExe switchFocusedMachineScript} "$FALLBACK"
+      fi
     '';
   };
 }

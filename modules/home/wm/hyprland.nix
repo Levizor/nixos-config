@@ -20,6 +20,8 @@ let
       myopts.monitors;
   monitorNames = map (m: m.name) myopts.monitors;
 
+  isLaptop = myopts.nh.host == "laptop";
+  isLab = myopts.nh.host == "lab";
   browser = if myopts.browser == null then "" else lib.getExe myopts.browser;
   brightnessctl = lib.getExe pkgs.brightnessctl;
   grimblast = lib.getExe pkgs.grimblast;
@@ -44,9 +46,13 @@ let
   gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
   forceKillScript = lib.getExe scriptDefs.forceKillScript;
   openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
-
+  switchFocusedMachineScript = lib.getExe scriptDefs.switchFocusedMachineScript;
+  seamlessFocusNav = lib.getExe scriptDefs.seamlessFocusNav;
 in
 {
+  home.packages = [
+    scriptDefs.switchFocusedMachineScript
+  ];
 
   imports = [
     ./mako.nix
@@ -264,14 +270,42 @@ in
           ",XF86MonBrightnessDown , exec, ${brightnessctl} set 10%-"
 
           # Move focus with mod + arrow keys
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
           "$mod, up, movefocus, u"
           "$mod, down, movefocus, d"
-          "$mod, h, movefocus, l"
-          "$mod, l, movefocus, r"
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
+        ]
+        ++ (
+          if isLaptop then
+            [
+              # Laptop: right edge → lab
+              "$mod, right, exec, ${seamlessFocusNav} r 1"
+              "$mod, l,     exec, ${seamlessFocusNav} r 1"
+
+              # Normal left movement
+              "$mod, left,  movefocus, l"
+              "$mod, h,     movefocus, l"
+            ]
+          else if isLab then
+            [
+              # lab: left edge → laptop
+              "$mod, left,  exec, ${seamlessFocusNav} l 0"
+              "$mod, h,     exec, ${seamlessFocusNav} l 0"
+
+              # Normal right movement
+              "$mod, right, movefocus, r"
+              "$mod, l,     movefocus, r"
+            ]
+          else
+            [
+              # Fallback: pure local movement
+              "$mod, left,  movefocus, l"
+              "$mod, right, movefocus, r"
+              "$mod, h,     movefocus, l"
+              "$mod, l,     movefocus, r"
+            ]
+        )
+        ++ [
 
           # special workspaces
           "$mod, S, togglespecialworkspace, terminal"

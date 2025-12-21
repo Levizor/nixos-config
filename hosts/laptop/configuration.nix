@@ -100,8 +100,18 @@
     };
   };
 
-  services.auto-cpufreq = {
-    enable = true;
+  services = {
+    auto-cpufreq = {
+      enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = true;
+      };
+    };
   };
 
   # Required for JetBrains Rider
