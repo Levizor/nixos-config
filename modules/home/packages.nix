@@ -34,13 +34,13 @@ in
       fzf
       loupe
       ripgrep
-      telegram-desktop
       tlrc
       neovim-remote
       typst
       cachix
     ]
     ++ lib.optionals myopts.additionalPackages [
+      telegram-desktop
       heroic
       inputs.tray-tui.packages.${system}.tray-tui
       # tray-tui
