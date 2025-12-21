@@ -78,10 +78,21 @@
             "tmux"
           ])
           "wm"
+          "wm/lan-mouse"
           "zsh"
           "packages"
         ]
       );
+
+      programs.lan-mouse.settings = {
+        clients = [
+          {
+            hostname = "nixlab";
+            position = "right";
+            activate_on_startup = true;
+          }
+        ];
+      };
 
       home.packages = [
         # laptop specific packages
@@ -122,5 +133,4 @@
   };
 
   hardware.amdgpu.opencl.enable = true;
-
 }

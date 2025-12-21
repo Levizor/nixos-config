@@ -59,6 +59,7 @@
           "zsh"
           "wm/hyprland"
           "wm/wpaperd"
+          "wm/lan-mouse"
         ]
       );
       wayland.windowManager.hyprland.xwayland.enable = false;
@@ -77,6 +78,7 @@
 
   environment.systemPackages = with pkgs; [
     sox
+    lan-mouse
   ];
 
   virtualisation.vmVariant = {
