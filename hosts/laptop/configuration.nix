@@ -109,7 +109,7 @@
       enable = true;
       settings = {
         PermitRootLogin = "no";
-        PasswordAuthentication = true;
+        PasswordAuthentication = false;
       };
     };
   };
@@ -143,4 +143,5 @@
   };
 
   hardware.amdgpu.opencl.enable = true;
+
 }
