@@ -58,6 +58,7 @@ in
     ./mako.nix
   ];
   services.hyprpaper.enable = lib.mkForce false;
+  services.poweralertd.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
 
