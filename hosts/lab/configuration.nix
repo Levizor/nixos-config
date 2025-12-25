@@ -51,6 +51,7 @@
             "ssh"
             "mpv"
             "zen"
+            "kdeconnect"
           ])
           (mylib.prefixList "terminals/" [
             "kitty"
@@ -69,7 +70,15 @@
     };
   };
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      kdePackages.krdp
+    ];
+  };
+
   programs.hyprland.xwayland.enable = false;
+  programs.kdeconnect.enable = true;
 
   services = {
     openssh.enable = true;

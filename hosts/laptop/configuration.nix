@@ -72,6 +72,7 @@
             "vicinae"
             "zathura"
             "zen"
+            "kdeconnect"
           ])
           (mylib.prefixList "terminals/" [
             "kitty"
@@ -116,10 +117,12 @@
 
   # Required for JetBrains Rider
   programs = {
+    kdeconnect.enable = true;
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
         icu
+        kdePackages.krdp
       ];
     };
   };
