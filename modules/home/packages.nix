@@ -53,7 +53,7 @@ in
       jetbrains.rider
       jetbrains-toolbox
       # jetbrains.idea-ultimate
-      stable.jetbrains.pycharm-professional
+      jetbrains.pycharm-professional
       pinta
       networkmanagerapplet
       nix-prefetch-github
