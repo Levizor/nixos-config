@@ -78,11 +78,6 @@
         default = null;
       };
 
-      wallpaperPack = lib.mkOption {
-        type = str;
-        default = "picturesque";
-      };
-
       browser = lib.mkOption {
         type = nullOr package;
         default = inputs.zen-browser.packages."${system}".twilight;

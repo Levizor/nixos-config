@@ -17,8 +17,6 @@
         config = "preferred, auto, 1, transform, 1";
       }
     ];
-
-    wallpaperPack = "vertical";
   };
 
   imports = [
@@ -40,7 +38,10 @@
 
   home-manager = {
     users."${user}" = {
-      imports = mylib.useModules ./../../modules/home (
+      imports = [
+        inputs.wallpapers.homeManagerModules.default
+      ]
+      ++ mylib.useModules ./../../modules/home (
         lib.flatten [
           (mylib.prefixList "programs/" [
             "xdg"
@@ -67,6 +68,7 @@
       home.packages = with pkgs; [
         timg
       ];
+      wallpapers.packs = [ "vertical" ];
     };
   };
 

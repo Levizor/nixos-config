@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   mylib,
   config,
@@ -24,7 +25,10 @@
       }
     ];
 
-    wallpaperPack = "picturesque";
+    # wallpaperPacks = [
+    #   "picturesque"
+    #   "alena-aenami"
+    # ];
   };
 
   imports = [
@@ -54,7 +58,10 @@
 
   home-manager = {
     users."${user}" = {
-      imports = mylib.useModules (modPath + "/home") (
+      imports = [
+        inputs.wallpapers.homeManagerModules.default
+      ]
+      ++ mylib.useModules (modPath + "/home") (
         lib.flatten [
           (mylib.prefixList "programs/" [
             "distrobox"
@@ -97,6 +104,11 @@
 
       home.packages = [
         # laptop specific packages
+      ];
+
+      wallpapers.packs = [
+        "picturesque"
+        "alena-aenami"
       ];
     };
   };

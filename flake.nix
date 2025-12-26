@@ -55,6 +55,8 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     lan-mouse.url = "github:feschber/lan-mouse";
+
+    wallpapers.url = "github:Levizor/Wallpapers";
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
     # };
