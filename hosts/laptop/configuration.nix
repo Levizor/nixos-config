@@ -36,7 +36,7 @@
     ./new-disko-config.nix
     ./snapper.nix
     # For virtual machines
-    # ./virtual.nix
+    ./virtual.nix
   ]
   ++ mylib.useModules (modPath + "/nixos") [
     "battery"
