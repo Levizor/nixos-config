@@ -54,7 +54,6 @@
         "copyfile"
         "copypath"
         "extract"
-        "aliases"
         "cp"
         "magic-enter"
       ];
