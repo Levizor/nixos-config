@@ -53,7 +53,7 @@ in
       jetbrains.rider
       jetbrains-toolbox
       # jetbrains.idea-ultimate
-      jetbrains.pycharm-professional
+      jetbrains.pycharm
       pinta
       networkmanagerapplet
       nix-prefetch-github
@@ -64,7 +64,7 @@ in
       timg
       # ungoogled-chromium
       vesktop
-      youtube-music
+      pear-desktop
       yt-dlp
       lazygit
       gemini-cli
