@@ -400,54 +400,37 @@ in
         ) totalWorkspaces
       );
 
-      windowrulev2 = [
-        "bordersize 0, floating:0, onworkspace:w[tv1]"
-        "rounding 0, floating:0, onworkspace:w[tv1]"
-        "bordersize 0, floating:0, onworkspace:f[1]"
-        "rounding 0, floating:0, onworkspace:f[1]"
-        "suppressevent maximize, class:.* # You'll probably like this."
+      windowrule = [
+        "border_size 0, match:float 0, match:workspace w[tv1]"
+        "rounding 0, match:float 0, match:workspace w[tv1]"
+        "border_size 0, match:float 0, match:workspace f[1]"
+        "rounding 0, match:float 0, match:workspace f[1]"
 
-        "workspace special:telegram, class:(org.telegram.desktop.*)"
+        "suppress_event maximize, match:class .*"
 
-        "size 95% 95%, class:(fl)"
-        "float, class:(fl)"
+        "workspace special:telegram, match:class org.telegram.desktop.*"
 
-        "float, class:(files)"
-        "size 60% 60%, centered, title:(.*Files)$"
+        "size 95% 95%, match:class fl"
+        "float on, match:class fl"
 
-        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-        "noanim,class:^(xwaylandvideobridge)$"
-        "noinitialfocus,class:^(xwaylandvideobridge)$"
-        "maxsize 1 1,class:^(xwaylandvideobridge)$"
-        "noblur,class:^(xwaylandvideobridge)$"
+        "float on, match:class files"
+        "size 60% 60%, center on, match:title (.*Files)$"
 
-        # "float, class:(clipse)"
-        # "size 622 652, class:(clipse)"
-        #
-        # Telegram
-        "workspace 1, class: ^(?i).*(telegram).*"
+        "opacity 0.0 override 0.0 override, match:class ^(xwaylandvideobridge)$"
+        "no_anim on, match:class ^(xwaylandvideobridge)$"
+        "no_initial_focus on, match:class ^(xwaylandvideobridge)$"
+        "max_size 1 1, match:class ^(xwaylandvideobridge)$"
+        "no_blur on, match:class ^(xwaylandvideobridge)$"
 
-        # KeePassXC
-        "workspace 2, class:^(?i).*(keepassxc).*"
-
-        # Music
-        "workspace 3, class:^(?i).*(youtube_music|ytmdesktop).*"
-
-        # Vesktop /
-        "workspace 4, class:^(vesktop)$"
-
-        # Teams
-        "workspace 5, class:^(teams-for-linux)$"
-
-        # Browser (WS6)
-        "workspace 6, class:^(?i).*(firefox|chromium|brave|floorp|zen).*"
-
-        # Steam + Games
-        "workspace 8, class:^(steam)$"
-        "workspace 9, title:^(.*)$, class:^(steam_app_.*)$"
-
-        # MPV
-        "workspace 10, class:^(mpv)$"
+        "workspace 1, match:class ^(?i).*(telegram).*"
+        "workspace 2, match:class ^(?i).*(keepassxc).*"
+        "workspace 3, match:class ^(?i).*(youtube_music|ytmdesktop).*"
+        "workspace 4, match:class ^(vesktop)$"
+        "workspace 5, match:class ^(teams-for-linux)$"
+        "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen).*"
+        "workspace 8, match:class ^(steam)$"
+        "workspace 9, match:title ^(.*)$, match:class ^(steam_app_.*)$"
+        "workspace 10, match:class ^(mpv)$"
       ];
 
     };
