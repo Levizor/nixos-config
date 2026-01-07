@@ -5,6 +5,12 @@
   ];
   services.vicinae = {
     enable = true;
-    autoStart = true;
+    systemd = {
+      enable = true;
+      autoStart = true;
+      environment = {
+        QT_SCALE_FACTOR = 1.25;
+      };
+    };
   };
 }
