@@ -64,6 +64,7 @@
       ++ mylib.useModules (modPath + "/home") (
         lib.flatten [
           (mylib.prefixList "programs/" [
+            "helix"
             "distrobox"
             "xdg"
             "btop"
