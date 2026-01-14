@@ -194,6 +194,7 @@ in
 
       bind-key b set-option status
       bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
+      bind g display-popup -d "#{pane_current_path}" -w 90% -h 90% -E "lazygit"
     '';
 
     plugins = with pkgs.tmuxPlugins; [
