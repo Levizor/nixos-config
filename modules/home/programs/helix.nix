@@ -132,6 +132,10 @@
           normal = "block";
           select = "underline";
         };
+
+        file-picker = {
+          git-ignore = false;
+        };
       };
     };
   };
