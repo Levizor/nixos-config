@@ -22,7 +22,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disko-config.nix
-    ./searx-funnel.nix
+    ./funnel.nix
   ]
   ++ mylib.useModules ./../../modules/nixos [
     "stylix"
@@ -34,6 +34,7 @@
     "nvim"
     "tailscale"
     "searx"
+    "attic"
   ];
 
   home-manager = {
