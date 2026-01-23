@@ -34,7 +34,7 @@
     "nvim"
     "tailscale"
     "searx"
-    "attic"
+    # "attic"
   ];
 
   home-manager = {
