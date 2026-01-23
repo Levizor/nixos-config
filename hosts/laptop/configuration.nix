@@ -44,7 +44,7 @@
     "docker"
     "environment"
     "filesystems"
-    # "flatpak"
+    "flatpak"
     "graphical"
     "hardware"
     "networking"
