@@ -57,6 +57,9 @@
     lan-mouse.url = "github:feschber/lan-mouse";
 
     wallpapers.url = "github:Levizor/Wallpapers";
+
+    cachyos.url = "github:xddxdd/nix-cachyos-kernel/release";
+
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";
     # };
