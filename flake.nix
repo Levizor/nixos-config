@@ -52,8 +52,6 @@
 
     vicinae.url = "github:vicinaehq/vicinae";
 
-    flake-utils.url = "github:numtide/flake-utils";
-
     lan-mouse.url = "github:feschber/lan-mouse";
 
     wallpapers.url = "github:Levizor/Wallpapers";
