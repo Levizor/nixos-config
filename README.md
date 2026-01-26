@@ -89,6 +89,9 @@ Example:
 | dark-text     | https://github.com/vimjoyer/dark-text                |
 | vicinae       | https://github.com/vicinaehq/vicinae                 |
 | nix-minecraft | https://github.com/Infinidoge/nix-minecraft          |
+| cachyos       | https://github.com/xddxdd/nix-cachyos-kernel         |
+| wallpapers    | https://github.com/Levizor/Wallpapers                |
+| lan-mouse     | https://github.comfeschber/lan-mouse                 |
 
 ## Installation
 
@@ -120,4 +123,9 @@ To update the system, run:
 
 ```sh
 nix flake update
+```
+
+and rebuild:
+```
+sudo nixos-rebuild switch --flake ".#<host>"
 ```
