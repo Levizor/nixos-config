@@ -1,72 +1,75 @@
 {
-  pkgs,
-  lib,
-  myopts,
-  ...
-}:
-{
-  programs.zsh.shellAliases = {
-    c = "wl-copy";
-    p = "wl-paste";
+  flake.homeModules.zsh-aliases =
+    {
+      pkgs,
+      lib,
+      myopts,
+      ...
+    }:
+    {
+      programs.zsh.shellAliases = {
+        c = "wl-copy";
+        p = "wl-paste";
 
-    mirror = "hyprctl keyword monitor HDMI-A-1, preferred, auto, 1, mirror, eDP-1";
+        mirror = "hyprctl keyword monitor HDMI-A-1, preferred, auto, 1, mirror, eDP-1";
 
-    sz = "du -sh";
+        sz = "du -sh";
 
-    tree = "lsd --tree";
+        tree = "lsd --tree";
 
-    dad = "${lib.getExe pkgs.dragon-drop} -a -x";
+        dad = "${lib.getExe pkgs.dragon-drop} -a -x";
 
-    clock = "clock-rs";
+        clock = "clock-rs";
 
-    cop = "copypath";
+        cop = "copypath";
 
-    cf = "copyfile";
+        cf = "copyfile";
 
-    nhs = "nh os switch -H ${myopts.nh.host}";
+        nhs = "nh os switch -H ${myopts.nh.host}";
 
-    vps = "nh os switch -H vps";
+        vps = "nh os switch -H vps";
 
-    min = "nh os switch -H minimal";
+        min = "nh os switch -H minimal";
 
-    adcom = "git commit -am";
+        adcom = "git commit -am";
 
-    battery = "upower -i $(upower -e | grep BAT) | grep -E 'state|to full|percentage'";
+        battery = "upower -i $(upower -e | grep BAT) | grep -E 'state|to full|percentage'";
 
-    nixconf = "nvim ~/nix/.";
+        nixconf = "nvim ~/nix/.";
 
-    hypr = "nvim ~/nix/modules/home/wm/hyprland.nix";
+        hypr = "nvim ~/nix/modules/home/wm/hyprland.nix";
 
-    aliases = "nvim ~/nix/modules/home/zsh/aliases.nix";
+        aliases = "nvim ~/nix/modules/home/zsh/aliases.nix";
 
-    zrc = "nvim ~/nix/home/zsh/zsh.nix";
+        zrc = "nvim ~/nix/home/zsh/zsh.nix";
 
-    cp = "rsync -r --info=progress2 --human-readable";
+        cp = "rsync -r --info=progress2 --human-readable";
 
-    compress = "compress()";
+        compress = "compress()";
 
-    pjatk = "sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
+        pjatk = "sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
 
-    grub-update = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
+        grub-update = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
 
-    # ls = "lsd --group-directories-first";
+        # ls = "lsd --group-directories-first";
 
-    # la = "lsd -a --group-directories-first";
+        # la = "lsd -a --group-directories-first";
 
-    # ll = "lsd -al --group-directories-first";
+        # ll = "lsd -al --group-directories-first";
 
-    z = "zathura";
+        z = "zathura";
 
-    s = "source ~/zsh_config/.zshrc";
+        s = "source ~/zsh_config/.zshrc";
 
-    i = "${lib.getExe pkgs.loupe}";
+        i = "${lib.getExe pkgs.loupe}";
 
-    get = "nix-shell -p";
+        get = "nix-shell -p";
 
-    uisudo = "sudo -sE ";
+        uisudo = "sudo -sE ";
 
-    up = "nvim ~/nix/modules/home/packages.nix";
+        up = "nvim ~/nix/modules/home/packages.nix";
 
-    ns = "nh search ";
-  };
+        ns = "nh search ";
+      };
+    };
 }

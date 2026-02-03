@@ -1,7 +1,10 @@
-{ pkgs, ... }:
 {
-  programs.obs-studio = {
-    enable = true;
-    plugins = [ pkgs.obs-studio-plugins.wlrobs ];
-  };
+  flake.homeModules.obs =
+    { pkgs, ... }:
+    {
+      programs.obs-studio = {
+        enable = true;
+        plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+      };
+    };
 }

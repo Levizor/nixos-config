@@ -1,9 +1,11 @@
 {
-  programs.distrobox = {
-    enable = true;
-    containers = {
-      aur = {
-        image = "archlinux:latest";
+  flake.homeModules.distrobox = {
+    programs.distrobox = {
+      enable = true;
+      containers = {
+        aur = {
+          image = "archlinux:latest";
+        };
       };
     };
   };

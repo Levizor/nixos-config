@@ -1,11 +1,13 @@
 { inputs, ... }:
 {
-  imports = [
-    inputs.lan-mouse.homeManagerModules.default
-  ];
+  flake.homeModules.lan-mouse = {
+    imports = [
+      inputs.lan-mouse.homeManagerModules.default
+    ];
 
-  programs.lan-mouse = {
-    enable = true;
-    systemd = true;
+    programs.lan-mouse = {
+      enable = true;
+      systemd = true;
+    };
   };
 }

@@ -1,6 +1,8 @@
 {
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
+  flake.homeModules.kdeconnect = {
+    services.kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
   };
 }

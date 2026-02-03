@@ -1,460 +1,452 @@
+{ self, inputs, ... }:
 {
-  inputs,
-  config,
-  pkgs,
-  lib,
-  myopts,
-  system,
-  ...
-}:
-let
-  monitors =
-    if myopts.monitors == null then
-      [
-        {
-          name = "none";
-          config = "none";
-        }
-      ]
-    else
-      myopts.monitors;
-  monitorNames = map (m: m.name) myopts.monitors;
-
-  isLaptop = myopts.nh.host == "laptop";
-  isLab = myopts.nh.host == "lab";
-  browser = if myopts.browser == null then "" else lib.getExe myopts.browser;
-  brightnessctl = lib.getExe pkgs.brightnessctl;
-  grimblast = lib.getExe pkgs.grimblast;
-  hyprpicker = lib.getExe pkgs.hyprpicker;
-  ncpamixer = lib.getExe pkgs.ncpamixer;
-  btop = lib.getExe pkgs.btop;
-
-  scriptDefs = import ./scripts.nix {
-    inherit
-      pkgs
-      lib
-      monitors
-      myopts
-      browser
-      ;
-  };
-
-  monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
-  tmuxInitScript = lib.getExe scriptDefs.tmuxInitScript;
-  animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
-  decorationsToggleScript = lib.getExe scriptDefs.decorationsToggleScript;
-  gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
-  forceKillScript = lib.getExe scriptDefs.forceKillScript;
-  openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
-  switchFocusedMachineScript = lib.getExe scriptDefs.switchFocusedMachineScript;
-  seamlessFocusNav = lib.getExe scriptDefs.seamlessFocusNav;
-in
-{
-  home.packages = [
-    scriptDefs.switchFocusedMachineScript
-  ];
-
-  imports = [
-    ./mako.nix
-  ];
-  services.hyprpaper.enable = lib.mkForce false;
-  services.poweralertd.enable = true;
-  wayland.windowManager.hyprland = {
-    enable = true;
-
-    package = null;
-    portalPackage = null;
-
-    plugins = with pkgs.hyprlandPlugins; [
-      hyprexpo
-      hyprscrolling
-    ];
-
-    settings.plugin = {
-      hyprexpo = {
-        columns = 3;
-        gap_size = 5;
-        workspace_method = "center current";
-      };
-
-      hyprscrolling = {
-        column_width = 0.5;
-        fullscreen_on_one_column = true;
-        focus_fit_method = 0;
-      };
-
-    };
-    systemd = {
-      variables = [ "--all" ];
-      enableXdgAutostart = true;
-    };
-    xwayland.enable = true;
-
-    settings = {
-      monitor =
-        if myopts.monitors != null then
-          map (m: "${m.name}, ${m.config}") monitors
+  flake.homeModules.hyprland =
+    {
+      config,
+      pkgs,
+      lib,
+      myopts,
+      system,
+      ...
+    }:
+    let
+      monitors =
+        if myopts.monitors == null then
+          [
+            {
+              name = "none";
+              config = "none";
+            }
+          ]
         else
-          ", preferred, auto, 1";
-      "$mod" = "SUPER";
+          myopts.monitors;
+      monitorNames = map (m: m.name) myopts.monitors;
 
-      "$browser" = "${browser}";
-      "$terminal" = "kitty -1";
-      "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
-      "$fileManager" = "${lib.getExe pkgs.nemo}";
-      "$player" = "${lib.getExe pkgs.youtube-music}";
+      isLaptop = myopts.nh.host == "laptop";
+      isLab = myopts.nh.host == "lab";
+      browser = if myopts.browser == null then "" else lib.getExe myopts.browser;
+      brightnessctl = lib.getExe pkgs.brightnessctl;
+      grimblast = lib.getExe pkgs.grimblast;
+      hyprpicker = lib.getExe pkgs.hyprpicker;
+      ncpamixer = lib.getExe pkgs.ncpamixer;
+      btop = lib.getExe pkgs.btop;
 
-      env = [
-        "TERMINAL, kitty -1"
-        "XDG_CURRENT_DESKTOP, Hyprland"
-        "GTK_USE_PORTAL=1"
-        "XCURSOR_SIZE, 30"
-        "NIXOS_OZONE_WL, 1"
-      ];
-
-      input = {
-        kb_layout = "us,ua,ru,pl";
-        kb_options = "grp:alt_space_toggle";
-
-        follow_mouse = 1;
-
-        touchpad = {
-          natural_scroll = true;
-          disable_while_typing = true;
-          tap-to-click = true;
-        };
-
-        sensitivity = 0;
-        repeat_delay = 250;
+      scriptDefs = self.lib.wm-scripts {
+        pkgs = pkgs;
+        monitors = monitors;
+        myopts = myopts;
       };
 
-      misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
-        initial_workspace_tracking = false;
-        enable_anr_dialog = false;
-      };
+      monitorToggleScript = lib.getExe scriptDefs.monitorToggleScript;
+      tmuxInitScript = lib.getExe scriptDefs.tmuxInitScript;
+      animationsToggleScript = lib.getExe scriptDefs.animationsToggleScript;
+      decorationsToggleScript = lib.getExe scriptDefs.decorationsToggleScript;
+      gapsToggleScript = lib.getExe scriptDefs.gapsToggleScript;
+      forceKillScript = lib.getExe scriptDefs.forceKillScript;
+      openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
+      switchFocusedMachineScript = lib.getExe scriptDefs.switchFocusedMachineScript;
+      seamlessFocusNav = lib.getExe scriptDefs.seamlessFocusNav;
+    in
+    {
+      services.hyprpaper.enable = lib.mkForce false;
+      services.poweralertd.enable = true;
+      wayland.windowManager.hyprland = {
+        enable = true;
 
-      general = {
-        gaps_in = 5;
-        gaps_out = 15;
-        border_size = 3;
+        package = null;
+        portalPackage = null;
 
-        layout = "scrolling";
-      };
-
-      decoration = {
-        rounding = 5;
-
-        blur = {
-          enabled = false;
-          size = 3;
-          passes = 3;
-        };
-      };
-
-      animations = {
-        enabled = false;
-
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-
-        animation = [
-          "windows, 1, 7, myBezier, slidevert"
-          "windowsOut, 1, 7, default, slidevert"
-          "border, 1, 10, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 6, default, slidevert"
-          "specialWorkspace, 1, 7, default, slide"
+        plugins = with pkgs.hyprlandPlugins; [
+          hyprexpo
+          hyprscrolling
         ];
-      };
 
-      dwindle = {
-        pseudotile = true;
-        preserve_split = true;
-      };
+        settings.plugin = {
+          hyprexpo = {
+            columns = 3;
+            gap_size = 5;
+            workspace_method = "center current";
+          };
 
-      master = {
-      };
+          hyprscrolling = {
+            column_width = 0.5;
+            fullscreen_on_one_column = true;
+            focus_fit_method = 0;
+          };
 
-      exec-once = [
-        "touch ~/.config/hypr/impure.conf"
-        # ensures screensharing
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_USE_PORTAL"
-        "hyprctl dispatch workspace 2"
-        "${tmuxInitScript}"
-        # "${openOnFocusScript}"
-        # "clipse -listen"
-        "wpaperd"
-      ];
+        };
+        systemd = {
+          variables = [ "--all" ];
+          enableXdgAutostart = true;
+        };
+        xwayland.enable = true;
 
-      bind =
-        let
-          screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
-        in
-        [
-          # Plugins
-          "$mod_Alt, Escape, hyprexpo:expo, toggle"
+        settings = {
+          monitor =
+            if myopts.monitors != null then
+              map (m: "${m.name}, ${m.config}") monitors
+            else
+              ", preferred, auto, 1";
+          "$mod" = "SUPER";
 
-          # hyprscrolling
-          "$mod, period, layoutmsg, move +col"
-          "$mod, comma, layoutmsg, move -col"
-          "$mod SHIFT, period, layoutmsg, movewindowto r"
-          "$mod SHIFT, comma, layoutmsg, movewindowto l"
-          "$mod SHIFT, up, layoutmsg, movewindowto u"
-          "$mod SHIFT, down, layoutmsg, movewindowto d"
+          "$browser" = "${browser}";
+          "$terminal" = "kitty -1";
+          "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
+          "$fileManager" = "${lib.getExe pkgs.nemo}";
+          "$player" = "${lib.getExe pkgs.youtube-music}";
 
-          # Utils
-          "$mod, Q, killactive,"
-          "$mod, V, togglefloating,"
-          "$mod, P, pseudo, # dwindle"
-          "$mod, F, fullscreen"
+          env = [
+            "TERMINAL, kitty -1"
+            "XDG_CURRENT_DESKTOP, Hyprland"
+            "GTK_USE_PORTAL=1"
+            "XCURSOR_SIZE, 30"
+            "NIXOS_OZONE_WL, 1"
+          ];
 
-          # Terminal launches
-          "$mod, Return, exec, $terminal"
-          "$mod SHIFT, Return, exec, $terminal -o # background_opacity=0.4"
-          "$mod, A, exec, $terminal --app-id fl ${ncpamixer}"
-          "$mod, U, exec, $terminal --app-id fl ${btop}"
-          "$mod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix"
+          input = {
+            kb_layout = "us,ua,ru,pl";
+            kb_options = "grp:alt_space_toggle";
 
-          # Other application launches
-          "$mod, T, exec, $telegram"
-          "$mod, E, exec, $fileManager --class files"
-          "CTRL_$mod, W, exec, $browser"
-          "$mod, W, exec, pgrep -x '.*(firefox|chromium|brave|floorp|zen).*' > /dev/null || $browser"
-          # "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
-          "CTRL_$mod, P, exec, $player"
-          ", F10, exec, wl-copy $(${hyprpicker})"
-          "$mod, Escape, exec, wlogout"
+            follow_mouse = 1;
 
-          # vicinae deeplinks
-          "$mod, D, exec, vicinae vicinae://toggle"
-          "$mod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
-          "$mod, space, exec, vicinae vicinae://extensions/vicinae/wm/switch-windows"
+            touchpad = {
+              natural_scroll = true;
+              disable_while_typing = true;
+              tap-to-click = true;
+            };
 
-          # Switch wallpapers
-          "$mod, F6, exec, wpaperctl next-wallpaper"
-          "$mod, F4, exec, wpaperctl previous-wallpaper"
+            sensitivity = 0;
+            repeat_delay = 250;
+          };
 
-          # Screenshots
-          ", Print , exec, ${grimblast} copy area"
-          "$mod, Print, exec, ${grimblast} copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
+          misc = {
+            disable_hyprland_logo = true;
+            disable_splash_rendering = true;
+            initial_workspace_tracking = false;
+            enable_anr_dialog = false;
+          };
 
-          # Scripts
-          "$mod Shift, Q, exec, ${forceKillScript}"
-          "$mod, F1, exec, ${decorationsToggleScript}"
-          "$mod, F2, exec, ${animationsToggleScript}"
-          "$mod, F3, exec, ${gapsToggleScript}"
+          general = {
+            gaps_in = 5;
+            gaps_out = 15;
+            border_size = 3;
 
-          "$mod, F7, exec, ${monitorToggleScript} 0"
-          "$mod, F8, exec, ${monitorToggleScript} 1"
-          "$mod, F9, exec, ${monitorToggleScript} 2"
+            layout = "scrolling";
+          };
 
-          # switch to specific language
-          # english
-          "bind = $mod_Shift, E, exec, hyprctl switchxkblayout all 0"
-          # ukrainian
-          "bind = $mod_Shift, U, exec, hyprctl switchxkblayout all 1"
-          # russian
-          "bind = $mod_Shift, R, exec, hyprctl switchxkblayout all 2"
-          # polish
-          "bind = $mod_Shift, P, exec, hyprctl switchxkblayout all 3"
+          decoration = {
+            rounding = 5;
 
-          # Volume
-          ",XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
-          "$mod, KP_Up,  exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
-          ",XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
-          "$mod, KP_Down,  exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
-          ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
-          "$mod, KP_Begin, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+            blur = {
+              enabled = false;
+              size = 3;
+              passes = 3;
+            };
+          };
 
-          # Brightness
-          ",XF86MonBrightnessUp , exec, ${brightnessctl} set +10%"
-          ",XF86MonBrightnessDown , exec, ${brightnessctl} set 10%-"
+          animations = {
+            enabled = false;
 
-          # Move focus with mod + arrow keys
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-          "$mod, k, movefocus, u"
-          "$mod, j, movefocus, d"
-        ]
-        ++ (
-          if isLaptop then
+            bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+
+            animation = [
+              "windows, 1, 7, myBezier, slidevert"
+              "windowsOut, 1, 7, default, slidevert"
+              "border, 1, 10, default"
+              "borderangle, 1, 8, default"
+              "fade, 1, 7, default"
+              "workspaces, 1, 6, default, slidevert"
+              "specialWorkspace, 1, 7, default, slide"
+            ];
+          };
+
+          dwindle = {
+            pseudotile = true;
+            preserve_split = true;
+          };
+
+          master = {
+          };
+
+          exec-once = [
+            "touch ~/.config/hypr/impure.conf"
+            # ensures screensharing
+            "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_USE_PORTAL"
+            "hyprctl dispatch workspace 2"
+            "${tmuxInitScript}"
+            # "${openOnFocusScript}"
+            # "clipse -listen"
+            "wpaperd"
+          ];
+
+          bind =
+            let
+              screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
+            in
             [
-              # Laptop: right edge → lab
-              "$mod, right, exec, ${seamlessFocusNav} r 1"
-              "$mod, l,     exec, ${seamlessFocusNav} r 1"
+              # Plugins
+              "$mod_Alt, Escape, hyprexpo:expo, toggle"
 
-              # Normal left movement
-              "$mod, left,  movefocus, l"
-              "$mod, h,     movefocus, l"
+              # hyprscrolling
+              "$mod, period, layoutmsg, move +col"
+              "$mod, comma, layoutmsg, move -col"
+              "$mod SHIFT, period, layoutmsg, movewindowto r"
+              "$mod SHIFT, comma, layoutmsg, movewindowto l"
+              "$mod SHIFT, up, layoutmsg, movewindowto u"
+              "$mod SHIFT, down, layoutmsg, movewindowto d"
+
+              # Utils
+              "$mod, Q, killactive,"
+              "$mod, V, togglefloating,"
+              "$mod, P, pseudo, # dwindle"
+              "$mod, F, fullscreen"
+
+              # Terminal launches
+              "$mod, Return, exec, $terminal"
+              "$mod SHIFT, Return, exec, $terminal -o # background_opacity=0.4"
+              "$mod, A, exec, $terminal --app-id fl ${ncpamixer}"
+              "$mod, U, exec, $terminal --app-id fl ${btop}"
+              "$mod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix"
+
+              # Other application launches
+              "$mod, T, exec, $telegram"
+              "$mod, E, exec, $fileManager --class files"
+              "CTRL_$mod, W, exec, $browser"
+              "$mod, W, exec, pgrep -x '.*(firefox|chromium|brave|floorp|zen).*' > /dev/null || $browser"
+              # "$mod, C, exec, $terminal --app-id 'clipse' 'clipse'"
+              "CTRL_$mod, P, exec, $player"
+              ", F10, exec, wl-copy $(${hyprpicker})"
+              "$mod, Escape, exec, wlogout"
+
+              # vicinae deeplinks
+              "$mod, D, exec, vicinae vicinae://toggle"
+              "$mod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
+              "$mod, space, exec, vicinae vicinae://extensions/vicinae/wm/switch-windows"
+
+              # Switch wallpapers
+              "$mod, F6, exec, wpaperctl next-wallpaper"
+              "$mod, F4, exec, wpaperctl previous-wallpaper"
+
+              # Screenshots
+              ", Print , exec, ${grimblast} copy area"
+              "$mod, Print, exec, ${grimblast} copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
+
+              # Scripts
+              "$mod Shift, Q, exec, ${forceKillScript}"
+              "$mod, F1, exec, ${decorationsToggleScript}"
+              "$mod, F2, exec, ${animationsToggleScript}"
+              "$mod, F3, exec, ${gapsToggleScript}"
+
+              "$mod, F7, exec, ${monitorToggleScript} 0"
+              "$mod, F8, exec, ${monitorToggleScript} 1"
+              "$mod, F9, exec, ${monitorToggleScript} 2"
+
+              # switch to specific language
+              # english
+              "bind = $mod_Shift, E, exec, hyprctl switchxkblayout all 0"
+              # ukrainian
+              "bind = $mod_Shift, U, exec, hyprctl switchxkblayout all 1"
+              # russian
+              "bind = $mod_Shift, R, exec, hyprctl switchxkblayout all 2"
+              # polish
+              "bind = $mod_Shift, P, exec, hyprctl switchxkblayout all 3"
+
+              # Volume
+              ",XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
+              "$mod, KP_Up,  exec, pactl set-sink-volume @DEFAULT_SINK@ +10%"
+              ",XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
+              "$mod, KP_Down,  exec, pactl set-sink-volume @DEFAULT_SINK@ -10%"
+              ", XF86AudioMute, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+              "$mod, KP_Begin, exec, pactl set-sink-mute @DEFAULT_SINK@ toggle"
+
+              # Brightness
+              ",XF86MonBrightnessUp , exec, ${brightnessctl} set +10%"
+              ",XF86MonBrightnessDown , exec, ${brightnessctl} set 10%-"
+
+              # Move focus with mod + arrow keys
+              "$mod, up, movefocus, u"
+              "$mod, down, movefocus, d"
+              "$mod, k, movefocus, u"
+              "$mod, j, movefocus, d"
             ]
-          else if isLab then
-            [
-              # lab: left edge → laptop
-              "$mod, left,  exec, ${seamlessFocusNav} l 0"
-              "$mod, h,     exec, ${seamlessFocusNav} l 0"
+            ++ (
+              if isLaptop then
+                [
+                  # Laptop: right edge → lab
+                  "$mod, right, exec, ${seamlessFocusNav} r 1"
+                  "$mod, l,     exec, ${seamlessFocusNav} r 1"
 
-              # Normal right movement
-              "$mod, right, movefocus, r"
-              "$mod, l,     movefocus, r"
+                  # Normal left movement
+                  "$mod, left,  movefocus, l"
+                  "$mod, h,     movefocus, l"
+                ]
+              else if isLab then
+                [
+                  # lab: left edge → laptop
+                  "$mod, left,  exec, ${seamlessFocusNav} l 0"
+                  "$mod, h,     exec, ${seamlessFocusNav} l 0"
+
+                  # Normal right movement
+                  "$mod, right, movefocus, r"
+                  "$mod, l,     movefocus, r"
+                ]
+              else
+                [
+                  # Fallback: pure local movement
+                  "$mod, left,  movefocus, l"
+                  "$mod, right, movefocus, r"
+                  "$mod, h,     movefocus, l"
+                  "$mod, l,     movefocus, r"
+                ]
+            )
+            ++ [
+
+              # special workspaces
+              "$mod, S, togglespecialworkspace, terminal"
+              "$mod SHIFT, S, movetoworkspace, special:terminal"
+              # "$mod, T, togglespecialworkspace, telegram"
+              # "$mod SHIFT, T, movetoworkspace, special:telegram"
+
+              #Move active window in directions
+              "$mod SHIFT, left, movewindow, l"
+              "$mod SHIFT, right, movewindow, r"
+              "$mod SHIFT, up, movewindow, u"
+              "$mod SHIFT, down, movewindow, d"
+              "$mod SHIFT, l, movewindow, r"
+              "$mod SHIFT, h, movewindow, l"
+              "$mod SHIFT, k, movewindow, u"
+              "$mod SHIFT, j, movewindow, d"
+
+              "$mod, W, workspace, 6"
+              "$mod Alt, W, focusworkspaceoncurrentmonitor, 6 "
+              "$mod, T, workspace, 1"
+              "$mod, T, focusworkspaceoncurrentmonitor, 1"
+              "$mod, 0, workspace, 10"
+              "$mod SHIFT, 0, movetoworkspace, 10"
+              "$mod Alt, 0, focusworkspaceoncurrentmonitor, 10 "
             ]
-          else
-            [
-              # Fallback: pure local movement
-              "$mod, left,  movefocus, l"
-              "$mod, right, movefocus, r"
-              "$mod, h,     movefocus, l"
-              "$mod, l,     movefocus, r"
-            ]
-        )
-        ++ [
+            ++ (
+              #binds for workspaces
+              builtins.concatLists (
+                builtins.genList (
+                  i:
+                  let
+                    ws = toString (i + 1);
+                  in
+                  [
+                    "$mod, ${ws}, workspace, ${ws}"
+                    "$mod SHIFT, ${ws}, movetoworkspace, ${ws}"
+                    "$mod Alt, ${ws}, focusworkspaceoncurrentmonitor, ${ws} "
+                  ]
+                ) 9
+              )
+            );
 
-          # special workspaces
-          "$mod, S, togglespecialworkspace, terminal"
-          "$mod SHIFT, S, movetoworkspace, special:terminal"
-          # "$mod, T, togglespecialworkspace, telegram"
-          # "$mod SHIFT, T, movetoworkspace, special:telegram"
+          bindm = [
+            # Move/resize windows with mod + LMB/RMB and dragging
+            "$mod, mouse:272, movewindow"
+            "$mod, mouse:273, resizewindow"
+          ];
 
-          #Move active window in directions
-          "$mod SHIFT, left, movewindow, l"
-          "$mod SHIFT, right, movewindow, r"
-          "$mod SHIFT, up, movewindow, u"
-          "$mod SHIFT, down, movewindow, d"
-          "$mod SHIFT, l, movewindow, r"
-          "$mod SHIFT, h, movewindow, l"
-          "$mod SHIFT, k, movewindow, u"
-          "$mod SHIFT, j, movewindow, d"
+          # gesture = [
+          #   "3, swipe, workspace"
+          #   "3, pinch, fullscreen "
+          # ];
 
-          "$mod, W, workspace, 6"
-          "$mod Alt, W, focusworkspaceoncurrentmonitor, 6 "
-          "$mod, T, workspace, 1"
-          "$mod, T, focusworkspaceoncurrentmonitor, 1"
-          "$mod, 0, workspace, 10"
-          "$mod SHIFT, 0, movetoworkspace, 10"
-          "$mod Alt, 0, focusworkspaceoncurrentmonitor, 10 "
-        ]
-        ++ (
-          #binds for workspaces
-          builtins.concatLists (
+          workspace = [
+            "w[tv1], gapsout:0, gapsin:0"
+            "f[1], gapsout:0, gapsin:0"
+            "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
+            "special:terminal, border:false, on-created-empty:$terminal tmux attach, gapsin:0, gapsout:0"
+            # tmuxp load --yes dashboard dev
+          ]
+          ++ lib.optionals (myopts.monitors != null) (
+            let
+              totalWorkspaces = 10;
+
+              mod = a: b: a - (a / b) * b;
+
+              numMonitors = builtins.length monitorNames;
+              basePerMonitor = totalWorkspaces / numMonitors;
+              extra = mod totalWorkspaces numMonitors;
+              # Assign workspace numbers to monitor indices
+              workspaceAssignments = builtins.concatLists (
+                builtins.genList (
+                  i:
+                  let
+                    count = basePerMonitor + (if i < extra then 1 else 0);
+                  in
+                  builtins.genList (_: i) count
+                ) numMonitors
+              );
+            in
             builtins.genList (
               i:
               let
                 ws = toString (i + 1);
+                monitorIndex = builtins.elemAt workspaceAssignments i;
+                monitor = builtins.elemAt monitorNames monitorIndex;
               in
-              [
-                "$mod, ${ws}, workspace, ${ws}"
-                "$mod SHIFT, ${ws}, movetoworkspace, ${ws}"
-                "$mod Alt, ${ws}, focusworkspaceoncurrentmonitor, ${ws} "
-              ]
-            ) 9
-          )
-        );
-
-      bindm = [
-        # Move/resize windows with mod + LMB/RMB and dragging
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
-
-      # gesture = [
-      #   "3, swipe, workspace"
-      #   "3, pinch, fullscreen "
-      # ];
-
-      workspace = [
-        "w[tv1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
-        "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
-        "special:terminal, border:false, on-created-empty:$terminal tmux attach, gapsin:0, gapsout:0"
-        # tmuxp load --yes dashboard dev
-      ]
-      ++ lib.optionals (myopts.monitors != null) (
-        let
-          totalWorkspaces = 10;
-
-          mod = a: b: a - (a / b) * b;
-
-          numMonitors = builtins.length monitorNames;
-          basePerMonitor = totalWorkspaces / numMonitors;
-          extra = mod totalWorkspaces numMonitors;
-          # Assign workspace numbers to monitor indices
-          workspaceAssignments = builtins.concatLists (
-            builtins.genList (
-              i:
-              let
-                count = basePerMonitor + (if i < extra then 1 else 0);
-              in
-              builtins.genList (_: i) count
-            ) numMonitors
+              "${ws}, monitor:${monitor}"
+            ) totalWorkspaces
           );
-        in
-        builtins.genList (
-          i:
-          let
-            ws = toString (i + 1);
-            monitorIndex = builtins.elemAt workspaceAssignments i;
-            monitor = builtins.elemAt monitorNames monitorIndex;
-          in
-          "${ws}, monitor:${monitor}"
-        ) totalWorkspaces
-      );
 
-      windowrule = [
-        "border_size 0, match:float 0, match:workspace w[tv1]"
-        "rounding 0, match:float 0, match:workspace w[tv1]"
-        "border_size 0, match:float 0, match:workspace f[1]"
-        "rounding 0, match:float 0, match:workspace f[1]"
+          windowrule = [
+            "border_size 0, match:float 0, match:workspace w[tv1]"
+            "rounding 0, match:float 0, match:workspace w[tv1]"
+            "border_size 0, match:float 0, match:workspace f[1]"
+            "rounding 0, match:float 0, match:workspace f[1]"
 
-        "suppress_event maximize, match:class .*"
+            "suppress_event maximize, match:class .*"
 
-        "workspace special:telegram, match:class org.telegram.desktop.*"
+            "workspace special:telegram, match:class org.telegram.desktop.*"
 
-        "size 95% 95%, match:class fl"
-        "float on, match:class fl"
+            "size 95% 95%, match:class fl"
+            "float on, match:class fl"
 
-        "float on, match:class files"
-        "size 60% 60%, center on, match:title (.*Files)$"
+            "float on, match:class files"
+            "size 60% 60%, center on, match:title (.*Files)$"
 
-        "opacity 0.0 override 0.0 override, match:class ^(xwaylandvideobridge)$"
-        "no_anim on, match:class ^(xwaylandvideobridge)$"
-        "no_initial_focus on, match:class ^(xwaylandvideobridge)$"
-        "max_size 1 1, match:class ^(xwaylandvideobridge)$"
-        "no_blur on, match:class ^(xwaylandvideobridge)$"
+            "opacity 0.0 override 0.0 override, match:class ^(xwaylandvideobridge)$"
+            "no_anim on, match:class ^(xwaylandvideobridge)$"
+            "no_initial_focus on, match:class ^(xwaylandvideobridge)$"
+            "max_size 1 1, match:class ^(xwaylandvideobridge)$"
+            "no_blur on, match:class ^(xwaylandvideobridge)$"
 
-        "workspace 1, match:class ^(?i).*(telegram).*"
-        "workspace 2, match:class ^(?i).*(keepassxc).*"
-        "workspace 3, match:class ^(?i).*(youtube_music|ytmdesktop).*"
-        "workspace 4, match:class ^(vesktop)$"
-        "workspace 5, match:class ^(teams-for-linux)$"
-        "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen).*"
-        "workspace 8, match:class ^(steam)$"
-        "workspace 9, match:title ^(.*)$, match:class ^(steam_app_.*)$"
-        "workspace 10, match:class ^(mpv)$"
-      ];
+            "workspace 1, match:class ^(?i).*(telegram).*"
+            "workspace 2, match:class ^(?i).*(keepassxc).*"
+            "workspace 3, match:class ^(?i).*(youtube_music|ytmdesktop).*"
+            "workspace 4, match:class ^(vesktop)$"
+            "workspace 5, match:class ^(teams-for-linux)$"
+            "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen).*"
+            "workspace 8, match:class ^(steam)$"
+            "workspace 9, match:title ^(.*)$, match:class ^(steam_app_.*)$"
+            "workspace 10, match:class ^(mpv)$"
+          ];
 
+        };
+
+        extraConfig = ''
+          render:expand_undersized_textures = false
+
+          # Resize submap
+          bind=$mod,R,submap,resize
+          submap=resize
+          binde=,right,resizeactive,0 0
+          binde=,left,resizeactive,-10 0
+          binde=,up,resizeactive,0 -10
+          binde=,down,resizeactive,0 10
+          binde=,l,resizeactive,30 0
+          binde=,h,resizeactive,-30 0
+          binde=,k,resizeactive,0 -30
+          binde=,j,resizeactive,0 30
+          bind=,Escape,submap,reset
+          bind=,Return,submap, reset
+          bind=$mod,r,submap, reset
+          submap=reset
+
+          source = ~/.config/hypr/impure.conf
+        '';
+      };
     };
-
-    extraConfig = ''
-      render:expand_undersized_textures = false
-
-      # Resize submap
-      bind=$mod,R,submap,resize
-      submap=resize
-      binde=,right,resizeactive,0 0
-      binde=,left,resizeactive,-10 0
-      binde=,up,resizeactive,0 -10
-      binde=,down,resizeactive,0 10
-      binde=,l,resizeactive,30 0
-      binde=,h,resizeactive,-30 0
-      binde=,k,resizeactive,0 -30
-      binde=,j,resizeactive,0 30
-      bind=,Escape,submap,reset
-      bind=,Return,submap, reset
-      bind=$mod,r,submap, reset
-      submap=reset
-
-      source = ~/.config/hypr/impure.conf
-    '';
-  };
 }

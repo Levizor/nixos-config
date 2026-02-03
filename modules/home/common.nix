@@ -1,41 +1,40 @@
+{ inputs, ... }:
 {
-  config,
-  inputs,
-  outputs,
-  mylib,
-  system,
-  user,
-  ...
-}:
-{
-  home-manager = {
-    extraSpecialArgs = {
-      inherit
-        inputs
-        outputs
-        mylib
-        system
-        user
-        ;
-      inherit (config) myopts;
-    };
+  flake.nixosModules.common =
+    {
+      config,
+      system,
+      user,
+      ...
+    }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.home-manager
+      ];
+      home-manager = {
+        extraSpecialArgs = {
+          inherit
+            system
+            user
+            ;
+          inherit (config) myopts;
+        };
 
-    backupFileExtension = "backup";
+        backupFileExtension = "backup";
 
-    users."${user}" = {
-      home = {
-        sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
-        sessionPath = [
-          "$HOME/.cargo/bin/"
-        ];
+        users."${user}" = {
+          home = {
+            sessionVariables.STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
+            sessionPath = [
+              "$HOME/.cargo/bin/"
+            ];
 
-        enableNixpkgsReleaseCheck = false;
-        username = user;
-        homeDirectory = "/home/${user}";
-        stateVersion = "25.05";
+            enableNixpkgsReleaseCheck = false;
+            username = user;
+            homeDirectory = "/home/${user}";
+            stateVersion = "26.05";
+          };
+        };
       };
     };
-
-  };
-
 }

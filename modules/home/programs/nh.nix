@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
 {
-  programs.nh = {
-    enable = true;
-    flake = "${config.home.homeDirectory}/nix";
-  };
+  flake.homeModules.nh =
+    { config, ... }:
+    {
+      programs.nh = {
+        enable = true;
+        flake = "${config.home.homeDirectory}/nix";
+      };
+    };
 }

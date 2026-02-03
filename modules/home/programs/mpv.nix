@@ -1,5 +1,7 @@
 {
-  programs.mpv = {
-    enable = true;
+  flake.homeModules.mpv = {
+    programs.mpv = {
+      enable = true;
+    };
   };
 }

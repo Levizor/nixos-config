@@ -5,6 +5,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,62 +67,5 @@
 
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      stable,
-      home-manager,
-      ...
-    }@inputs:
-    let
-      linux = "x86_64-linux";
-      user = "levizor";
-      mkSystem =
-
-        system: nixpkgs: configPath:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
-              allowUnsupportedSystem = true;
-            };
-          };
-
-          modPath = ./modules;
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system pkgs;
-          specialArgs = {
-            inherit
-              inputs
-              user
-              system
-              modPath
-              ;
-            mylib = import ./mylib {
-              inherit pkgs inputs system;
-              lib = pkgs.lib;
-            };
-          };
-          modules = [
-            inputs.disko.nixosModules.disko
-            home-manager.nixosModules.home-manager
-            configPath
-            ./modules/nixos/common.nix
-            ./modules/home/common.nix
-            ./modules/options
-          ];
-        };
-    in
-    {
-      nixosConfigurations = {
-        laptop = mkSystem linux nixpkgs ./hosts/laptop/configuration.nix;
-        minimal = mkSystem linux nixpkgs ./hosts/minimal/configuration.nix;
-        iso = mkSystem linux nixpkgs ./hosts/iso/configuration.nix;
-        vps = mkSystem linux stable ./hosts/vps/configuration.nix;
-        lab = mkSystem linux nixpkgs ./hosts/lab/configuration.nix;
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
