@@ -17,11 +17,9 @@
       config,
       lib,
       modPath,
+      user,
       ...
     }:
-    let
-      user = config.user;
-    in
     {
       networking.hostName = "nixlaptop";
 

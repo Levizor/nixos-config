@@ -3,7 +3,7 @@
 ## Description
 
 This is a full fledged, modular nixos configuration for multiple hosts, including laptop, lab, vps machine and iso image.
-Right now configuration is suited for one user only.
+Utilizes [flake-parts](https://flake.parts) to construct a [dendritic pattern](https://github.com/mightyiam/dendritic) configuration.
 
 ![diagram](./.github/diagram.svg)
 
@@ -11,64 +11,114 @@ Each host specifies which nixos and home-manager modules it requires.
 Example:
 
 ```nix
-# hosts/laptop/configuration.nix
+# modules/nixosConfigurations/laptop/configuration.nix
 
-  imports = [
-    ./hardware-configuration.nix
-    ./disko-config.nix
-  ]
-  ++ mylib.useModules (modPath + "/nixos") [
-    "battery"
-    "console"
-    "docker"
-    "environment"
-    "filesystems"
-    # "flatpak"
-    "graphical"
-    "hardware"
-    "networking"
-    "nvim"
-    "printing"
-    "sound"
-    "steam"
-    "stylix"
-    "tailscale"
-  ];
+  flake.nixosModules.laptop =
+    {
+      pkgs,
+      mylib,
+      config,
+      lib,
+      modPath,
+      user,
+      ...
+    }:
+    {
+      networking.hostName = "nixlaptop";
 
-  home-manager = {
-    users."${user}" = {
-      imports = mylib.useModules (modPath + "/home") (
-        lib.flatten [
-          (mylib.prefixList "programs/" [
-            "btop"
-            "chromium"
-            "direnv"
-            "fzf"
-            "git"
-            "keepassxc"
-            "mako"
-            "mpv"
-            "nh"
-            "obs"
-            "ssh"
-            "vicinae"
-            "zathura"
-            "zen"
-          ])
-          (mylib.prefixList "terminals/" [
-            "kitty"
-            "tmux"
-          ])
-          "wm"
-          "zsh"
-          "packages"
-        ]
-      );
+      myopts = {
+        additionalPackages = true;
+        nh.host = "laptop";
+        monitors = [
+          {
+            name = "eDP-1";
+            config = "1920x1080@60, 0x0, 1,";
+          }
+          {
+            name = "HDMI-A-1";
+            config = "preferred, auto, 1,";
+          }
+        ];
+      };
 
-      home.packages = [
-        # laptop specific packages
+      imports = with self.nixosModules; [
+        self.diskoConfigurations.laptop
+
+        common
+        battery
+        docker
+        environment
+        filesystems
+        flatpak
+        graphical
+        hardware
+        networking
+        nvim
+        printing
+        sound
+        steam
+        stylix
+        tailscale
+        snapper
+        virtualisation
+      ];
+
+      # connect nixos and home-manager configurations
+      home-manager = {
+        users.${user} = {
+          imports = [
+            self.homeModules.laptop
+          ];
+        };
+      };
+    };
+
+  flake.homeModules.laptop = {
+    imports = with self.homeModules; [
+      inputs.wallpapers.homeManagerModules.default
+
+      helix
+      distrobox
+      xdg
+      btop
+      chromium
+      direnv
+      fzf
+      git
+      keepassxc
+      mpv
+      nh
+      obs
+      ssh
+      vicinae
+      zathura
+      zen
+      kdeconnect
+      kitty
+      tmux
+      zsh
+      packages
+      wm
+    ];
+
+    programs.lan-mouse.settings = {
+      clients = [
+        {
+          hostname = "nixlab";
+          position = "right";
+          activate_on_startup = true;
+        }
       ];
     };
+
+    home.packages = [
+      # laptop specific packages
+    ];
+
+    wallpapers.packs = [
+      "picturesque"
+      "alena-aenami"
+    ];
   };
 
 ```
@@ -79,6 +129,8 @@ Example:
 | ------------- | ---------------------------------------------------- |
 | nixpkgs       | https://github.com/NixOS/nixpkgs/tree/nixos-unstable |
 | stable        | https://github.com/NixOS/nixpkgs/tree/nixos-25.05    |
+| flake-parts   | https://github.com/hercules-ci/flake-parts           |
+| import-tree   | https://github.com/vic/import-tree                   |
 | disko         | https://github.com/nix-community/disko               |
 | stylix        | https://github.com/danth/stylix                      |
 | nixvim        | https://github.com/Levizor/nixvim                    |
@@ -105,10 +157,10 @@ Then, for drives formatting and mounting run disko with
 
 ```sh
 # WARNING! This action will format drives set under disko-config.nix!
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko hosts/<host>/disko-config.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko modules/nixosConfigurations/<host>/disko-config.nix
 ```
 
-or do the mounting yourself.
+or do the mounting yourself, in which case it's required to update hardware configuration to include the filesystem layout.
 
 Then install with
 
