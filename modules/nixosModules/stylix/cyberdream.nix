@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.stylix-cyberdream =
+  flake.stylix.cyberdream =
     { pkgs, ... }:
     {
       stylix = {

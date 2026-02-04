@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.stylix-nord =
+  flake.stylix.nord =
     { pkgs, ... }:
     {
       stylix = {

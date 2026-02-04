@@ -5,7 +5,7 @@
     {
       imports = [
         inputs.stylix.nixosModules.stylix
-        self.nixosModules.stylix-cyberdream
+        self.stylix.cyberdream
       ];
 
       stylix = {

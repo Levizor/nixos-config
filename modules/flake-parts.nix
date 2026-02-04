@@ -12,6 +12,12 @@
     description = "My custom library output";
   };
 
+  options.flake.stylix = lib.mkOption {
+    type = lib.types.lazyAttrsOf lib.types.raw;
+    default = { };
+    description = "Stylix theme output";
+  };
+
   config = {
     systems = [
       "aarch64-darwin"
