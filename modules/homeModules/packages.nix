@@ -37,7 +37,6 @@
           cmatrix
           ffmpeg
           fzf
-          loupe
           ripgrep
           tlrc
           neovim-remote
@@ -73,7 +72,7 @@
           yt-dlp
           lazygit
           gemini-cli
-          blender
+          # blender
           # prismlauncher
         ];
 

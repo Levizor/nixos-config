@@ -91,9 +91,9 @@
 
           "$browser" = "${browser}";
           "$terminal" = "kitty -1";
-          "$telegram" = "${lib.getExe pkgs.telegram-desktop}";
+          "$telegram" = "Telegram";
           "$fileManager" = "${lib.getExe pkgs.nemo}";
-          "$player" = "${lib.getExe pkgs.youtube-music}";
+          "$player" = "pear-desktop";
 
           env = [
             "TERMINAL, kitty -1"
