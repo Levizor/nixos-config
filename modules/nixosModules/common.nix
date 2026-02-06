@@ -4,7 +4,6 @@
     {
       pkgs,
       config,
-      myopts,
       ...
     }:
     let
@@ -85,7 +84,6 @@
       security = {
         sudo = {
           wheelNeedsPassword = false;
-          extraConfig = ''moritz  ALL=(ALL) NOPASSWD: ${pkgs.systemd}/bin/systemctl'';
         };
 
         rtkit.enable = true;
