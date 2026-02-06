@@ -43,6 +43,7 @@
         nvim
         tailscale
         searx
+        forgejo
         # "attic"
       ];
 

@@ -6,48 +6,36 @@
       lib,
       ...
     }:
-    {
-      services.tailscale.enable = true;
+    let
+      mkFunnel =
 
-      systemd.services.searx-funnel = {
-        description = "Run Tailscale Funnel on searx";
+        name: localport: publicport: {
+          systemd.services."${name}-funnel" = {
+            description = "Run Tailscale Funnel on ${name}";
 
-        after = [ "tailscaled.service" ];
-        wants = [ "tailscaled.service" ];
+            after = [ "tailscaled.service" ];
+            wants = [ "tailscaled.service" ];
 
-        wantedBy = [ "multi-user.target" ];
+            wantedBy = [ "multi-user.target" ];
 
-        serviceConfig = {
-          Type = "simple";
+            serviceConfig = {
+              Type = "simple";
 
-          ExecStart = "${lib.getExe pkgs.tailscale} funnel 127.0.0.1:8080";
+              ExecStart = "${lib.getExe pkgs.tailscale} funnel --https ${toString publicport} 127.0.0.1:${toString localport}";
 
-          Restart = "on-failure";
-          RestartSec = "10s";
+              Restart = "on-failure";
+              RestartSec = "10s";
 
-          User = "root";
+              User = "root";
+            };
+          };
         };
-      };
-
-      # systemd.services.attic-funnel = {
-      #   description = "Run Tailscale Funnel on searx";
-
-      #   after = [ "tailscaled.service" ];
-      #   wants = [ "tailscaled.service" ];
-
-      #   wantedBy = [ "multi-user.target" ];
-
-      #   serviceConfig = {
-      #     Type = "simple";
-
-      #     ExecStart = "${lib.getExe pkgs.tailscale} funnel --https 8443 127.0.0.1:8443";
-
-      #     Restart = "on-failure";
-      #     RestartSec = "10s";
-
-      #     User = "root";
-      #   };
-
-      # };
-    };
+    in
+    lib.mkMerge [
+      {
+        services.tailscale.enable = true;
+      }
+      (mkFunnel "searx" 8080 443)
+      (mkFunnel "forgejo" 4545 8443)
+    ];
 }
