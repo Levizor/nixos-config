@@ -20,6 +20,13 @@
             identitiesOnly = true;
           };
 
+          "nixlab.worm-chameleon.ts.net" = {
+            hostname = "nixlab.worm-chameleon.ts.net";
+            user = user;
+            identityFile = "~/.ssh/forgejo";
+            identitiesOnly = true;
+          };
+
           "github-pjatk.com" = {
             hostname = "github.com";
             user = user;
