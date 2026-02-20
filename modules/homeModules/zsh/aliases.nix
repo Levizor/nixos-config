@@ -27,9 +27,7 @@
 
         nhs = "nh os switch -H ${myopts.nh.host}";
 
-        vps = "nh os switch -H vps";
-
-        min = "nh os switch -H minimal";
+        lab = "nixos-rebuild switch --flake '.#lab' --target-host=levizor@nixlab --sudo";
 
         adcom = "git commit -am";
 
@@ -37,9 +35,9 @@
 
         nixconf = "nvim ~/nix/.";
 
-        hypr = "nvim ~/nix/modules/home/wm/hyprland.nix";
+        hypr = "nvim ~/nix/modules/homeModules/wm/hyprland.nix";
 
-        aliases = "nvim ~/nix/modules/home/zsh/aliases.nix";
+        aliases = "nvim ~/nix/modules/homeModules/zsh/aliases.nix";
 
         zrc = "nvim ~/nix/home/zsh/zsh.nix";
 
