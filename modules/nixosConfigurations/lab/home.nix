@@ -15,6 +15,7 @@
       imports = with self.homeModules; [
         # inputs.wallpapers.homeManagerModules.default
 
+        weathr
         btop
         git
         nh
@@ -25,7 +26,7 @@
         tmux
         zsh
         hyprland
-        wpaperd
+        # wpaperd
         lan-mouse
       ];
 
@@ -33,6 +34,6 @@
       home.packages = with pkgs; [
         timg
       ];
-      wallpapers.packs = [ "vertical" ];
+      # wallpapers.packs = [ "vertical" ];
     };
 }

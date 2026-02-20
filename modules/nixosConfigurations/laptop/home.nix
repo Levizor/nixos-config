@@ -62,6 +62,7 @@
       imports = with self.homeModules; [
         inputs.wallpapers.homeManagerModules.default
 
+        weathr
         helix
         distrobox
         xdg
