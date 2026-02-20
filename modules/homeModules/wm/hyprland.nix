@@ -58,21 +58,21 @@
 
         plugins = with pkgs.hyprlandPlugins; [
           hyprexpo
-          hyprscrolling
+          # hyprscrolling
         ];
 
         settings.plugin = {
-          hyprexpo = {
-            columns = 3;
-            gap_size = 5;
-            workspace_method = "center current";
-          };
+          # hyprexpo = {
+          #   columns = 3;
+          #   gap_size = 5;
+          #   workspace_method = "center current";
+          # };
 
-          hyprscrolling = {
-            column_width = 0.5;
-            fullscreen_on_one_column = true;
-            focus_fit_method = 0;
-          };
+          # hyprscrolling = {
+          #   column_width = 0.5;
+          #   fullscreen_on_one_column = true;
+          #   focus_fit_method = 0;
+          # };
 
         };
         systemd = {
