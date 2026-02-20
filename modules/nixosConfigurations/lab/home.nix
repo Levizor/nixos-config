@@ -13,7 +13,7 @@
     { pkgs, ... }:
     {
       imports = with self.homeModules; [
-        inputs.wallpapers.homeManagerModules.default
+        # inputs.wallpapers.homeManagerModules.default
 
         btop
         git

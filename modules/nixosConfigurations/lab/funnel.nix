@@ -35,7 +35,8 @@
       {
         services.tailscale.enable = true;
       }
-      (mkFunnel "searx" 8080 443)
+      (mkFunnel "devcook" 8080 443)
       (mkFunnel "forgejo" 4545 8443)
+      (mkFunnel "searx" 10000 10000)
     ];
 }

@@ -44,6 +44,7 @@
         tailscale
         searx
         forgejo
+        devcook
         # "attic"
       ];
 

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
@@ -60,6 +60,13 @@
     wallpapers.url = "github:Levizor/Wallpapers";
 
     cachyos.url = "github:xddxdd/nix-cachyos-kernel/release";
+
+    devcook = {
+      url = "github:Levizor/devcook";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    weathr.url = "github:Veirt/weathr";
 
     # hyprland = {
     #   url = "github:hyprwm/Hyprland";

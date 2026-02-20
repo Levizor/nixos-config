@@ -27,6 +27,8 @@
         typst
         cachix
 
+        # google-cloud-sdk
+
         telegram-desktop
         heroic
         inputs.tray-tui.packages.${system}.tray-tui
