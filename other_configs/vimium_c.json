@@ -1,13 +1,22 @@
 {
 	"name": "Vimium C",
-	"@time": "10/25/2025, 12:58:09 AM",
-	"time": 1761346689620,
+	"@time": "2/13/2026, 2:44:20 AM",
+	"time": 1770947060376,
 	"environment": {
 		"extension": "2.12.3",
 		"platform": "linux",
-		"firefox": 144
+		"firefox": 147
 	},
-	"exclusionRules": [],
+	"exclusionRules": [
+		{
+			"passKeys": "",
+			"pattern": ":https://neetcode.io/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://leetcode.com/"
+		}
+	],
 	"keyLayout": 2,
 	"preferBrowserSearch": false,
 	"searchEngines": [
@@ -39,6 +48,6 @@
 		"s|searx: https://nixlab.worm-chameleon.ts.net/search?q=%s SearXNG",
 		""
 	],
-	"searchUrl": "https://nixlab.worm-chameleon.ts.net/search?q=$s SearXNG",
+	"searchUrl": "https://nixlab.worm-chameleon.ts.net:10000/search?q=$s SearXNG",
 	"vimSync": true
 }
