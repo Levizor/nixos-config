@@ -24,6 +24,8 @@
       imports = [
         inputs.zen-browser.homeModules.twilight
       ];
+      programs.zen-browser.suppressXdgMigrationWarning = true;
+
       programs.zen-browser = {
         enable = true;
 
