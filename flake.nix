@@ -72,6 +72,8 @@
     #   url = "github:hyprwm/Hyprland";
     # };
 
+    peerix.url = "github:sophronesis/peerix";
+
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
