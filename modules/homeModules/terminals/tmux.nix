@@ -133,18 +133,21 @@
           set -s set-clipboard on
           set -gq allow-passthrough on
           set -g visual-activity off
+          set -g extended-keys on
+          set -g extended-keys-format csi-u
+          set -as terminal-features 'xterm*:extkeys'
 
           # Switch between windows using Alt + [number]
-          bind -n M-1 select-window -t 1
-          bind -n M-2 select-window -t 2
-          bind -n M-3 select-window -t 3
-          bind -n M-4 select-window -t 4
-          bind -n M-5 select-window -t 5
-          bind -n M-6 select-window -t 6
-          bind -n M-7 select-window -t 7
-          bind -n M-8 select-window -t 8
-          bind -n M-9 select-window -t 9
-          bind -n M-0 select-window -t 0
+          bind -n C-1 select-window -t 1
+          bind -n C-2 select-window -t 2
+          bind -n C-3 select-window -t 3
+          bind -n C-4 select-window -t 4
+          bind -n C-5 select-window -t 5
+          bind -n C-6 select-window -t 6
+          bind -n C-7 select-window -t 7
+          bind -n C-8 select-window -t 8
+          bind -n C-9 select-window -t 9
+          bind -n C-0 select-window -t 0
 
 
           # Move between windows
@@ -195,13 +198,14 @@
           bind -n M-s source-file ~/.config/tmux/tmux.conf \; display "Resourced"
 
           bind-key b set-option status
-          bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
-          bind g display-popup -d "#{pane_current_path}" -w 90% -h 90% -E "lazygit"
+          bind-key -T copy-mode-vi v send-keys -X begin-selection
+          bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+          unbind-key -T copy-mode-vi Enter
+          bind-key -T copy-mode-vi Enter send-keys -X copy-selection-and-cancel
         '';
 
         plugins = with pkgs.tmuxPlugins; [
           better-mouse-mode
-
           {
             plugin = extrakto;
           }
@@ -256,6 +260,13 @@
               set -g @continuum-save-interval '15' # minutes
             '';
           }
+          {
+            plugin = tmux-toggle-popup;
+            extraConfig = ''
+              bind -n M-g run "#{@popup-toggle} -Ed'##{pane_current_path}' -w90% -h90% --name=lazygit lazygit"
+            '';
+          }
+
         ];
 
       };
