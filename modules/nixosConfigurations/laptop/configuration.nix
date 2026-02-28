@@ -18,6 +18,7 @@
       lib,
       modPath,
       user,
+      system,
       ...
     }:
     {
@@ -58,6 +59,7 @@
         tailscale
         snapper
         virtualisation
+        # peerix
       ];
 
       # connect nixos and home-manager configurations
@@ -108,6 +110,8 @@
       # };
 
       # For virtual camera in OBS
+
+      stylix.targets.grub.enable = false;
       boot = {
         kernelModules = [ "v4l2loopback" ];
         extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -116,11 +120,13 @@
           enable = true;
           efiSupport = true;
           device = "nodev";
+          theme = self.packages.${system}.lain-grub-theme;
         };
 
         loader.efi.canTouchEfiVariables = true;
       };
 
       hardware.amdgpu.opencl.enable = true;
+
     };
 }
