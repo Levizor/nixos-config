@@ -27,7 +27,7 @@
 
         nhs = "nh os switch -H ${myopts.nh.host}";
 
-        lab = "nixos-rebuild switch --flake '.#lab' --target-host=levizor@nixlab --sudo";
+        lab = "sudo nixos-rebuild switch --flake '.#lab' --target-host=levizor@nixlab --sudo";
 
         adcom = "git commit -am";
 
@@ -46,8 +46,6 @@
         compress = "compress()";
 
         pjatk = "sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
-
-        grub-update = "sudo grub-mkconfig -o /boot/grub/grub.cfg";
 
         # ls = "lsd --group-directories-first";
 
