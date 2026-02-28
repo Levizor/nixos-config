@@ -8,8 +8,10 @@
     programs.weathr = {
       enable = true;
       settings = {
-        hide_hud = true;
+        hide_hud = false;
+        display = "mixed";
       };
+
     };
   };
 }

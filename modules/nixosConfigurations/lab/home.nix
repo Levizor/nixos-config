@@ -30,7 +30,12 @@
         lan-mouse
       ];
 
-      wayland.windowManager.hyprland.xwayland.enable = false;
+      programs.weathr.settings.location = {
+        auto = false;
+        latitude = 52.2298;
+        longitude = 21.0118;
+      };
+
       home.packages = with pkgs; [
         timg
       ];
