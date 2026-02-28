@@ -15,7 +15,16 @@
         ];
 
         languages = {
-
+          language = [
+            {
+              name = "nix";
+              auto-format = true;
+            }
+            {
+              name = "python";
+              auto-format = true;
+            }
+          ];
         };
 
         themes = {
