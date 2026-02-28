@@ -59,7 +59,6 @@
         ];
       };
 
-      programs.hyprland.xwayland.enable = false;
       programs.kdeconnect.enable = true;
 
       services = {
