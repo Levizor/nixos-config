@@ -8,6 +8,7 @@
       };
 
       settings = {
+        font_size = 14;
         dynamic_background_opacity = true;
         disable_ligatures = "cursor";
         cursor_trail = 50;
