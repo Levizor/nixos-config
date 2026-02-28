@@ -421,6 +421,7 @@
             "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen).*"
             "workspace 8, match:class ^(steam)$"
             "workspace 9, match:title ^(.*)$, match:class ^(steam_app_.*)$"
+            "workspace 9, match:class ^.*(qemu).*$"
             "workspace 10, match:class ^(mpv)$"
           ];
 
