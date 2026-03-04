@@ -166,7 +166,6 @@ Then install with
 
 ```sh
 sudo nixos-install --flake .#<host>
-
 ```
 
 ## Updates
