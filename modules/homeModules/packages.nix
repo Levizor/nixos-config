@@ -54,10 +54,10 @@
           cargo
           # filezilla
           hyprland-workspaces-tui
-          jetbrains.rider
+          # jetbrains.rider
           jetbrains-toolbox
-          # jetbrains.idea-ultimate
-          jetbrains.pycharm
+          jetbrains.idea
+          # jetbrains.pycharm
           pinta
           networkmanagerapplet
           nix-prefetch-github
