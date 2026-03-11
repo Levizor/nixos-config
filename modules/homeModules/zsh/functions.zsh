@@ -1,5 +1,5 @@
 clone() {
-  if [ -z "$1" ]; then
+  if [ "$1" = "" ]; then
     echo "Usage: clone <repo-name>"
     return 1
   fi
@@ -13,25 +13,25 @@ down() {
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      -m|--move)
-        move=1
-        shift
-        ;;
-      [0-9]*)
-        count=$1
-        shift
-        ;;
-      *)
-        target=$1
-        shift
-        ;;
+    -m | --move)
+      move=1
+      shift
+      ;;
+    [0-9]*)
+      count=$1
+      shift
+      ;;
+    *)
+      target=$1
+      shift
+      ;;
     esac
   done
 
   # Use null delimiter to properly handle filenames with spaces
   while IFS= read -r -d '' file; do
     files+=("$file")
-  done < <(find ~/Downloads -type f -printf '%T@ %p\0' 2>/dev/null | \
+  done < <(find ~/Downloads -type f -printf '%T@ %p\0' 2>/dev/null |
     sort -zn | tail -z -n "$count" | cut -z -d' ' -f2-)
 
   for f in "${files[@]}"; do
@@ -39,15 +39,15 @@ down() {
       mv -v "$f" "$target/"
       echo "Moved $f to $target"
     else
-      rsync -r --info=progress2,name0 --human-readable "$f" "$target/"&&
-      echo "Copied $f to $target"
+      rsync -r --info=progress2,name0 --human-readable "$f" "$target/" &&
+        echo "Copied $f to $target"
     fi
   done
 }
 
 json2nix() {
   tmpfile=$(mktemp)
-  cat > "$tmpfile"
+  cat >"$tmpfile"
   nix eval --raw --impure --expr "
     let
       j = builtins.fromJSON (builtins.readFile \"$tmpfile\");
@@ -61,7 +61,6 @@ json2nix() {
   "
   rm -f "$tmpfile"
 }
-
 
 ffcompress() {
   if [[ $# -lt 1 ]]; then
@@ -88,7 +87,7 @@ ffcompress() {
     output="${base}_compressed.${ext}"
   fi
 
-  if $discord; then
+  if "$discord"; then
     # Discord-friendly compression (H.264 + AAC)
     ffmpeg -hide_banner -v error -stats -i "$input" \
       -c:v libx264 -crf 23 -preset medium \
@@ -102,3 +101,11 @@ ffcompress() {
 
   echo "✅ Compression complete: $output"
 }
+
+spawn() {
+  "$@" >/dev/null 2>&1 &!
+}
+
+alias s='spawn'
+
+compdef _precommand spawn s
