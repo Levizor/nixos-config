@@ -30,6 +30,8 @@
       hyprpicker = lib.getExe pkgs.hyprpicker;
       ncpamixer = lib.getExe pkgs.ncpamixer;
       btop = lib.getExe pkgs.btop;
+      wl-kbptr = lib.getExe pkgs.wl-kbptr;
+      killall = lib.getExe pkgs.killall;
 
       scriptDefs = self.lib.wm-scripts {
         pkgs = pkgs;
@@ -57,7 +59,7 @@
         portalPackage = null;
 
         plugins = with pkgs.hyprlandPlugins; [
-          hyprexpo
+          # hyprexpo
           # hyprscrolling
         ];
 
@@ -179,26 +181,52 @@
             "wpaperd"
           ];
 
+          scrolling = {
+            fullscreen_on_one_column = true;
+            column_width = 0.5;
+            follow_focus = true;
+            direction = "right";
+          };
+
+          # submaps = {
+          #   scrollcontrols = {
+          #     bind = [
+          #       ", f, layoutmsg, focus"
+          #       ", p, layoutmsg, promote"
+          #       ", c, layoutmsg, fit active"
+          #       ", a, layoutmsg, fit all"
+          #       ", v, layoutmsg, fit visible"
+          #       ", b, layoutmsg, fit tobeg"
+          #       ", e, layoutmsg, fit toend"
+          #       ", escape, submap, reset"
+          #     ];
+          #   };
+          # };
+
           bind =
             let
               screenshotDir = "${config.home.homeDirectory}/Pictures/Screenshots";
             in
             [
+              # wl-kbptr
+              "$mod_Alt, t, exec, ${killall} -q wl-kbptr ; ${wl-kbptr} -o modes=tile"
+              "$mod_Alt, p, exec, ${killall} -q wl-kbptr ; ${wl-kbptr} -o modes=floating,click -o mode_floating.source=detect"
+              "$mod_Alt, k, exec, ${killall} -q wl-kbptr"
               # Plugins
-              "$mod_Alt, Escape, hyprexpo:expo, toggle"
+              # "$mod_Alt, Escape, hyprexpo:expo, toggle"
+
+              # monocle layout
+              "$mod_alt, l, layoutmsg, cyclenext"
+              "$mod_alt, h, layoutmsg, cycleprev"
 
               # hyprscrolling
-              "$mod, period, layoutmsg, move +col"
-              "$mod, comma, layoutmsg, move -col"
-              "$mod SHIFT, period, layoutmsg, movewindowto r"
-              "$mod SHIFT, comma, layoutmsg, movewindowto l"
-              "$mod SHIFT, up, layoutmsg, movewindowto u"
-              "$mod SHIFT, down, layoutmsg, movewindowto d"
+              "$mod_alt, l, layoutmsg, move +col"
+              "$mod_alt, h, layoutmsg, move -col"
+              # "$mod_alt, f, submap, scrollcontrols"
 
               # Utils
               "$mod, Q, killactive,"
               "$mod, V, togglefloating,"
-              "$mod, P, pseudo, # dwindle"
               "$mod, F, fullscreen"
 
               # Terminal launches
@@ -206,7 +234,6 @@
               "$mod SHIFT, Return, exec, $terminal -o # background_opacity=0.4"
               "$mod, A, exec, $terminal --app-id fl ${ncpamixer}"
               "$mod, U, exec, $terminal --app-id fl ${btop}"
-              "$mod_Alt, p, exec, $terminal nvim ~/nix/modules/home-manager/packages.nix"
 
               # Other application launches
               "$mod, T, exec, $telegram"
@@ -358,6 +385,16 @@
             "f[1], gapsout:0, gapsin:0"
             "special:telegram, decorate:false, border:false, on-created-empty:$telegram, gapsin:0, gapsout:0"
             "special:terminal, border:false, on-created-empty:$terminal tmux attach, gapsin:0, gapsout:0"
+            "1, layoutopt:direction:left"
+            "2, layoutopt:direction:left"
+            "3, layoutopt:direction:left"
+            "4, layoutopt:direction:left"
+            "5, layoutopt:direction:left"
+            "6, layoutopt:direction:right"
+            "7, layoutopt:direction:right"
+            "8, layoutopt:direction:right"
+            "9, layoutopt:direction:right"
+            "10, layoutopt:direction:right"
             # tmuxp load --yes dashboard dev
           ]
           ++ lib.optionals (myopts.monitors != null) (
@@ -400,6 +437,7 @@
             "suppress_event maximize, match:class .*"
 
             "workspace special:telegram, match:class org.telegram.desktop.*"
+            "workspace +0 silent, match:class negative:kitty"
 
             "size 95% 95%, match:class fl"
             "float on, match:class fl"
