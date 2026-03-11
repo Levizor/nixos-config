@@ -72,7 +72,7 @@
           owner = "uiriansan";
           repo = "LainGrubTheme";
           tag = "1.0.1";
-          hash = "sha256-gDwNolJ28UQUjE2G2U0bvzh29E9EEiet9SlItbY46IQ=";
+          hash = "sha256-qk0uadFVTQeproT8ZODTYTDg7BBd5Ae4XQekWEWyBHQ=";
         };
 
         installPhase = ''
