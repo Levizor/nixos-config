@@ -74,6 +74,12 @@
 
     peerix.url = "github:sophronesis/peerix";
 
+    nix-scribe.url = "github:Levizor/nix-scribe";
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
