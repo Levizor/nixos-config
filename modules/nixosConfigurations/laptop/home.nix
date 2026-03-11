@@ -13,9 +13,10 @@
   flake.homeModules.laptop =
     { pkgs, ... }:
     {
-
+      nixpkgs.config.allowUnfree = true;
       home.packages = with pkgs; [
         # laptop specific packages
+        stremio-linux-shell
         duf
         fd
         bat
@@ -25,8 +26,8 @@
         ripgrep
         tlrc
         typst
-        cachix
 
+        inputs.nix-scribe.packages.${system}.default
         # google-cloud-sdk
 
         telegram-desktop
@@ -39,10 +40,10 @@
         cargo
         # filezilla
         hyprland-workspaces-tui
-        jetbrains.rider
+        # jetbrains.rider
         jetbrains-toolbox
-        # jetbrains.idea-ultimate
-        jetbrains.pycharm
+        jetbrains.idea
+        # jetbrains.pycharm
         pinta
         networkmanagerapplet
         nix-prefetch-github
@@ -61,6 +62,7 @@
 
       imports = with self.homeModules; [
         inputs.wallpapers.homeManagerModules.default
+        inputs.nix-index-database.homeModules.default
 
         weathr
         helix
@@ -83,9 +85,12 @@
         kitty
         tmux
         zsh
-        packages
         wm
       ];
+
+      programs.nix-index.enable = true;
+      programs.nix-index.enableZshIntegration = true;
+      programs.nix-index-database.comma.enable = true;
 
       programs.lan-mouse.settings = {
         clients = [
