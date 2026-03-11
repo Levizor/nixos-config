@@ -53,9 +53,7 @@
 
         # ll = "lsd -al --group-directories-first";
 
-        z = "zathura";
-
-        s = "source ~/zsh_config/.zshrc";
+        z = "zathura --fork";
 
         i = "${lib.getExe pkgs.loupe}";
 
