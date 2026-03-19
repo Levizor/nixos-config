@@ -456,7 +456,7 @@
             "workspace 3, match:class ^(?i).*(youtube_music|ytmdesktop).*"
             "workspace 4, match:class ^(vesktop)$"
             "workspace 5, match:class ^(teams-for-linux)$"
-            "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen).*"
+            "workspace 6, match:class ^(?i).*(firefox|chromium|brave|floorp|zen|vivaldi).*"
             "workspace 8, match:class ^(steam)$"
             "workspace 9, match:title ^(.*)$, match:class ^(steam_app_.*)$"
             "workspace 9, match:class ^.*(qemu).*$"
