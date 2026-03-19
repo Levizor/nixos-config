@@ -39,13 +39,11 @@
           fzf
           ripgrep
           tlrc
-          neovim-remote
           typst
-          cachix
         ]
         ++ lib.optionals myopts.additionalPackages [
           telegram-desktop
-          heroic
+          # heroic
           inputs.tray-tui.packages.${system}.tray-tui
           # tray-tui
           inputs.dark-text.packages.${system}.default
@@ -58,10 +56,10 @@
           jetbrains-toolbox
           jetbrains.idea
           # jetbrains.pycharm
-          pinta
+          # pinta
           networkmanagerapplet
           nix-prefetch-github
-          obsidian
+          # obsidian
           onlyoffice-desktopeditors
           qbittorrent
           thunderbird
