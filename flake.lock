@@ -943,11 +943,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1772041442,
-        "narHash": "sha256-QTYl1Yr13XaoO9HMifDhtz/jaM2gxkEGISr954cvfaY=",
+        "lastModified": 1773590980,
+        "narHash": "sha256-rwoWjsMBSmRlmX5L40RIxZFkqeE/YOZBKl/6sh70hCw=",
         "owner": "Levizor",
         "repo": "nvix",
-        "rev": "d2f0a0abb85c9f9312efc144545a809d4e749eb5",
+        "rev": "986a03654a4f4e30a797c96cd6c65435966600ad",
         "type": "github"
       },
       "original": {
