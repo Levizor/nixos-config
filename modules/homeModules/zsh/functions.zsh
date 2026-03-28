@@ -64,42 +64,58 @@ json2nix() {
 
 ffcompress() {
   if [[ $# -lt 1 ]]; then
-    echo "Usage: ffcompress [-d] <input_file> [output_file]"
-    echo "  -d   Use H.264 for Discord"
+    echo "Usage: ffcompress <input_file> [size_in_MB] [output_file]"
     return 1
   fi
 
-  local discord=false
-  if [[ "$1" == "-d" ]]; then
-    discord=true
-    shift
+  local input="$1"
+  local target_size_mb="$2"
+  local output="$3"
+
+  # If size is not provided or is not a number, default to 50% of original
+  if [[ -z "$target_size_mb" || ! "$target_size_mb" =~ ^[0-9.]+$ ]]; then
+    local original_size_bytes=$(ffprobe -v error -show_entries format=size -of default=noprint_wrappers=1:nokey=1 "$input")
+    # Zsh floating point math: (( size / 1024 / 1024 ) * 0.5)
+    target_size_mb=$(( (original_size_bytes / 1048576.0) * 0.5 ))
+
+    # Shift output argument if $2 was actually a filename
+    if [[ -n "$2" && ! "$2" =~ ^[0-9.]+$ ]]; then
+        output="$2"
+    fi
   fi
 
-  local input="$1"
-  shift
-
-  local output
-  if [[ $# -ge 1 ]]; then
-    output="$1"
-  else
+  # Default output naming
+  if [[ -z "$output" ]]; then
     local base="${input%.*}"
     local ext="${input##*.}"
     output="${base}_compressed.${ext}"
   fi
 
-  if "$discord"; then
-    # Discord-friendly compression (H.264 + AAC)
-    ffmpeg -hide_banner -v error -stats -i "$input" \
-      -c:v libx264 -crf 23 -preset medium \
-      -c:a aac -b:a 128k "$output"
-  else
-    # Default compression (H.265 + AAC)
-    ffmpeg -hide_banner -v error -stats -i "$input" \
-      -c:v libx265 -crf 28 -preset medium \
-      -c:a aac -b:a 128k "$output"
-  fi
+  local duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$input")
 
-  echo "✅ Compression complete: $output"
+  # Bitrate Calculation in Zsh (MB * 8192 / duration)
+  local audio_bitrate=128
+  local total_bitrate=$(( (target_size_mb * 8192) / duration ))
+  local video_bitrate=$(( total_bitrate - audio_bitrate ))
+
+  # Floor check (min 100k)
+  if (( video_bitrate < 100 )); then video_bitrate=100; fi
+
+  # Convert to integer for FFmpeg
+  video_bitrate=${video_bitrate%.*}
+
+  echo "🎯 Target Size: ~${target_size_mb%.*}MB | Bitrate: ${video_bitrate}k"
+
+  # Two-pass encoding
+  ffmpeg -y -hide_banner -v error -stats -i "$input" \
+    -c:v libx264 -b:v "${video_bitrate}k" -pass 1 -an -f mp4 /dev/null
+
+  ffmpeg -hide_banner -v error -stats -i "$input" \
+    -c:v libx264 -b:v "${video_bitrate}k" -pass 2 \
+    -c:a aac -b:a "${audio_bitrate}k" "$output"
+
+  rm -f ffmpeg2pass-0.log ffmpeg2pass-0.log.mbtree
+  echo "✅ Done: $output"
 }
 
 spawn() {
