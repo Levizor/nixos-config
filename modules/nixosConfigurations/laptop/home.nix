@@ -16,7 +16,7 @@
       nixpkgs.config.allowUnfree = true;
       home.packages = with pkgs; [
         # laptop specific packages
-        stremio-linux-shell
+        # stremio-linux-shell
         duf
         fd
         bat
@@ -31,7 +31,7 @@
         # google-cloud-sdk
 
         telegram-desktop
-        heroic
+        # heroic
         inputs.tray-tui.packages.${system}.tray-tui
         # tray-tui
         inputs.dark-text.packages.${system}.default
@@ -44,7 +44,7 @@
         jetbrains-toolbox
         jetbrains.idea
         # jetbrains.pycharm
-        pinta
+        # pinta
         networkmanagerapplet
         nix-prefetch-github
         obsidian

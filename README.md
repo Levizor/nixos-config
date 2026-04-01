@@ -97,7 +97,6 @@ Example:
       kitty
       tmux
       zsh
-      packages
       wm
     ];
 
