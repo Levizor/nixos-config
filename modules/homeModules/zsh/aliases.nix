@@ -45,7 +45,9 @@
 
         compress = "compress()";
 
-        pjatk = "sshfs s30243@sftp.pjwstk.edu.pl:/ ~/pja/ -o allow-other -o user";
+        pjatk = "${lib.getExe pkgs.sshfs} s30243@sftp.pjwstk.edu.pl:/ ~/pja/";
+
+        lss = "lsd --sort=time --reverse";
 
         # ls = "lsd --group-directories-first";
 
