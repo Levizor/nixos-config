@@ -39,6 +39,14 @@
             identityFile = "~/.ssh/aur";
           };
 
+          "pjatk" = {
+            user = "s30243";
+            hostname = "msh.pjwstk.edu.pl";
+            extraOptions = {
+              HostKeyAlgorithms = "+ssh-rsa";
+            };
+          };
+
           "*" = {
             forwardAgent = false;
             addKeysToAgent = "no";
