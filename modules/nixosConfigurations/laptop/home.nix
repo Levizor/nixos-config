@@ -17,6 +17,7 @@
       home.packages = with pkgs; [
         # laptop specific packages
         # stremio-linux-shell
+        tesseract
         duf
         fd
         bat
