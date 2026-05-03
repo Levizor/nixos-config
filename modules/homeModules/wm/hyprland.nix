@@ -256,6 +256,9 @@
 
               # Screenshots
               ", Print , exec, ${grimblast} copy area"
+              # OCR last image in the clipboard
+              "$mod, o, exec, wl-paste | ${lib.getExe pkgs.tesseract} stdin stdout | wl-copy"
+
               "$mod, Print, exec, ${grimblast} copysave active \"${screenshotDir}/screenshot_$(date +\"%Y%m%d_%H%M%S\").png\""
 
               # Scripts
