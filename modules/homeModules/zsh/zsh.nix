@@ -47,7 +47,7 @@
         ];
 
         history = {
-          size = 10000;
+          size = 100000;
           path = "${config.programs.zsh.dotDir}/.zsh/history";
         };
 
