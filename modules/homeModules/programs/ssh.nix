@@ -27,6 +27,13 @@
             identitiesOnly = true;
           };
 
+          "codeberg.org" = {
+            hostname = "codeberg.org";
+            user = user;
+            identityFile = "~/.ssh/codeberg";
+            identitiesOnly = true;
+          };
+
           "github-pjatk.com" = {
             hostname = "github.com";
             user = user;
