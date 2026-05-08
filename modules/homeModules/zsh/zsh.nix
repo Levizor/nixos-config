@@ -34,6 +34,12 @@
         initContent = lib.concatStringsSep "\n" [
           (builtins.readFile ./init.zsh)
           (builtins.readFile ./functions.zsh)
+          (''
+            ztree() {
+                [[ -f "$1" ]] || { echo "Usage: ztree <archive.zip>"; return 1; }
+                unzip -Z1 "$1" | ${lib.getExe pkgs.tree} --fromfile
+            }
+          '')
           (lib.optionalString (!myopts.server) ''
             #tmux
             zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
