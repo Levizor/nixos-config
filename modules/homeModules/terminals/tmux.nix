@@ -116,9 +116,11 @@
       };
     in
     {
+      home.packages = [ rebuildScript ];
       programs.tmux = {
         shortcut = "b";
         enable = true;
+        historyLimit = 10000;
         focusEvents = true;
         mouse = true;
         keyMode = "vi";
