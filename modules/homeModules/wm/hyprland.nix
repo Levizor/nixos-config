@@ -247,8 +247,8 @@
 
               # vicinae deeplinks
               "$mod, D, exec, vicinae vicinae://toggle"
-              "$mod, C, exec, vicinae vicinae://extensions/vicinae/clipboard/history"
-              "$mod, space, exec, vicinae vicinae://extensions/vicinae/wm/switch-windows"
+              "$mod, C, exec, vicinae vicinae://launch/clipboard/history"
+              "$mod, space, exec, vicinae vicinae://launch/wm/switch-windows"
 
               # Switch wallpapers
               "$mod, F6, exec, wpaperctl next-wallpaper"
