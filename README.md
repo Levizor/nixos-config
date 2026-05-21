@@ -167,6 +167,13 @@ Then install with
 sudo nixos-install --flake .#<host>
 
 ```
+or in one run:
+```sh
+sudo nix --extra-experimental-features "nix-command flakes"\
+run 'github:nix-community/disko/latest#disko-install' -- \
+--flake ".#<host>" \
+--disk main /dev/disk
+```
 
 ## Updates
 
