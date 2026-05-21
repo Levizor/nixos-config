@@ -54,6 +54,7 @@
       services.poweralertd.enable = true;
       wayland.windowManager.hyprland = {
         enable = true;
+        configType = "hyprlang";
 
         package = null;
         portalPackage = null;
@@ -133,7 +134,7 @@
             gaps_out = 15;
             border_size = 3;
 
-            layout = "scrolling";
+            layout = "dwindle";
           };
 
           decoration = {
@@ -163,7 +164,6 @@
           };
 
           dwindle = {
-            pseudotile = true;
             preserve_split = true;
           };
 
@@ -181,13 +181,13 @@
             "wpaperd"
           ];
 
-          scrolling = {
-            fullscreen_on_one_column = true;
-            column_width = 0.5;
-            follow_focus = true;
-            direction = "right";
-          };
-
+          # scrolling = {
+          #   fullscreen_on_one_column = true;
+          #   column_width = 0.5;
+          #   follow_focus = true;
+          #   direction = "right";
+          # };
+          #
           # submaps = {
           #   scrollcontrols = {
           #     bind = [
