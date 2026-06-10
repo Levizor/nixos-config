@@ -1,5 +1,12 @@
 {
   flake.homeModules.kitty = {
+    xdg.terminal-exec = {
+      enable = true;
+      settings.default = [
+        "kitty.desktop"
+      ];
+    };
+
     programs.kitty = {
       enable = true;
       enableGitIntegration = true;
