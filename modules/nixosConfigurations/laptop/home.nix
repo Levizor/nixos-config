@@ -48,17 +48,19 @@
         # pinta
         networkmanagerapplet
         nix-prefetch-github
-        obsidian
+        # obsidian
         onlyoffice-desktopeditors
         qbittorrent
         thunderbird
         timg
         # ungoogled-chromium
         vesktop
+        # discord
         pear-desktop
         yt-dlp
         lazygit
         gemini-cli
+        antigravity-cli
       ];
 
       imports = with self.homeModules; [
@@ -102,8 +104,9 @@
         ];
       };
       wallpapers.packs = [
-        "picturesque"
+        # "picturesque"
         "alena-aenami"
+        # "lain"
       ];
     };
 }
