@@ -18,15 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nixvim = {
-    #   url = "github:Levizor/nixvim";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
-    nixvim = {
-      url = "github:Levizor/nvix";
-    };
-
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +26,11 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvim = {
+        url = "github:Levizor/config.nvim";
+        inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-minecraft.url = "github:Infinidoge/nix-minecraft";
