@@ -48,6 +48,8 @@
       openOnFocusScript = lib.getExe scriptDefs.openOnFocusScript;
       switchFocusedMachineScript = lib.getExe scriptDefs.switchFocusedMachineScript;
       seamlessFocusNav = lib.getExe scriptDefs.seamlessFocusNav;
+      increaseOpacityScript = lib.getExe scriptDefs.increaseOpacityScript;
+      decreaseOpacityScript = lib.getExe scriptDefs.decreaseOpacityScript;
     in
     {
       services.hyprpaper.enable = lib.mkForce false;
@@ -270,6 +272,10 @@
               "$mod, F7, exec, ${monitorToggleScript} 0"
               "$mod, F8, exec, ${monitorToggleScript} 1"
               "$mod, F9, exec, ${monitorToggleScript} 2"
+
+              # Window opacity
+              "$mod, F11, exec, ${decreaseOpacityScript}"
+              "$mod, F12, exec, ${increaseOpacityScript}"
 
               # switch to specific language
               # english

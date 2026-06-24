@@ -248,5 +248,35 @@
           fi
         '';
       };
+
+      increaseOpacityScript = pkgs.writeShellApplication {
+        name = "increaseOpacityScript";
+        runtimeInputs = commonDependencies;
+        text = ''
+          addr=$(hyprctl activewindow -j | jq -r '.address')
+          cache="$HOME/.cache/hypr-opacity/$addr"
+          mkdir -p "$HOME/.cache/hypr-opacity"
+          current=$(cat "$cache" 2>/dev/null || echo "1.0")
+          new=$(awk -v v="$current" 'BEGIN { r = v + 0.1; if (r > 1.0) r = 1.0; printf "%.1f", r }')
+          echo "$new" > "$cache"
+          hyprctl dispatch setprop active opacity "$new"
+          notify-send -t 800 "Opacity" "$new"
+        '';
+      };
+
+      decreaseOpacityScript = pkgs.writeShellApplication {
+        name = "decreaseOpacityScript";
+        runtimeInputs = commonDependencies;
+        text = ''
+          addr=$(hyprctl activewindow -j | jq -r '.address')
+          cache="$HOME/.cache/hypr-opacity/$addr"
+          mkdir -p "$HOME/.cache/hypr-opacity"
+          current=$(cat "$cache" 2>/dev/null || echo "1.0")
+          new=$(awk -v v="$current" 'BEGIN { r = v - 0.1; if (r < 0.1) r = 0.1; printf "%.1f", r }')
+          echo "$new" > "$cache"
+          hyprctl dispatch setprop active opacity "$new"
+          notify-send -t 800 "Opacity" "$new"
+        '';
+      };
     };
 }
