@@ -78,14 +78,20 @@
                 };
                 "Brave" = {
                   urls = [ { template = "https://search.brave.com/search?q={searchTerms}"; } ];
-                  icon = "https://brave.com/static-assets/images/brave-logo-sans-text.svg";
+                  icon = "https://nixlab.worm-chameleon.ts.net:10000/";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@b" ];
                 };
+                "Searx" = {
+                  urls = [ { template = "https://nixlab.worm-chameleon.ts.net:10000/search?q={searchTerms}"; } ];
+                  icon = "https://nixlab.worm-chameleon.ts.net:10000/static/themes/simple/img/favicon.png";
+                  updateInterval = 24 * 60 * 60 * 1000; # every day
+                  definedAliases = [ "@s" ];
+                };
               };
 
-              default = "Brave";
-              privateDefault = "Brave";
+              default = "google";
+              privateDefault = "Searx";
             };
             settings = {
               "zen.keyboard.shortcuts.version" = 9;
