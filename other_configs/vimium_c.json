@@ -1,11 +1,11 @@
 {
 	"name": "Vimium C",
-	"@time": "2/13/2026, 2:44:20 AM",
-	"time": 1770947060376,
+	"@time": "6/22/2026, 9:39:51 AM",
+	"time": 1782113991010,
 	"environment": {
 		"extension": "2.12.3",
 		"platform": "linux",
-		"firefox": 147
+		"firefox": 152
 	},
 	"exclusionRules": [
 		{
@@ -15,6 +15,18 @@
 		{
 			"passKeys": "",
 			"pattern": ":https://leetcode.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": "^https?://dataiku\\.pjwstk\\.edu\\.pl:11000/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://colab.research.google.com/"
+		},
+		{
+			"passKeys": "",
+			"pattern": ":https://www.hackerrank.com/"
 		}
 	],
 	"keyLayout": 2,
@@ -40,14 +52,15 @@
 		"  blank=https://github.com/ GitHub Repo",
 		"js\\:|Js: javascript:\\ $S; JavaScript",
 		"n|NixPKGS: https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query=%s",
-		"hm|HM Opts: https://home-manager-options.extranix.com/?query=%s&release=master",
+		"hm|HM Options: https://search.nixos.org/options?channel=unstable&source=home_manager&query=%s",
+		"hmo|HM Opts: https://home-manager-options.extranix.com/?query=%s&release=master",
 		"nw|NixWiki: https://nixos.wiki/index.php?search=%s&go=Go",
 		"nv|nixvim: https://nix-community.github.io/nixvim/search/?query=%s",
 		"no|NixOS Opts: https://search.nixos.org/options?channel=unstable&size=50&sort=relevance&type=packages&query=%s",
 		"git|Levizor: https://github.com/Levizor/%s",
-		"s|searx: https://nixlab.worm-chameleon.ts.net/search?q=%s SearXNG",
+		"s|searx: https://nixlab.worm-chameleon.ts.net:10000/search?q=%s SearXNG",
 		""
 	],
-	"searchUrl": "https://nixlab.worm-chameleon.ts.net:10000/search?q=$s SearXNG",
+	"searchUrl": "https://www.google.com/search?q=$s Google",
 	"vimSync": true
 }
