@@ -96,7 +96,7 @@
 
       programs = {
         kdeconnect.enable = true;
-        # Required for JetBrains Rider
+        # Required for JetBrains Rider: icu
         nix-ld = {
           enable = true;
           libraries = with pkgs; [
