@@ -1,12 +1,20 @@
 { inputs, ... }:
 {
   flake.nixosModules.nvim =
-    { pkgs, ... }:
+    { pkgs, system, ... }:
+    let
+      devNvim = pkgs.runCommand "nvim" { } ''
+        mkdir -p $out/bin
+        ln -s ${inputs.nvim.packages.${system}.dev}/bin/nvim-dev $out/bin/nvim
+      '';
+      nvim = inputs.nvim.packages.${system}.default;
+    in
     {
       environment = {
         systemPackages = with pkgs; [
-          inputs.nixvim.packages."${system}".default
           vim
+          devNvim
+          # nvim
         ];
 
         variables.EDITOR = "nvim";
