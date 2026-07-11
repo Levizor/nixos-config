@@ -114,3 +114,5 @@ fi
 # Magic enter oh-my-zsh plugin setup
 MAGIC_ENTER_OTHER_COMMAND='ls'
 MAGIC_ENTER_GIT_COMMAND='ls'
+
+touch ~/.zsh/impure.zsh && source ~/.zsh/impure.zsh
