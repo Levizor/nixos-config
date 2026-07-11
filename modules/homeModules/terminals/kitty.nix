@@ -1,5 +1,5 @@
 {
-  flake.homeModules.kitty = {
+  flake.homeModules.kitty = {lib, ...}:{
     xdg.terminal-exec = {
       enable = true;
       settings.default = [
@@ -50,5 +50,7 @@
         map kitty_mod+0 launch --type=tab --stdin-source=@screen_scrollback nvim -c "normal! G" -
       '';
     };
+
+    programs.tmux.terminal = lib.mkForce "xterm-kitty";
   };
 }

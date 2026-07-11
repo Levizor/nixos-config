@@ -128,7 +128,8 @@
         tmuxp.enable = true;
         newSession = true;
         shell = "${pkgs.zsh}/bin/zsh";
-        terminal = "xterm-kitty";
+
+        terminal = "xterm-256color";
 
         extraConfig = ''
 
