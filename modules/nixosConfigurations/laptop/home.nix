@@ -89,6 +89,7 @@
         tmux
         zsh
         wm
+        lan-mouse
       ];
 
       programs.nix-index.enable = true;
