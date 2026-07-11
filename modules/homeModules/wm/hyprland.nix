@@ -20,7 +20,7 @@
           ]
         else
           myopts.monitors;
-      monitorNames = map (m: m.name) myopts.monitors;
+      monitorNames = map (m: m.name) monitors;
 
       isLaptop = myopts.nh.host == "laptop";
       isLab = myopts.nh.host == "lab";

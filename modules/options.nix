@@ -1,19 +1,24 @@
 { inputs, ... }:
-{
-  flake.nixosModules.common =
+let
+  optionsModule =
     {
       lib,
       config,
       pkgs,
-      system,
-      myopts,
       ...
     }@args:
+    let
+      system = args.system or pkgs.stdenv.hostPlatform.system;
+    in
     {
       options = with lib.types; {
         user = lib.mkOption {
           type = str;
-          default = "levizor";
+          default =
+            if config ? home && config.home ? username && config.home.username != null then
+              config.home.username
+            else
+              "levizor";
         };
 
         myopts = rec {
@@ -43,7 +48,11 @@
 
             hostName = lib.mkOption {
               type = str;
-              default = config.networking.hostName;
+              default =
+                if config ? networking && config.networking ? hostName then
+                  config.networking.hostName
+                else
+                  "";
             };
 
             address =
@@ -96,7 +105,15 @@
       };
 
       config = {
-        user = "levizor";
+        _module.args.myopts = config.myopts;
+        _module.args.user = config.user;
+        _module.args.system = lib.mkDefault system;
+        user = lib.mkDefault (
+          if config ? home && config.home ? username && config.home.username != null then
+            config.home.username
+          else
+            "levizor"
+        );
         myopts = {
           additionalPackages = lib.mkDefault false;
           server = lib.mkDefault false;
@@ -104,4 +121,10 @@
       };
 
     };
+in
+{
+  flake.modules.options = optionsModule;
+  flake.nixosModules.common = optionsModule;
+  flake.nixosModules.options = optionsModule;
+  flake.homeModules.options = optionsModule;
 }
