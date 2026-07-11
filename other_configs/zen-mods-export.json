@@ -20,18 +20,18 @@
   "5941aefd-67b0-453d-9b62-9071a31cbb0d": {
     "id": "5941aefd-67b0-453d-9b62-9071a31cbb0d",
     "name": "Smaller Compact Mode",
-    "description": "Reduce the height of the compact sidebar!",
-    "homepage": "https://github.com/n7itro/Zen-Themes",
+    "description": "Reduce the height of the compact sidebar.",
     "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/5941aefd-67b0-453d-9b62-9071a31cbb0d/chrome.css",
     "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/5941aefd-67b0-453d-9b62-9071a31cbb0d/readme.md",
     "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/5941aefd-67b0-453d-9b62-9071a31cbb0d/image.png",
     "author": "n7itro",
-    "version": "1.0.3",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/5941aefd-67b0-453d-9b62-9071a31cbb0d/preferences.json",
+    "version": "1.0.5",
     "tags": [
       "tabs"
     ],
     "createdAt": "2024-08-31",
-    "updatedAt": "2025-01-26",
+    "updatedAt": "2025-10-29",
     "enabled": true
   },
   "ae7868dc-1fa1-469e-8b89-a5edf7ab1f24": {
@@ -77,16 +77,17 @@
     "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/a6335949-4465-4b71-926c-4a52d34bc9c0/image.png",
     "author": "RobotoSkunk",
     "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/a6335949-4465-4b71-926c-4a52d34bc9c0/preferences.json",
-    "version": "1.3.3",
+    "version": "1.5.1",
     "tags": [
       "find",
       "bar",
       "search",
       "searchbar",
-      "find-bar"
+      "find-bar",
+      "search-bar"
     ],
     "createdAt": "2024-11-24",
-    "updatedAt": "2025-08-19",
+    "updatedAt": "2026-02-12",
     "enabled": true
   },
   "2317fd93-c3ed-4f37-b55a-304c1816819e": {
@@ -98,11 +99,72 @@
     "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/2317fd93-c3ed-4f37-b55a-304c1816819e/readme.md",
     "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/2317fd93-c3ed-4f37-b55a-304c1816819e/image.png",
     "author": "Kaedriz",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/2317fd93-c3ed-4f37-b55a-304c1816819e/preferences.json",
     "tags": [],
     "createdAt": "2024-12-06",
-    "updatedAt": "2025-05-28",
+    "updatedAt": "2025-10-29",
+    "enabled": true
+  },
+  "b51ff956-6aea-47ab-80c7-d6c047c0d510": {
+    "id": "b51ff956-6aea-47ab-80c7-d6c047c0d510",
+    "name": "Disable Status Bar",
+    "description": "This removes the bottom-left status bar when hovering over a URL.",
+    "homepage": "",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/b51ff956-6aea-47ab-80c7-d6c047c0d510/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/b51ff956-6aea-47ab-80c7-d6c047c0d510/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/b51ff956-6aea-47ab-80c7-d6c047c0d510/image.png",
+    "author": "F-U-B-AR",
+    "version": "1.0.0",
+    "tags": [],
+    "createdAt": "2024-09-03",
+    "updatedAt": "2025-01-26",
+    "enabled": true
+  },
+  "79dde383-4fe7-404a-a8e6-9be440022542": {
+    "id": "79dde383-4fe7-404a-a8e6-9be440022542",
+    "name": "Tidy Popup",
+    "description": "Modifies popup panels, changing divider lines with empty spacer, and makes the button more compact.",
+    "homepage": "https://github.com/Dinno-DEV/zen-tidy-popup",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/79dde383-4fe7-404a-a8e6-9be440022542/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/79dde383-4fe7-404a-a8e6-9be440022542/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/79dde383-4fe7-404a-a8e6-9be440022542/image.png",
+    "author": "Dinno-DEV",
+    "version": "1.0.0",
+    "tags": [],
+    "createdAt": "2025-02-26",
+    "updatedAt": "2025-03-31",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/79dde383-4fe7-404a-a8e6-9be440022542/preferences.json",
+    "enabled": true
+  },
+  "c01d3e22-1cee-45c1-a25e-53c0f180eea8": {
+    "id": "c01d3e22-1cee-45c1-a25e-53c0f180eea8",
+    "name": "Ghost Tabs",
+    "description": "Makes unloaded tabs & folders appear ghost-like by making them grayscale and transparent.",
+    "homepage": "https://github.com/Seismix/zen-ghost-tabs",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/image.png",
+    "author": "Seismix",
+    "version": "1.1.0",
+    "tags": [],
+    "createdAt": "2025-10-02",
+    "updatedAt": "2026-03-11",
+    "enabled": true
+  },
+  "87196c08-8ca1-4848-b13b-7ea41ee830e7": {
+    "id": "87196c08-8ca1-4848-b13b-7ea41ee830e7",
+    "name": "Tab Preview Enhanced",
+    "description": "Enhanced tab preview, respecting user background color and padding",
+    "homepage": "https://github.com/Kaedriz/ZenMods/tree/main/TabPreviewEnhanced",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/87196c08-8ca1-4848-b13b-7ea41ee830e7/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/87196c08-8ca1-4848-b13b-7ea41ee830e7/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/87196c08-8ca1-4848-b13b-7ea41ee830e7/image.png",
+    "author": "Kaedriz",
+    "version": "1.1.0",
+    "tags": [],
+    "createdAt": "2024-12-20",
+    "updatedAt": "2025-02-07",
     "enabled": true
   }
 }
