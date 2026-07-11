@@ -17,6 +17,7 @@
       home.packages = with pkgs; [
         # laptop specific packages
         # stremio-linux-shell
+        drawy
         tesseract
         duf
         fd
@@ -67,6 +68,7 @@
         inputs.wallpapers.homeManagerModules.default
         inputs.nix-index-database.homeModules.default
 
+        wpaperd
         weathr
         helix
         distrobox

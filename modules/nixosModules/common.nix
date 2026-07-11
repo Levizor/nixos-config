@@ -10,9 +10,6 @@
       user = config.user;
     in
     {
-      _module.args.user = user;
-      _module.args.system = pkgs.stdenv.hostPlatform.system;
-
       myopts = {
         git = {
           user = "Levizor";
