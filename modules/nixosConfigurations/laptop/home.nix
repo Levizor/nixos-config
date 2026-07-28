@@ -67,6 +67,7 @@
       imports = with self.homeModules; [
         inputs.wallpapers.homeManagerModules.default
         inputs.nix-index-database.homeModules.default
+        jujutsu
 
         wpaperd
         weathr
