@@ -21,7 +21,6 @@
         tesseract
         duf
         fd
-        bat
         cmatrix
         ffmpeg
         fzf
@@ -65,6 +64,7 @@
       ];
 
       imports = with self.homeModules; [
+        bat
         inputs.wallpapers.homeManagerModules.default
         inputs.nix-index-database.homeModules.default
         jujutsu
@@ -91,6 +91,7 @@
         kitty
         tmux
         zsh
+        fish
         wm
         lan-mouse
       ];

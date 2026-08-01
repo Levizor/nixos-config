@@ -3,6 +3,7 @@
     programs.oh-my-posh = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
       settings = builtins.fromJSON ''
         {
           "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",

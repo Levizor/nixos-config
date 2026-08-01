@@ -12,7 +12,7 @@
       programs.ssh = {
         enableDefaultConfig = false;
         enable = true;
-        matchBlocks = {
+        settings = {
           "github.com" = {
             hostname = "github.com";
             user = user;
@@ -49,9 +49,7 @@
           "pjatk" = {
             user = "s30243";
             hostname = "msh.pjwstk.edu.pl";
-            extraOptions = {
-              HostKeyAlgorithms = "+ssh-rsa";
-            };
+            HostKeyAlgorithms = "+ssh-rsa";
           };
 
           "*" = {

@@ -1,15 +1,17 @@
+{ self, ... }:
 {
-  flake.homeModules.zsh-aliases =
+  flake.homeModules.shell-aliases =
     {
       pkgs,
       lib,
       myopts,
+      system,
       ...
     }:
-    {
-      programs.zsh.shellAliases = {
-        c = "wl-copy";
-        p = "wl-paste";
+    let
+      shellAliases = {
+        c = lib.getExe self.packages.${system}.clip-copy;
+        p = lib.getExe self.packages.${system}.clip-paste;
 
         mirror = "hyprctl keyword monitor HDMI-A-1, preferred, auto, 1, mirror, eDP-1";
 
@@ -43,17 +45,9 @@
 
         cp = "rsync -r --info=progress2 --human-readable";
 
-        compress = "compress()";
-
         pjatk = "${lib.getExe pkgs.sshfs} s30243@sftp.pjwstk.edu.pl:/ ~/pja/";
 
         lss = "lsd --sort=time --reverse";
-
-        # ls = "lsd --group-directories-first";
-
-        # la = "lsd -a --group-directories-first";
-
-        # ll = "lsd -al --group-directories-first";
 
         z = "zathura --fork";
 
@@ -67,5 +61,10 @@
 
         ns = "nh search ";
       };
+    in
+    {
+      programs.zsh.shellAliases = shellAliases;
+      programs.fish.shellAbbrs = shellAliases;
+      programs.bash.shellAliases = shellAliases;
     };
 }

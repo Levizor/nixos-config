@@ -6,12 +6,18 @@
       pkgs,
       lib,
       myopts,
+      system,
       ...
     }:
+    let
+      copy = lib.getExe self.packages.${system}.clip-copy;
+      paste = lib.getExe self.packages.${system}.clip-paste;
+    in
     {
       imports = [
         self.homeModules.oh-my-posh
-        self.homeModules.zsh-aliases
+        self.homeModules.shell-aliases
+        self.homeModules.zoxide
       ];
       programs.fzf.enable = true;
       programs.zsh = {
@@ -50,6 +56,13 @@
             # only apply to 'diff'
             zstyle ':fzf-tab:complete:diff:*' popup-min-size 80 12
           '')
+          # Override OMZ's clipcopy/clippaste with our universal wrappers.
+          # This makes copypath, copyfile, copybuffer OMZ plugins all use
+          # clip-copy, which includes OSC 52 fallback for SSH sessions.
+          ''
+            clipcopy()  { ${copy}  }
+            clippaste() { ${paste} }
+          ''
         ];
 
         history = {
@@ -64,8 +77,6 @@
             "sudo"
             "colored-man-pages"
             "copybuffer"
-            "copyfile"
-            "copypath"
             "extract"
             "cp"
             "magic-enter"
@@ -80,14 +91,6 @@
             "getantidote/use-omz"
           ];
         };
-      };
-
-      programs.zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-        options = [
-          "--cmd cd"
-        ];
       };
 
       programs.lsd = {
