@@ -93,6 +93,7 @@
         zsh
         fish
         wm
+        mango
         lan-mouse
       ];
 

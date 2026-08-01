@@ -70,6 +70,8 @@
 
     peerix.url = "github:sophronesis/peerix";
 
+    mango.url = "github:mangowm/mango";
+
     nix-scribe.url = "github:Levizor/nix-scribe";
 
     nix-index-database = {
