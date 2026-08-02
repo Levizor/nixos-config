@@ -3,7 +3,7 @@
     { user, ... }:
     {
       services.snapper = {
-        snapshotInterval = "hourly";
+        snapshotInterval = "daily";
         cleanupInterval = "timeline";
         filters = ''
           /nix
