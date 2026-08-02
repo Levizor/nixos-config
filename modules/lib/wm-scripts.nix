@@ -131,13 +131,34 @@
 
       forceKillScript = pkgs.writeShellApplication {
         name = "forceKillScript";
-        runtimeInputs = commonDependencies;
+        runtimeInputs = commonDependencies ++ [ pkgs.xdotool pkgs.procps ];
         text = ''
           #!/usr/bin/env bash
 
-          pid=$(hyprctl activewindow | grep -E 'pid:' | grep -oE '[0-9]+')
-          notify-send -t 3000 "Process Killed" "$pid: $(ps -p "$pid" -o comm=)"
-          kill -9 "$pid"
+          pid=""
+
+          # 1. Hyprland
+          if command -v hyprctl &>/dev/null && hyprctl activewindow &>/dev/null; then
+            pid=$(hyprctl activewindow -j 2>/dev/null | jq -r '.pid // empty')
+          fi
+
+          # 2. X11 (i3 / Qtile)
+          if [ -z "$pid" ] && command -v xdotool &>/dev/null && [ -n "''${DISPLAY:-}" ]; then
+            pid=$(xdotool getactivewindow getwindowpid 2>/dev/null || true)
+          fi
+
+          # 3. Mango (mmsg)
+          if [ -z "$pid" ] && command -v mmsg &>/dev/null; then
+            pid=$(mmsg get focusing-client 2>/dev/null | jq -r '.pid // empty' || true)
+          fi
+
+          if [ -n "$pid" ] && [ "$pid" != "null" ] && [ "$pid" -gt 0 ] 2>/dev/null; then
+            comm=$(ps -p "$pid" -o comm= 2>/dev/null || echo "Unknown")
+            notify-send -t 3000 "Process Killed (SIGKILL)" "$pid: $comm"
+            kill -9 "$pid"
+          else
+            notify-send -t 3000 "Kill Error" "Could not determine PID of active window"
+          fi
         '';
       };
 

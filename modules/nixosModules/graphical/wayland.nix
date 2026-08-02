@@ -8,9 +8,11 @@
       programs = {
         hyprland = {
           enable = true;
-          package = inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-          portalPackage =
-            inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+          # package = null;
+          # portalPackage = null;
+          # package = inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+          # portalPackage =
+          #   inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
         };
 
         wayfire = {
@@ -27,6 +29,15 @@
         };
 
         mango = {
+          enable = true;
+        };
+      };
+
+      services.xserver.windowManager = {
+        qtile = {
+          enable = true;
+        };
+        i3 = {
           enable = true;
         };
       };
