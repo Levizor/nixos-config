@@ -67,7 +67,7 @@
 
         history = {
           size = 100000;
-          path = "${config.programs.zsh.dotDir}/.zsh/history";
+          path = "${config.programs.zsh.dotDir}/history";
         };
 
         oh-my-zsh = {

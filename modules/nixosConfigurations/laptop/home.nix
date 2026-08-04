@@ -114,5 +114,11 @@
         "alena-aenami"
         # "lain"
       ];
+
+      home.file.".ideavimrc".text = ''
+        set clipboard+=unnamedplus
+        set relativenumber
+      '';
     };
+
 }
