@@ -69,6 +69,7 @@
         inputs.nix-index-database.homeModules.default
         jujutsu
 
+        i3
         wpaperd
         weathr
         helix
@@ -114,5 +115,11 @@
         "alena-aenami"
         # "lain"
       ];
+
+      home.file.".ideavimrc".text = ''
+        set clipboard+=unnamedplus
+        set relativenumber
+      '';
     };
+
 }

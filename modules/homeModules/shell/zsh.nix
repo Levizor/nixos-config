@@ -22,7 +22,7 @@
       programs.fzf.enable = true;
       programs.zsh = {
         enable = true;
-        dotDir = "${config.home.homeDirectory}/.zsh";
+        dotDir = "${config.home.homeDirectory}/.config/zsh";
 
         plugins = [
           {
@@ -67,7 +67,7 @@
 
         history = {
           size = 100000;
-          path = "${config.programs.zsh.dotDir}/.zsh/history";
+          path = "${config.home.homeDirectory}/.local/share/zsh/history";
         };
 
         oh-my-zsh = {

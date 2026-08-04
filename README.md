@@ -44,7 +44,7 @@ Example:
       imports = with self.nixosModules; [
         self.diskoConfigurations.laptop
 
-        common
+        home-manager
         battery
         docker
         environment

@@ -31,7 +31,7 @@
       imports = with self.nixosModules; [
         self.diskoConfigurations.lab
 
-        common
+        home-manager
 
         funnel
         stylix

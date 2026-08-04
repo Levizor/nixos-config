@@ -247,7 +247,8 @@
           # Input — keyboard
           # mango only accepts a single layout in xkb_rules_layout;
           # multi-layout cycling must be done via spawn + setxkbmap / ydotool / etc.
-          xkb_rules_layout = "us";
+          xkb_rules_layout = "us,ua,ru,pl";
+          xkb_rules_options="grp:lalt_lshift_toggle";
           repeat_delay = 250;
           repeat_rate = 25;
 
@@ -324,7 +325,6 @@
           bind=SUPER,o,spawn,sh -c "${wlCopy} < <(${grim} -g \"$(${slurp})\" - | ${tesseract} stdin stdout)"
 
           # Window management
-          bind=ALT,q,killclient
           bind=SUPER,q,killclient
           bind=ALT,backslash,togglefloating
           bind=SUPER,v,togglefloating
@@ -388,11 +388,11 @@
           bind=SUPER,s,toggle_named_scratchpad,terminal-scratch,none,kitty --class terminal-scratch tmux attach
 
           # Keyboard layout switching via setxkbmap
-          bind=SUPER+SHIFT,e,spawn,setxkbmap us
-          bind=SUPER+SHIFT,u,spawn,setxkbmap ua
-          bind=SUPER+SHIFT,r,spawn,setxkbmap ru
-          bind=SUPER+SHIFT,p,spawn,setxkbmap pl
-
+          bind=SUPER+SHIFT,e,switch_keyboard_layout,0
+          bind=SUPER+SHIFT,u,spawn,switch_keyboard_layout,1
+          bind=SUPER+SHIFT,r,spawn,switch_keyboard_layout,2
+          bind=SUPER+SHIFT,p,spawn,switch_keyboard_layout,3
+          
           # Resize submap mode (Super+R enters resize mode, Escape/Return exits)
           bind=SUPER,r,setkeymode,resize
           keymode=resize

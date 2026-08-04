@@ -115,4 +115,4 @@ fi
 MAGIC_ENTER_OTHER_COMMAND='ls'
 MAGIC_ENTER_GIT_COMMAND='ls'
 
-touch ~/.zsh/impure.zsh && source ~/.zsh/impure.zsh
+mkdir -p ~/.config/zsh && touch ~/.config/zsh/impure.zsh && source ~/.config/zsh/impure.zsh

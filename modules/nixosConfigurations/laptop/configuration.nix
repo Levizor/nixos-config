@@ -41,8 +41,8 @@
 
       imports = with self.nixosModules; [
         self.diskoConfigurations.laptop
-
         common
+        home-manager
         battery
         docker
         environment
@@ -63,13 +63,9 @@
       ];
 
       # connect nixos and home-manager configurations
-      home-manager = {
-        users.${user} = {
-          imports = [
-            self.homeModules.laptop
-          ];
-        };
-      };
+      home-manager.users.${user}.imports = [
+        self.homeModules.laptop
+      ];
 
       nixpkgs.overlays = [
         inputs.cachyos.overlays.pinned

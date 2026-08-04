@@ -30,67 +30,55 @@
                 name = "encrypted"; # /dev/mapper/encrypted
                 askPassword = true;
                 settings.allowDiscards = true;
-                content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-                  subvolumes = {
-                    "@root" = {
-                      mountpoint = "/";
-                      mountOptions = [
-                        "noatime"
-                        "compress=zstd:3"
-                        "space_cache=v2"
-                      ];
-                    };
+                content =
+                  let
+                    mountOptions = [
+                      "noatime"
+                      "compress=zstd:3"
+                      "space_cache=v2"
+                    ];
+                  in
+                  {
+                    type = "btrfs";
+                    extraArgs = [ "-f" ];
+                    subvolumes = {
+                      "@persist" = {
+                        mountpoint = "/persist";
+                        inherit mountOptions;
+                      };
 
-                    "@root/.snapshots" = {
-                      mountpoint = "/.snapshots";
-                      mountOptions = [
-                        "noatime"
-                        "compress=zstd:3"
-                        "space_cache=v2"
-                      ];
-                    };
+                      "@persist-home" = {
+                        mountpoint = "/persist-home";
+                        inherit mountOptions;
+                      };
 
-                    "@nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "noatime"
-                        "compress=zstd:3"
-                        "space_cache=v2"
-                      ];
-                    };
+                      "@root" = {
+                        mountpoint = "/";
+                        inherit mountOptions;
+                      };
 
-                    "@swap" = {
-                      mountpoint = "/.swapvol";
-                      swap = {
-                        swapfile = {
-                          size = "8G";
-                          path = "swapfile";
+                      "@nix" = {
+                        mountpoint = "/nix";
+                        inherit mountOptions;
+                      };
+
+                      "@home" = {
+                        mountpoint = "/home";
+                        inherit mountOptions;
+                      };
+
+                      "@swap" = {
+                        mountpoint = "/.swapvol";
+                        swap = {
+                          swapfile = {
+                            size = "8G";
+                            path = "swapfile";
+                          };
                         };
                       };
-                    };
 
-                    "@home" = {
-                      mountpoint = "/home";
-                      mountOptions = [
-                        "noatime"
-                        "compress=zstd:3"
-                        "space_cache=v2"
-                      ];
                     };
-
-                    "@home/.snapshots" = {
-                      mountpoint = "/home/.snapshots";
-                      mountOptions = [
-                        "noatime"
-                        "compress=zstd:3"
-                        "space_cache=v2"
-                      ];
-                    };
-
                   };
-                };
               };
             };
           };

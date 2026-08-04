@@ -43,7 +43,7 @@
 
         zrc = "nvim ~/nix/home/zsh/zsh.nix";
 
-        cp = "rsync -r --info=progress2 --human-readable";
+        rsync = "rsync -r --info=progress2 --human-readable";
 
         pjatk = "${lib.getExe pkgs.sshfs} s30243@sftp.pjwstk.edu.pl:/ ~/pja/";
 
@@ -60,6 +60,8 @@
         up = "nvim ~/nix/modules/nixosConfigurations/laptop/home.nix";
 
         ns = "nh search ";
+
+        cp = "cp -r";
       };
     in
     {
