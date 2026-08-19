@@ -85,7 +85,7 @@
         nh
         obs
         ssh
-        vicinae
+        # vicinae
         zathura
         zen
         kdeconnect

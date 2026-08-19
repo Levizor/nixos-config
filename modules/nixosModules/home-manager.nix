@@ -20,7 +20,7 @@
           inherit (config) myopts;
         };
 
-        backupFileExtension = "backup";
+        backupCommand = "sh -c 'rm -f \"$1\".backup && mv \"$1\" \"$1\".backup' --";
 
         users."${user}" = {
           imports = [

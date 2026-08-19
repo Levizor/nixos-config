@@ -2,10 +2,12 @@
 {
   flake.homeModules.wm = {
     imports = with self.homeModules; [
-      hyprland
-      hyprlock
-      mako
-      wlogout
+      # hyprland
+      # hyprlock
+      # mako
+      # wlogout
+      niri
+      noctalia
     ];
   };
 }

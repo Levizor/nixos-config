@@ -236,7 +236,7 @@
           {
             plugin = resurrect;
             extraConfig = ''
-              set -g @resurrect-dir '${config.home.homeDirectory}/.local/share/tmux/ressurect'
+              set -g @resurrect-dir '${config.home.homeDirectory}/.local/share/tmux/resurrect'
               set -g @resurrect-strategy-nvim 'session'
               set -g @resurrect-capture-pane-contents 'on'
               set -g @resurrect-processes 'ssh btop tray-tui watch "~nvim -> nvim"'

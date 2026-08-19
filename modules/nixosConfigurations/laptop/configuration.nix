@@ -78,7 +78,7 @@
 
       services = {
         auto-cpufreq = {
-          enable = true;
+          # enable = true;
         };
 
         openssh = {

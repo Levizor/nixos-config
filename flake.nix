@@ -34,8 +34,8 @@
     };
 
     nvim = {
-        url = "github:Levizor/config.nvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Levizor/config.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix-minecraft.url = "github:Infinidoge/nix-minecraft";
@@ -83,6 +83,16 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri-scratchpad = {
+      url = "github:argosnothing/niri-scratchpad-rs";
+    };
+
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

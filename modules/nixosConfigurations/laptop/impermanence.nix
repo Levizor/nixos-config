@@ -140,6 +140,7 @@
           "cargo"
         ]
         ++ map (x: ".local/state/" + x) [
+          "noctalia"
           "wireplumber"
           "nvim"
           "nvim-dev"

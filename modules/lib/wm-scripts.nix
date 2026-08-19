@@ -142,6 +142,11 @@
             pid=$(hyprctl activewindow -j 2>/dev/null | jq -r '.pid // empty')
           fi
 
+          # 2. Niri
+          if [ -z "$pid" ] && command -v niri &>/dev/null; then
+            pid=$(niri msg -j focused-window 2>/dev/null | jq -r '.pid // empty' || true)
+          fi
+
           # 2. X11 (i3 / Qtile)
           if [ -z "$pid" ] && command -v xdotool &>/dev/null && [ -n "''${DISPLAY:-}" ]; then
             pid=$(xdotool getactivewindow getwindowpid 2>/dev/null || true)

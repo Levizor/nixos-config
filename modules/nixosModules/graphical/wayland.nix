@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.nixosModules.wayland =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       imports = [ inputs.mango.nixosModules.mango ];
 
@@ -25,7 +25,7 @@
         };
 
         niri = {
-          enable = false;
+          enable = true;
         };
 
         mango = {
