@@ -17,6 +17,7 @@
       home.packages = with pkgs; [
         # laptop specific packages
         # stremio-linux-shell
+        gh
         drawy
         tesseract
         duf
@@ -70,7 +71,7 @@
         jujutsu
 
         i3
-        wpaperd
+        # wpaperd
         weathr
         helix
         distrobox
