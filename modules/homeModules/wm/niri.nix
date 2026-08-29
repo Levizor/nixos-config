@@ -53,7 +53,7 @@
               keyboard {
                   xkb {
                       layout "us,ua,ru,pl"
-                      options "grp:alt_shift_toggle"
+                      // options "grp:alt_shift_toggle"
                   }
               }
 
@@ -82,7 +82,9 @@
                   proportion 0.66667
               }
 
-              default-column-width {}
+              default-column-width {
+                  proportion 0.5 
+              }
 
               focus-ring {
                   width 4
@@ -151,7 +153,7 @@
 
           // === Default Window Rule ===
           window-rule {
-              open-maximized true
+              // open-maximized true
           }
 
           // === Window Rules ===
@@ -233,6 +235,18 @@
               default-window-height { proportion 1.0; }
               border { off; }
           }
+
+          // steam notification toasts
+          window-rule {
+              match app-id="steam" title="^notificationtoasts"
+              open-floating true
+          }
+          - or using the newer regex style format depending on your version:
+          window-rule {
+              match app-id=r#"^steam$"# title=r#"^notificationtoasts"#
+              open-floating true
+          }
+
           binds {
               Mod+Shift+Slash { show-hotkey-overlay; }
 

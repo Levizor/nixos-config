@@ -255,7 +255,7 @@
           # Input — trackpad
           tap_to_click = 1;
           trackpad_natural_scrolling = 1;
-          disable_while_typing = 1;
+          # disable_while_typing = 1;
 
           # Appearance
           # gaps: ih=inner-horizontal, iv=inner-vertical, oh=outer-h, ov=outer-v
