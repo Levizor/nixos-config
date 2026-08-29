@@ -34,9 +34,9 @@
       };
 
       services.xserver.windowManager = {
-        qtile = {
-          enable = true;
-        };
+        # qtile = {
+        #   enable = true;
+        # };
         i3 = {
           enable = true;
         };
