@@ -92,6 +92,7 @@
           ".thunderbird"
           ".gemini"
           ".steam"
+          ".net"
 
           ".config/chromium"
           ".config/vivaldi"
