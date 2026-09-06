@@ -11,6 +11,7 @@
           enable = true;
           trustedInterfaces = [
             "docker0"
+            "tailscale0"
           ];
         };
         networkmanager = {
