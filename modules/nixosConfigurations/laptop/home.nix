@@ -60,7 +60,7 @@
         pear-desktop
         yt-dlp
         lazygit
-        gemini-cli
+        # gemini-cli
         antigravity-cli
       ];
 
