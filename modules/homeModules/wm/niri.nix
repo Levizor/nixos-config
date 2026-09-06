@@ -241,7 +241,7 @@
               match app-id="steam" title="^notificationtoasts"
               open-floating true
           }
-          - or using the newer regex style format depending on your version:
+          // or using the newer regex style format depending on your version:
           window-rule {
               match app-id=r#"^steam$"# title=r#"^notificationtoasts"#
               open-floating true
