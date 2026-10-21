@@ -39,7 +39,7 @@
       stateVersion = "26.05";
 
       sessionVariables = {
-        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
+        # STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$\{HOME}/.local/Steam/compatabilitytools.d";
         CARGO_HOME = "${config.xdg.dataHome}/.local/share/cargo";
         XDG_CACHE_HOME = "${config.home.homeDirectory}/.cache";
         # XDG_STATE_HOME = "${config.home.homeDirectory}/.local/.state";
