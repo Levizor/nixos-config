@@ -3,7 +3,7 @@
   flake.nixosModules.wayland =
     { pkgs, lib, ... }:
     {
-      imports = [ inputs.mango.nixosModules.mango ];
+      # imports = [ inputs.mango.nixosModules.mango ];
 
       programs = {
         hyprland = {
@@ -13,6 +13,10 @@
           # package = inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.hyprland;
           # portalPackage =
           #   inputs.stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        };
+
+        umbriel = {
+          enable = true;
         };
 
         wayfire = {
@@ -29,7 +33,7 @@
         };
 
         mango = {
-          enable = true;
+          # enable = true;
         };
       };
 
