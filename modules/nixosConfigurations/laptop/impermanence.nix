@@ -81,6 +81,7 @@
       users.${user} = {
         directories = [
           ".ssh"
+          ".mozilla"
           ".cache"
           "Downloads"
           "Music"
@@ -109,10 +110,13 @@
           ".config/nvim"
           ".config/onlyoffice"
           ".config/qBittorrent"
-          ".config/vicinae"
+          # ".config/vicinae"
           ".config/wl-kbptr"
           ".config/YouTube Music"
           ".config/obs-studio"
+          ".vscode-oss"
+          ".vscode-oss-shared"
+          ".config/VSCodium"
         ]
         ++ map (x: ".local/share/" + x) [
           "applications"
@@ -149,8 +153,9 @@
           "ani-cli"
           "home-manager"
           "toggles"
-          "vicinae"
+          # "vicinae"
           "wpaperd"
+          "VSCodium"
         ];
 
         files = [
