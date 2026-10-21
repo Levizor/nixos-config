@@ -54,7 +54,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vicinae.url = "github:vicinaehq/vicinae";
+    # vicinae.url = "github:vicinaehq/vicinae";
 
     lan-mouse.url = "github:feschber/lan-mouse";
 
@@ -73,9 +73,9 @@
     #   url = "github:hyprwm/Hyprland";
     # };
 
-    peerix.url = "github:sophronesis/peerix";
+    # peerix.url = "github:sophronesis/peerix";
 
-    mango.url = "github:mangowm/mango";
+    # mango.url = "github:mangowm/mango";
 
     nix-scribe.url = "github:Levizor/nix-scribe";
 
