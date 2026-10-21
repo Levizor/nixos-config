@@ -18,7 +18,7 @@
           enable = true;
           plugins = with pkgs; [
             networkmanager-openvpn
-            networkmanager-sstp
+            # networkmanager-sstp
           ];
         };
       };
