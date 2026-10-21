@@ -17,6 +17,7 @@
       home.packages = with pkgs; [
         # laptop specific packages
         # stremio-linux-shell
+        vscodium
         gh
         drawy
         tesseract
@@ -29,7 +30,7 @@
         tlrc
         typst
 
-        inputs.nix-scribe.packages.${system}.default
+        # inputs.nix-scribe.packages.${system}.default
         # google-cloud-sdk
 
         telegram-desktop
@@ -47,7 +48,7 @@
         jetbrains.idea
         # jetbrains.pycharm
         # pinta
-        networkmanagerapplet
+        # networkmanagerapplet
         nix-prefetch-github
         # obsidian
         onlyoffice-desktopeditors
@@ -95,22 +96,22 @@
         zsh
         fish
         wm
-        mango
-        lan-mouse
+        # mango
+        # lan-mouse
       ];
 
       programs.nix-index.enable = true;
       programs.nix-index-database.comma.enable = true;
 
-      programs.lan-mouse.settings = {
-        clients = [
-          {
-            hostname = "nixlab";
-            position = "right";
-            activate_on_startup = true;
-          }
-        ];
-      };
+      # programs.lan-mouse.settings = {
+      #   clients = [
+      #     {
+      #       hostname = "nixlab";
+      #       position = "right";
+      #       activate_on_startup = true;
+      #     }
+      #   ];
+      # };
       wallpapers.packs = [
         # "picturesque"
         "alena-aenami"
