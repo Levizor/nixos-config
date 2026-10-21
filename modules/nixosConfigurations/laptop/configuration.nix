@@ -82,7 +82,7 @@
         };
 
         openssh = {
-          enable = true;
+          enable = false;
           settings = {
             PermitRootLogin = "no";
             PasswordAuthentication = false;
@@ -96,7 +96,13 @@
         nix-ld = {
           enable = true;
           libraries = with pkgs; [
+            libx11
+            libsm
+            fontconfig
+            libice
             icu
+            freetype
+            glib
           ];
         };
       };
@@ -105,10 +111,9 @@
       #   networking.firewall.enable = lib.mkForce false;
       # };
 
-      # For virtual camera in OBS
-
       stylix.targets.grub.enable = false;
       boot = {
+        # For virtual camera in OBS
         kernelModules = [ "v4l2loopback" ];
         extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
 
