@@ -59,6 +59,7 @@
         tailscale
         snapper
         virtualisation
+        sops
         # peerix
       ];
 
