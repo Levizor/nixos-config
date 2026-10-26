@@ -63,6 +63,8 @@
         lazygit
         # gemini-cli
         antigravity-cli
+        antigravity-hub
+        antigravity-ide
       ];
 
       imports = with self.homeModules; [
