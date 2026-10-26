@@ -60,6 +60,7 @@
         snapper
         virtualisation
         sops
+        # openclaw
         # peerix
       ];
 
