@@ -42,10 +42,10 @@
         ani-cli
         cargo
         # filezilla
-        hyprland-workspaces-tui
+        # hyprland-workspaces-tui
         # jetbrains.rider
-        jetbrains-toolbox
-        jetbrains.idea
+        # jetbrains-toolbox
+        # jetbrains.idea
         # jetbrains.pycharm
         # pinta
         # networkmanagerapplet
@@ -63,8 +63,6 @@
         lazygit
         # gemini-cli
         antigravity-cli
-        antigravity-hub
-        antigravity-ide
       ];
 
       imports = with self.homeModules; [
@@ -75,7 +73,7 @@
 
         i3
         # wpaperd
-        weathr
+        # weathr
         helix
         distrobox
         xdg
@@ -96,7 +94,7 @@
         kitty
         tmux
         zsh
-        fish
+        # fish
         wm
         # mango
         # lan-mouse
