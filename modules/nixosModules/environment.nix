@@ -23,6 +23,7 @@
           man-pages
           man-pages-posix
           toggles.toggle
+          wl-clipboard
         ];
 
         variables = {

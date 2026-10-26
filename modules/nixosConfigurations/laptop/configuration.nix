@@ -40,6 +40,9 @@
       };
 
       imports = with self.nixosModules; [
+        niri
+        i3
+        umbriel
         self.diskoConfigurations.laptop
         common
         home-manager
