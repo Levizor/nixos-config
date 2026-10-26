@@ -94,10 +94,13 @@
           ".gemini"
           ".steam"
           ".net"
+          ".antigravity-ide"
 
           ".config/chromium"
+          ".config/Antigravity IDE"
           ".config/vivaldi"
           ".config/zen"
+          ".config/sops"
           ".config/vesktop"
           ".config/gcloud"
           ".config/gh"
@@ -143,6 +146,7 @@
           "devenv"
           "tmux"
           "cargo"
+          "openclaw"
         ]
         ++ map (x: ".local/state/" + x) [
           "noctalia"
