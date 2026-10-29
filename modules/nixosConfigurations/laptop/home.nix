@@ -78,7 +78,7 @@
         distrobox
         xdg
         btop
-        chromium
+        # chromium
         direnv
         fzf
         git
@@ -90,7 +90,7 @@
         # vicinae
         zathura
         zen
-        kdeconnect
+        # kdeconnect
         kitty
         tmux
         zsh
