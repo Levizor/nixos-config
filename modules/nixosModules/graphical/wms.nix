@@ -13,7 +13,7 @@
   };
 
   flake.nixosModules.wayfire = {
-    programs.wayfire = {
+    programs.wayfire = {pkgs, ...}:{
       enable = false;
       plugins = with pkgs.wayfirePlugins; [
         wcm

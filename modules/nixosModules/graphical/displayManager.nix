@@ -1,5 +1,6 @@
 {
-  flake.nixosModules.displayManager = {
+
+  flake.nixosModules.ly = {
     services = {
       displayManager.ly = {
         enable = true;
@@ -8,11 +9,6 @@
           hide_borders = true;
           session_log = false;
         };
-      };
-
-      displayManager.sddm = {
-        enable = false;
-        wayland.enable = true;
       };
     };
   };

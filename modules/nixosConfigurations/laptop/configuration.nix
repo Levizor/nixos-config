@@ -40,9 +40,15 @@
       };
 
       imports = with self.nixosModules; [
+        # graphical
         niri
         i3
         umbriel
+        ly
+        xdg
+        stylix
+        steam
+
         self.diskoConfigurations.laptop
         common
         home-manager
@@ -51,14 +57,11 @@
         environment
         filesystems
         flatpak
-        graphical
         hardware
         networking
         nvim
         printing
         sound
-        steam
-        stylix
         tailscale
         snapper
         virtualisation
@@ -77,9 +80,6 @@
       ];
 
       boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
-
-      nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-      nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
 
       services = {
         auto-cpufreq = {
