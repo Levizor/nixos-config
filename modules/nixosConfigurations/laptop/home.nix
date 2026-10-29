@@ -61,8 +61,6 @@
         pear-desktop
         yt-dlp
         lazygit
-        # gemini-cli
-        antigravity-cli
       ];
 
       imports = with self.homeModules; [
@@ -87,6 +85,7 @@
         nh
         obs
         ssh
+        antigravity
         # vicinae
         zathura
         zen
