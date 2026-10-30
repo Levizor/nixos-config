@@ -29,13 +29,13 @@
       };
 
       imports = with self.nixosModules; [
+        common
         self.diskoConfigurations.lab
 
         home-manager
 
         funnel
         stylix
-        wayland
         networking
         environment
         filesystems
@@ -55,7 +55,7 @@
       programs.nix-ld = {
         enable = true;
         libraries = with pkgs; [
-          kdePackages.krdp
+          # kdePackages.krdp
         ];
       };
 
@@ -76,5 +76,32 @@
           cores = 4;
         };
       };
+    };
+
+
+  flake.homeConfigurations.lab =
+    { pkgs, ... }:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      modules = [
+        self.homeModules.lab
+      ];
+    };
+
+  flake.homeModules.lab =
+    { pkgs, ... }:
+    {
+      imports = with self.homeModules; [
+        btop
+        git
+        ssh
+        tmux
+        zsh
+      ];
+
+      home.packages = with pkgs; [
+        # timg
+      ];
+      # wallpapers.packs = [ "vertical" ];
     };
 }
