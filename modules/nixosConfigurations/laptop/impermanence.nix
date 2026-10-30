@@ -96,6 +96,7 @@
           ".net"
           ".antigravity-ide"
 
+          ".config/umbriel"
           ".config/chromium"
           ".config/Antigravity IDE"
           ".config/vivaldi"
