@@ -95,6 +95,7 @@
         zsh
         # fish
         wm
+        difftastic
         # mango
         # lan-mouse
       ];

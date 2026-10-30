@@ -9,7 +9,7 @@
 
     programs.kitty = {
       enable = true;
-      enableGitIntegration = true;
+      # enableGitIntegration = true;
       shellIntegration = {
         enableZshIntegration = true;
       };
