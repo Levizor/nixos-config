@@ -39,6 +39,7 @@
         networking
         environment
         filesystems
+        cage
         sound # :)
         nvim
         tailscale

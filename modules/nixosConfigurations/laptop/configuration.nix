@@ -36,6 +36,10 @@
             name = "HDMI-A-1";
             config = "preferred, auto, 1,";
           }
+          {
+            name = "Virtual-1";
+            config = "1920x1080@60, auto, 1, transform, 1";
+          }
         ];
       };
 
@@ -48,6 +52,7 @@
         xdg
         stylix
         steam
+        sunshine
 
         self.diskoConfigurations.laptop
         common

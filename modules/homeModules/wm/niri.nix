@@ -15,6 +15,7 @@
       monitors = if myopts.monitors != null then myopts.monitors else [ ];
       mon0 = if builtins.length monitors > 0 then (builtins.elemAt monitors 0).name else null;
       mon1 = if builtins.length monitors > 1 then (builtins.elemAt monitors 1).name else mon0;
+      mon2 = if builtins.length monitors > 2 then (builtins.elemAt monitors 2).name else "Virtual-1";
 
       scriptDefs = self.lib.wm-scripts {
         pkgs = pkgs;
@@ -24,7 +25,7 @@
       forceKillScript = lib.getExe scriptDefs.forceKillScript;
 
       outputConfigKdl =
-        if mon0 != null && mon1 != null && mon0 != mon1 then ''
+        (if mon0 != null && mon1 != null && mon0 != mon1 then ''
           output "${mon0}" {
               position x=0 y=0
           }
@@ -35,10 +36,30 @@
           output "${mon0}" {
               position x=0 y=0
           }
-        '' else "";
+        '' else "")
+        + ''
+          output "${mon2}" {
+              mode "1080x1920@60.000" custom=true
+              transform "normal"
+              position x=3840 y=-840
 
+              layout {
+                  default-column-width { proportion 1.0; }
 
+                  preset-column-widths {
+                      proportion 0.5
+                      proportion 1.0
+                  }
 
+                  preset-window-heights {
+                      proportion 0.33333
+                      proportion 0.5
+                      proportion 0.66667
+                      proportion 1.0
+                  }
+              }
+          }
+        '';
     in
     {
       home.packages = [

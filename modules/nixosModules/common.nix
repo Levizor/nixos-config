@@ -60,6 +60,8 @@
             "networkmanager"
             "input"
             "audio"
+            "video"
+            "render"
             "wireshark"
             "minecraft"
             "libvirtd"

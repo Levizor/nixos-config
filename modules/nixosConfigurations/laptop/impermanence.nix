@@ -110,6 +110,7 @@
           ".config/kdeconnect"
           ".config/keepassxc"
           ".config/lan-mouse"
+          ".config/sunshine"
           ".config/nix"
           ".config/nvim"
           ".config/onlyoffice"
