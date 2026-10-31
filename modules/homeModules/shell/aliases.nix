@@ -29,7 +29,7 @@
 
         nhs = "nh os switch -H ${myopts.nh.host}";
 
-        lab = "sudo nixos-rebuild switch --flake '.#lab' --target-host=levizor@nixlab --sudo";
+        lab = "nixos-rebuild switch --flake '.#lab' --target-host=levizor@nixlab --elevate=sudo";
 
         adcom = "git commit -am";
 
