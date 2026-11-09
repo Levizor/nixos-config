@@ -60,7 +60,6 @@
         # discord
         pear-desktop
         yt-dlp
-        lazygit
       ];
 
       imports = with self.homeModules; [
@@ -96,6 +95,7 @@
         # fish
         wm
         difftastic
+        lazygit
         # mango
         # lan-mouse
       ];

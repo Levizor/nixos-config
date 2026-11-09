@@ -8,6 +8,7 @@
 
       options = {
         color = "always";
+        display = "inline";
         sort-paths = true;
       };
     };
