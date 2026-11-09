@@ -44,6 +44,7 @@
       };
 
       imports = with self.nixosModules; [
+        iets
         # graphical
         niri
         i3

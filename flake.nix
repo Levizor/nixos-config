@@ -102,6 +102,14 @@
       url = "github:openclaw/nix-openclaw";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    umbriel = {
+      url = "github:noctalia-dev/umbriel";
+    };
+
+    iets = {
+      url = "github:numtide/iets";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
