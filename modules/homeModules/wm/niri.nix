@@ -182,6 +182,7 @@
           // Workspace 1: Telegram
           window-rule {
               match app-id=r#"(?i).*(telegram).*"#
+              exclude title="^Media viewer$"
               open-on-workspace "1"
               ${if mon0 != null then "open-on-output \"${mon0}\"" else ""}
           }
