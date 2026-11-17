@@ -44,6 +44,7 @@
       };
 
       imports = with self.nixosModules; [
+        cachyos-kernel
         iets
         # graphical
         niri
@@ -80,12 +81,6 @@
       home-manager.users.${user}.imports = [
         self.homeModules.laptop
       ];
-
-      nixpkgs.overlays = [
-        inputs.cachyos.overlays.pinned
-      ];
-
-      boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
       services = {
         auto-cpufreq = {
