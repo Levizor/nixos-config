@@ -44,6 +44,7 @@
       };
 
       imports = with self.nixosModules; [
+        ./_hardware-configuration.nix
         cachyos-kernel
         iets
         # graphical

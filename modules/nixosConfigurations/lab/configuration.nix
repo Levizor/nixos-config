@@ -29,6 +29,7 @@
       };
 
       imports = with self.nixosModules; [
+        ./_hardware-configuration.nix
         common
         self.diskoConfigurations.lab
 
