@@ -210,26 +210,6 @@
               set -g @minimal-tmux-show-expanded-icons-for-all-tabs true
 
               set -g @minimal-tmux-status-right "%H:%M"
-            ''
-            + lib.optionalString (!myopts.server) ''
-              set -g @minimal-tmux-status-left-extra "#(${lib.getExe pkgs.hyprland-workspaces-tui} plain -p true)"
-              set -g @minimal-tmux-status-right "\
-              #( \
-                vol=\$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print \$2}'); \
-                if [ \"\$vol\" = yes ]; then \
-                  echo -n '🔇'; \
-                else \
-                  echo -n '🔊'; \
-                fi; \
-                echo -n ' | '; \
-                upower -i \$(upower -e | grep 'BAT') | \
-                  awk '/state:/ { if (\$2==\"discharging\") icon=\"🔋\"; else if (\$2==\"fully-charged\") icon=\"✅\"; else icon=\"⚡\" } \
-                       /percentage:/ { print icon \$2 }'; \
-              ) | %H:%M"
-
-              set -g @minimal-tmux-indicator-str "  #S  "
-              set -g status-left-length 20
-              set -g status-interval 1
             '';
           }
 
